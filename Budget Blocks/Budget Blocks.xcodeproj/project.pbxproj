@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
 		5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89723DB59B800A24A8F /* AppDelegate.swift */; };
 		5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89923DB59B800A24A8F /* SceneDelegate.swift */; };
 		5955B89C23DB59B800A24A8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89B23DB59B800A24A8F /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		5955B89423DB59B800A24A8F /* Budget Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Blocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B89723DB59B800A24A8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5955B89923DB59B800A24A8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5939B1F023DF54E4003FB0E0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5939B1F123DF5517003FB0E0 /* NetworkingController.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		5955B88B23DB59B800A24A8F = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +114,7 @@
 				5955B89723DB59B800A24A8F /* AppDelegate.swift */,
 				5955B89923DB59B800A24A8F /* SceneDelegate.swift */,
 				5955B89B23DB59B800A24A8F /* ViewController.swift */,
+				5939B1F023DF54E4003FB0E0 /* Networking */,
 				5955B89D23DB59B800A24A8F /* Main.storyboard */,
 				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
 				5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */,
@@ -266,6 +277,7 @@
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
+				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
