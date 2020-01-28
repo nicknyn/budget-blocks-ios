@@ -93,7 +93,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g9r-bt-3SK">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g9r-bt-3SK">
                                 <rect key="frame" x="56" y="502" width="302" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
@@ -114,27 +114,72 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mt6-rd-orw">
+                                <rect key="frame" x="170" y="8" width="74" height="50.000000000000057"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="QxX-x5-bBw"/>
+                                    <constraint firstAttribute="height" constant="50" id="uCy-85-xUU"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixL-LW-pJK">
+                                <rect key="frame" x="114.5" y="62" width="185.5" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSU-tg-btp">
+                                <rect key="frame" x="56" y="287" width="91.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9au-ti-kQU">
+                                <rect key="frame" x="56" y="385" width="62.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-zq-XxR">
+                                <rect key="frame" x="56" y="483" width="117.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="g9r-bt-3SK" firstAttribute="top" secondItem="zfg-c6-9d2" secondAttribute="bottom" constant="64" id="2fN-Cp-t6v"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="zfg-c6-9d2" secondAttribute="trailing" constant="56" id="4AM-UM-Wgw"/>
                             <constraint firstItem="b1h-Fh-jM4" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="4gV-R5-bUv"/>
+                            <constraint firstItem="zfg-c6-9d2" firstAttribute="top" secondItem="9au-ti-kQU" secondAttribute="bottom" constant="2" id="6PD-C6-9Vg"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="top" secondItem="dUx-EC-sSE" secondAttribute="bottom" constant="64" id="C2n-NX-dVt"/>
+                            <constraint firstItem="HSU-tg-btp" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="dUx-EC-sSE" secondAttribute="trailing" id="C8T-Ua-vR9"/>
+                            <constraint firstItem="Mt6-rd-orw" firstAttribute="top" secondItem="nfe-Yt-LUT" secondAttribute="top" constant="8" id="GEj-2G-w4L"/>
                             <constraint firstItem="dUx-EC-sSE" firstAttribute="top" secondItem="IYb-zA-YfR" secondAttribute="bottom" constant="44" id="IQ0-J6-QIf"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="dUx-EC-sSE" secondAttribute="trailing" constant="56" id="KdE-9j-2Ap"/>
+                            <constraint firstItem="Mt6-rd-orw" firstAttribute="centerX" secondItem="v1V-d6-1t0" secondAttribute="centerX" id="LHo-7w-QHo"/>
+                            <constraint firstItem="g9r-bt-3SK" firstAttribute="top" secondItem="5T4-zq-XxR" secondAttribute="bottom" constant="2" id="PY8-Mh-ICl"/>
+                            <constraint firstItem="9au-ti-kQU" firstAttribute="leading" secondItem="zfg-c6-9d2" secondAttribute="leading" id="Peh-mY-F3I"/>
+                            <constraint firstItem="9au-ti-kQU" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="zfg-c6-9d2" secondAttribute="trailing" id="Rmz-f7-iFx"/>
                             <constraint firstItem="IYb-zA-YfR" firstAttribute="centerX" secondItem="v1V-d6-1t0" secondAttribute="centerX" id="SPk-Jz-TGs"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="VPm-Hw-ieL"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="centerY" secondItem="v1V-d6-1t0" secondAttribute="centerY" id="WuG-ZU-fYe"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="b1h-Fh-jM4" secondAttribute="trailing" constant="56" id="ZBg-uX-rok"/>
                             <constraint firstItem="g9r-bt-3SK" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="azn-jO-qpY"/>
+                            <constraint firstItem="ixL-LW-pJK" firstAttribute="top" secondItem="Mt6-rd-orw" secondAttribute="bottom" constant="4" id="cBi-yG-yVE"/>
+                            <constraint firstItem="ixL-LW-pJK" firstAttribute="centerX" secondItem="v1V-d6-1t0" secondAttribute="centerX" id="cQ4-nP-v3Z"/>
+                            <constraint firstItem="HSU-tg-btp" firstAttribute="leading" secondItem="dUx-EC-sSE" secondAttribute="leading" id="g1L-eH-WJI"/>
                             <constraint firstItem="b1h-Fh-jM4" firstAttribute="bottom" secondItem="nfe-Yt-LUT" secondAttribute="bottom" constant="-64" id="hRA-gL-Baf"/>
+                            <constraint firstItem="dUx-EC-sSE" firstAttribute="top" secondItem="HSU-tg-btp" secondAttribute="bottom" constant="2" id="j0H-wB-jU5"/>
                             <constraint firstItem="dUx-EC-sSE" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="msG-Mt-wYM"/>
+                            <constraint firstItem="5T4-zq-XxR" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="g9r-bt-3SK" secondAttribute="trailing" id="tGi-XX-ZLS"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="g9r-bt-3SK" secondAttribute="trailing" constant="56" id="v1p-aW-UZT"/>
+                            <constraint firstItem="5T4-zq-XxR" firstAttribute="leading" secondItem="g9r-bt-3SK" secondAttribute="leading" id="zaq-UU-37M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nfe-Yt-LUT"/>
                     </view>
                     <connections>
+                        <outlet property="confirmPasswordLabel" destination="5T4-zq-XxR" id="Ku0-mE-zbo"/>
                         <outlet property="confirmPasswordTextField" destination="g9r-bt-3SK" id="fzF-gi-87l"/>
                         <outlet property="emailTextField" destination="dUx-EC-sSE" id="RJZ-kk-bUm"/>
                         <outlet property="loginButton" destination="b1h-Fh-jM4" id="OxD-Gi-Jpu"/>

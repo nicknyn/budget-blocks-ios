@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordLabel: UILabel!
     
     // MARK: Properties
     
@@ -36,6 +37,7 @@ class LoginViewController: UIViewController {
         loginLabel.text = title
         
         confirmPasswordTextField.isHidden = signIn
+        confirmPasswordLabel.isHidden = signIn
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
