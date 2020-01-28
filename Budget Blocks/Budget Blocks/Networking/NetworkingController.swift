@@ -52,7 +52,40 @@ class NetworkingController {
         }
     }
     
-    func register(email: String, password: String) {
+    func register(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
+        let registerJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
+        let url = baseURL.appendingPathComponent("auth")
+            .appendingPathComponent("register")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try registerJSON.rawData()
+            URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    return completion(nil, error)
+                }
+                
+                guard let data = data else {
+                    NSLog("No data returned from register request")
+                    return completion(nil, nil)
+                }
+                
+                do {
+                    let responseJSON = try JSON(data: data)
+                    if let email = responseJSON["email"].string {
+                        completion(email, nil)
+                    } else {
+                        completion(responseJSON["error"].string, nil)
+                    }
+                } catch {
+                    completion(nil, error)
+                }
+            }.resume()
+        } catch {
+            completion(nil, error)
+        }
     }
 }
