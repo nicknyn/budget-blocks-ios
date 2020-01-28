@@ -104,7 +104,16 @@
                                     <constraint firstAttribute="height" constant="42" id="MuB-Qe-W6q"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="login:" destination="F4U-IQ-jeT" eventType="touchUpInside" id="S59-bb-rCF"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYb-zA-YfR">
+                                <rect key="frame" x="170" y="226" width="74.5" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -112,7 +121,9 @@
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="zfg-c6-9d2" secondAttribute="trailing" constant="56" id="4AM-UM-Wgw"/>
                             <constraint firstItem="b1h-Fh-jM4" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="4gV-R5-bUv"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="top" secondItem="dUx-EC-sSE" secondAttribute="bottom" constant="64" id="C2n-NX-dVt"/>
+                            <constraint firstItem="dUx-EC-sSE" firstAttribute="top" secondItem="IYb-zA-YfR" secondAttribute="bottom" constant="44" id="IQ0-J6-QIf"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="dUx-EC-sSE" secondAttribute="trailing" constant="56" id="KdE-9j-2Ap"/>
+                            <constraint firstItem="IYb-zA-YfR" firstAttribute="centerX" secondItem="v1V-d6-1t0" secondAttribute="centerX" id="SPk-Jz-TGs"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="VPm-Hw-ieL"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="centerY" secondItem="v1V-d6-1t0" secondAttribute="centerY" id="WuG-ZU-fYe"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="b1h-Fh-jM4" secondAttribute="trailing" constant="56" id="ZBg-uX-rok"/>
@@ -124,7 +135,11 @@
                         <viewLayoutGuide key="safeArea" id="nfe-Yt-LUT"/>
                     </view>
                     <connections>
+                        <outlet property="confirmPasswordTextField" destination="g9r-bt-3SK" id="fzF-gi-87l"/>
+                        <outlet property="emailTextField" destination="dUx-EC-sSE" id="RJZ-kk-bUm"/>
                         <outlet property="loginButton" destination="b1h-Fh-jM4" id="OxD-Gi-Jpu"/>
+                        <outlet property="loginLabel" destination="IYb-zA-YfR" id="cjE-ps-qlV"/>
+                        <outlet property="passwordTextField" destination="zfg-c6-9d2" id="bvg-9U-umt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncl-dd-3ES" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

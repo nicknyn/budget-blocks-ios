@@ -13,9 +13,14 @@ class LoginViewController: UIViewController {
     // MARK: Outlets
 
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginLabel: UILabel!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     // MARK: Properties
     
+    var networkingController = NetworkingController()
     var signIn: Bool = true
     
     override func viewDidLoad() {
@@ -26,7 +31,11 @@ class LoginViewController: UIViewController {
     }
     
     private func setUpViews() {
-        loginButton.setTitle("Sign \(signIn ? "In" : "Up")", for: .normal)
+        let title = "Sign \(signIn ? "In" : "Up")"
+        loginButton.setTitle(title, for: .normal)
+        loginLabel.text = title
+        
+        confirmPasswordTextField.isHidden = signIn
     }
     
     private func updateViews() {
@@ -42,7 +51,54 @@ class LoginViewController: UIViewController {
             loginButton.setTitleColor(daybreakBlue, for: .normal)
         }
     }
-
+    
+    // MARK: Actions
+    
+    @IBAction func login(_ sender: Any) {
+        guard let email = emailTextField.text,
+            let password = passwordTextField.text,
+            !email.isEmpty,
+            !password.isEmpty else { return }
+        
+        if signIn {
+            networkingController.login(email: email, password: password) { token, error in
+                if let error = error {
+                    return NSLog("Error signing in: \(error)")
+                }
+                
+                guard let token = token else {
+                    return NSLog("No token returned from login.")
+                }
+                
+                print(token)
+            }
+        } else {
+            guard let confirmPassword = confirmPasswordTextField.text,
+                confirmPassword == password else {
+                    //TODO: indicate this to the user
+                    print("Passwords don't match!")
+                    return
+            }
+            
+            networkingController.register(email: email, password: password) { message, error in
+                if let error = error {
+                    return NSLog("Error signing up: \(error)")
+                }
+                
+                guard let message = message else {
+                    return NSLog("No message back from register.")
+                }
+                
+                if message == email {
+                    NSLog("Sign in successful with email: \(message)")
+                } else {
+                    //TODO: alert the user
+                    print(message)
+                }
+            }
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
