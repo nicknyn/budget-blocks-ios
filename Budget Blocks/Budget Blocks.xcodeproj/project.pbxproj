@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
 		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
+		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
 		5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89723DB59B800A24A8F /* AppDelegate.swift */; };
 		5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89923DB59B800A24A8F /* SceneDelegate.swift */; };
 		5955B89C23DB59B800A24A8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89B23DB59B800A24A8F /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
+		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
 		5955B89423DB59B800A24A8F /* Budget Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Blocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B89723DB59B800A24A8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5955B89923DB59B800A24A8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			children = (
 				5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */,
 				5955B8B323DB59BB00A24A8F /* Info.plist */,
+				5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */,
 			);
 			path = "Budget BlocksTests";
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5955B8B223DB59BB00A24A8F /* Budget_BlocksTests.swift in Sources */,
+				5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
