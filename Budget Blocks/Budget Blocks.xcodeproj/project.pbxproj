@@ -3,19 +3,23 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
+		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
+		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
 		5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89723DB59B800A24A8F /* AppDelegate.swift */; };
 		5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89923DB59B800A24A8F /* SceneDelegate.swift */; };
-		5955B89C23DB59B800A24A8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89B23DB59B800A24A8F /* ViewController.swift */; };
 		5955B89F23DB59B800A24A8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B89D23DB59B800A24A8F /* Main.storyboard */; };
 		5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */; };
 		5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A323DB59BA00A24A8F /* Assets.xcassets */; };
 		5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */; };
 		5955B8B223DB59BB00A24A8F /* Budget_BlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */; };
 		5955B8BD23DB59BB00A24A8F /* Budget_BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */; };
+		5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964123DFC1FD0062F794 /* WelcomeViewController.swift */; };
+		5967964423DFC8520062F794 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964323DFC8520062F794 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,10 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
+		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
 		5955B89423DB59B800A24A8F /* Budget Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Blocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B89723DB59B800A24A8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5955B89923DB59B800A24A8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5955B89B23DB59B800A24A8F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5955B89E23DB59B800A24A8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5955B8A123DB59B800A24A8F /* Budget_Blocks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Budget_Blocks.xcdatamodel; sourceTree = "<group>"; };
 		5955B8A323DB59BA00A24A8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +56,8 @@
 		5955B8B823DB59BB00A24A8F /* Budget BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget BlocksUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BlocksUITests.swift; sourceTree = "<group>"; };
 		5955B8BE23DB59BB00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5967964123DFC1FD0062F794 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		5967964323DFC8520062F794 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +86,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5939B1F023DF54E4003FB0E0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5939B1F123DF5517003FB0E0 /* NetworkingController.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		5955B88B23DB59B800A24A8F = {
 			isa = PBXGroup;
 			children = (
@@ -103,7 +119,8 @@
 			children = (
 				5955B89723DB59B800A24A8F /* AppDelegate.swift */,
 				5955B89923DB59B800A24A8F /* SceneDelegate.swift */,
-				5955B89B23DB59B800A24A8F /* ViewController.swift */,
+				5967964023DFC1C70062F794 /* View Controllers */,
+				5939B1F023DF54E4003FB0E0 /* Networking */,
 				5955B89D23DB59B800A24A8F /* Main.storyboard */,
 				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
 				5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */,
@@ -118,6 +135,7 @@
 			children = (
 				5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */,
 				5955B8B323DB59BB00A24A8F /* Info.plist */,
+				5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */,
 			);
 			path = "Budget BlocksTests";
 			sourceTree = "<group>";
@@ -129,6 +147,15 @@
 				5955B8BE23DB59BB00A24A8F /* Info.plist */,
 			);
 			path = "Budget BlocksUITests";
+			sourceTree = "<group>";
+		};
+		5967964023DFC1C70062F794 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5967964123DFC1FD0062F794 /* WelcomeViewController.swift */,
+				5967964323DFC8520062F794 /* LoginViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +174,9 @@
 			dependencies = (
 			);
 			name = "Budget Blocks";
+			packageProductDependencies = (
+				5939B1F423DF55F3003FB0E0 /* SwiftyJSON */,
+			);
 			productName = "Budget Blocks";
 			productReference = 5955B89423DB59B800A24A8F /* Budget Blocks.app */;
 			productType = "com.apple.product-type.application";
@@ -219,6 +249,9 @@
 				Base,
 			);
 			mainGroup = 5955B88B23DB59B800A24A8F;
+			packageReferences = (
+				5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 5955B89523DB59B800A24A8F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,10 +295,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5955B89C23DB59B800A24A8F /* ViewController.swift in Sources */,
+				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
+				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
+				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5955B8B223DB59BB00A24A8F /* Budget_BlocksTests.swift in Sources */,
+				5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +630,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5939B1F423DF55F3003FB0E0 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */ = {
