@@ -24,7 +24,23 @@ class NetworkingControllerTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 100, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testRegister() {
+        let networkingController = NetworkingController()
+        let expectation = self.expectation(description: "Login")
+        
+        networkingController.register(email: "email@example.com", password: "password") { message, error in
+            if let error = error {
+                XCTFail("\(error)")
+            }
+            
+            XCTAssertNotNil(message)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
 }
