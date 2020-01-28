@@ -36,6 +36,10 @@ class LoginViewController: UIViewController {
         loginLabel.text = title
         
         confirmPasswordTextField.isHidden = signIn
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
     }
     
     private func updateViews() {
@@ -109,4 +113,19 @@ class LoginViewController: UIViewController {
     }
     */
 
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailTextField:
+            passwordTextField.becomeFirstResponder()
+        case passwordTextField where !signIn:
+            confirmPasswordTextField.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
 }
