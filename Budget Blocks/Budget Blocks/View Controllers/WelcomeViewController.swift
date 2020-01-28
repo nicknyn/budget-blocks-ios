@@ -20,7 +20,7 @@ class WelcomeViewController: UIViewController {
         setUpViews()
     }
 
-    func setUpViews() {
+    private func setUpViews() {
         let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1).cgColor
         
         signUpButton.layer.backgroundColor = daybreakBlue
@@ -30,6 +30,15 @@ class WelcomeViewController: UIViewController {
         signInButton.layer.cornerRadius = 4
         signInButton.layer.borderWidth = 1
         signInButton.layer.borderColor = daybreakBlue
+    }
+    
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let loginVC = segue.destination as? LoginViewController {
+            loginVC.signIn = segue.identifier == "SignIn"
+        }
     }
 
 }

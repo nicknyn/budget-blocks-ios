@@ -9,13 +9,39 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    // MARK: Outlets
 
+    @IBOutlet weak var loginButton: UIButton!
+    
+    // MARK: Properties
+    
+    var signIn: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setUpViews()
+        updateViews()
     }
     
+    private func setUpViews() {
+        loginButton.setTitle("Sign \(signIn ? "In" : "Up")", for: .normal)
+    }
+    
+    private func updateViews() {
+        let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1)
+        
+        //TODO: check the status of the form
+        if false {
+            
+        } else {
+            loginButton.layer.cornerRadius = 4
+            loginButton.layer.borderWidth = 1
+            loginButton.layer.borderColor = daybreakBlue.cgColor
+            loginButton.setTitleColor(daybreakBlue, for: .normal)
+        }
+    }
 
     /*
     // MARK: - Navigation

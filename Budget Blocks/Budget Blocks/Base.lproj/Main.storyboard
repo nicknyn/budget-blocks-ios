@@ -22,12 +22,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="SOJ-4i-bQY">
-                                <rect key="frame" x="56" y="702" width="302" height="96"/>
+                                <rect key="frame" x="56" y="698" width="302" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sew-FY-ZfX">
-                                        <rect key="frame" x="0.0" y="0.0" width="302" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="302" height="42"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="24G-Xk-6ro"/>
+                                            <constraint firstAttribute="height" constant="42" id="24G-Xk-6ro"/>
                                         </constraints>
                                         <state key="normal" title="Sign Up"/>
                                         <connections>
@@ -35,7 +35,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReI-gj-VUh">
-                                        <rect key="frame" x="0.0" y="56" width="302" height="40"/>
+                                        <rect key="frame" x="0.0" y="58" width="302" height="42"/>
                                         <state key="normal" title="Sign In"/>
                                         <connections>
                                             <segue destination="F4U-IQ-jeT" kind="presentation" identifier="SignIn" id="gIB-OX-Qv2"/>
@@ -98,21 +98,34 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1h-Fh-jM4">
+                                <rect key="frame" x="56" y="702" width="302" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="MuB-Qe-W6q"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="g9r-bt-3SK" firstAttribute="top" secondItem="zfg-c6-9d2" secondAttribute="bottom" constant="64" id="2fN-Cp-t6v"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="zfg-c6-9d2" secondAttribute="trailing" constant="56" id="4AM-UM-Wgw"/>
+                            <constraint firstItem="b1h-Fh-jM4" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="4gV-R5-bUv"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="top" secondItem="dUx-EC-sSE" secondAttribute="bottom" constant="64" id="C2n-NX-dVt"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="dUx-EC-sSE" secondAttribute="trailing" constant="56" id="KdE-9j-2Ap"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="VPm-Hw-ieL"/>
                             <constraint firstItem="zfg-c6-9d2" firstAttribute="centerY" secondItem="v1V-d6-1t0" secondAttribute="centerY" id="WuG-ZU-fYe"/>
+                            <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="b1h-Fh-jM4" secondAttribute="trailing" constant="56" id="ZBg-uX-rok"/>
                             <constraint firstItem="g9r-bt-3SK" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="azn-jO-qpY"/>
+                            <constraint firstItem="b1h-Fh-jM4" firstAttribute="bottom" secondItem="nfe-Yt-LUT" secondAttribute="bottom" constant="-64" id="hRA-gL-Baf"/>
                             <constraint firstItem="dUx-EC-sSE" firstAttribute="leading" secondItem="nfe-Yt-LUT" secondAttribute="leading" constant="56" id="msG-Mt-wYM"/>
                             <constraint firstItem="nfe-Yt-LUT" firstAttribute="trailing" secondItem="g9r-bt-3SK" secondAttribute="trailing" constant="56" id="v1p-aW-UZT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nfe-Yt-LUT"/>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="b1h-Fh-jM4" id="OxD-Gi-Jpu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncl-dd-3ES" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
