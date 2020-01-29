@@ -17,7 +17,7 @@ enum HTTPMethod: String {
 }
 
 class NetworkingController {
-    private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/api/")!
+    private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     private let bearerTokenKey = "bearerToken"
     private let userIDKey = "userIDKey"
     private let userDefaults = UserDefaults.standard
@@ -35,7 +35,8 @@ class NetworkingController {
     func login(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let loginJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
-        let url = baseURL.appendingPathComponent("auth")
+        let url = baseURL.appendingPathComponent("api")
+            .appendingPathComponent("auth")
             .appendingPathComponent("login")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
@@ -74,7 +75,8 @@ class NetworkingController {
     func register(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let registerJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
-        let url = baseURL.appendingPathComponent("auth")
+        let url = baseURL.appendingPathComponent("api")
+            .appendingPathComponent("auth")
             .appendingPathComponent("register")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
