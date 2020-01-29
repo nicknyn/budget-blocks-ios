@@ -46,8 +46,8 @@ class WelcomeViewController: UIViewController {
 
 extension WelcomeViewController: LoginViewControllerDelegate {
     func loginSuccessful() {
-        dismiss(animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
+        dismiss(animated: true)
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LinkKit
 
 class DashboardViewController: UIViewController {
 
@@ -16,7 +17,15 @@ class DashboardViewController: UIViewController {
         performSegue(withIdentifier: "InitialLogin", sender: self)
     }
     
-
+    @IBAction func linkAccount(_ sender: Any) {
+        guard let publicKey = ProcessInfo.processInfo.environment["PLAID_PUBLIC_KEY"] else {
+            return NSLog("No public key found!")
+        }
+        let linkConfiguration = PLKConfiguration(key: publicKey, env: .sandbox, product: .auth)
+        let linkViewController = PLKPlaidLinkViewController(configuration: linkConfiguration, delegate: self)
+        present(linkViewController, animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -27,4 +36,14 @@ class DashboardViewController: UIViewController {
     }
     */
 
+}
+
+extension DashboardViewController: PLKPlaidLinkViewDelegate {
+    func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
+        dismiss(animated: true)
+    }
+    
+    func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didExitWithError error: Error?, metadata: [String : Any]?) {
+        //<#code#>
+    }
 }

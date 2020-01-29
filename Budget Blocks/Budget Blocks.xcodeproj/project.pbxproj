@@ -23,7 +23,6 @@
 		596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; };
 		596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C110123E1041B003DF1D8 /* DashboardViewController.swift */; };
-		596C110423E10715003DF1D8 /* LinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C110323E10715003DF1D8 /* LinkViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +77,6 @@
 		5967964323DFC8520062F794 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		596C10FC23E0E09F003DF1D8 /* LinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinkKit.framework; path = ../Carthage/Build/iOS/LinkKit.framework; sourceTree = "<group>"; };
 		596C110123E1041B003DF1D8 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		596C110323E10715003DF1D8 /* LinkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +176,6 @@
 				5967964123DFC1FD0062F794 /* WelcomeViewController.swift */,
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
 				596C110123E1041B003DF1D8 /* DashboardViewController.swift */,
-				596C110323E10715003DF1D8 /* LinkViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -351,7 +348,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				596C110423E10715003DF1D8 /* LinkViewController.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
