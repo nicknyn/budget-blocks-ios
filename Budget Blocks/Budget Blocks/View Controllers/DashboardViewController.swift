@@ -16,7 +16,9 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        performSegue(withIdentifier: "InitialLogin", sender: self)
+        if networkingController.bearer == nil {
+            performSegue(withIdentifier: "InitialLogin", sender: self)
+        }
     }
     
     @IBAction func linkAccount(_ sender: Any) {
@@ -26,6 +28,11 @@ class DashboardViewController: UIViewController {
         let linkConfiguration = PLKConfiguration(key: publicKey, env: .sandbox, product: .auth)
         let linkViewController = PLKPlaidLinkViewController(configuration: linkConfiguration, delegate: self)
         present(linkViewController, animated: true)
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        networkingController.logout()
+        performSegue(withIdentifier: "AnimatedLogin", sender: self)
     }
     
     // MARK: - Navigation

@@ -18,8 +18,19 @@ enum HTTPMethod: String {
 
 class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/api/")!
+    private let bearerTokenKey = "bearerToken"
+    private let userIDKey = "userIDKey"
+    private let userDefaults = UserDefaults.standard
     
     var bearer: Bearer?
+    
+    init() {
+        let userID = userDefaults.integer(forKey: userIDKey)
+        if let token = userDefaults.string(forKey: bearerTokenKey),
+            userID != 0 {
+            bearer = Bearer(token: token, userID: userID)
+        }
+    }
     
     func login(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let loginJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
@@ -47,6 +58,8 @@ class NetworkingController {
                     if let token = responseJSON["token"].string,
                         let userID = responseJSON["id"].int {
                         self.bearer = Bearer(token: token, userID: userID)
+                        self.userDefaults.set(token, forKey: self.bearerTokenKey)
+                        self.userDefaults.set(userID, forKey: self.userIDKey)
                     }
                     completion(responseJSON["token"].string, nil)
                 } catch {
@@ -93,6 +106,12 @@ class NetworkingController {
         } catch {
             completion(nil, error)
         }
+    }
+    
+    func logout() {
+        bearer = nil
+        self.userDefaults.removeObject(forKey: bearerTokenKey)
+        self.userDefaults.removeObject(forKey: userIDKey)
     }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {

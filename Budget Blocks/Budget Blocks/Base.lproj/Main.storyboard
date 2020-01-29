@@ -47,7 +47,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lZ8-dv-Duv">
-                                <rect key="frame" x="30" y="151.5" width="354" height="236"/>
+                                <rect key="frame" x="30" y="151.49999999999997" width="354" height="236.00000000000009"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lZ8-dv-Duv" secondAttribute="height" multiplier="6:4" id="NFa-HA-y5u"/>
                                 </constraints>
@@ -115,7 +115,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mt6-rd-orw">
-                                <rect key="frame" x="170" y="8" width="74" height="50"/>
+                                <rect key="frame" x="170" y="8" width="74" height="50.000000000000057"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="74" id="QxX-x5-bBw"/>
                                     <constraint firstAttribute="height" constant="50" id="uCy-85-xUU"/>
@@ -207,13 +207,25 @@
                                     <action selector="linkAccount:" destination="BPe-4v-P8t" eventType="touchUpInside" id="FAH-K5-tsg"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRU-Kt-PYN">
+                                <rect key="frame" x="183" y="473" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logout:" destination="BPe-4v-P8t" eventType="touchUpInside" id="2LC-uJ-WhQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jRU-Kt-PYN" firstAttribute="centerY" secondItem="fD0-Kt-WYF" secondAttribute="centerY" constant="40" id="KvK-DD-swX"/>
+                            <constraint firstItem="jRU-Kt-PYN" firstAttribute="centerX" secondItem="fD0-Kt-WYF" secondAttribute="centerX" id="g2J-Cw-u9c"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cIx-au-x1p"/>
                     </view>
                     <navigationItem key="navigationItem" id="JtQ-mn-2dK"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="InitialLogin" animates="NO" id="Rba-x6-Osm"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="AnimatedLogin" id="yE1-92-tbK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ndz-j1-dKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -244,5 +256,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QHt-ML-1ag"/>
+        <segue reference="yE1-92-tbK"/>
     </inferredMetricsTieBreakers>
 </document>
