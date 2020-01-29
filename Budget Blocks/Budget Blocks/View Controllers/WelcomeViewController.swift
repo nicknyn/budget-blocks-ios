@@ -37,9 +37,20 @@ class WelcomeViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let loginVC = segue.destination as? LoginViewController {
+            loginVC.delegate = self
             loginVC.signIn = segue.identifier == "SignIn"
         }
     }
 
+}
+
+extension WelcomeViewController: LoginViewControllerDelegate {
+    func loginSuccessful() {
+        dismiss(animated: true) {
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
 }
 

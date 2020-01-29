@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate {
+    func loginSuccessful()
+}
+
 class LoginViewController: UIViewController {
     
     // MARK: Outlets
@@ -23,6 +27,7 @@ class LoginViewController: UIViewController {
     
     var networkingController = NetworkingController()
     var signIn: Bool = true
+    var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +53,10 @@ class LoginViewController: UIViewController {
         let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1)
         
         //TODO: check the status of the form
-        if false {
-            
-        } else {
-            loginButton.layer.cornerRadius = 4
-            loginButton.layer.borderWidth = 1
-            loginButton.layer.borderColor = daybreakBlue.cgColor
-            loginButton.setTitleColor(daybreakBlue, for: .normal)
-        }
+        loginButton.layer.cornerRadius = 4
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = daybreakBlue.cgColor
+        loginButton.setTitleColor(daybreakBlue, for: .normal)
     }
     
     // MARK: Actions
@@ -77,6 +78,9 @@ class LoginViewController: UIViewController {
                 }
                 
                 print(token)
+                DispatchQueue.main.async {
+                    self.delegate?.loginSuccessful()
+                }
             }
         } else {
             guard let confirmPassword = confirmPasswordTextField.text,
@@ -96,7 +100,10 @@ class LoginViewController: UIViewController {
                 }
                 
                 if message == email {
-                    NSLog("Sign in successful with email: \(message)")
+                    NSLog("Sign up successful with email: \(message)")
+                    DispatchQueue.main.async {
+                        self.delegate?.loginSuccessful()
+                    }
                 } else {
                     //TODO: alert the user
                     print(message)
