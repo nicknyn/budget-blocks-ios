@@ -68,20 +68,7 @@ class LoginViewController: UIViewController {
             !password.isEmpty else { return }
         
         if signIn {
-            networkingController.login(email: email, password: password) { token, error in
-                if let error = error {
-                    return NSLog("Error signing in: \(error)")
-                }
-                
-                guard let token = token else {
-                    return NSLog("No token returned from login.")
-                }
-                
-                print(token)
-                DispatchQueue.main.async {
-                    self.delegate?.loginSuccessful()
-                }
-            }
+            signIn(email: email, password: password)
         } else {
             guard let confirmPassword = confirmPasswordTextField.text,
                 confirmPassword == password else {
@@ -101,13 +88,28 @@ class LoginViewController: UIViewController {
                 
                 if message == email {
                     NSLog("Sign up successful with email: \(message)")
-                    DispatchQueue.main.async {
-                        self.delegate?.loginSuccessful()
-                    }
+                    self.signIn(email: email, password: password)
                 } else {
                     //TODO: alert the user
                     print(message)
                 }
+            }
+        }
+    }
+    
+    private func signIn(email: String, password: String) {
+        networkingController.login(email: email, password: password) { token, error in
+            if let error = error {
+                return NSLog("Error signing in: \(error)")
+            }
+            
+            guard let token = token else {
+                return NSLog("No token returned from login.")
+            }
+            
+            print(token)
+            DispatchQueue.main.async {
+                self.delegate?.loginSuccessful()
             }
         }
     }
