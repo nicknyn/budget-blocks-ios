@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     
     // MARK: Properties
     
-    var networkingController = NetworkingController()
+    var networkingController: NetworkingController!
     var signIn: Bool = true
     var delegate: LoginViewControllerDelegate?
     
@@ -123,6 +123,8 @@ class LoginViewController: UIViewController {
     */
 
 }
+
+// MARK: Text field delegate
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

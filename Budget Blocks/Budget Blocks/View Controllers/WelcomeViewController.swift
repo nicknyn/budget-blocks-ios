@@ -15,6 +15,8 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     
+    var networkingController: NetworkingController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
@@ -39,10 +41,13 @@ class WelcomeViewController: UIViewController {
         if let loginVC = segue.destination as? LoginViewController {
             loginVC.delegate = self
             loginVC.signIn = segue.identifier == "SignIn"
+            loginVC.networkingController = networkingController
         }
     }
 
 }
+
+// MARK: Login view controller delegate
 
 extension WelcomeViewController: LoginViewControllerDelegate {
     func loginSuccessful() {

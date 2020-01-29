@@ -19,6 +19,8 @@ enum HTTPMethod: String {
 class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/api/")!
     
+    var bearer: Bearer?
+    
     func login(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let loginJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
@@ -42,6 +44,10 @@ class NetworkingController {
                 
                 do {
                     let responseJSON = try JSON(data: data)
+                    if let token = responseJSON["token"].string,
+                        let userID = responseJSON["id"].int {
+                        self.bearer = Bearer(token: token, userID: userID)
+                    }
                     completion(responseJSON["token"].string, nil)
                 } catch {
                     completion(nil, error)
@@ -86,6 +92,53 @@ class NetworkingController {
             }.resume()
         } catch {
             completion(nil, error)
+        }
+    }
+    
+    func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return }
+        let tokenJSON = JSON(dictionaryLiteral: ("publicToken", publicToken), ("userid", bearer.userID))
+        
+        let url = baseURL.appendingPathComponent("plaid")
+            .appendingPathComponent("token_exchange")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try tokenJSON.rawData()
+            URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    return completion(error)
+                }
+                
+                guard let data = data else {
+                    NSLog("No data returned from register request")
+                    return completion(nil)
+                }
+                
+                do {
+                    let responseJSON = try JSON(data: data)
+                    if let success = responseJSON["AccessTokenInserted"].int {
+                        if success != 1 {
+                            NSLog("Access token insertion failed")
+                        } else {
+                            print("Access token inserted!")
+                        }
+                    } else {
+                        if let response = responseJSON.rawString() {
+                            NSLog("Unexpected response returned: \(response)")
+                        } else {
+                            NSLog("Unexpected response returned and can't be decoded.")
+                        }
+                    }
+                    completion(nil)
+                } catch {
+                    completion(error)
+                }
+            }.resume()
+        } catch {
+            completion(error)
         }
     }
 }
