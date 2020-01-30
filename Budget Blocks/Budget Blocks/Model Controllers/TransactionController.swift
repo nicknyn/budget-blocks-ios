@@ -12,8 +12,8 @@ class TransactionController {
     
     var networkingController: NetworkingController?
     
-    func createTransaction(transactionID: String, amount: Int16, date: Date, context: NSManagedObjectContext) {
-        Transaction(transactionID: transactionID, amount: amount, date: date, context: context)
+    func createTransaction(transactionID: String, name: String, amount: Int16, date: Date, context: NSManagedObjectContext) {
+        Transaction(transactionID: transactionID, name: name, amount: amount, date: date, context: context)
         CoreDataStack.shared.save(context: context)
     }
     
@@ -53,15 +53,17 @@ class TransactionController {
                 
                 for transactionJSON in transactions {
                     guard let transactionID = transactionJSON["transaction_id"].string,
+                        let name = transactionJSON["name"].string,
                         let amount = transactionJSON["amount"].int16,
                         let dateString = transactionJSON["date"].string,
                         let date = dateFormatter.date(from: dateString) else { continue }
                     
                     if let existingTransaction = existingTransactions.first(where: { $0.transactionID == transactionID }) {
+                        existingTransaction.name = name
                         existingTransaction.amount = amount
                         existingTransaction.date = date
                     } else {
-                        Transaction(transactionID: transactionID, amount: amount, date: date, context: context)
+                        Transaction(transactionID: transactionID, name: name, amount: amount, date: date, context: context)
                     }
                 }
                 

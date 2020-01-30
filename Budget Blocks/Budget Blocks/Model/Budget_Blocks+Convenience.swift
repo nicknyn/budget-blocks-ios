@@ -9,10 +9,11 @@
 import CoreData
 
 extension Transaction {
-    @discardableResult convenience init(transactionID: String, amount: Int16, date: Date, context: NSManagedObjectContext) {
+    @discardableResult convenience init(transactionID: String, name: String, amount: Int16, date: Date, context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.transactionID = transactionID
+        self.name = name
         self.amount = amount
         self.date = date
     }
