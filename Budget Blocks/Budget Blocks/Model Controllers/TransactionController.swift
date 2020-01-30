@@ -73,4 +73,17 @@ class TransactionController {
         })
     }
     
+    func clearStoredTransactions(context: NSManagedObjectContext) {
+        let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        do {
+            let allTransactions = try context.fetch(fetchRequest)
+            for transaction in allTransactions {
+                context.delete(transaction)
+            }
+            CoreDataStack.shared.save(context: context)
+        } catch {
+            NSLog("Error fetching transactions for deletion: \(error)")
+        }
+    }
+    
 }

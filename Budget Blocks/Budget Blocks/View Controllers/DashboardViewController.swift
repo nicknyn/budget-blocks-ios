@@ -8,6 +8,7 @@
 
 import UIKit
 import LinkKit
+import CoreData
 
 class DashboardViewController: UIViewController {
     
@@ -32,6 +33,7 @@ class DashboardViewController: UIViewController {
     
     @IBAction func logout(_ sender: Any) {
         networkingController.logout()
+        TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
         performSegue(withIdentifier: "AnimatedLogin", sender: self)
     }
     
