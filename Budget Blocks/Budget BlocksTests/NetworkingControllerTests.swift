@@ -16,10 +16,7 @@ class NetworkingControllerTests: XCTestCase {
         let expectation = self.expectation(description: "Login")
         
         networkingController.login(email: "email@example.com", password: "password") { token, error in
-            if let error = error {
-                XCTFail("\(error)")
-            }
-            
+            XCTAssertNil(error)
             XCTAssertNotNil(token)
             expectation.fulfill()
         }
@@ -32,11 +29,22 @@ class NetworkingControllerTests: XCTestCase {
         let expectation = self.expectation(description: "Login")
         
         networkingController.register(email: "email@example.com", password: "password") { message, error in
-            if let error = error {
-                XCTFail("\(error)")
-            }
-            
+            XCTAssertNil(error)
             XCTAssertNotNil(message)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testFetchTransactions() {
+        let networkingController = NetworkingController()
+        networkingController.bearer = Bearer(token: "token", userID: 1)
+        let expectation = self.expectation(description: "Fetch")
+        
+        networkingController.fetchTransactionsFromServer { json, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(json)
             expectation.fulfill()
         }
         
