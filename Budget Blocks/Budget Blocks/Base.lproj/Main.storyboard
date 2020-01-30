@@ -287,6 +287,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="UEm-MF-jgl" id="hAS-tG-gEY"/>
+                                    <outlet property="delegate" destination="UEm-MF-jgl" id="VLM-Qw-d2s"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -302,6 +306,9 @@
                         <viewLayoutGuide key="safeArea" id="ucJ-ve-5n5"/>
                     </view>
                     <navigationItem key="navigationItem" title="Transactions" id="RSR-3I-Kza"/>
+                    <connections>
+                        <outlet property="tableView" destination="Dgr-GO-OPb" id="fiI-XH-bBQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTb-s2-xyt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
