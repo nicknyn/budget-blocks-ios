@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate {
+    func loginSuccessful()
+}
+
 class LoginViewController: UIViewController {
     
     // MARK: Outlets
@@ -21,8 +25,9 @@ class LoginViewController: UIViewController {
     
     // MARK: Properties
     
-    var networkingController = NetworkingController()
+    var networkingController: NetworkingController!
     var signIn: Bool = true
+    var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +53,10 @@ class LoginViewController: UIViewController {
         let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1)
         
         //TODO: check the status of the form
-        if false {
-            
-        } else {
-            loginButton.layer.cornerRadius = 4
-            loginButton.layer.borderWidth = 1
-            loginButton.layer.borderColor = daybreakBlue.cgColor
-            loginButton.setTitleColor(daybreakBlue, for: .normal)
-        }
+        loginButton.layer.cornerRadius = 4
+        loginButton.layer.borderWidth = 1
+        loginButton.layer.borderColor = daybreakBlue.cgColor
+        loginButton.setTitleColor(daybreakBlue, for: .normal)
     }
     
     // MARK: Actions
@@ -67,17 +68,7 @@ class LoginViewController: UIViewController {
             !password.isEmpty else { return }
         
         if signIn {
-            networkingController.login(email: email, password: password) { token, error in
-                if let error = error {
-                    return NSLog("Error signing in: \(error)")
-                }
-                
-                guard let token = token else {
-                    return NSLog("No token returned from login.")
-                }
-                
-                print(token)
-            }
+            signIn(email: email, password: password)
         } else {
             guard let confirmPassword = confirmPasswordTextField.text,
                 confirmPassword == password else {
@@ -95,12 +86,30 @@ class LoginViewController: UIViewController {
                     return NSLog("No message back from register.")
                 }
                 
-                if message == email {
-                    NSLog("Sign in successful with email: \(message)")
+                if message == "success" {
+                    NSLog("Sign up successful!")
+                    self.signIn(email: email, password: password)
                 } else {
                     //TODO: alert the user
                     print(message)
                 }
+            }
+        }
+    }
+    
+    private func signIn(email: String, password: String) {
+        networkingController.login(email: email, password: password) { token, error in
+            if let error = error {
+                return NSLog("Error signing in: \(error)")
+            }
+            
+            guard let token = token else {
+                return NSLog("No token returned from login.")
+            }
+            
+            print(token)
+            DispatchQueue.main.async {
+                self.delegate?.loginSuccessful()
             }
         }
     }
@@ -116,6 +125,8 @@ class LoginViewController: UIViewController {
     */
 
 }
+
+// MARK: Text field delegate
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

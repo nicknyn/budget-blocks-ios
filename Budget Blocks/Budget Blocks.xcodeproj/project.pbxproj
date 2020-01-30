@@ -20,6 +20,10 @@
 		5955B8BD23DB59BB00A24A8F /* Budget_BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */; };
 		5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964123DFC1FD0062F794 /* WelcomeViewController.swift */; };
 		5967964423DFC8520062F794 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964323DFC8520062F794 /* LoginViewController.swift */; };
+		5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1ED23E239C000BAA183 /* Bearer.swift */; };
+		596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; };
+		596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C110123E1041B003DF1D8 /* DashboardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +42,20 @@
 			remoteInfo = "Budget Blocks";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		596C10FF23E0E09F003DF1D8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
@@ -58,6 +76,9 @@
 		5955B8BE23DB59BB00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5967964123DFC1FD0062F794 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5967964323DFC8520062F794 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		5969C1ED23E239C000BAA183 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		596C10FC23E0E09F003DF1D8 /* LinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinkKit.framework; path = ../Carthage/Build/iOS/LinkKit.framework; sourceTree = "<group>"; };
+		596C110123E1041B003DF1D8 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
+				596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				5939B1F123DF5517003FB0E0 /* NetworkingController.swift */,
+				5969C1ED23E239C000BAA183 /* Bearer.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -101,6 +124,7 @@
 				5955B8B023DB59BB00A24A8F /* Budget BlocksTests */,
 				5955B8BB23DB59BB00A24A8F /* Budget BlocksUITests */,
 				5955B89523DB59B800A24A8F /* Products */,
+				596C10FB23E0E09F003DF1D8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,8 +178,17 @@
 			children = (
 				5967964123DFC1FD0062F794 /* WelcomeViewController.swift */,
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
+				596C110123E1041B003DF1D8 /* DashboardViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		596C10FB23E0E09F003DF1D8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				596C10FC23E0E09F003DF1D8 /* LinkKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +201,8 @@
 				5955B89023DB59B800A24A8F /* Sources */,
 				5955B89123DB59B800A24A8F /* Frameworks */,
 				5955B89223DB59B800A24A8F /* Resources */,
+				596C10FF23E0E09F003DF1D8 /* Embed Frameworks */,
+				596C110023E0E0D1003DF1D8 /* Prepare for Distribution */,
 			);
 			buildRules = (
 			);
@@ -290,12 +325,35 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		596C110023E0E0D1003DF1D8 /* Prepare for Distribution */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare for Distribution";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LINK_ROOT=${PODS_ROOT:+$PODS_ROOT/Plaid/ios}\ncp \"${LINK_ROOT:-$PROJECT_DIR}/../Carthage/Build/iOS/\"/LinkKit.framework/prepare_for_distribution.sh \"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n\"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5955B89023DB59B800A24A8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
+				596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
 				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
@@ -476,6 +534,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A4525544Q4;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Budget Blocks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -494,6 +553,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A4525544Q4;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Budget Blocks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

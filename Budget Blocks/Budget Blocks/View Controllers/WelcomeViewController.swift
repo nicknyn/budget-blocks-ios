@@ -15,6 +15,8 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var signInButton: UIButton!
     
+    var networkingController: NetworkingController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
@@ -37,9 +39,20 @@ class WelcomeViewController: UIViewController {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let loginVC = segue.destination as? LoginViewController {
+            loginVC.delegate = self
             loginVC.signIn = segue.identifier == "SignIn"
+            loginVC.networkingController = networkingController
         }
     }
 
+}
+
+// MARK: Login view controller delegate
+
+extension WelcomeViewController: LoginViewControllerDelegate {
+    func loginSuccessful() {
+        dismiss(animated: true)
+        dismiss(animated: true)
+    }
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8Cn-UY-Ybz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -10,7 +10,7 @@
         <!--Welcome View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WelcomeViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="WelcomeViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="139"/>
+            <point key="canvasLocation" x="1042" y="139"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tlU-rZ-57U">
@@ -189,13 +189,73 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncl-dd-3ES" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1001" y="139"/>
+            <point key="canvasLocation" x="1951" y="139"/>
+        </scene>
+        <!--Dashboard View Controller-->
+        <scene sceneID="sbr-2V-wMt">
+            <objects>
+                <viewController id="BPe-4v-P8t" customClass="DashboardViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fD0-Kt-WYF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZA-GY-Z41">
+                                <rect key="frame" x="144" y="433" width="127" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Bank Account"/>
+                                <connections>
+                                    <action selector="linkAccount:" destination="BPe-4v-P8t" eventType="touchUpInside" id="FAH-K5-tsg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRU-Kt-PYN">
+                                <rect key="frame" x="183" y="473" width="48" height="30"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logout:" destination="BPe-4v-P8t" eventType="touchUpInside" id="2LC-uJ-WhQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="jRU-Kt-PYN" firstAttribute="centerY" secondItem="fD0-Kt-WYF" secondAttribute="centerY" constant="40" id="KvK-DD-swX"/>
+                            <constraint firstItem="jRU-Kt-PYN" firstAttribute="centerX" secondItem="fD0-Kt-WYF" secondAttribute="centerX" id="g2J-Cw-u9c"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cIx-au-x1p"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="JtQ-mn-2dK"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="InitialLogin" animates="NO" id="Rba-x6-Osm"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="AnimatedLogin" id="yE1-92-tbK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ndz-j1-dKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="845.75892857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="srR-H7-YeM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Cn-UY-Ybz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0BN-HD-JfH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BPe-4v-P8t" kind="relationship" relationship="rootViewController" id="9P4-gd-2vJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A8C-f8-0qJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="845.75892857142856"/>
         </scene>
     </scenes>
     <resources>
         <image name="BlocksIcon" width="315" height="214"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gIB-OX-Qv2"/>
+        <segue reference="QHt-ML-1ag"/>
+        <segue reference="yE1-92-tbK"/>
     </inferredMetricsTieBreakers>
 </document>
