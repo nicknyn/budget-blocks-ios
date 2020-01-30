@@ -86,8 +86,8 @@ class LoginViewController: UIViewController {
                     return NSLog("No message back from register.")
                 }
                 
-                if message == email {
-                    NSLog("Sign up successful with email: \(message)")
+                if message == "success" {
+                    NSLog("Sign up successful!")
                     self.signIn(email: email, password: password)
                 } else {
                     //TODO: alert the user

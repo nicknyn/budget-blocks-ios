@@ -96,7 +96,7 @@ class NetworkingController {
                 
                 do {
                     let responseJSON = try JSON(data: data)
-                    if let email = responseJSON["email"].string {
+                    if let email = responseJSON["message"].string {
                         completion(email, nil)
                     } else {
                         completion(responseJSON["error"].string, nil)
