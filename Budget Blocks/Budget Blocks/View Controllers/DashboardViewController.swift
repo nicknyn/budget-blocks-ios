@@ -41,6 +41,8 @@ class DashboardViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let welcomeVC = segue.destination as? WelcomeViewController {
             welcomeVC.networkingController = networkingController
+        } else if let transactionsVC = segue.destination as? TransactionsViewController {
+            transactionsVC.networkingController = networkingController
         }
     }
 

@@ -47,7 +47,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lZ8-dv-Duv">
-                                <rect key="frame" x="30" y="151.49999999999997" width="354" height="236.00000000000009"/>
+                                <rect key="frame" x="30" y="151.5" width="354" height="236"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lZ8-dv-Duv" secondAttribute="height" multiplier="6:4" id="NFa-HA-y5u"/>
                                 </constraints>
@@ -115,7 +115,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mt6-rd-orw">
-                                <rect key="frame" x="170" y="8" width="74" height="50.000000000000057"/>
+                                <rect key="frame" x="170" y="8" width="74" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="74" id="QxX-x5-bBw"/>
                                     <constraint firstAttribute="height" constant="50" id="uCy-85-xUU"/>
@@ -245,7 +245,7 @@
         <!--Transactions-->
         <scene sceneID="xWZ-ME-HmN">
             <objects>
-                <viewController id="UEm-MF-jgl" sceneMemberID="viewController">
+                <viewController id="UEm-MF-jgl" customClass="TransactionsViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gbH-sf-BrD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
