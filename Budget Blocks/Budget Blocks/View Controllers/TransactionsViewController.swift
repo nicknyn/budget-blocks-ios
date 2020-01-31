@@ -51,7 +51,20 @@ class TransactionsViewController: UIViewController {
             }
         }
     }
-
+    
+    @IBAction func filterChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "amount > 0")
+        case 2:
+            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "amount < 0")
+        default:
+            fetchedResultsController.fetchRequest.predicate = nil
+        }
+        try? fetchedResultsController.performFetch()
+        tableView.reloadData()
+    }
+    
 }
 
 // MARK: Table view data source and delegate

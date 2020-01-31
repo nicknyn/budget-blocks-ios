@@ -257,6 +257,9 @@
                                     <segment title="All"/>
                                     <segment title="Income"/>
                                 </segments>
+                                <connections>
+                                    <action selector="filterChanged:" destination="UEm-MF-jgl" eventType="valueChanged" id="hFj-Ho-Liz"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Dgr-GO-OPb">
                                 <rect key="frame" x="0.0" y="179" width="414" height="683"/>
