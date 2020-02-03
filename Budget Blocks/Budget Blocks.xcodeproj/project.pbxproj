@@ -10,6 +10,8 @@
 		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
 		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
 		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
+		5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */; };
+		5943B3F223E498600050866D /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5943B3F123E498600050866D /* Exo-Regular.otf */; };
 		5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89723DB59B800A24A8F /* AppDelegate.swift */; };
 		5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89923DB59B800A24A8F /* SceneDelegate.swift */; };
 		5955B89F23DB59B800A24A8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B89D23DB59B800A24A8F /* Main.storyboard */; };
@@ -21,6 +23,10 @@
 		5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964123DFC1FD0062F794 /* WelcomeViewController.swift */; };
 		5967964423DFC8520062F794 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964323DFC8520062F794 /* LoginViewController.swift */; };
 		5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1ED23E239C000BAA183 /* Bearer.swift */; };
+		5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F023E38D3200BAA183 /* CoreDataStack.swift */; };
+		5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F223E38EBF00BAA183 /* Budget_Blocks+Convenience.swift */; };
+		5969C1F623E3904400BAA183 /* TransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F523E3904400BAA183 /* TransactionController.swift */; };
+		5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */; };
 		596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; };
 		596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C110123E1041B003DF1D8 /* DashboardViewController.swift */; };
@@ -60,6 +66,8 @@
 /* Begin PBXFileReference section */
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
+		5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SquadaOne-Regular.ttf"; sourceTree = "<group>"; };
+		5943B3F123E498600050866D /* Exo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Regular.otf"; sourceTree = "<group>"; };
 		5955B89423DB59B800A24A8F /* Budget Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Blocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B89723DB59B800A24A8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5955B89923DB59B800A24A8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +85,10 @@
 		5967964123DFC1FD0062F794 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5967964323DFC8520062F794 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5969C1ED23E239C000BAA183 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
+		5969C1F023E38D3200BAA183 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		5969C1F223E38EBF00BAA183 /* Budget_Blocks+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Budget_Blocks+Convenience.swift"; sourceTree = "<group>"; };
+		5969C1F523E3904400BAA183 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
+		5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		596C10FC23E0E09F003DF1D8 /* LinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinkKit.framework; path = ../Carthage/Build/iOS/LinkKit.framework; sourceTree = "<group>"; };
 		596C110123E1041B003DF1D8 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +129,15 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		5943B3EE23E491A10050866D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */,
+				5943B3F123E498600050866D /* Exo-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		5955B88B23DB59B800A24A8F = {
 			isa = PBXGroup;
 			children = (
@@ -143,13 +164,15 @@
 			children = (
 				5955B89723DB59B800A24A8F /* AppDelegate.swift */,
 				5955B89923DB59B800A24A8F /* SceneDelegate.swift */,
+				5969C1EF23E38CC800BAA183 /* Model */,
+				5969C1F423E3903400BAA183 /* Model Controllers */,
 				5967964023DFC1C70062F794 /* View Controllers */,
 				5939B1F023DF54E4003FB0E0 /* Networking */,
 				5955B89D23DB59B800A24A8F /* Main.storyboard */,
 				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
 				5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */,
 				5955B8A823DB59BA00A24A8F /* Info.plist */,
-				5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */,
+				5943B3EE23E491A10050866D /* Fonts */,
 			);
 			path = "Budget Blocks";
 			sourceTree = "<group>";
@@ -179,8 +202,27 @@
 				5967964123DFC1FD0062F794 /* WelcomeViewController.swift */,
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
 				596C110123E1041B003DF1D8 /* DashboardViewController.swift */,
+				5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		5969C1EF23E38CC800BAA183 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */,
+				5969C1F023E38D3200BAA183 /* CoreDataStack.swift */,
+				5969C1F223E38EBF00BAA183 /* Budget_Blocks+Convenience.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5969C1F423E3903400BAA183 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5969C1F523E3904400BAA183 /* TransactionController.swift */,
+			);
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 		596C10FB23E0E09F003DF1D8 /* Frameworks */ = {
@@ -303,7 +345,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5943B3F223E498600050866D /* Exo-Regular.otf in Resources */,
 				5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */,
+				5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */,
 				5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */,
 				5955B89F23DB59B800A24A8F /* Main.storyboard in Resources */,
 			);
@@ -353,9 +397,13 @@
 			files = (
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
+				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
 				596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */,
+				5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
 				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,
+				5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */,
+				5969C1F623E3904400BAA183 /* TransactionController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,

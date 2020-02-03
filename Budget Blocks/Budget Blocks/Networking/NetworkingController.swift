@@ -162,4 +162,37 @@ class NetworkingController {
             completion(error)
         }
     }
+    
+    func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer else { return }
+        let userIDJSON = JSON(dictionaryLiteral: ("userid", bearer.userID))
+        
+        let url = baseURL.appendingPathComponent("plaid").appendingPathComponent("transactions")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try userIDJSON.rawData()
+            URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    return completion(nil, error)
+                }
+                
+                guard let data = data else {
+                    NSLog("No data returned from transactions request.")
+                    return completion(nil, nil)
+                }
+                
+                do {
+                    let responseJSON = try JSON(data: data)
+                    completion(responseJSON, nil)
+                } catch {
+                    completion(nil, error)
+                }
+            }.resume()
+        } catch {
+            completion(nil, error)
+        }
+    }
 }
