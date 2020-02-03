@@ -47,6 +47,20 @@ class LoginViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
+        
+        let loginLabelFontSize = loginLabel.font.pointSize
+        loginLabel.font = UIFont(name: "Exo-Regular", size: loginLabelFontSize)
+        
+        if let textFieldFontSize = emailTextField.font?.pointSize {
+            let exo = UIFont(name: "Exo-Regular", size: textFieldFontSize)
+            emailTextField.font = exo
+            passwordTextField.font = exo
+            confirmPasswordTextField.font = exo
+        }
+        
+        if let buttonFontSize = loginButton.titleLabel?.font.pointSize {
+            loginButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
+        }
     }
     
     private func updateViews() {
