@@ -30,7 +30,6 @@
 		5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */; };
 		596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; };
 		596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596C110123E1041B003DF1D8 /* DashboardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +91,6 @@
 		5969C1F523E3904400BAA183 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		596C10FC23E0E09F003DF1D8 /* LinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinkKit.framework; path = ../Carthage/Build/iOS/LinkKit.framework; sourceTree = "<group>"; };
-		596C110123E1041B003DF1D8 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +201,6 @@
 			children = (
 				5967964123DFC1FD0062F794 /* WelcomeViewController.swift */,
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
-				596C110123E1041B003DF1D8 /* DashboardViewController.swift */,
 				5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */,
 				593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */,
 			);
@@ -402,7 +399,6 @@
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
-				596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */,
 				5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
 				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,

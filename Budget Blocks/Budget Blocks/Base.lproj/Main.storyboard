@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWx-tZ-WFt">
-                                <rect key="frame" x="49.666666666666657" y="396.33333333333331" width="315" height="63.666666666666686"/>
+                                <rect key="frame" x="9.6666666666666572" y="393" width="394.66666666666674" height="70"/>
                                 <fontDescription key="fontDescription" name="SquadaOne-Regular" family="Squada One" pointSize="60"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lZ8-dv-Duv">
-                                <rect key="frame" x="30" y="140.33333333333334" width="354" height="236.00000000000009"/>
+                                <rect key="frame" x="30" y="137" width="354" height="236"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lZ8-dv-Duv" secondAttribute="height" multiplier="6:4" id="NFa-HA-y5u"/>
                                 </constraints>
@@ -123,32 +123,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mt6-rd-orw">
-                                <rect key="frame" x="170" y="8" width="74" height="50.000000000000057"/>
+                                <rect key="frame" x="170" y="8" width="74" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="74" id="QxX-x5-bBw"/>
                                     <constraint firstAttribute="height" constant="50" id="uCy-85-xUU"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixL-LW-pJK">
-                                <rect key="frame" x="128.33333333333337" y="62" width="157.66666666666663" height="32"/>
+                                <rect key="frame" x="108.33333333333333" y="62" width="197.33333333333337" height="35"/>
                                 <fontDescription key="fontDescription" name="SquadaOne-Regular" family="Squada One" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSU-tg-btp">
-                                <rect key="frame" x="56" y="286" width="90" height="18"/>
+                                <rect key="frame" x="56" y="287.66666666666669" width="90" height="16.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9au-ti-kQU">
-                                <rect key="frame" x="56" y="384" width="62" height="18"/>
+                                <rect key="frame" x="56" y="385.66666666666669" width="62" height="16.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-zq-XxR">
-                                <rect key="frame" x="55.999999999999993" y="482" width="115.33333333333331" height="18"/>
+                                <rect key="frame" x="55.999999999999993" y="483.66666666666669" width="115.33333333333331" height="16.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -199,50 +199,6 @@
             </objects>
             <point key="canvasLocation" x="1951" y="139"/>
         </scene>
-        <!--Dashboard View Controller-->
-        <scene sceneID="sbr-2V-wMt">
-            <objects>
-                <viewController id="BPe-4v-P8t" customClass="DashboardViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fD0-Kt-WYF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uZA-GY-Z41">
-                                <rect key="frame" x="143.66666666666666" y="433" width="126.99999999999997" height="30"/>
-                                <state key="normal" title="Add Bank Account"/>
-                                <connections>
-                                    <action selector="linkAccount:" destination="BPe-4v-P8t" eventType="touchUpInside" id="FAH-K5-tsg"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRU-Kt-PYN">
-                                <rect key="frame" x="183" y="473" width="48" height="30"/>
-                                <state key="normal" title="Logout"/>
-                                <connections>
-                                    <action selector="logout:" destination="BPe-4v-P8t" eventType="touchUpInside" id="2LC-uJ-WhQ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j57-0B-0tw">
-                                <rect key="frame" x="163" y="393" width="88" height="30"/>
-                                <state key="normal" title="Transactions"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="j57-0B-0tw" firstAttribute="centerY" secondItem="fD0-Kt-WYF" secondAttribute="centerY" constant="-40" id="Bsz-Hn-ZNj"/>
-                            <constraint firstItem="jRU-Kt-PYN" firstAttribute="centerY" secondItem="fD0-Kt-WYF" secondAttribute="centerY" constant="40" id="KvK-DD-swX"/>
-                            <constraint firstItem="uZA-GY-Z41" firstAttribute="centerY" secondItem="fD0-Kt-WYF" secondAttribute="centerY" id="Wp1-hA-tGE"/>
-                            <constraint firstItem="uZA-GY-Z41" firstAttribute="centerX" secondItem="fD0-Kt-WYF" secondAttribute="centerX" id="d1z-gb-15P"/>
-                            <constraint firstItem="jRU-Kt-PYN" firstAttribute="centerX" secondItem="fD0-Kt-WYF" secondAttribute="centerX" id="g2J-Cw-u9c"/>
-                            <constraint firstItem="j57-0B-0tw" firstAttribute="centerX" secondItem="fD0-Kt-WYF" secondAttribute="centerX" id="o30-qS-f3g"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="cIx-au-x1p"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="JtQ-mn-2dK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ndz-j1-dKK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="845.75892857142856"/>
-        </scene>
         <!--Dashboard-->
         <scene sceneID="MTt-cH-dRr">
             <objects>
@@ -275,7 +231,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMs-46-nno" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042" y="1551"/>
+            <point key="canvasLocation" x="1041" y="846"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="xWZ-ME-HmN">
