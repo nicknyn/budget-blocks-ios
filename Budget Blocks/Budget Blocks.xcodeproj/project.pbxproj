@@ -10,6 +10,7 @@
 		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
 		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
 		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
+		593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */; };
 		5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */; };
 		5943B3F223E498600050866D /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5943B3F123E498600050866D /* Exo-Regular.otf */; };
 		5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89723DB59B800A24A8F /* AppDelegate.swift */; };
@@ -66,6 +67,7 @@
 /* Begin PBXFileReference section */
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
+		593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
 		5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SquadaOne-Regular.ttf"; sourceTree = "<group>"; };
 		5943B3F123E498600050866D /* Exo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Regular.otf"; sourceTree = "<group>"; };
 		5955B89423DB59B800A24A8F /* Budget Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Blocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +205,7 @@
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
 				596C110123E1041B003DF1D8 /* DashboardViewController.swift */,
 				5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */,
+				593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
+				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
 				596C110223E1041B003DF1D8 /* DashboardViewController.swift in Sources */,
