@@ -23,6 +23,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SquadaOne-Regular.ttf</string>
+		<string>Exo-Regular.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

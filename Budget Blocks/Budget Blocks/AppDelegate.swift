@@ -15,7 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // The below lines for setting the label font currently aren't being used
+        // as it would cause issues with navigation bar titles
+//        let bodyFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+//        UILabel.appearance().font = UIFont(name: "Exo-Regular", size: bodyFont.pointSize)
+        
+        let captionFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+        if let captionFontExo = UIFont(name: "Exo-Regular", size: captionFont.pointSize) {
+            UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font : captionFontExo], for: .normal)
+        }
+        
         return true
     }
 

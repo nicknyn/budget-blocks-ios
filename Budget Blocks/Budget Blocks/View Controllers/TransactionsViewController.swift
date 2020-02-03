@@ -43,6 +43,9 @@ class TransactionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
 
         transactionController.networkingController = networkingController
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { error in
@@ -80,6 +83,9 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         let transaction = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = transaction.name
         cell.detailTextLabel?.text = "$\(transaction.amount)"
+        
+        cell.textLabel?.font = UIFont(name: "Exo-Regular", size: 16)
+        cell.detailTextLabel?.font = UIFont(name: "Exo-Regular", size: 16)
         
         return cell
     }

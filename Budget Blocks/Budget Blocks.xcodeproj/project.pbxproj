@@ -11,6 +11,7 @@
 		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
 		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
 		5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */; };
+		5943B3F223E498600050866D /* Exo-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5943B3F123E498600050866D /* Exo-Regular.otf */; };
 		5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89723DB59B800A24A8F /* AppDelegate.swift */; };
 		5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B89923DB59B800A24A8F /* SceneDelegate.swift */; };
 		5955B89F23DB59B800A24A8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B89D23DB59B800A24A8F /* Main.storyboard */; };
@@ -66,6 +67,7 @@
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
 		5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SquadaOne-Regular.ttf"; sourceTree = "<group>"; };
+		5943B3F123E498600050866D /* Exo-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Regular.otf"; sourceTree = "<group>"; };
 		5955B89423DB59B800A24A8F /* Budget Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Blocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B89723DB59B800A24A8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5955B89923DB59B800A24A8F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */,
+				5943B3F123E498600050866D /* Exo-Regular.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5943B3F223E498600050866D /* Exo-Regular.otf in Resources */,
 				5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */,
 				5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */,
 				5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */,
