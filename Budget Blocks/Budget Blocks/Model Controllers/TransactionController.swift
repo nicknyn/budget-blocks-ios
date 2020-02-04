@@ -34,9 +34,14 @@ class TransactionController {
                     if message == "No access_Token found for that user id provided" {
                         // TODO: Alert the user
                         print("User needs to link a bank account first!")
+                    } else if message == "insertion process hasn't started" {
+                        // TODO: Alert the user
+                        print("Try again in a moment.")
                     } else {
                         NSLog("Message: \(message)")
                     }
+                } else if let response = json?.rawString() {
+                    NSLog("Response: \(response)")
                 }
                 return completion(nil)
             }

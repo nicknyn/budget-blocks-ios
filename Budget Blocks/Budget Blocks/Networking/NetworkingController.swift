@@ -161,34 +161,30 @@ class NetworkingController {
     
     func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
         guard let bearer = bearer else { return }
-        let userIDJSON = JSON(dictionaryLiteral: ("userid", bearer.userID))
         
-        let url = baseURL.appendingPathComponent("plaid").appendingPathComponent("transactions")
+        let url = baseURL
+            .appendingPathComponent("plaid")
+            .appendingPathComponent("transactions")
+            .appendingPathComponent("\(bearer.userID)")
         var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.get.rawValue
         
-        do {
-            request.httpBody = try userIDJSON.rawData()
-            URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(nil, error)
-                }
-                
-                guard let data = data else {
-                    NSLog("No data returned from transactions request.")
-                    return completion(nil, nil)
-                }
-                
-                do {
-                    let responseJSON = try JSON(data: data)
-                    completion(responseJSON, nil)
-                } catch {
-                    completion(nil, error)
-                }
-            }.resume()
-        } catch {
-            completion(nil, error)
-        }
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from transactions request.")
+                return completion(nil, nil)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                completion(responseJSON, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
     }
 }
