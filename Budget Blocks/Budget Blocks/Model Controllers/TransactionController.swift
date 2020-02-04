@@ -28,13 +28,14 @@ class TransactionController {
                 return completion(error)
             }
             
-            guard let transactions = json?["transactions"].array else {
+            guard let categories = json?["categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
                     if message == "No access_Token found for that user id provided" {
                         // TODO: Alert the user
                         print("User needs to link a bank account first!")
-                    } else if message == "insertion process hasn't started" {
+                    } else if message == "insertion process hasn't started"
+                        || message == "we are inserting your data" {
                         // TODO: Alert the user
                         print("Try again in a moment.")
                     } else {
@@ -55,20 +56,22 @@ class TransactionController {
                     .withMonth,
                     .withDay
                 ]
-                
-                for transactionJSON in transactions {
-                    guard let transactionID = transactionJSON["transaction_id"].string,
-                        let name = transactionJSON["name"].string,
-                        let amount = transactionJSON["amount"].int16,
-                        let dateString = transactionJSON["date"].string,
-                        let date = dateFormatter.date(from: dateString) else { continue }
-                    
-                    if let existingTransaction = existingTransactions.first(where: { $0.transactionID == transactionID }) {
-                        existingTransaction.name = name
-                        existingTransaction.amount = amount
-                        existingTransaction.date = date
-                    } else {
-                        Transaction(transactionID: transactionID, name: name, amount: amount, date: date, context: context)
+                for category in categories {
+                    guard let transactions = category["transactions"].array else { continue }
+                    for transactionJSON in transactions {
+                        guard let transactionID = transactionJSON["id"].int,
+                            let name = transactionJSON["name"].string,
+                            let amount = transactionJSON["amount"].int16,
+                            let dateString = transactionJSON["payment_date"].string,
+                            let date = dateFormatter.date(from: dateString) else { continue }
+                        
+                        if let existingTransaction = existingTransactions.first(where: { $0.transactionID == "\(transactionID)" }) {
+                            existingTransaction.name = name
+                            existingTransaction.amount = amount
+                            existingTransaction.date = date
+                        } else {
+                            Transaction(transactionID: "\(transactionID)", name: name, amount: amount, date: date, context: context)
+                        }
                     }
                 }
                 

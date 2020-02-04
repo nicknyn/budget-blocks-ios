@@ -118,7 +118,8 @@ class DashboardTableViewController: UITableViewController {
         guard let publicKey = ProcessInfo.processInfo.environment["PLAID_PUBLIC_KEY"] else {
             return NSLog("No public key found!")
         }
-        let linkConfiguration = PLKConfiguration(key: publicKey, env: .sandbox, product: .auth)
+        let linkConfiguration = PLKConfiguration(key: publicKey, env: .sandbox, product: [.auth, .transactions, .identity])
+        linkConfiguration.webhook = URL(string: "https://lambda-budget-blocks.herokuapp.com/plaid/webhook")!
         let linkViewController = PLKPlaidLinkViewController(configuration: linkConfiguration, delegate: self)
         present(linkViewController, animated: true)
     }
