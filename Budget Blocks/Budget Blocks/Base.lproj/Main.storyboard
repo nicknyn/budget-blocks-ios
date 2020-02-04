@@ -24,7 +24,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWx-tZ-WFt">
-                                <rect key="frame" x="9.6666666666666572" y="393" width="394.66666666666674" height="70"/>
+                                <rect key="frame" x="49.666666666666657" y="396.33333333333331" width="315" height="63.666666666666686"/>
                                 <fontDescription key="fontDescription" name="SquadaOne-Regular" family="Squada One" pointSize="60"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lZ8-dv-Duv">
-                                <rect key="frame" x="30" y="137" width="354" height="236"/>
+                                <rect key="frame" x="30" y="140.33333333333334" width="354" height="236.00000000000009"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lZ8-dv-Duv" secondAttribute="height" multiplier="6:4" id="NFa-HA-y5u"/>
                                 </constraints>
@@ -123,32 +123,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mt6-rd-orw">
-                                <rect key="frame" x="170" y="8" width="74" height="50"/>
+                                <rect key="frame" x="170" y="8" width="74" height="50.000000000000057"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="74" id="QxX-x5-bBw"/>
                                     <constraint firstAttribute="height" constant="50" id="uCy-85-xUU"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixL-LW-pJK">
-                                <rect key="frame" x="108.33333333333333" y="62" width="197.33333333333337" height="35"/>
+                                <rect key="frame" x="128.33333333333337" y="62" width="157.66666666666663" height="32"/>
                                 <fontDescription key="fontDescription" name="SquadaOne-Regular" family="Squada One" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSU-tg-btp">
-                                <rect key="frame" x="56" y="287.66666666666669" width="90" height="16.333333333333314"/>
+                                <rect key="frame" x="56" y="286" width="90" height="18"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9au-ti-kQU">
-                                <rect key="frame" x="56" y="385.66666666666669" width="62" height="16.333333333333314"/>
+                                <rect key="frame" x="56" y="384" width="62" height="18"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-zq-XxR">
-                                <rect key="frame" x="55.999999999999993" y="483.66666666666669" width="115.33333333333331" height="16.333333333333314"/>
+                                <rect key="frame" x="55.999999999999993" y="482" width="115.33333333333331" height="18"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -207,9 +207,91 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="pJV-2e-9eR">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$500.65" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g04-Io-PNY">
+                                    <rect key="frame" x="132" y="4" width="150" height="48.666666666666664"/>
+                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="38"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="yMn-YA-LV7">
+                                    <rect key="frame" x="65.333333333333343" y="76.666666666666671" width="283.33333333333326" height="85.000000000000014"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GNM-ba-CJa">
+                                            <rect key="frame" x="0.0" y="0.0" width="101.66666666666667" height="85"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+$1250.85" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2U-OP-bHL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="101.66666666666667" height="25.666666666666668"/>
+                                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Sy5-LL-ltk">
+                                                    <rect key="frame" x="31" y="25.666666666666661" width="40" height="59.333333333333343"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Income" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1H-cV-wfG">
+                                                            <rect key="frame" x="0.6666666666666714" y="0.0" width="38.666666666666664" height="15.333333333333334"/>
+                                                            <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" translatesAutoresizingMaskIntoConstraints="NO" id="OLS-IV-KcF">
+                                                            <rect key="frame" x="0.0" y="19.333333333333343" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="OWd-IC-oRP"/>
+                                                                <constraint firstAttribute="height" constant="40" id="gCk-VS-zks"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4jh-Jp-a3r">
+                                            <rect key="frame" x="181.66666666666669" y="0.0" width="101.66666666666669" height="85"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-$750.20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcO-Tg-kcs">
+                                                    <rect key="frame" x="8" y="0.0" width="86" height="25.666666666666668"/>
+                                                    <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OdZ-Ig-qMH">
+                                                    <rect key="frame" x="25.333333333333314" y="25.666666666666661" width="51" height="59.333333333333343"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expenses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WD9-Ww-5kF">
+                                                            <rect key="frame" x="0.0" y="0.0" width="51" height="15.333333333333334"/>
+                                                            <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minus" translatesAutoresizingMaskIntoConstraints="NO" id="aij-Jt-BxC">
+                                                            <rect key="frame" x="5.6666666666666856" y="19.333333333333343" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="6pQ-mT-tR6"/>
+                                                                <constraint firstAttribute="width" constant="40" id="etw-B8-lA3"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstItem="g04-Io-PNY" firstAttribute="top" secondItem="pJV-2e-9eR" secondAttribute="top" constant="4" id="2lo-Hx-jUc"/>
+                                <constraint firstItem="yMn-YA-LV7" firstAttribute="top" secondItem="g04-Io-PNY" secondAttribute="bottom" constant="24" id="R8e-Wr-cGS"/>
+                                <constraint firstItem="yMn-YA-LV7" firstAttribute="centerX" secondItem="pJV-2e-9eR" secondAttribute="centerX" id="z91-TI-MAJ"/>
+                                <constraint firstItem="g04-Io-PNY" firstAttribute="centerX" secondItem="pJV-2e-9eR" secondAttribute="centerX" id="zzF-i1-8KH"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DashboardCell" id="HUC-EN-Ov0">
-                                <rect key="frame" x="20" y="55.333332061767578" width="374" height="43.666667938232422"/>
+                                <rect key="frame" x="20" y="225.33333206176758" width="374" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HUC-EN-Ov0" id="c4L-IP-ZFy">
                                     <rect key="frame" x="0.0" y="0.0" width="374" height="43.666667938232422"/>
@@ -231,7 +313,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMs-46-nno" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="846"/>
+            <point key="canvasLocation" x="1039.1304347826087" y="845.75892857142856"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="xWZ-ME-HmN">
@@ -329,6 +411,8 @@
     </scenes>
     <resources>
         <image name="BlocksIcon" width="315" height="214"/>
+        <image name="minus" width="40" height="40"/>
+        <image name="plus" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QHt-ML-1ag"/>
