@@ -140,12 +140,8 @@ class NetworkingController {
                 
                 do {
                     let responseJSON = try JSON(data: data)
-                    if let success = responseJSON["AccessTokenInserted"].int {
-                        if success != 1 {
-                            NSLog("Access token insertion failed")
-                        } else {
-                            print("Access token inserted!")
-                        }
+                    if responseJSON["ItemCreated"].int != nil {
+                        print("Access token inserted!")
                     } else {
                         if let response = responseJSON.rawString() {
                             NSLog("Unexpected response returned: \(response)")
