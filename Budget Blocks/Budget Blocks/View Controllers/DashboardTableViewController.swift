@@ -12,10 +12,53 @@ import CoreData
 
 class DashboardTableViewController: UITableViewController {
     
+    // MARK: Outlets
+    
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var incomeLabel: UILabel!
+    @IBOutlet weak var expensesLabel: UILabel!
+    
+    // MARK: Properties
+    
     let networkingController = NetworkingController()
+    let transactionController = TransactionController()
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
+        let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        
+        let context = CoreDataStack.shared.mainContext
+        
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                             managedObjectContext: context,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        
+        do {
+            try frc.performFetch()
+        } catch {
+            fatalError("Error fetching transactions: \(error)")
+        }
+        
+        return frc
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateBalances()
+        
+        transactionController.networkingController = networkingController
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            DispatchQueue.main.async {
+                self.updateBalances()
+            }
+            
+            if let error = error {
+                return NSLog("\(error)")
+            }
+        }
         
         let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
@@ -132,6 +175,24 @@ class DashboardTableViewController: UITableViewController {
         TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
         performSegue(withIdentifier: "AnimatedLogin", sender: self)
     }
+    
+    private func updateBalances() {
+        guard let amounts = fetchedResultsController.fetchedObjects?.map({ $0.amount }) else {
+            incomeLabel.text = "+$0"
+            expensesLabel.text = "-$0"
+            balanceLabel.text = "$0"
+            return
+        }
+        let positiveTransactions = amounts.filter({ $0 > 0 })
+        let negativeTransactions = amounts.filter({ $0 < 0 })
+        
+        let expenses = positiveTransactions.reduce(0, +)
+        let income = negativeTransactions.reduce(0, +) * -1
+        
+        incomeLabel.text = "+$\(income)"
+        expensesLabel.text = "-$\(expenses)"
+        balanceLabel.text = "$\(income - expenses)"
+    }
 
     // MARK: - Navigation
 
@@ -141,6 +202,7 @@ class DashboardTableViewController: UITableViewController {
             welcomeVC.networkingController = networkingController
         } else if let transactionsVC = segue.destination as? TransactionsViewController {
             transactionsVC.networkingController = networkingController
+            transactionsVC.transactionController = transactionController
         }
     }
 
@@ -165,5 +227,13 @@ extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
         } else {
             NSLog("Error linking bank account.")
         }
+    }
+}
+
+// MARK: Fetched results controller delegate
+
+extension DashboardTableViewController: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateBalances()
     }
 }

@@ -14,7 +14,7 @@ class TransactionsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var networkingController: NetworkingController!
-    let transactionController = TransactionController()
+    var transactionController: TransactionController!
     
     lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -44,12 +44,44 @@ class TransactionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        transactionController.networkingController = networkingController
-        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { error in
+//        transactionController.networkingController = networkingController
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { message, error in
             if let error = error {
+                DispatchQueue.main.async {
+                    self.alertAndReturn(title: "An error has occurred.", message: "There was an error fetching your transactions.")
+                }
                 return NSLog("\(error)")
             }
+            
+            guard let message = message else { return }
+            if message == "No access_Token found for that user id provided" {
+                DispatchQueue.main.async {
+                    self.alertAndReturn(title: "No linked accounts", message: "Please link a bank account first")
+                }
+            } else if message == "insertion process hasn't started"
+                || message == "we are inserting your data" {
+                DispatchQueue.main.async {
+                    self.alertAndReturn(title: "Try again in a moment", message: "We're working on fetching your transactions. Please try again in a moment.")
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.alertAndReturn(title: "An error has occurred.", message: "There was an error fetching your transactions.")
+                }
+                NSLog("Message: \(message)")
+            }
         }
+    }
+    
+    private func alertAndReturn(title: String?, message: String?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default) { _ in
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        alert.addAction(ok)
+        
+        present(alert, animated: true)
     }
     
     @IBAction func filterChanged(_ sender: UISegmentedControl) {

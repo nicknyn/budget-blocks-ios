@@ -22,29 +22,30 @@ class TransactionController {
         CoreDataStack.shared.save(context: context)
     }
     
-    func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (Error?) -> Void) {
+    func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
             if let error = error {
-                return completion(error)
+                return completion(nil, error)
             }
             
             guard let categories = json?["categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
-                    if message == "No access_Token found for that user id provided" {
-                        // TODO: Alert the user
-                        print("User needs to link a bank account first!")
-                    } else if message == "insertion process hasn't started"
-                        || message == "we are inserting your data" {
-                        // TODO: Alert the user
-                        print("Try again in a moment.")
-                    } else {
-                        NSLog("Message: \(message)")
-                    }
+//                    if message == "No access_Token found for that user id provided" {
+//                        // TODO: Alert the user
+//                        print("User needs to link a bank account first!")
+//                    } else if message == "insertion process hasn't started"
+//                        || message == "we are inserting your data" {
+//                        // TODO: Alert the user
+//                        print("Try again in a moment.")
+//                    } else {
+//                        NSLog("Message: \(message)")
+//                    }
+                    return completion(message, nil)
                 } else if let response = json?.rawString() {
                     NSLog("Response: \(response)")
                 }
-                return completion(nil)
+                return completion(nil, nil)
             }
             
             do {
@@ -76,9 +77,9 @@ class TransactionController {
                 }
                 
                 CoreDataStack.shared.save(context: context)
-                completion(nil)
+                completion(nil, nil)
             } catch {
-                completion(error)
+                completion(nil, error)
             }
         })
     }
