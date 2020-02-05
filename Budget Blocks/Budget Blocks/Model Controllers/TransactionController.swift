@@ -31,16 +31,6 @@ class TransactionController {
             guard let categories = json?["categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
-//                    if message == "No access_Token found for that user id provided" {
-//                        // TODO: Alert the user
-//                        print("User needs to link a bank account first!")
-//                    } else if message == "insertion process hasn't started"
-//                        || message == "we are inserting your data" {
-//                        // TODO: Alert the user
-//                        print("Try again in a moment.")
-//                    } else {
-//                        NSLog("Message: \(message)")
-//                    }
                     return completion(message, nil)
                 } else if let response = json?.rawString() {
                     NSLog("Response: \(response)")

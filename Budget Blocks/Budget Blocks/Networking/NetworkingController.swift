@@ -20,15 +20,20 @@ class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     private let bearerTokenKey = "bearerToken"
     private let userIDKey = "userIDKey"
+    private let linkedAccountKey = "linkedAccount"
     private let userDefaults = UserDefaults.standard
     
     var bearer: Bearer?
+    var linkedAccount: Bool {
+        return bearer?.linkedAccount ?? false
+    }
     
     init() {
         let userID = userDefaults.integer(forKey: userIDKey)
+        let linkedAccount = userDefaults.bool(forKey: linkedAccountKey)
         if let token = userDefaults.string(forKey: bearerTokenKey),
             userID != 0 {
-            bearer = Bearer(token: token, userID: userID)
+            bearer = Bearer(token: token, userID: userID, linkedAccount: linkedAccount)
         }
     }
     
@@ -57,10 +62,12 @@ class NetworkingController {
                 do {
                     let responseJSON = try JSON(data: data)
                     if let token = responseJSON["token"].string,
-                        let userID = responseJSON["id"].int {
-                        self.bearer = Bearer(token: token, userID: userID)
+                        let userID = responseJSON["id"].int,
+                        let linked = responseJSON["LinkedAccount"].bool {
+                        self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked)
                         self.userDefaults.set(token, forKey: self.bearerTokenKey)
                         self.userDefaults.set(userID, forKey: self.userIDKey)
+                        self.userDefaults.set(linked, forKey: self.linkedAccountKey)
                     }
                     completion(responseJSON["token"].string, nil)
                 } catch {
@@ -114,6 +121,7 @@ class NetworkingController {
         bearer = nil
         self.userDefaults.removeObject(forKey: bearerTokenKey)
         self.userDefaults.removeObject(forKey: userIDKey)
+        self.userDefaults.removeObject(forKey: linkedAccountKey)
     }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
@@ -142,6 +150,7 @@ class NetworkingController {
                     let responseJSON = try JSON(data: data)
                     if responseJSON["ItemCreated"].int != nil {
                         print("Access token inserted!")
+                        self.bearer?.linkedAccount = true
                     } else {
                         if let response = responseJSON.rawString() {
                             NSLog("Unexpected response returned: \(response)")

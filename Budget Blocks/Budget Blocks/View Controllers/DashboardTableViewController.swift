@@ -71,11 +71,16 @@ class DashboardTableViewController: UITableViewController {
         let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
         navigationItem.rightBarButtonItem = logoutButton
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return networkingController.linkedAccount ? 1 : 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,7 +91,8 @@ class DashboardTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
 
         let cellText: String
-        if indexPath.section == 0 {
+        if indexPath.section == 0,
+            !networkingController.linkedAccount {
             cellText = "Connect your bank with Plaid"
         } else {
             cellText = "Transactions"
@@ -151,7 +157,8 @@ class DashboardTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 {
+        if indexPath.section == 0,
+            !networkingController.linkedAccount {
             linkAccount()
         } else {
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
