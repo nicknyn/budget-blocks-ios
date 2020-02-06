@@ -196,4 +196,9 @@ class NetworkingController {
             }
         }.resume()
     }
+    
+    func setLinked() {
+        bearer?.linkedAccount = true
+        self.userDefaults.set(true, forKey: self.linkedAccountKey)
+    }
 }

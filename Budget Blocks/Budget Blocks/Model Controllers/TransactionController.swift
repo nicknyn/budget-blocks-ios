@@ -88,6 +88,7 @@ class TransactionController {
                     }
                 }
                 
+                self.networkingController?.setLinked()
                 CoreDataStack.shared.save(context: context)
                 completion(nil, nil)
             } catch {

@@ -221,7 +221,12 @@ extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
         print("Link successful. Public token: \(publicToken)")
         networkingController.tokenExchange(publicToken: publicToken) { error in
             if let error = error {
-                NSLog("Error exchanging token: \(error)")
+                return NSLog("Error exchanging token: \(error)")
+            }
+            
+            self.networkingController.setLinked()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
             }
         }
         dismiss(animated: true)
