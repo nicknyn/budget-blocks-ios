@@ -110,7 +110,7 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         
         let transaction = fetchedResultsController.object(at: indexPath)
         cell.textLabel?.text = transaction.name
-        cell.detailTextLabel?.text = "$\(transaction.amount)"
+        cell.detailTextLabel?.text = "$\(transaction.amount.currency)"
         
         cell.textLabel?.font = UIFont(name: "Exo-Regular", size: 16)
         cell.detailTextLabel?.font = UIFont(name: "Exo-Regular", size: 16)

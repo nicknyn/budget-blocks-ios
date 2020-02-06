@@ -195,9 +195,9 @@ class DashboardTableViewController: UITableViewController {
         let expenses = positiveTransactions.reduce(0, +)
         let income = negativeTransactions.reduce(0, +) * -1
         
-        incomeLabel.text = "+$\(income)"
-        expensesLabel.text = "-$\(expenses)"
-        balanceLabel.text = "$\(income - expenses)"
+        incomeLabel.text = "+$\(income.currency)"
+        expensesLabel.text = "-$\(expenses.currency)"
+        balanceLabel.text = "$\((income - expenses).currency)"
     }
 
     // MARK: - Navigation
