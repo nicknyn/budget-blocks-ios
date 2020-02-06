@@ -39,8 +39,11 @@ class TransactionController {
             }
             
             do {
-                let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-                let existingTransactions = try context.fetch(fetchRequest)
+                let transactionsFetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+                let existingTransactions = try context.fetch(transactionsFetchRequest)
+                let categoriesFetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+                let existingCategories = try context.fetch(categoriesFetchRequest)
+                
                 let dateFormatter = ISO8601DateFormatter()
                 dateFormatter.formatOptions = [
                     .withYear,
@@ -48,8 +51,21 @@ class TransactionController {
                     .withDay,
                     .withDashSeparatorInDate
                 ]
-                for category in categories {
-                    guard let transactions = category["transactions"].array else { continue }
+                for categoryJSON in categories {
+                    // Create/update category
+                    var currentCategory: TransactionCategory?
+                    if let categoryID = categoryJSON["id"].int32,
+                        let categoryName = categoryJSON["name"].string {
+                        if let existingCategory = existingCategories.first(where: { $0.categoryID == categoryID }) {
+                            existingCategory.name = categoryName
+                            currentCategory = existingCategory
+                        } else {
+                            currentCategory = TransactionCategory(categoryID: categoryID, name: categoryName, context: context)
+                        }
+                    }
+                    
+                    // Create/update transactions
+                    guard let transactions = categoryJSON["transactions"].array else { continue }
                     for transactionJSON in transactions {
                         guard let transactionID = transactionJSON["id"].int,
                             let name = transactionJSON["name"].string,
@@ -58,13 +74,17 @@ class TransactionController {
                             let date = dateFormatter.date(from: dateString) else { continue }
                         let amount = Int64(amountFloat * 100)
                         
+                        let transaction: Transaction
                         if let existingTransaction = existingTransactions.first(where: { $0.transactionID == "\(transactionID)" }) {
                             existingTransaction.name = name
                             existingTransaction.amount = amount
                             existingTransaction.date = date
+                            transaction = existingTransaction
                         } else {
-                            Transaction(transactionID: "\(transactionID)", name: name, amount: amount, date: date, context: context)
+                            transaction = Transaction(transactionID: "\(transactionID)", name: name, amount: amount, date: date, context: context)
                         }
+                        
+                        transaction.category = currentCategory
                     }
                 }
                 

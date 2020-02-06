@@ -18,3 +18,12 @@ extension Transaction {
         self.date = date
     }
 }
+
+extension TransactionCategory {
+    @discardableResult convenience init(categoryID: Int32, name: String, context: NSManagedObjectContext) {
+        self.init(context: context)
+        
+        self.categoryID = categoryID
+        self.name = name
+    }
+}

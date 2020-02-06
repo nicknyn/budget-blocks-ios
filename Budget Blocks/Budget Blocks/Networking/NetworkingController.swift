@@ -125,7 +125,7 @@ class NetworkingController {
     }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer else { return }
+        guard let bearer = bearer else { return completion(nil) }
         let tokenJSON = JSON(dictionaryLiteral: ("publicToken", publicToken), ("userid", bearer.userID))
         
         let url = baseURL.appendingPathComponent("plaid")
@@ -169,7 +169,7 @@ class NetworkingController {
     }
     
     func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return }
+        guard let bearer = bearer else { return completion(nil, nil) }
         
         let url = baseURL
             .appendingPathComponent("plaid")
