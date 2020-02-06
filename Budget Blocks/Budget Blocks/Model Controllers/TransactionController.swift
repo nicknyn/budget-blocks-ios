@@ -45,7 +45,8 @@ class TransactionController {
                 dateFormatter.formatOptions = [
                     .withYear,
                     .withMonth,
-                    .withDay
+                    .withDay,
+                    .withDashSeparatorInDate
                 ]
                 for category in categories {
                     guard let transactions = category["transactions"].array else { continue }
