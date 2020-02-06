@@ -74,8 +74,11 @@ class TransactionsViewController: UIViewController {
     private func alertAndReturn(title: String?, message: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .default) { _ in
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+            // Only return if there are no locally-stored transactions
+            if self.fetchedResultsController.fetchedObjects?.count == 0 {
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
         alert.addAction(ok)
