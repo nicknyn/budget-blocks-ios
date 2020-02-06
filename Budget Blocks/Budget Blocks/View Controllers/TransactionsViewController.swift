@@ -43,8 +43,7 @@ class TransactionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        transactionController.networkingController = networkingController
+        
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { message, error in
             if let error = error {
                 DispatchQueue.main.async {

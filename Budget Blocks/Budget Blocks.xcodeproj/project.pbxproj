@@ -30,6 +30,7 @@
 		5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */; };
 		596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; };
 		596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		5969C1F523E3904400BAA183 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		596C10FC23E0E09F003DF1D8 /* LinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinkKit.framework; path = ../Carthage/Build/iOS/LinkKit.framework; sourceTree = "<group>"; };
+		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				5969C1EF23E38CC800BAA183 /* Model */,
 				5969C1F423E3903400BAA183 /* Model Controllers */,
 				5967964023DFC1C70062F794 /* View Controllers */,
+				59D1550523EB8D3F003233C1 /* Views */,
 				5939B1F023DF54E4003FB0E0 /* Networking */,
 				5955B89D23DB59B800A24A8F /* Main.storyboard */,
 				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
@@ -231,6 +234,14 @@
 				596C10FC23E0E09F003DF1D8 /* LinkKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59D1550523EB8D3F003233C1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +416,7 @@
 				5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */,
 				5969C1F623E3904400BAA183 /* TransactionController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
+				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 			);

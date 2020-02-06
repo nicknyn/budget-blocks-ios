@@ -88,22 +88,21 @@ class DashboardTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
+        let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
+        guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
 
         let cellText: String
+        var cellImage: UIImage?
         if indexPath.section == 0,
             !networkingController.linkedAccount {
             cellText = "Connect your bank with Plaid"
+            cellImage = UIImage(named: "plaid-logo-icon")
         } else {
             cellText = "Transactions"
+            cellImage = UIImage(named: "budget")
         }
-        cell.textLabel?.text = cellText
-        
-        if let cellTextSize = cell.textLabel?.font.pointSize {
-            cell.textLabel?.font = UIFont(name: "Exo-Regular", size: cellTextSize)
-        }
-        
-        cell.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
+        cell.titleLabel.text = cellText
+        cell.rightImageView.image = cellImage
 
         return cell
     }
