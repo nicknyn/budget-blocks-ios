@@ -15,6 +15,7 @@ class TransactionsViewController: UIViewController {
     
     var networkingController: NetworkingController!
     var transactionController: TransactionController!
+    var category: TransactionCategory?
     
     lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -23,6 +24,11 @@ class TransactionsViewController: UIViewController {
             NSSortDescriptor(key: "date", ascending: false),
             NSSortDescriptor(key: "transactionID", ascending: true)
         ]
+        
+        if let category = category {
+            let predicate = NSPredicate(format: "category == %@", category)
+            fetchRequest.predicate = predicate
+        }
         
         let context = CoreDataStack.shared.mainContext
         

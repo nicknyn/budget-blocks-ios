@@ -208,14 +208,13 @@ class DashboardTableViewController: UITableViewController {
     */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         switch adjustedSection(index: indexPath.section) {
         case 0:
             linkAccount()
-        case 1:
+        case 1...2:
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
         default:
-            break
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
@@ -268,6 +267,11 @@ class DashboardTableViewController: UITableViewController {
         } else if let transactionsVC = segue.destination as? TransactionsViewController {
             transactionsVC.networkingController = networkingController
             transactionsVC.transactionController = transactionController
+            
+            if let indexPath = tableView.indexPathForSelectedRow,
+                adjustedSection(index: indexPath.section) == 2 {
+                transactionsVC.category = categoriesFRC.fetchedObjects?[indexPath.row]
+            }
         }
     }
 
