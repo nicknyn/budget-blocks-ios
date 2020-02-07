@@ -141,6 +141,11 @@ class DashboardTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
             cell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
             
+            if let textSize = cell.textLabel?.font.pointSize {
+                cell.textLabel?.font = UIFont(name: "Exo-Regular", size: textSize)
+                cell.detailTextLabel?.font = UIFont(name: "Exo-Regular", size: textSize)
+            }
+            
             if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
                 cell.textLabel?.text = category.name
                 var sum: Int64 = 0
@@ -149,6 +154,9 @@ class DashboardTableViewController: UITableViewController {
                     sum += transaction.amount
                 }
                 cell.detailTextLabel?.text = "$\(sum.currency)"
+            } else {
+                cell.textLabel?.text = nil
+                cell.detailTextLabel?.text = nil
             }
             
             return cell
