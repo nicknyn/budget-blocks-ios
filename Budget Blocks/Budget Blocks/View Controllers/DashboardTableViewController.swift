@@ -23,9 +23,33 @@ class DashboardTableViewController: UITableViewController {
     let networkingController = NetworkingController()
     let transactionController = TransactionController()
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
+    lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        
+        let context = CoreDataStack.shared.mainContext
+        
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                             managedObjectContext: context,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        
+        do {
+            try frc.performFetch()
+        } catch {
+            fatalError("Error fetching transactions: \(error)")
+        }
+        
+        return frc
+    }()
+    
+    lazy var categoriesFRC: NSFetchedResultsController<TransactionCategory> = {
+        let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
+        
+        let predicate = NSPredicate(format: "transactions.@count > 0")
+        fetchRequest.predicate = predicate
         
         let context = CoreDataStack.shared.mainContext
         
@@ -80,35 +104,64 @@ class DashboardTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return networkingController.linkedAccount ? 1 : 2
+        return networkingController.linkedAccount ? 2 : 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch adjustedSection(index: section) {
+        case 2:
+            return categoriesFRC.fetchedObjects?.count ?? 0
+        default:
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
-        guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
-
-        let cellText: String
-        var cellImage: UIImage?
-        if indexPath.section == 0,
-            !networkingController.linkedAccount {
-            cellText = "Connect your bank with Plaid"
-            cellImage = UIImage(named: "plaid-logo-icon")
-        } else {
-            cellText = "Transactions"
-            cellImage = UIImage(named: "budget")
+        let adjustedSection = self.adjustedSection(index: indexPath.section)
+        
+        switch adjustedSection {
+        case 0...1:
+            let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
+            guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
+            
+            let cellText: String
+            var cellImage: UIImage?
+            if adjustedSection == 0 {
+                cellText = "Connect your bank with Plaid"
+                cellImage = UIImage(named: "plaid-logo-icon")
+            } else {
+                cellText = "View All Transactions"
+                cellImage = UIImage(named: "budget")
+            }
+            cell.titleLabel.text = cellText
+            cell.rightImageView.image = cellImage
+            
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+            cell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
+            
+            if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
+                cell.textLabel?.text = category.name
+                var sum: Int64 = 0
+                for transaction in category.transactions ?? [] {
+                    guard let transaction = transaction as? Transaction else { continue }
+                    sum += transaction.amount
+                }
+                cell.detailTextLabel?.text = "$\(sum.currency)"
+            }
+            
+            return cell
         }
-        cell.titleLabel.text = cellText
-        cell.rightImageView.image = cellImage
-
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        switch adjustedSection(index: indexPath.section) {
+        case 0...1:
+            return 100
+        default:
+            return UITableView.automaticDimension
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -156,11 +209,13 @@ class DashboardTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0,
-            !networkingController.linkedAccount {
+        switch adjustedSection(index: indexPath.section) {
+        case 0:
             linkAccount()
-        } else {
+        case 1:
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
+        default:
+            break
         }
     }
     
@@ -183,7 +238,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func updateBalances() {
-        guard let amounts = fetchedResultsController.fetchedObjects?.map({ $0.amount }) else {
+        guard let amounts = transactionsFRC.fetchedObjects?.map({ $0.amount }) else {
             incomeLabel.text = "+$0"
             expensesLabel.text = "-$0"
             balanceLabel.text = "$0"
@@ -198,6 +253,10 @@ class DashboardTableViewController: UITableViewController {
         incomeLabel.text = "+$\(income.currency)"
         expensesLabel.text = "-$\(expenses.currency)"
         balanceLabel.text = "$\((income - expenses).currency)"
+    }
+    
+    private func adjustedSection(index: Int) -> Int {
+        return index + (networkingController.linkedAccount ? 1 : 0)
     }
 
     // MARK: - Navigation
