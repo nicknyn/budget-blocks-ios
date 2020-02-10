@@ -50,6 +50,10 @@ class TransactionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let categoryName = category?.name {
+            title = categoryName
+        }
+        
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { message, error in
             if let error = error {
                 DispatchQueue.main.async {
@@ -93,14 +97,21 @@ class TransactionsViewController: UIViewController {
     }
     
     @IBAction func filterChanged(_ sender: UISegmentedControl) {
+        var predicates: [NSPredicate] = []
+        
+        if let category = category {
+            predicates.append(NSPredicate(format: "category == %@", category))
+        }
+        
         switch sender.selectedSegmentIndex {
         case 0:
-            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "amount > 0")
+            predicates.append(NSPredicate(format: "amount > 0"))
         case 2:
-            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "amount < 0")
+            predicates.append(NSPredicate(format: "amount < 0"))
         default:
-            fetchedResultsController.fetchRequest.predicate = nil
+            break
         }
+        fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         try? fetchedResultsController.performFetch()
         tableView.reloadData()
     }

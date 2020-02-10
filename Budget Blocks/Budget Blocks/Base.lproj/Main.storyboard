@@ -325,10 +325,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="O2U-kK-vCA" customClass="CategoryTableViewCell" customModule="Budget_Blocks" customModuleProvider="target">
-                                <rect key="frame" x="20" y="269" width="374" height="53.666667938232422"/>
+                                <rect key="frame" x="20" y="269" width="374" height="57.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O2U-kK-vCA" id="IVF-Vu-9H3">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="53.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="57.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRf-yY-n3L">
@@ -344,7 +344,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Fa9-nj-Le1">
-                                            <rect key="frame" x="20" y="39.666666666666664" width="334" height="2"/>
+                                            <rect key="frame" x="20" y="43.666666666666664" width="334" height="2"/>
                                         </progressView>
                                     </subviews>
                                     <constraints>
@@ -356,7 +356,7 @@
                                         <constraint firstItem="xRf-yY-n3L" firstAttribute="top" secondItem="IVF-Vu-9H3" secondAttribute="topMargin" id="ikn-f2-aSs"/>
                                         <constraint firstItem="xRf-yY-n3L" firstAttribute="leading" secondItem="IVF-Vu-9H3" secondAttribute="leadingMargin" id="k0y-JC-FrP"/>
                                         <constraint firstItem="wUZ-qc-JGA" firstAttribute="top" secondItem="IVF-Vu-9H3" secondAttribute="topMargin" id="naA-dW-A13"/>
-                                        <constraint firstItem="Fa9-nj-Le1" firstAttribute="top" secondItem="xRf-yY-n3L" secondAttribute="bottom" constant="8" id="pWf-a3-L0t"/>
+                                        <constraint firstItem="Fa9-nj-Le1" firstAttribute="top" secondItem="xRf-yY-n3L" secondAttribute="bottom" constant="12" id="pWf-a3-L0t"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
