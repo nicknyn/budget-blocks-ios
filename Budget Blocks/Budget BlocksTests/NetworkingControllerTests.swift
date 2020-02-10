@@ -48,7 +48,7 @@ class NetworkingControllerTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testFetchCategories() {
