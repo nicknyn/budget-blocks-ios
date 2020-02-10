@@ -120,7 +120,8 @@ class DashboardTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch adjustedSection(index: section) {
         case 2:
-            return categoriesFRC.fetchedObjects?.count ?? 0
+            let categoriesCount = categoriesFRC.fetchedObjects?.count ?? 0
+            return categoriesCount > 0 ? categoriesCount : 1
         default:
             return 1
         }
@@ -140,7 +141,7 @@ class DashboardTableViewController: UITableViewController {
                 cellText = "Connect your bank with Plaid"
                 cellImage = UIImage(named: "plaid-logo-icon")
             } else {
-                cellText = "View All Transactions"
+                cellText = "View Transactions"
                 cellImage = UIImage(named: "budget")
             }
             cell.titleLabel.text = cellText
@@ -148,41 +149,52 @@ class DashboardTableViewController: UITableViewController {
             
             return cell
         default:
-            let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-            guard let cell = uiCell as? CategoryTableViewCell else { return uiCell }
-            
-            let textSize = cell.titleLabel.font.pointSize
-            cell.titleLabel.font = UIFont(name: "Exo-Regular", size: textSize)
-            cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
-            
-            if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
-                cell.titleLabel.text = category.name
-                var sum: Int64 = 0
-                for transaction in category.transactions ?? [] {
-                    guard let transaction = transaction as? Transaction else { continue }
-                    sum += transaction.amount
-                }
-                cell.detailLabel.text = "$\(sum.currency) / $\(category.budget.currency)"
+            if categoriesFRC.fetchedObjects?.count ?? 0 == 0 {
+                let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
+                guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
                 
-                let progress = Float(sum) / Float(category.budget)
-                cell.progressBar.progress = progress
-                if progress < 0.8 {
-                    cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
-                } else {
-                    cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
-                }
+                cell.titleLabel.text = "Create a budget"
+                cell.rightImageView.image = UIImage(named: "budget")
+                
+                return cell
             } else {
-                cell.titleLabel.text = nil
-                cell.detailLabel.text = nil
+                let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+                guard let cell = uiCell as? CategoryTableViewCell else { return uiCell }
+                
+                let textSize = cell.titleLabel.font.pointSize
+                cell.titleLabel.font = UIFont(name: "Exo-Regular", size: textSize)
+                cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
+                
+                if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
+                    cell.titleLabel.text = category.name
+                    var sum: Int64 = 0
+                    for transaction in category.transactions ?? [] {
+                        guard let transaction = transaction as? Transaction else { continue }
+                        sum += transaction.amount
+                    }
+                    cell.detailLabel.text = "$\(sum.currency) / $\(category.budget.currency)"
+                    
+                    let progress = Float(sum) / Float(category.budget)
+                    cell.progressBar.progress = progress
+                    if progress < 0.8 {
+                        cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+                    } else {
+                        cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+                    }
+                } else {
+                    cell.titleLabel.text = nil
+                    cell.detailLabel.text = nil
+                }
+                
+                return cell
             }
-            
-            return cell
         }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch adjustedSection(index: indexPath.section) {
-        case 0...1:
+        case 0...1,
+             2 where categoriesFRC.fetchedObjects?.count ?? 0 == 0:
             return 100
         default:
             return UITableView.automaticDimension
@@ -236,6 +248,9 @@ class DashboardTableViewController: UITableViewController {
         switch adjustedSection(index: indexPath.section) {
         case 0:
             linkAccount()
+        case 2 where categoriesFRC.fetchedObjects?.count ?? 0 == 0:
+            self.performSegue(withIdentifier: "CreateBudget", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
         case 1...2:
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
         default:
