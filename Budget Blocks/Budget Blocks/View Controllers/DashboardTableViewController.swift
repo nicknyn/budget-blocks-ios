@@ -48,7 +48,7 @@ class DashboardTableViewController: UITableViewController {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
         
-        let predicate = NSPredicate(format: "transactions.@count > 0")
+        let predicate = NSPredicate(format: "transactions.@count > 0 AND budget > 0")
         fetchRequest.predicate = predicate
         
         let context = CoreDataStack.shared.mainContext
@@ -143,25 +143,32 @@ class DashboardTableViewController: UITableViewController {
             
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-            cell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
+            let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+            guard let cell = uiCell as? CategoryTableViewCell else { return uiCell }
             
-            if let textSize = cell.textLabel?.font.pointSize {
-                cell.textLabel?.font = UIFont(name: "Exo-Regular", size: textSize)
-                cell.detailTextLabel?.font = UIFont(name: "Exo-Regular", size: textSize)
-            }
+            let textSize = cell.titleLabel.font.pointSize
+            cell.titleLabel.font = UIFont(name: "Exo-Regular", size: textSize)
+            cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
             
             if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
-                cell.textLabel?.text = category.name
+                cell.titleLabel.text = category.name
                 var sum: Int64 = 0
                 for transaction in category.transactions ?? [] {
                     guard let transaction = transaction as? Transaction else { continue }
                     sum += transaction.amount
                 }
-                cell.detailTextLabel?.text = "$\(sum.currency)"
+                cell.detailLabel.text = "$\(sum.currency) / $\(category.budget.currency)"
+                
+                let progress = Float(sum) / Float(category.budget)
+                cell.progressBar.progress = progress
+                if progress < 0.8 {
+                    cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+                } else {
+                    cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+                }
             } else {
-                cell.textLabel?.text = nil
-                cell.detailTextLabel?.text = nil
+                cell.titleLabel.text = nil
+                cell.detailLabel.text = nil
             }
             
             return cell
