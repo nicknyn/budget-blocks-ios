@@ -12,7 +12,7 @@ class TransactionController {
     
     var networkingController: NetworkingController?
     
-    func createTransaction(transactionID: String, name: String, amount: Int16, date: Date, context: NSManagedObjectContext) {
+    func createTransaction(transactionID: String, name: String, amount: Int64, date: Date, context: NSManagedObjectContext) {
         Transaction(transactionID: transactionID, name: name, amount: amount, date: date, context: context)
         CoreDataStack.shared.save(context: context)
     }
@@ -22,66 +22,138 @@ class TransactionController {
         CoreDataStack.shared.save(context: context)
     }
     
-    func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (Error?) -> Void) {
+    func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
             if let error = error {
-                return completion(error)
+                return completion(nil, error)
             }
             
-            guard let transactions = json?["transactions"].array else {
+            guard let categories = json?["Categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
-                    if message == "No access_Token found for that user id provided" {
-                        // TODO: Alert the user
-                        print("User needs to link a bank account first!")
-                    } else {
-                        NSLog("Message: \(message)")
-                    }
+                    return completion(message, nil)
+                } else if let response = json?.rawString() {
+                    NSLog("Response: \(response)")
                 }
-                return completion(nil)
+                return completion(nil, nil)
             }
             
             do {
-                let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-                let existingTransactions = try context.fetch(fetchRequest)
+                let transactionsFetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+                let existingTransactions = try context.fetch(transactionsFetchRequest)
+                let categoriesFetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+                let existingCategories = try context.fetch(categoriesFetchRequest)
+                
                 let dateFormatter = ISO8601DateFormatter()
                 dateFormatter.formatOptions = [
                     .withYear,
                     .withMonth,
-                    .withDay
+                    .withDay,
+                    .withDashSeparatorInDate
                 ]
-                
-                for transactionJSON in transactions {
-                    guard let transactionID = transactionJSON["transaction_id"].string,
-                        let name = transactionJSON["name"].string,
-                        let amount = transactionJSON["amount"].int16,
-                        let dateString = transactionJSON["date"].string,
-                        let date = dateFormatter.date(from: dateString) else { continue }
+                for categoryJSON in categories {
+                    // Create/update category
+                    var currentCategory: TransactionCategory?
+                    if let categoryID = categoryJSON["id"].int32,
+                        let categoryName = categoryJSON["name"].string {
+                        if let existingCategory = existingCategories.first(where: { $0.categoryID == categoryID }) {
+                            existingCategory.name = categoryName
+                            currentCategory = existingCategory
+                        } else {
+                            currentCategory = TransactionCategory(categoryID: categoryID, name: categoryName, context: context)
+                        }
+                    }
                     
-                    if let existingTransaction = existingTransactions.first(where: { $0.transactionID == transactionID }) {
-                        existingTransaction.name = name
-                        existingTransaction.amount = amount
-                        existingTransaction.date = date
-                    } else {
-                        Transaction(transactionID: transactionID, name: name, amount: amount, date: date, context: context)
+                    // Create/update transactions
+                    guard let transactions = categoryJSON["transactions"].array else { continue }
+                    for transactionJSON in transactions {
+                        guard let transactionID = transactionJSON["id"].int,
+                            let name = transactionJSON["name"].string,
+                            let amountFloat = transactionJSON["amount"].float,
+                            let dateString = transactionJSON["payment_date"].string,
+                            let date = dateFormatter.date(from: dateString) else { continue }
+                        let amount = Int64(amountFloat * 100)
+                        
+                        let transaction: Transaction
+                        if let existingTransaction = existingTransactions.first(where: { $0.transactionID == "\(transactionID)" }) {
+                            existingTransaction.name = name
+                            existingTransaction.amount = amount
+                            existingTransaction.date = date
+                            transaction = existingTransaction
+                        } else {
+                            transaction = Transaction(transactionID: "\(transactionID)", name: name, amount: amount, date: date, context: context)
+                        }
+                        
+                        transaction.category = currentCategory
                     }
                 }
                 
+                self.networkingController?.setLinked()
                 CoreDataStack.shared.save(context: context)
-                completion(nil)
+                completion(nil, nil)
             } catch {
-                completion(error)
+                completion(nil, error)
+            }
+        })
+    }
+    
+    func updateCategoriesFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
+        networkingController?.fetchCategoriesFromServer(completion: { json, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let categoriesJSON = json?.array else {
+                if let message = json?["message"].string {
+                    return completion(message, nil)
+                } else if let response = json?.rawString() {
+                    NSLog("Response: \(response)")
+                }
+                return completion(nil, nil)
+            }
+            
+            do {
+                let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+                let existingCategories = try context.fetch(fetchRequest)
+                
+                for categoryJSON in categoriesJSON {
+                    guard let categoryID = categoryJSON["id"].int32,
+                        let name = categoryJSON["name"].string else { continue }
+                    
+                    let category: TransactionCategory
+                    if let existingCategory = existingCategories.first(where: { $0.categoryID == categoryID }) {
+                        category = existingCategory
+                    } else {
+                        category = TransactionCategory(categoryID: categoryID, name: name, context: context)
+                    }
+                    
+                    guard let budgetFloat = categoryJSON["budget"].float else { continue }
+                    let budget = Int64(budgetFloat * 100)
+                    category.budget = budget
+                }
+                
+                CoreDataStack.shared.save(context: context)
+                completion(nil, nil)
+            } catch {
+                completion(nil, error)
             }
         })
     }
     
     func clearStoredTransactions(context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        let transactionsFetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        let categoriesFetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         do {
-            let allTransactions = try context.fetch(fetchRequest)
+            let allTransactions = try context.fetch(transactionsFetchRequest)
             for transaction in allTransactions {
                 context.delete(transaction)
             }
+            
+            let allCategories = try context.fetch(categoriesFetchRequest)
+            for category in allCategories {
+                context.delete(category)
+            }
+            
             CoreDataStack.shared.save(context: context)
         } catch {
             NSLog("Error fetching transactions for deletion: \(error)")

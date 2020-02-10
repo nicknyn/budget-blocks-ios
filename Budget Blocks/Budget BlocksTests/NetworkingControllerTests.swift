@@ -39,10 +39,24 @@ class NetworkingControllerTests: XCTestCase {
     
     func testFetchTransactions() {
         let networkingController = NetworkingController()
-        networkingController.bearer = Bearer(token: "token", userID: 1)
+        networkingController.bearer = Bearer(token: "token", userID: 1, linkedAccount: false)
         let expectation = self.expectation(description: "Fetch")
         
         networkingController.fetchTransactionsFromServer { json, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(json)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 30, handler: nil)
+    }
+    
+    func testFetchCategories() {
+        let networkingController = NetworkingController()
+        networkingController.bearer = Bearer(token: "token", userID: 1, linkedAccount: false)
+        let expectation = self.expectation(description: "Fetch")
+        
+        networkingController.fetchCategoriesFromServer { json, error in
             XCTAssertNil(error)
             XCTAssertNotNil(json)
             expectation.fulfill()

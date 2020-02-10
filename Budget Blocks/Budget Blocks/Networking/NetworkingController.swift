@@ -20,15 +20,20 @@ class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     private let bearerTokenKey = "bearerToken"
     private let userIDKey = "userIDKey"
+    private let linkedAccountKey = "linkedAccount"
     private let userDefaults = UserDefaults.standard
     
     var bearer: Bearer?
+    var linkedAccount: Bool {
+        return bearer?.linkedAccount ?? false
+    }
     
     init() {
         let userID = userDefaults.integer(forKey: userIDKey)
+        let linkedAccount = userDefaults.bool(forKey: linkedAccountKey)
         if let token = userDefaults.string(forKey: bearerTokenKey),
             userID != 0 {
-            bearer = Bearer(token: token, userID: userID)
+            bearer = Bearer(token: token, userID: userID, linkedAccount: linkedAccount)
         }
     }
     
@@ -57,10 +62,12 @@ class NetworkingController {
                 do {
                     let responseJSON = try JSON(data: data)
                     if let token = responseJSON["token"].string,
-                        let userID = responseJSON["id"].int {
-                        self.bearer = Bearer(token: token, userID: userID)
+                        let userID = responseJSON["id"].int,
+                        let linked = responseJSON["LinkedAccount"].bool {
+                        self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked)
                         self.userDefaults.set(token, forKey: self.bearerTokenKey)
                         self.userDefaults.set(userID, forKey: self.userIDKey)
+                        self.userDefaults.set(linked, forKey: self.linkedAccountKey)
                     }
                     completion(responseJSON["token"].string, nil)
                 } catch {
@@ -114,10 +121,11 @@ class NetworkingController {
         bearer = nil
         self.userDefaults.removeObject(forKey: bearerTokenKey)
         self.userDefaults.removeObject(forKey: userIDKey)
+        self.userDefaults.removeObject(forKey: linkedAccountKey)
     }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer else { return }
+        guard let bearer = bearer else { return completion(nil) }
         let tokenJSON = JSON(dictionaryLiteral: ("publicToken", publicToken), ("userid", bearer.userID))
         
         let url = baseURL.appendingPathComponent("plaid")
@@ -140,12 +148,9 @@ class NetworkingController {
                 
                 do {
                     let responseJSON = try JSON(data: data)
-                    if let success = responseJSON["AccessTokenInserted"].int {
-                        if success != 1 {
-                            NSLog("Access token insertion failed")
-                        } else {
-                            print("Access token inserted!")
-                        }
+                    if responseJSON["ItemCreated"].int != nil {
+                        print("Access token inserted!")
+                        self.bearer?.linkedAccount = true
                     } else {
                         if let response = responseJSON.rawString() {
                             NSLog("Unexpected response returned: \(response)")
@@ -164,35 +169,64 @@ class NetworkingController {
     }
     
     func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return }
-        let userIDJSON = JSON(dictionaryLiteral: ("userid", bearer.userID))
+        guard let bearer = bearer else { return completion(nil, nil) }
         
-        let url = baseURL.appendingPathComponent("plaid").appendingPathComponent("transactions")
+        let url = baseURL
+            .appendingPathComponent("plaid")
+            .appendingPathComponent("transactions")
+            .appendingPathComponent("\(bearer.userID)")
         var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = HTTPMethod.get.rawValue
         
-        do {
-            request.httpBody = try userIDJSON.rawData()
-            URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(nil, error)
-                }
-                
-                guard let data = data else {
-                    NSLog("No data returned from transactions request.")
-                    return completion(nil, nil)
-                }
-                
-                do {
-                    let responseJSON = try JSON(data: data)
-                    completion(responseJSON, nil)
-                } catch {
-                    completion(nil, error)
-                }
-            }.resume()
-        } catch {
-            completion(nil, error)
-        }
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from transactions request.")
+                return completion(nil, nil)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                completion(responseJSON, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
+    }
+    
+    func fetchCategoriesFromServer(completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer else { return completion(nil, nil) }
+        
+        let url = baseURL
+            .appendingPathComponent("api")
+            .appendingPathComponent("users")
+            .appendingPathComponent("categories")
+            .appendingPathComponent("\(bearer.userID)")
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from categories request.")
+                return completion(nil, nil)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                completion(responseJSON, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
+    }
+    
+    func setLinked() {
+        bearer?.linkedAccount = true
+        self.userDefaults.set(true, forKey: self.linkedAccountKey)
     }
 }
