@@ -97,6 +97,49 @@ class TransactionController {
         })
     }
     
+    func updateCategoriesFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
+        networkingController?.fetchCategories(completion: { json, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let categoriesJSON = json?.array else {
+                if let message = json?["message"].string {
+                    return completion(message, nil)
+                } else if let response = json?.rawString() {
+                    NSLog("Response: \(response)")
+                }
+                return completion(nil, nil)
+            }
+            
+            do {
+                let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+                let existingCategories = try context.fetch(fetchRequest)
+                
+                for categoryJSON in categoriesJSON {
+                    guard let categoryID = categoryJSON["id"].int32,
+                        let name = categoryJSON["name"].string else { continue }
+                    
+                    let category: TransactionCategory
+                    if let existingCategory = existingCategories.first(where: { $0.categoryID == categoryID }) {
+                        category = existingCategory
+                    } else {
+                        category = TransactionCategory(categoryID: categoryID, name: name, context: context)
+                    }
+                    
+                    guard let budgetFloat = categoryJSON["budget"].float else { continue }
+                    let budget = Int64(budgetFloat * 100)
+                    category.budget = budget
+                }
+                
+                CoreDataStack.shared.save(context: context)
+                completion(nil, nil)
+            } catch {
+                completion(nil, error)
+            }
+        })
+    }
+    
     func clearStoredTransactions(context: NSManagedObjectContext) {
         let transactionsFetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         let categoriesFetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()

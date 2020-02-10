@@ -197,6 +197,34 @@ class NetworkingController {
         }.resume()
     }
     
+    func fetchCategories(completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer else { return completion(nil, nil) }
+        
+        let url = baseURL
+            .appendingPathComponent("api")
+            .appendingPathComponent("users")
+            .appendingPathComponent("categories")
+            .appendingPathComponent("\(bearer.userID)")
+        
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from categories request.")
+                return completion(nil, nil)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                completion(responseJSON, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
+    }
+    
     func setLinked() {
         bearer?.linkedAccount = true
         self.userDefaults.set(true, forKey: self.linkedAccountKey)

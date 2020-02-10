@@ -74,6 +74,11 @@ class DashboardTableViewController: UITableViewController {
         updateBalances()
         
         transactionController.networkingController = networkingController
+        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            if let error = error {
+                return NSLog("\(error)")
+            }
+        }
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             DispatchQueue.main.async {
                 self.updateBalances()
