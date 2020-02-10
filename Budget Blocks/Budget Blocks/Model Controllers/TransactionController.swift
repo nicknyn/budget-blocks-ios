@@ -98,7 +98,7 @@ class TransactionController {
     }
     
     func updateCategoriesFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
-        networkingController?.fetchCategories(completion: { json, error in
+        networkingController?.fetchCategoriesFromServer(completion: { json, error in
             if let error = error {
                 return completion(nil, error)
             }

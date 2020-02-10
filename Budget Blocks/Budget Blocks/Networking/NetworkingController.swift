@@ -197,7 +197,7 @@ class NetworkingController {
         }.resume()
     }
     
-    func fetchCategories(completion: @escaping (JSON?, Error?) -> Void) {
+    func fetchCategoriesFromServer(completion: @escaping (JSON?, Error?) -> Void) {
         guard let bearer = bearer else { return completion(nil, nil) }
         
         let url = baseURL
