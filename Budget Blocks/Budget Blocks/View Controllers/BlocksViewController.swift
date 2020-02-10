@@ -11,7 +11,13 @@ import CoreData
 
 class BlocksViewController: UIViewController {
     
+    // MARK: Outlets
+    
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: Properties
+    
+    var selectedCategories: [TransactionCategory] = []
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
@@ -72,6 +78,21 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        let category = fetchedResultsController.object(at: indexPath)
+        
+        if selectedCategories.contains(category) {
+            selectedCategories.removeAll(where: { $0 == category })
+            cell?.accessoryType = .none
+        } else {
+            selectedCategories.append(category)
+            cell?.accessoryType = .checkmark
+        }
     }
 }
 
