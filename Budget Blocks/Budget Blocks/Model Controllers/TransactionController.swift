@@ -28,7 +28,7 @@ class TransactionController {
                 return completion(nil, error)
             }
             
-            guard let categories = json?["categories"].array else {
+            guard let categories = json?["Categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
                     return completion(message, nil)

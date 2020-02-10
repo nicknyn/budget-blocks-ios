@@ -81,6 +81,7 @@ class DashboardTableViewController: UITableViewController {
         }
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             DispatchQueue.main.async {
+                // This might be able to be removed since the FRC controllerDidChange function updates balances
                 self.updateBalances()
             }
             
@@ -99,6 +100,10 @@ class DashboardTableViewController: UITableViewController {
         // Temporary logout button until the profile page is set up
         let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
         navigationItem.rightBarButtonItem = logoutButton
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTable(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -239,6 +244,19 @@ class DashboardTableViewController: UITableViewController {
     }
     
     // MARK: Private
+    
+    @objc private func refreshTable(_ refreshControl: UIRefreshControl) {
+        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                refreshControl.endRefreshing()
+            }
+            
+            if let error = error {
+                return NSLog("\(error)")
+            }
+        }
+    }
     
     private func linkAccount() {
         guard let publicKey = ProcessInfo.processInfo.environment["PLAID_PUBLIC_KEY"] else {
