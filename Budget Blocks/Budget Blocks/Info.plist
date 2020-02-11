@@ -24,6 +24,7 @@
 	<array>
 		<string>SquadaOne-Regular.ttf</string>
 		<string>Exo-Regular.otf</string>
+		<string>Exo-SemiBold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

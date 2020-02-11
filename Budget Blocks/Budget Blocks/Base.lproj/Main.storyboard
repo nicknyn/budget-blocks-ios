@@ -10,6 +10,9 @@
         <array key="Exo-Regular.otf">
             <string>Exo-Regular</string>
         </array>
+        <array key="Exo-SemiBold.otf">
+            <string>Exo-DemiBold</string>
+        </array>
         <array key="SquadaOne-Regular.ttf">
             <string>SquadaOne-Regular</string>
         </array>
@@ -497,7 +500,7 @@
             </objects>
             <point key="canvasLocation" x="1041" y="1558"/>
         </scene>
-        <!--Blocks View Controller-->
+        <!--Create Budget-->
         <scene sceneID="dmS-tq-Blc">
             <objects>
                 <viewController id="hT9-id-g1g" customClass="BlocksViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
@@ -506,7 +509,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VV8-Im-QP2">
-                                <rect key="frame" x="0.0" y="183" width="414" height="499"/>
+                                <rect key="frame" x="0.0" y="253.66666666666666" width="414" height="428.33333333333337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CategoryCell" textLabel="eRh-MG-vY7" style="IBUITableViewCellStyleDefault" id="gd8-27-4PP">
@@ -564,17 +567,23 @@
                                     <outlet property="delegate" destination="hT9-id-g1g" id="YvE-K1-wS6"/>
                                 </connections>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3G8-Jc-ibA">
-                                <rect key="frame" x="20" y="76" width="374" height="87"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="3G8-Jc-ibA">
+                                <rect key="frame" x="20" y="75.999999999999986" width="374" height="157.66666666666663"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose spending blocks" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhG-lU-KhF">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="Exo-DemiBold" family="Exo" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose which categories you would like to set budgets for." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7r-Rb-YFq">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="54.666666666666657" width="374" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="GNr-H8-d6R">
-                                        <rect key="frame" x="0.0" y="48.666666666666671" width="374" height="38.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="119.33333333333333" width="374" height="38.333333333333329"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9P-SL-MYE">
                                                 <rect key="frame" x="163.33333333333334" y="0.0" width="47.666666666666657" height="20.333333333333332"/>
@@ -583,7 +592,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo2-vh-Pn0">
-                                                <rect key="frame" x="170.33333333333334" y="20.333333333333329" width="33.333333333333343" height="18"/>
+                                                <rect key="frame" x="170.33333333333334" y="20.333333333333314" width="33.333333333333343" height="18"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -619,7 +628,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hJV-NO-vKn"/>
                     </view>
-                    <navigationItem key="navigationItem" id="YwN-Mc-don">
+                    <navigationItem key="navigationItem" title="Create Budget" id="YwN-Mc-don">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="44b-1a-tHT">
                             <connections>
                                 <action selector="cancel:" destination="hT9-id-g1g" id="wgp-vP-x0i"/>
@@ -630,6 +639,7 @@
                         <outlet property="nextButton" destination="NNO-tF-dd0" id="O5d-bP-2Bx"/>
                         <outlet property="promptLabel" destination="x7r-Rb-YFq" id="CUY-1a-kgL"/>
                         <outlet property="tableView" destination="VV8-Im-QP2" id="lhh-Us-2gV"/>
+                        <outlet property="titleLabel" destination="QhG-lU-KhF" id="U2E-Ct-4LI"/>
                         <outlet property="totalLabel" destination="I9P-SL-MYE" id="VQm-XN-lSW"/>
                         <outlet property="totalStackView" destination="GNr-H8-d6R" id="83n-em-oXQ"/>
                         <outlet property="totalSubtitleLabel" destination="jo2-vh-Pn0" id="fOz-Q8-DCV"/>

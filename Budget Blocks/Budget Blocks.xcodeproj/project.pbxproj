@@ -11,6 +11,7 @@
 		592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB123F2132F0035FF3A /* BlocksViewController.swift */; };
 		592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */; };
 		592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB523F2539E0035FF3A /* UIKit+Font.swift */; };
+		592B3CB823F25A950035FF3A /* Exo-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 592B3CB723F2594C0035FF3A /* Exo-SemiBold.otf */; };
 		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
 		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
 		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
@@ -74,6 +75,7 @@
 		592B3CB123F2132F0035FF3A /* BlocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksViewController.swift; sourceTree = "<group>"; };
 		592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
 		592B3CB523F2539E0035FF3A /* UIKit+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Font.swift"; sourceTree = "<group>"; };
+		592B3CB723F2594C0035FF3A /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
 		593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */,
 				5943B3F123E498600050866D /* Exo-Regular.otf */,
+				592B3CB723F2594C0035FF3A /* Exo-SemiBold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5943B3F223E498600050866D /* Exo-Regular.otf in Resources */,
+				592B3CB823F25A950035FF3A /* Exo-SemiBold.otf in Resources */,
 				5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */,
 				5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */,
 				5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */,

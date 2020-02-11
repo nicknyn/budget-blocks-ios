@@ -19,6 +19,7 @@ class BlocksViewController: UIViewController {
     @IBOutlet weak var totalStackView: UIStackView!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var totalSubtitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     
     // MARK: Properties
     
@@ -53,6 +54,14 @@ class BlocksViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.allowsSelection = !categoriesAreSet
+        
+        if !categoriesAreSet {
+            titleLabel.text = "Choose spending blocks"
+            promptLabel.text = "Choose which categories you would like to set budgets for."
+        } else {
+            titleLabel.text = "Budgets"
+            promptLabel.text = "Assign the value you want in each selected category."
+        }
         
         totalStackView.isHidden = !categoriesAreSet
         
