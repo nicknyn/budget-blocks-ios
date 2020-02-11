@@ -175,26 +175,9 @@ class NetworkingController {
             .appendingPathComponent("plaid")
             .appendingPathComponent("transactions")
             .appendingPathComponent("\(bearer.userID)")
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.get.rawValue
+        let request = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
-            guard let data = data else {
-                NSLog("No data returned from transactions request.")
-                return completion(nil, nil)
-            }
-            
-            do {
-                let responseJSON = try JSON(data: data)
-                completion(responseJSON, nil)
-            } catch {
-                completion(nil, error)
-            }
-        }.resume()
+        completeReturnedJSON(request: request, requestName: "transactions", completion: completion)
     }
     
     func fetchCategoriesFromServer(completion: @escaping (JSON?, Error?) -> Void) {
@@ -205,24 +188,9 @@ class NetworkingController {
             .appendingPathComponent("users")
             .appendingPathComponent("categories")
             .appendingPathComponent("\(bearer.userID)")
+        let request = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
-            guard let data = data else {
-                NSLog("No data returned from categories request.")
-                return completion(nil, nil)
-            }
-            
-            do {
-                let responseJSON = try JSON(data: data)
-                completion(responseJSON, nil)
-            } catch {
-                completion(nil, error)
-            }
-        }.resume()
+        completeReturnedJSON(request: request, requestName: "categories", completion: completion)
     }
     
     func setCategoryBudget(categoryID: Int32, budget: Int64, completion: @escaping (JSON?, Error?) -> Void) {
@@ -241,23 +209,7 @@ class NetworkingController {
         
         do {
             request.httpBody = try budgetJSON.rawData()
-            URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(nil, error)
-                }
-                
-                guard let data = data else {
-                    NSLog("No data returned from set category request.")
-                    return completion(nil, nil)
-                }
-                
-                do {
-                    let responseJSON = try JSON(data: data)
-                    completion(responseJSON, nil)
-                } catch {
-                    completion(nil, error)
-                }
-            }.resume()
+            completeReturnedJSON(request: request, requestName: "set category", completion: completion)
         } catch {
             completion(nil, error)
         }
@@ -266,5 +218,27 @@ class NetworkingController {
     func setLinked() {
         bearer?.linkedAccount = true
         self.userDefaults.set(true, forKey: self.linkedAccountKey)
+    }
+    
+    // MARK: Private
+    
+    private func completeReturnedJSON(request: URLRequest, requestName: String, completion: @escaping (JSON?, Error?) -> Void) {
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let data = data else {
+                NSLog("No data returned from \(requestName) request.")
+                return completion(nil, nil)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                completion(responseJSON, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
     }
 }
