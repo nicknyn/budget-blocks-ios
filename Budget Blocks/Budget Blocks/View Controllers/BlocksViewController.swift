@@ -15,6 +15,10 @@ class BlocksViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var promptLabel: UILabel!
+    @IBOutlet weak var totalStackView: UIStackView!
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var totalSubtitleLabel: UILabel!
     
     // MARK: Properties
     
@@ -50,6 +54,8 @@ class BlocksViewController: UIViewController {
 
         tableView.allowsSelection = !categoriesAreSet
         
+        totalStackView.isHidden = !categoriesAreSet
+        
         let titleText = categoriesAreSet ? "Save" : "Continue"
         nextButton.setTitle(titleText, for: .normal)
         
@@ -61,14 +67,20 @@ class BlocksViewController: UIViewController {
             nextButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
         }
         
+        promptLabel.setApplicationTypeface()
+        totalLabel.setApplicationTypeface()
+        totalSubtitleLabel.setApplicationTypeface()
+        
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        
+        updateViews()
     }
     
     // MARK: Private
     
-    @objc func adjustForKeyboard(notification: Notification) {
+    @objc private func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
@@ -81,6 +93,11 @@ class BlocksViewController: UIViewController {
         }
 
         tableView.scrollIndicatorInsets = tableView.contentInset
+    }
+    
+    private func updateViews() {
+        let total = budgets.values.reduce(0, +)
+        totalLabel.text = "$" + total.currency
     }
     
     // MARK: Actions
@@ -192,6 +209,7 @@ extension BlocksViewController: UITextFieldDelegate {
         }
         let budget = Int64(budgetFloat * 100)
         budgets[textField.tag] = budget
+        updateViews()
     }
 }
 
