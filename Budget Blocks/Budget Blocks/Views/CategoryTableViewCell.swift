@@ -23,10 +23,4 @@ class CategoryTableViewCell: UITableViewCell {
         backgroundColor = UIColor(red:0.93, green:0.94, blue:0.95, alpha:1.0)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
