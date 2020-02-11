@@ -6,9 +6,9 @@
 
 # Title of project goes here
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
-## 4️⃣ Contributors
+## Contributors
 
 | [Isaac Lyons](https://github.com/Isvvc) |
 | :-----------------------------------------------------------------------------------------------------------: |
@@ -25,13 +25,13 @@
 
 ## Project Overview
 
-1️⃣ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
-1️⃣ [Trello Board](https://trello.com/b/emmxnHtH/labs-20-budget-blocks)
+[Trello Board](https://trello.com/b/emmxnHtH/labs-20-budget-blocks)
 
-1️⃣ [Product Canvas](https://www.notion.so/Budget-Blocks-6251cc75b71c4988af56529409f6f07f)
+[Product Canvas](https://www.notion.so/Budget-Blocks-6251cc75b71c4988af56529409f6f07f)
 
-1️⃣ [UX Design files](https://www.figma.com/file/PRObUGqKAPZE2lo7A2eeV1/Budget-Blocks-Aaryn-M.?node-id=1%3A4)
+[UX Design files](https://www.figma.com/file/PRObUGqKAPZE2lo7A2eeV1/Budget-Blocks-Aaryn-M.?node-id=1%3A4)
 
 🚫 One to two paragraph statement about your product and what it does.
 
@@ -134,7 +134,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/Lambda-School-Labs/budget-blocks-be/blob/development/README.md) for details on the backend of our project.
 
 
 [swift-image]: https://img.shields.io/badge/swift-5.0-orange.svg
