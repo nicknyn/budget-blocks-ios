@@ -24,8 +24,7 @@ class BlocksViewController: UIViewController {
     // MARK: Properties
     
     var transactionController: TransactionController?
-    var selectedCategories: [TransactionCategory] = []
-    var budgets: [Int: Int64] = [:]
+    var budgets: [(category: TransactionCategory, budget: Int64)] = []
     var categoriesAreSet: Bool = false
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
@@ -52,7 +51,29 @@ class BlocksViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setUpViews()
+        updateViews()
+    }
+    
+    // MARK: Private
+    
+    @objc private func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            tableView.contentInset = .zero
+        } else {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        tableView.scrollIndicatorInsets = tableView.contentInset
+    }
+    
+    private func setUpViews() {
         tableView.allowsSelection = !categoriesAreSet
         
         if !categoriesAreSet {
@@ -83,29 +104,10 @@ class BlocksViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-        
-        updateViews()
-    }
-    
-    // MARK: Private
-    
-    @objc private func adjustForKeyboard(notification: Notification) {
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-
-        let keyboardScreenEndFrame = keyboardValue.cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-
-        if notification.name == UIResponder.keyboardWillHideNotification {
-            tableView.contentInset = .zero
-        } else {
-            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
-        }
-
-        tableView.scrollIndicatorInsets = tableView.contentInset
     }
     
     private func updateViews() {
-        let total = budgets.values.reduce(0, +)
+        let total = budgets.map({ $0.budget }).reduce(0, +)
         totalLabel.text = "$" + total.currency
     }
     
@@ -118,8 +120,8 @@ class BlocksViewController: UIViewController {
     @IBAction func save(_ sender: Any) {
         guard categoriesAreSet else { return }
         
-        for (index, category) in selectedCategories.enumerated() {
-            let budget = budgets[index] ?? 0
+        for (category, budget) in budgets {
+            //let budget = budgets[index] ?? 0
             transactionController?.setCategoryBudget(category: category, budget: budget, completion: { error in
                 if let error = error {
                     return NSLog("Error setting \(category.name ?? "category") budget: \(error)")
@@ -140,7 +142,7 @@ class BlocksViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let blocksVC = segue.destination as? BlocksViewController {
             blocksVC.transactionController = transactionController
-            blocksVC.selectedCategories = selectedCategories
+            blocksVC.budgets = budgets
             blocksVC.categoriesAreSet = true
         }
     }
@@ -152,7 +154,7 @@ class BlocksViewController: UIViewController {
 extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if categoriesAreSet {
-            return selectedCategories.count
+            return budgets.count
         } else {
             return fetchedResultsController.fetchedObjects?.count ?? 0
         }
@@ -165,10 +167,14 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
         let category: TransactionCategory
         let titleLabel: UILabel?
         if categoriesAreSet {
-            category = selectedCategories[indexPath.row]
+            category = budgets[indexPath.row].category
             guard let budgetCell = cell as? BudgetTableViewCell else { return cell }
             titleLabel = budgetCell.titleLabel
-            
+                        
+            let budget = budgets[indexPath.row].budget
+            if budget > 0 {
+                budgetCell.textField.text = "\(budget)"
+            }
             budgetCell.textField.tag = indexPath.row
             budgetCell.textField.delegate = self
         } else {
@@ -182,7 +188,7 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if !categoriesAreSet,
-            selectedCategories.contains(category) {
+            budgets.contains(where: { $0.category == category }) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
@@ -197,11 +203,11 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath)
         let category = fetchedResultsController.object(at: indexPath)
         
-        if selectedCategories.contains(category) {
-            selectedCategories.removeAll(where: { $0 == category })
+        if budgets.contains(where: { $0.category == category }) {
+            budgets.removeAll(where: { $0.category == category })
             cell?.accessoryType = .none
         } else {
-            selectedCategories.append(category)
+            budgets.append((category, category.budget))
             cell?.accessoryType = .checkmark
         }
     }
@@ -213,11 +219,11 @@ extension BlocksViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let budgetString = textField.text,
             let budgetFloat = Float(budgetString) else {
-                textField.text = "\(budgets[textField.tag] ?? 0)"
+                textField.text = "\(budgets[textField.tag])"
                 return
         }
         let budget = Int64(budgetFloat * 100)
-        budgets[textField.tag] = budget
+        budgets[textField.tag].budget = budget
         updateViews()
     }
 }

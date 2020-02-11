@@ -67,6 +67,10 @@ class DashboardTableViewController: UITableViewController {
         
         return frc
     }()
+    
+    var categoriesWithBudget: [TransactionCategory]? {
+        categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 })
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -284,9 +288,9 @@ class DashboardTableViewController: UITableViewController {
         var totalBudget: Int64 = 0
         var totalSpending: Int64 = 0
         
-        let categories = categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 })
+        //let categories = categoriesWithBudget
         
-        for category in categories ?? [] {
+        for category in categoriesWithBudget ?? [] {
             totalBudget += category.budget
             for transaction in category.transactions ?? [] {
                 guard let transaction = transaction as? Transaction else { continue }
@@ -347,6 +351,14 @@ class DashboardTableViewController: UITableViewController {
         } else if let navigationVC = segue.destination as? UINavigationController,
             let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
             blocksVC.transactionController = transactionController
+            if let budgets = categoriesWithBudget?.map({ ($0, $0.budget) }) {
+                blocksVC.budgets = budgets
+            }
+            if let indexPath = tableView.indexPathForSelectedRow,
+                let selectedCategory = categoriesFRC.fetchedObjects?[indexPath.row],
+                selectedCategory.budget == 0 {
+                blocksVC.budgets.append((selectedCategory, 0))
+            }
         }
     }
 
