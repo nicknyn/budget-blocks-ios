@@ -24,18 +24,14 @@ class TransactionController {
     
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
             guard let categories = json?["Categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
-                    return completion(message, nil)
+                    return completion(message, error)
                 } else if let response = json?.rawString() {
                     NSLog("Response: \(response)")
                 }
-                return completion(nil, nil)
+                return completion(nil, error)
             }
             
             do {
@@ -99,17 +95,13 @@ class TransactionController {
     
     func updateCategoriesFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchCategoriesFromServer(completion: { json, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
             guard let categoriesJSON = json?.array else {
                 if let message = json?["message"].string {
-                    return completion(message, nil)
+                    return completion(message, error)
                 } else if let response = json?.rawString() {
                     NSLog("Response: \(response)")
                 }
-                return completion(nil, nil)
+                return completion(nil, error)
             }
             
             do {
@@ -142,14 +134,10 @@ class TransactionController {
     
     func setCategoryBudget(category: TransactionCategory, budget: Int64, completion: @escaping (Error?) -> Void) {
         networkingController?.setCategoryBudget(categoryID: category.categoryID, budget: budget, completion: { json, error in
-            if let error = error {
-                return completion(error)
-            }
-            
             guard let json = json,
                 let amount = json["amount"].float else {
                 NSLog("No `amount` returned from budget set request.")
-                return completion(nil)
+                return completion(error)
             }
             
             category.budget = Int64(amount * 100)

@@ -60,13 +60,9 @@ class NetworkingController {
         do {
             request.httpBody = try loginJSON.rawData()
             URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(nil, error)
-                }
-                
                 guard let data = data else {
                     NSLog("No data returned from login request")
-                    return completion(nil, nil)
+                    return completion(nil, error)
                 }
                 
                 do {
@@ -100,13 +96,9 @@ class NetworkingController {
         do {
             request.httpBody = try registerJSON.rawData()
             URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(nil, error)
-                }
-                
                 guard let data = data else {
                     NSLog("No data returned from register request")
-                    return completion(nil, nil)
+                    return completion(nil, error)
                 }
                 
                 do {
@@ -145,13 +137,9 @@ class NetworkingController {
         do {
             request.httpBody = try tokenJSON.rawData()
             URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(error)
-                }
-                
                 guard let data = data else {
                     NSLog("No data returned from register request")
-                    return completion(nil)
+                    return completion(error)
                 }
                 
                 do {
@@ -221,13 +209,9 @@ class NetworkingController {
     
     private func completeReturnedJSON(request: URLRequest, requestName: String, completion: @escaping (JSON?, Error?) -> Void) {
         URLSession.shared.dataTask(with: request) { data, _, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
             guard let data = data else {
                 NSLog("No data returned from \(requestName) request.")
-                return completion(nil, nil)
+                return completion(nil, error)
             }
             
             do {
