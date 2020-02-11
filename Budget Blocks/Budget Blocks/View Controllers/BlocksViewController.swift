@@ -14,10 +14,13 @@ class BlocksViewController: UIViewController {
     // MARK: Outlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nextButton: UIButton!
     
     // MARK: Properties
     
+    var transactionController: TransactionController?
     var selectedCategories: [TransactionCategory] = []
+    var categoriesAreSet: Bool = false
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
@@ -44,19 +47,40 @@ class BlocksViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.allowsSelection = !categoriesAreSet
+        
+        let titleText = categoriesAreSet ? "Save" : "Continue"
+        nextButton.setTitle(titleText, for: .normal)
+        
+        let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1)
+        nextButton.layer.backgroundColor = daybreakBlue.cgColor
+        nextButton.layer.cornerRadius = 4
+        nextButton.setTitleColor(.white, for: .normal)
+        if let buttonFontSize = nextButton.titleLabel?.font.pointSize {
+            nextButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
+        }
     }
     
-
-    /*
+    // MARK: Actions
+    
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Navigation
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return !categoriesAreSet
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let blocksVC = segue.destination as? BlocksViewController {
+            blocksVC.transactionController = transactionController
+            blocksVC.selectedCategories = selectedCategories
+            blocksVC.categoriesAreSet = true
+        }
     }
-    */
 
 }
 
@@ -64,13 +88,22 @@ class BlocksViewController: UIViewController {
 
 extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.fetchedObjects?.count ?? 0
+        if categoriesAreSet {
+            return selectedCategories.count
+        } else {
+            return fetchedResultsController.fetchedObjects?.count ?? 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
-        let category = fetchedResultsController.object(at: indexPath)
+        let category: TransactionCategory
+        if categoriesAreSet {
+            category = selectedCategories[indexPath.row]
+        } else {
+            category = fetchedResultsController.object(at: indexPath)
+        }
         cell.textLabel?.text = category.name
         
         if let textSize = cell.textLabel?.font.pointSize {
