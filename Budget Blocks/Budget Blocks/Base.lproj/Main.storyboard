@@ -505,7 +505,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VV8-Im-QP2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VV8-Im-QP2">
                                 <rect key="frame" x="0.0" y="183" width="414" height="499"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
@@ -525,6 +525,38 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BudgetCell" id="vvY-r2-yKf" customClass="BudgetTableViewCell" customModule="Budget_Blocks" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="71.666667938232422" width="414" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vvY-r2-yKf" id="eka-T3-fqu">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ygV-4E-7Xc">
+                                                    <rect key="frame" x="19.999999999999996" y="11.666666666666666" width="41.666666666666657" height="20.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="paJ-9Y-a0Q">
+                                                    <rect key="frame" x="69.666666666666657" y="13.333333333333336" width="324.33333333333337" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="paJ-9Y-a0Q" firstAttribute="leading" secondItem="ygV-4E-7Xc" secondAttribute="trailing" constant="8" id="2tp-aQ-KdJ"/>
+                                                <constraint firstItem="paJ-9Y-a0Q" firstAttribute="centerY" secondItem="eka-T3-fqu" secondAttribute="centerY" id="DTf-9n-ON3"/>
+                                                <constraint firstItem="paJ-9Y-a0Q" firstAttribute="trailing" secondItem="eka-T3-fqu" secondAttribute="trailingMargin" id="FVs-QN-Urh"/>
+                                                <constraint firstItem="ygV-4E-7Xc" firstAttribute="leading" secondItem="eka-T3-fqu" secondAttribute="leadingMargin" id="Hn5-pL-xpm"/>
+                                                <constraint firstItem="ygV-4E-7Xc" firstAttribute="centerY" secondItem="eka-T3-fqu" secondAttribute="centerY" id="RKx-KJ-4sr"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="paJ-9Y-a0Q" id="an2-gS-iJ6"/>
+                                            <outlet property="titleLabel" destination="ygV-4E-7Xc" id="ixT-S0-6VC"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

@@ -96,18 +96,29 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        let cellIdentifier = categoriesAreSet ? "BudgetCell" : "CategoryCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         let category: TransactionCategory
+        let titleLabel: UILabel?
         if categoriesAreSet {
             category = selectedCategories[indexPath.row]
+            guard let budgetCell = cell as? BudgetTableViewCell else { return cell }
+            titleLabel = budgetCell.titleLabel
         } else {
             category = fetchedResultsController.object(at: indexPath)
+            titleLabel = cell.textLabel
         }
-        cell.textLabel?.text = category.name
+        titleLabel?.text = category.name
         
-        if let textSize = cell.textLabel?.font.pointSize {
-            cell.textLabel?.font = UIFont(name: "Exo-Regular",size: textSize)
+        if let textSize = titleLabel?.font.pointSize {
+            titleLabel?.font = UIFont(name: "Exo-Regular",size: textSize)
+        }
+        
+        if selectedCategories.contains(category) {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
         }
         
         return cell
