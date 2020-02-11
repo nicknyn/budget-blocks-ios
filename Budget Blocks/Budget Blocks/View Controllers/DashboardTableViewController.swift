@@ -350,6 +350,8 @@ class DashboardTableViewController: UITableViewController {
         actionSheet.addAction(viewTransactions)
         actionSheet.addAction(newBudget)
         
+        actionSheet.pruneNegativeWidthConstraints()
+        
         present(actionSheet, animated: true)
     }
 
