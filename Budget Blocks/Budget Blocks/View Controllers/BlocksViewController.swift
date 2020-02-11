@@ -173,7 +173,7 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
                         
             let budget = budgets[indexPath.row].budget
             if budget > 0 {
-                budgetCell.textField.text = "\(budget)"
+                budgetCell.textField.text = "$\(budget.currency)"
             }
             budgetCell.textField.tag = indexPath.row
             budgetCell.textField.delegate = self
@@ -216,14 +216,37 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: Text field delegate
 
 extension BlocksViewController: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let budgetString = textField.text,
-            let budgetFloat = Float(budgetString) else {
-                textField.text = "\(budgets[textField.tag])"
-                return
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text?.first == "$",
+            let budgetWithoutDollars = textField.text?.dropFirst() {
+            textField.text = String(budgetWithoutDollars)
         }
-        let budget = Int64(budgetFloat * 100)
-        budgets[textField.tag].budget = budget
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        var budgetFloat: Float?
+        
+        if let budgetString = textField.text,
+            !budgetString.isEmpty {
+            budgetFloat = Float(budgetString)
+        } else {
+            budgetFloat = 0
+        }
+        
+        if let budgetFloat = budgetFloat {
+            let budget = Int64(budgetFloat * 100)
+            budgets[textField.tag].budget = budget
+            
+            if budget > 0 {
+                textField.text = "$\(budget.currency)"
+            } else {
+                textField.text = nil
+            }
+        } else {
+            // If the text inputted was not valid, set it back to the last known valud budget
+            textField.text = "$\(budgets[textField.tag].budget.currency)"
+        }
+        
         updateViews()
     }
 }
