@@ -46,11 +46,11 @@ class DashboardTableViewController: UITableViewController {
     
     lazy var categoriesFRC: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
         
-        let predicate = NSPredicate(format: "transactions.@count > 0 AND budget > 0")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "budget", ascending: false)]
+        
+        let predicate = NSPredicate(format: "transactions.@count > 0")
         fetchRequest.predicate = predicate
-        
         let context = CoreDataStack.shared.mainContext
         
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -162,8 +162,7 @@ class DashboardTableViewController: UITableViewController {
                 let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
                 guard let cell = uiCell as? CategoryTableViewCell else { return uiCell }
                 
-                let textSize = cell.titleLabel.font.pointSize
-                cell.titleLabel.font = UIFont(name: "Exo-Regular", size: textSize)
+                cell.titleLabel.setApplicationTypeface()
                 cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
                 
                 if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
@@ -173,15 +172,23 @@ class DashboardTableViewController: UITableViewController {
                         guard let transaction = transaction as? Transaction else { continue }
                         sum += transaction.amount
                     }
-                    cell.detailLabel.text = "$\(sum.currency) / $\(category.budget.currency)"
+                    var budgetString = "$\(sum.currency)"
                     
-                    let progress = Float(sum) / Float(category.budget)
-                    cell.progressBar.progress = progress
-                    if progress < 0.8 {
-                        cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+                    if category.budget > 0 {
+                        budgetString += " / $\(category.budget.currency)"
+                        
+                        let progress = Float(sum) / Float(category.budget)
+                        cell.progressBar.progress = progress
+                        if progress < 0.8 {
+                            cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+                        } else {
+                            cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+                        }
                     } else {
-                        cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+                        cell.progressBar.progress = 0
                     }
+                    
+                    cell.detailLabel.text = budgetString
                 } else {
                     cell.titleLabel.text = nil
                     cell.detailLabel.text = nil
@@ -276,7 +283,10 @@ class DashboardTableViewController: UITableViewController {
     private func updateRemainingBudget() {
         var totalBudget: Int64 = 0
         var totalSpending: Int64 = 0
-        for category in categoriesFRC.fetchedObjects ?? [] {
+        
+        let categories = categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 })
+        
+        for category in categories ?? [] {
             totalBudget += category.budget
             for transaction in category.transactions ?? [] {
                 guard let transaction = transaction as? Transaction else { continue }
