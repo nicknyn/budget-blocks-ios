@@ -10,6 +10,7 @@
 		592B3CAE23F1CBC90035FF3A /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CAD23F1CBC90035FF3A /* CategoryTableViewCell.swift */; };
 		592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB123F2132F0035FF3A /* BlocksViewController.swift */; };
 		592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */; };
+		592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB523F2539E0035FF3A /* UIKit+Font.swift */; };
 		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
 		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
 		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
@@ -72,6 +73,7 @@
 		592B3CAD23F1CBC90035FF3A /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		592B3CB123F2132F0035FF3A /* BlocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksViewController.swift; sourceTree = "<group>"; };
 		592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
+		592B3CB523F2539E0035FF3A /* UIKit+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Font.swift"; sourceTree = "<group>"; };
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
 		593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				59D1550923EB91DE003233C1 /* Int64+Currency.swift */,
+				592B3CB523F2539E0035FF3A /* UIKit+Font.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */,
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
 				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,
