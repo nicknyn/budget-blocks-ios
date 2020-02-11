@@ -80,19 +80,10 @@ class DashboardTableViewController: UITableViewController {
         
         transactionController.networkingController = networkingController
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
-            if let error = error {
-                return NSLog("\(error)")
-            }
+            error?.log()
         }
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
-            DispatchQueue.main.async {
-                // This might be able to be removed since the FRC controllerDidChange function updates balances
-                self.updateBalances()
-            }
-            
-            if let error = error {
-                return NSLog("\(error)")
-            }
+            error?.log()
         }
         
         let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
@@ -241,9 +232,7 @@ class DashboardTableViewController: UITableViewController {
                 refreshControl.endRefreshing()
             }
             
-            if let error = error {
-                return NSLog("\(error)")
-            }
+            error?.log()
         }
     }
     

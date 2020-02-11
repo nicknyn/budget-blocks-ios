@@ -59,7 +59,7 @@ class TransactionsViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.alertAndReturn(title: "An error has occurred.", message: "There was an error fetching your transactions.")
                 }
-                return NSLog("\(error)")
+                return error.log()
             }
             
             guard let message = message else { return }
