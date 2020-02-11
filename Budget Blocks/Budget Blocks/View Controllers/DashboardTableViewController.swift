@@ -274,10 +274,7 @@ class DashboardTableViewController: UITableViewController {
         
         for category in categoriesWithBudget ?? [] {
             totalBudget += category.budget
-            for transaction in category.transactions ?? [] {
-                guard let transaction = transaction as? Transaction else { continue }
-                totalSpending += transaction.amount
-            }
+            totalSpending += transactionController.getTotalSpending(for: category)
         }
         
         balanceLabel.text = "$\((totalBudget - totalSpending).currency)"

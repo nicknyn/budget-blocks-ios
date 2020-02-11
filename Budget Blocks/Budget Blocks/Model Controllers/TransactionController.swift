@@ -177,4 +177,9 @@ class TransactionController {
         }
     }
     
+    func getTotalSpending(for category: TransactionCategory) -> Int64 {
+        let transactionAmounts = category.transactions?.compactMap({ ($0 as? Transaction)?.amount })
+        return transactionAmounts?.reduce(0, +) ?? 0
+    }
+    
 }
