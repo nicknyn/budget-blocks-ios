@@ -59,6 +59,27 @@ class BlocksViewController: UIViewController {
         if let buttonFontSize = nextButton.titleLabel?.font.pointSize {
             nextButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
         }
+        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    // MARK: Private
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            tableView.contentInset = .zero
+        } else {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        }
+
+        tableView.scrollIndicatorInsets = tableView.contentInset
     }
     
     // MARK: Actions
@@ -115,7 +136,8 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
             titleLabel?.font = UIFont(name: "Exo-Regular",size: textSize)
         }
         
-        if selectedCategories.contains(category) {
+        if !categoriesAreSet,
+            selectedCategories.contains(category) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
