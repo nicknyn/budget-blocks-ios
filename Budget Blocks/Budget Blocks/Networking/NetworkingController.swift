@@ -18,6 +18,18 @@ enum HTTPMethod: String {
 
 class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
+    private var authURL: URL {
+        baseURL.appendingPathComponent("api")
+            .appendingPathComponent("auth")
+    }
+    private var categoriesURL: URL? {
+        guard let bearer = bearer else { return nil }
+        return baseURL.appendingPathComponent("api")
+            .appendingPathComponent("users")
+            .appendingPathComponent("categories")
+            .appendingPathComponent("\(bearer.userID)")
+    }
+    
     private let bearerTokenKey = "bearerToken"
     private let userIDKey = "userIDKey"
     private let linkedAccountKey = "linkedAccount"
@@ -40,9 +52,7 @@ class NetworkingController {
     func login(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let loginJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
-        let url = baseURL.appendingPathComponent("api")
-            .appendingPathComponent("auth")
-            .appendingPathComponent("login")
+        let url = authURL.appendingPathComponent("login")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -82,9 +92,7 @@ class NetworkingController {
     func register(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let registerJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
-        let url = baseURL.appendingPathComponent("api")
-            .appendingPathComponent("auth")
-            .appendingPathComponent("register")
+        let url = authURL.appendingPathComponent("register")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -181,28 +189,17 @@ class NetworkingController {
     }
     
     func fetchCategoriesFromServer(completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return completion(nil, nil) }
-        
-        let url = baseURL
-            .appendingPathComponent("api")
-            .appendingPathComponent("users")
-            .appendingPathComponent("categories")
-            .appendingPathComponent("\(bearer.userID)")
+        guard let url = categoriesURL else { return completion(nil, nil) }
         let request = URLRequest(url: url)
         
         completeReturnedJSON(request: request, requestName: "categories", completion: completion)
     }
     
     func setCategoryBudget(categoryID: Int32, budget: Int64, completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return completion(nil, nil) }
+        guard let url = categoriesURL else { return completion(nil, nil) }
         let budgetFloat = Float(budget) / 100
         let budgetJSON = JSON(dictionaryLiteral: ("categoryid", categoryID), ("budget", budgetFloat))
         
-        let url = baseURL
-            .appendingPathComponent("api")
-            .appendingPathComponent("users")
-            .appendingPathComponent("categories")
-            .appendingPathComponent("\(bearer.userID)")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.put.rawValue
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
