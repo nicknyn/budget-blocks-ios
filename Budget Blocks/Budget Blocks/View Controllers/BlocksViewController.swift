@@ -20,6 +20,7 @@ class BlocksViewController: UIViewController {
     
     var transactionController: TransactionController?
     var selectedCategories: [TransactionCategory] = []
+    var budgets: [Int: Int64] = [:]
     var categoriesAreSet: Bool = false
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
@@ -88,6 +89,21 @@ class BlocksViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func save(_ sender: Any) {
+        guard categoriesAreSet else { return }
+        
+        for (index, category) in selectedCategories.enumerated() {
+            let budget = budgets[index] ?? 0
+            transactionController?.setCategoryBudget(category: category, budget: budget, completion: { error in
+                if let error = error {
+                    return NSLog("Error setting \(category.name ?? "category") budget: \(error)")
+                }
+            })
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Navigation
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -126,6 +142,9 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
             category = selectedCategories[indexPath.row]
             guard let budgetCell = cell as? BudgetTableViewCell else { return cell }
             titleLabel = budgetCell.titleLabel
+            
+            budgetCell.textField.tag = indexPath.row
+            budgetCell.textField.delegate = self
         } else {
             category = fetchedResultsController.object(at: indexPath)
             titleLabel = cell.textLabel
@@ -159,6 +178,20 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
             selectedCategories.append(category)
             cell?.accessoryType = .checkmark
         }
+    }
+}
+
+// MARK: Text field delegate
+
+extension BlocksViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let budgetString = textField.text,
+            let budgetFloat = Float(budgetString) else {
+                textField.text = "\(budgets[textField.tag] ?? 0)"
+                return
+        }
+        let budget = Int64(budgetFloat * 100)
+        budgets[textField.tag] = budget
     }
 }
 

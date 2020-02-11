@@ -225,6 +225,44 @@ class NetworkingController {
         }.resume()
     }
     
+    func setCategoryBudget(categoryID: Int32, budget: Int64, completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer else { return completion(nil, nil) }
+        let budgetFloat = Float(budget) / 100
+        let budgetJSON = JSON(dictionaryLiteral: ("categoryid", categoryID), ("budget", budgetFloat))
+        
+        let url = baseURL
+            .appendingPathComponent("api")
+            .appendingPathComponent("users")
+            .appendingPathComponent("categories")
+            .appendingPathComponent("\(bearer.userID)")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.put.rawValue
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            request.httpBody = try budgetJSON.rawData()
+            URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    return completion(nil, error)
+                }
+                
+                guard let data = data else {
+                    NSLog("No data returned from set category request.")
+                    return completion(nil, nil)
+                }
+                
+                do {
+                    let responseJSON = try JSON(data: data)
+                    completion(responseJSON, nil)
+                } catch {
+                    completion(nil, error)
+                }
+            }.resume()
+        } catch {
+            completion(nil, error)
+        }
+    }
+    
     func setLinked() {
         bearer?.linkedAccount = true
         self.userDefaults.set(true, forKey: self.linkedAccountKey)

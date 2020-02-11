@@ -248,11 +248,13 @@ class DashboardTableViewController: UITableViewController {
         switch adjustedSection(index: indexPath.section) {
         case 0:
             linkAccount()
+        case 1:
+            self.performSegue(withIdentifier: "ShowTransactions", sender: self)
         case 2 where categoriesFRC.fetchedObjects?.count ?? 0 == 0:
             self.performSegue(withIdentifier: "CreateBudget", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
-        case 1...2:
-            self.performSegue(withIdentifier: "ShowTransactions", sender: self)
+        case 2:
+            viewBudget(forRowAt: indexPath)
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }
@@ -310,6 +312,33 @@ class DashboardTableViewController: UITableViewController {
     private func adjustedSection(index: Int) -> Int {
         return index + (networkingController.linkedAccount ? 1 : 0)
     }
+    
+    private func viewBudget(forRowAt indexPath: IndexPath) {
+        let actionSheet = UIAlertController(title: nil, message: "Would you like to view transactions of this budget or create a new budget?", preferredStyle: .actionSheet)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            DispatchQueue.main.async {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        let viewTransactions = UIAlertAction(title: "View Transactions", style: .default) { _ in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "ShowTransactions", sender: self)
+            }
+        }
+        let newBudget = UIAlertAction(title: "Create Budget", style: .default) { _ in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "CreateBudget", sender: self)
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
+        actionSheet.addAction(cancel)
+        actionSheet.addAction(viewTransactions)
+        actionSheet.addAction(newBudget)
+        
+        present(actionSheet, animated: true)
+    }
 
     // MARK: - Navigation
 
@@ -325,6 +354,9 @@ class DashboardTableViewController: UITableViewController {
                 adjustedSection(index: indexPath.section) == 2 {
                 transactionsVC.category = categoriesFRC.fetchedObjects?[indexPath.row]
             }
+        } else if let navigationVC = segue.destination as? UINavigationController,
+            let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
+            blocksVC.transactionController = transactionController
         }
     }
 
@@ -361,6 +393,13 @@ extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
 
 extension DashboardTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateBalances()
+        switch controller {
+        case transactionsFRC:
+            updateBalances()
+        case categoriesFRC:
+            tableView.reloadData()
+        default:
+            break
+        }
     }
 }

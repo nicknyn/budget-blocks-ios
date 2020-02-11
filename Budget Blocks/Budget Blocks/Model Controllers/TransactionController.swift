@@ -140,6 +140,23 @@ class TransactionController {
         })
     }
     
+    func setCategoryBudget(category: TransactionCategory, budget: Int64, completion: @escaping (Error?) -> Void) {
+        networkingController?.setCategoryBudget(categoryID: category.categoryID, budget: budget, completion: { json, error in
+            if let error = error {
+                return completion(error)
+            }
+            
+            guard let json = json,
+                let amount = json["amount"].float else {
+                NSLog("No `amount` returned from budget set request.")
+                return completion(nil)
+            }
+            
+            category.budget = Int64(amount * 100)
+            completion(nil)
+        })
+    }
+    
     func clearStoredTransactions(context: NSManagedObjectContext) {
         let transactionsFetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         let categoriesFetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
