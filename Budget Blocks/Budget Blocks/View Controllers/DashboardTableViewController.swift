@@ -72,6 +72,7 @@ class DashboardTableViewController: UITableViewController {
         super.viewDidLoad()
         
         updateBalances()
+        updateRemainingBudget()
         
         transactionController.networkingController = networkingController
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
@@ -295,7 +296,6 @@ class DashboardTableViewController: UITableViewController {
         guard let amounts = transactionsFRC.fetchedObjects?.map({ $0.amount }) else {
             incomeLabel.text = "+$0"
             expensesLabel.text = "-$0"
-            balanceLabel.text = "$0"
             return
         }
         let positiveTransactions = amounts.filter({ $0 > 0 })
@@ -306,7 +306,20 @@ class DashboardTableViewController: UITableViewController {
         
         incomeLabel.text = "+$\(income.currency)"
         expensesLabel.text = "-$\(expenses.currency)"
-        balanceLabel.text = "$\((income - expenses).currency)"
+    }
+    
+    private func updateRemainingBudget() {
+        var totalBudget: Int64 = 0
+        var totalSpending: Int64 = 0
+        for category in categoriesFRC.fetchedObjects ?? [] {
+            totalBudget += category.budget
+            for transaction in category.transactions ?? [] {
+                guard let transaction = transaction as? Transaction else { continue }
+                totalSpending += transaction.amount
+            }
+        }
+        
+        balanceLabel.text = "$\((totalBudget - totalSpending).currency)"
     }
     
     private func adjustedSection(index: Int) -> Int {
@@ -393,6 +406,8 @@ extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
 
 extension DashboardTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        updateRemainingBudget()
+        
         switch controller {
         case transactionsFRC:
             updateBalances()
