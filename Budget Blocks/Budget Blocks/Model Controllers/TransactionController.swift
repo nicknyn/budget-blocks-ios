@@ -127,7 +127,7 @@ class TransactionController {
                         category = TransactionCategory(categoryID: categoryID, name: name, context: context)
                     }
                     
-                    guard let budgetFloat = categoryJSON["budget"].float else { continue }
+                    let budgetFloat = categoryJSON["budget"].floatValue
                     let budget = Int64(budgetFloat * 100)
                     category.budget = budget
                 }
