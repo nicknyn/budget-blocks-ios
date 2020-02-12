@@ -17,6 +17,7 @@ class DashboardTableViewController: UITableViewController {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var incomeLabel: UILabel!
     @IBOutlet weak var expensesLabel: UILabel!
+    @IBOutlet weak var totalBudgetLabel: UILabel!
     
     // MARK: Properties
     
@@ -277,7 +278,8 @@ class DashboardTableViewController: UITableViewController {
             totalSpending += transactionController.getTotalSpending(for: category)
         }
         
-        balanceLabel.text = "$\((totalBudget - totalSpending).currency)"
+        balanceLabel.text = "$\(totalSpending.currency)"
+        totalBudgetLabel.text = "$\(totalBudget.currency)"
     }
     
     private func adjustedSection(index: Int) -> Int {
