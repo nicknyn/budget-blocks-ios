@@ -19,7 +19,8 @@ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste
 [![Swift Version][swift-image]][swift-url]
 [![License][license-image]][license-url]
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![Maintainability](https://api.codeclimate.com/v1/badges/bf07fe920bb7f2571c9b/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/budget-blocks-ios/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bf07fe920bb7f2571c9b/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/budget-blocks-ios/test_coverage)
 
 🚫 more info on using badges [here](https://github.com/badges/shields)
 
