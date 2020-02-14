@@ -65,7 +65,8 @@ class TransactionController {
                     for transactionJSON in transactions {
                         guard let transactionID = transactionJSON["id"].int,
                             let name = transactionJSON["name"].string,
-                            let amountFloat = transactionJSON["amount"].float,
+                            let amountString = transactionJSON["amount"].string,
+                            let amountFloat = Float(amountString),
                             let dateString = transactionJSON["payment_date"].string,
                             let date = dateFormatter.date(from: dateString) else { continue }
                         let amount = Int64(amountFloat * 100)
