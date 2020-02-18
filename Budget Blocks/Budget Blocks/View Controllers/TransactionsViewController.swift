@@ -136,7 +136,14 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         
         let transaction = fetchedResultsController.object(at: indexPath)
         cell.descriptionLabel.text = transaction.name
-        cell.amountLabel.text = "$\(transaction.amount.currency)"
+        
+        let amount = transaction.amount * -1
+        cell.amountLabel.text = "$\(amount.currency)"
+        if amount < 0 {
+            cell.amountLabel.textColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+        } else {
+            cell.amountLabel.textColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+        }
         
         if let category = transaction.category?.name {
             cell.categoryLabel.text = category
