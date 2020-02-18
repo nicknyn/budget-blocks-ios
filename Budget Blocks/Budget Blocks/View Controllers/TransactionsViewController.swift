@@ -16,11 +16,7 @@ class TransactionsViewController: UIViewController {
     var networkingController: NetworkingController!
     var transactionController: TransactionController!
     var category: TransactionCategory?
-    let dateFormatter: DateFormatter = {
-        var dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/DD/YYYY"
-        return dateFormatter
-    }()
+    let dateFormatter = DateFormatter()
     
     lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -54,6 +50,8 @@ class TransactionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dateFormatter.dateFormat = "MM/dd/YYYY"
         
         if let categoryName = category?.name {
             title = categoryName
