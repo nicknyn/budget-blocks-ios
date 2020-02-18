@@ -16,6 +16,11 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
+enum HTTPHeader: String {
+    case contentType = "Content-Type"
+    case auth = "Authorization"
+}
+
 class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     private var authURL: URL {
@@ -55,7 +60,7 @@ class NetworkingController {
         let url = authURL.appendingPathComponent("login")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
         
         do {
             request.httpBody = try loginJSON.rawData()
@@ -91,7 +96,7 @@ class NetworkingController {
         let url = authURL.appendingPathComponent("register")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
         
         do {
             request.httpBody = try registerJSON.rawData()
@@ -132,7 +137,8 @@ class NetworkingController {
             .appendingPathComponent("token_exchange")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
         do {
             request.httpBody = try tokenJSON.rawData()
@@ -171,26 +177,31 @@ class NetworkingController {
             .appendingPathComponent("plaid")
             .appendingPathComponent("transactions")
             .appendingPathComponent("\(bearer.userID)")
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
         completeReturnedJSON(request: request, requestName: "transactions", completion: completion)
     }
     
     func fetchCategoriesFromServer(completion: @escaping (JSON?, Error?) -> Void) {
-        guard let url = categoriesURL else { return completion(nil, nil) }
-        let request = URLRequest(url: url)
+        guard let bearer = bearer,
+            let url = categoriesURL else { return completion(nil, nil) }
+        var request = URLRequest(url: url)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
         completeReturnedJSON(request: request, requestName: "categories", completion: completion)
     }
     
     func setCategoryBudget(categoryID: Int32, budget: Int64, completion: @escaping (JSON?, Error?) -> Void) {
-        guard let url = categoriesURL else { return completion(nil, nil) }
+        guard let bearer = bearer,
+            let url = categoriesURL else { return completion(nil, nil) }
         let budgetFloat = Float(budget) / 100
         let budgetJSON = JSON(dictionaryLiteral: ("categoryid", categoryID), ("budget", budgetFloat))
         
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.put.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
         do {
             request.httpBody = try budgetJSON.rawData()
