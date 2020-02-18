@@ -19,6 +19,7 @@ class CreateTransactionViewController: UIViewController {
     let datePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     var amount: Int64 = 0
+    var category: TransactionCategory?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,10 @@ class CreateTransactionViewController: UIViewController {
         amountTextField.delegate = self
     }
     
+    private func updateViews() {
+        categoryTextField.text = category?.name
+    }
+    
     private func createDatePicker(){
         datePicker.datePickerMode = .date
         dateTextField.inputView = datePicker
@@ -87,15 +92,13 @@ class CreateTransactionViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    /*
      // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let categoriesVC = segue.destination as? CategoriesTableViewController {
+            categoriesVC.delegate = self
+        }
     }
-    */
 
 }
 
@@ -150,5 +153,15 @@ extension CreateTransactionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+// MARK: Categories table view controller delegate
+
+extension CreateTransactionViewController: CategoriesTableViewControllerDelegate {
+    func choose(category: TransactionCategory) {
+        self.category = category
+        navigationController?.popViewController(animated: true)
+        updateViews()
     }
 }

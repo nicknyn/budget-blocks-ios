@@ -9,7 +9,13 @@
 import UIKit
 import CoreData
 
+protocol CategoriesTableViewControllerDelegate {
+    func choose(category: TransactionCategory)
+}
+
 class CategoriesTableViewController: UITableViewController {
+    
+    var delegate: CategoriesTableViewControllerDelegate?
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
@@ -56,6 +62,13 @@ class CategoriesTableViewController: UITableViewController {
         }
 
         return cell
+    }
+    
+    // MARK: Table view delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let category = fetchedResultsController.object(at: indexPath)
+        delegate?.choose(category: category)
     }
 
 }
