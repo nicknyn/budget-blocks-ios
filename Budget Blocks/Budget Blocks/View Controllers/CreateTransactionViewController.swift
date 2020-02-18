@@ -15,6 +15,7 @@ class CreateTransactionViewController: UIViewController {
     @IBOutlet weak var categoryTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     
     let datePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
@@ -55,6 +56,11 @@ class CreateTransactionViewController: UIViewController {
         categoryTextField.delegate = self
         descriptionTextField.delegate = self
         amountTextField.delegate = self
+        
+        let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1)
+        saveButton.layer.backgroundColor = daybreakBlue.cgColor
+        saveButton.layer.cornerRadius = 4
+        saveButton.setTitleColor(.white, for: .normal)
     }
     
     private func updateViews() {
@@ -89,6 +95,16 @@ class CreateTransactionViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func save(_ sender: Any) {
+        guard let _ = category,
+            !(dateTextField.text?.isEmpty ?? true),
+            amount > 0 else { return }
+        
+        //Save the transaction
+        
         dismiss(animated: true, completion: nil)
     }
     
