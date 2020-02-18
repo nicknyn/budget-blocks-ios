@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		590B3A5123FC554F0058D236 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3A5023FC554F0058D236 /* TransactionTableViewCell.swift */; };
+		590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3A5223FC63B50058D236 /* CreateTransactionViewController.swift */; };
 		592B3CAE23F1CBC90035FF3A /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CAD23F1CBC90035FF3A /* CategoryTableViewCell.swift */; };
 		592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB123F2132F0035FF3A /* BlocksViewController.swift */; };
 		592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		590B3A5023FC554F0058D236 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		590B3A5223FC63B50058D236 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
 		592B3CAD23F1CBC90035FF3A /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		592B3CB123F2132F0035FF3A /* BlocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksViewController.swift; sourceTree = "<group>"; };
 		592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */,
 				593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */,
 				592B3CB123F2132F0035FF3A /* BlocksViewController.swift */,
+				590B3A5223FC63B50058D236 /* CreateTransactionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
+				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 			);

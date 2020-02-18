@@ -409,7 +409,13 @@
                             <outlet property="delegate" destination="s0a-F6-sdi" id="v6b-QV-SeL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dashboard" id="pBD-10-vz5"/>
+                    <navigationItem key="navigationItem" title="Dashboard" id="pBD-10-vz5">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="D51-27-LzN">
+                            <connections>
+                                <segue destination="EtC-B0-qbB" kind="presentation" id="fXK-5b-3xH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="balanceLabel" destination="g04-Io-PNY" id="Pkc-y2-QuG"/>
                         <outlet property="expensesLabel" destination="gcO-Tg-kcs" id="Gnw-ZO-Dbx"/>
@@ -579,6 +585,90 @@
             </objects>
             <point key="canvasLocation" x="1041" y="1558"/>
         </scene>
+        <!--Add Transaction-->
+        <scene sceneID="NCg-WJ-eSB">
+            <objects>
+                <viewController id="j6Y-Zs-d1S" customClass="CreateTransactionViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AHz-HH-fnn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="682"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zNN-DT-LpZ">
+                                <rect key="frame" x="0.0" y="108" width="414" height="574"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0d7-op-0DG" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="574"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LGG-ip-QyQ">
+                                                <rect key="frame" x="56" y="56" width="302" height="73"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FeR-30-On3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="302" height="31"/>
+                                                        <subviews>
+                                                            <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="jSv-Qb-fvo">
+                                                                <rect key="frame" x="0.0" y="0.0" width="151" height="32"/>
+                                                                <segments>
+                                                                    <segment title="Paid"/>
+                                                                    <segment title="Recieved"/>
+                                                                </segments>
+                                                            </segmentedControl>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8hH-ds-ff6">
+                                                                <rect key="frame" x="159" y="0.0" width="143" height="31"/>
+                                                                <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="24"/>
+                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                            </textField>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vbr-Vs-pak">
+                                                        <rect key="frame" x="0.0" y="39" width="302" height="34"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="LGG-ip-QyQ" firstAttribute="top" secondItem="0d7-op-0DG" secondAttribute="top" constant="56" id="6iS-Er-FrQ"/>
+                                            <constraint firstItem="LGG-ip-QyQ" firstAttribute="leading" secondItem="0d7-op-0DG" secondAttribute="leading" constant="56" id="HXq-oa-TOW"/>
+                                            <constraint firstAttribute="trailing" secondItem="LGG-ip-QyQ" secondAttribute="trailing" constant="56" id="IWe-46-gOK"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="0d7-op-0DG" firstAttribute="width" secondItem="zNN-DT-LpZ" secondAttribute="width" id="9in-YK-Ngw"/>
+                                    <constraint firstItem="0d7-op-0DG" firstAttribute="leading" secondItem="zNN-DT-LpZ" secondAttribute="leading" id="CXR-vQ-4iI"/>
+                                    <constraint firstItem="0d7-op-0DG" firstAttribute="top" secondItem="zNN-DT-LpZ" secondAttribute="top" id="Evm-rS-O9V"/>
+                                    <constraint firstItem="0d7-op-0DG" firstAttribute="height" secondItem="zNN-DT-LpZ" secondAttribute="height" priority="250" id="mlf-Ls-22M"/>
+                                    <constraint firstAttribute="bottom" secondItem="0d7-op-0DG" secondAttribute="bottom" id="u7j-yz-0Hh"/>
+                                    <constraint firstAttribute="trailing" secondItem="0d7-op-0DG" secondAttribute="trailing" id="vQw-3A-S2M"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="rXB-91-Ro6"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Mry-Zw-a5m"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="GXU-Lu-Kdz" firstAttribute="trailing" secondItem="zNN-DT-LpZ" secondAttribute="trailing" id="5QY-vO-MlN"/>
+                            <constraint firstItem="GXU-Lu-Kdz" firstAttribute="bottom" secondItem="zNN-DT-LpZ" secondAttribute="bottom" id="Uax-Nf-VQL"/>
+                            <constraint firstItem="zNN-DT-LpZ" firstAttribute="top" secondItem="GXU-Lu-Kdz" secondAttribute="top" id="bgr-Vz-JBD"/>
+                            <constraint firstItem="zNN-DT-LpZ" firstAttribute="leading" secondItem="GXU-Lu-Kdz" secondAttribute="leading" id="rLu-jD-cIm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GXU-Lu-Kdz"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Transaction" id="unb-Iu-IlN">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="a2h-1F-gOo"/>
+                    </navigationItem>
+                    <size key="freeformSize" width="414" height="736"/>
+                    <connections>
+                        <outlet property="dateTextField" destination="Vbr-Vs-pak" id="299-ew-2Ey"/>
+                        <outlet property="scrollView" destination="zNN-DT-LpZ" id="Zp5-vp-D7i"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="chx-no-smm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1949.2753623188407" y="2250.6696428571427"/>
+        </scene>
         <!--Create Budget-->
         <scene sceneID="dmS-tq-Blc">
             <objects>
@@ -727,6 +817,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8KG-g5-HeY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1951" y="1558"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ukS-ra-W3E">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EtC-B0-qbB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="nfs-Sf-ghS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="j6Y-Zs-d1S" kind="relationship" relationship="rootViewController" id="SWG-nF-m2g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jOc-78-Yj3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1039.1304347826087" y="2250.6696428571427"/>
         </scene>
     </scenes>
     <resources>
