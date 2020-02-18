@@ -113,9 +113,12 @@ extension CreateTransactionViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == amountTextField,
-            textField.text?.first == "$",
-            let amountWithoutDollars = textField.text?.dropFirst() {
-            textField.text = String(amountWithoutDollars)
+            textField.text?.first == "$" {
+            textField.text?.removeFirst()
+            
+            if textField.text?.last == "0", textField.text?.dropLast().last == "0" {
+                textField.text?.removeLast(3)
+            }
         }
     }
     

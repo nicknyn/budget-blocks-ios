@@ -217,9 +217,12 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension BlocksViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text?.first == "$",
-            let budgetWithoutDollars = textField.text?.dropFirst() {
-            textField.text = String(budgetWithoutDollars)
+        if textField.text?.first == "$" {
+            textField.text?.removeFirst()
+            
+            if textField.text?.last == "0", textField.text?.dropLast().last == "0" {
+                textField.text?.removeLast(3)
+            }
         }
     }
     
