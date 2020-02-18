@@ -12,9 +12,13 @@ class CreateTransactionViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var categoryTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet weak var amountTextField: UITextField!
     
     let datePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
+    var amount: Int64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +50,10 @@ class CreateTransactionViewController: UIViewController {
         
         dateFormatter.dateFormat = "MM/dd/YYYY"
         createDatePicker()
+        
+        categoryTextField.delegate = self
+        descriptionTextField.delegate = self
+        amountTextField.delegate = self
     }
     
     private func createDatePicker(){
@@ -73,6 +81,12 @@ class CreateTransactionViewController: UIViewController {
         self.view.endEditing(false)
     }
     
+    // MARK: Actions
+    
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
      // MARK: - Navigation
 
@@ -85,10 +99,53 @@ class CreateTransactionViewController: UIViewController {
 
 }
 
-//extension CreateTransactionViewController: UITextFieldDelegate {
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        //showDatePicker()
-//        textField.inputView = datePicker
-//        return true
-//    }
-//}
+// MARK: Text field delegate
+
+extension CreateTransactionViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == categoryTextField {
+            performSegue(withIdentifier: "ShowCategories", sender: self)
+            return false
+        }
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == amountTextField,
+            textField.text?.first == "$",
+            let amountWithoutDollars = textField.text?.dropFirst() {
+            textField.text = String(amountWithoutDollars)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == amountTextField {
+            var amountFloat: Float?
+            
+            if let amountString = textField.text,
+                !amountString.isEmpty {
+                amountFloat = Float(amountString)
+            } else {
+                amountFloat = 0
+            }
+            
+            if let amountFloat = amountFloat {
+                amount = Int64(amountFloat * 100)
+                
+                if amount > 0 {
+                    textField.text = "$\(amount.currency)"
+                } else {
+                    textField.text = nil
+                }
+            } else {
+                textField.text = "$\(amount.currency)"
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
