@@ -69,12 +69,22 @@ class DashboardTableViewController: UITableViewController {
         return frc
     }()
     
-    var categoriesWithBudget: [TransactionCategory]? {
-        categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 })
+    var categoriesWithBudget: [TransactionCategory] {
+        categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateBalances()
+        updateRemainingBudget()
+        
+        let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
+        
+        // Temporary logout button until the profile page is set up
+        let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
+        navigationItem.rightBarButtonItem = logoutButton
         
         if networkingController.bearer == nil {
             networkingController.loginWithKeychain { success in
@@ -99,14 +109,14 @@ class DashboardTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return networkingController.linkedAccount ? 2 : 3
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch adjustedSection(index: section) {
         case 2:
             let categoriesCount = categoriesFRC.fetchedObjects?.count ?? 0
-            return categoriesCount > 0 ? categoriesCount : 1
+            return categoriesCount + (categoriesWithBudget.count == 0).int
         default:
             return 1
         }
@@ -117,7 +127,7 @@ class DashboardTableViewController: UITableViewController {
         
         switch adjustedSection {
         case 0...1,
-             2 where categoriesFRC.fetchedObjects?.count ?? 0 == 0:
+             2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
             let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
             guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
             
@@ -145,7 +155,8 @@ class DashboardTableViewController: UITableViewController {
             cell.titleLabel.setApplicationTypeface()
             cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
             
-            if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
+            let index = indexPath.row - (categoriesWithBudget.count == 0).int
+            if let category = categoriesFRC.fetchedObjects?[index] {
                 cell.titleLabel.text = category.name
                 var sum: Int64 = 0
                 for transaction in category.transactions ?? [] {
@@ -181,7 +192,7 @@ class DashboardTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch adjustedSection(index: indexPath.section) {
         case 0...1,
-             2 where categoriesFRC.fetchedObjects?.count ?? 0 == 0:
+             2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
             return 100
         default:
             return UITableView.automaticDimension
@@ -202,7 +213,7 @@ class DashboardTableViewController: UITableViewController {
             linkAccount()
         case 1:
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
-        case 2 where categoriesFRC.fetchedObjects?.count ?? 0 == 0:
+        case 2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
             self.performSegue(withIdentifier: "CreateBudget", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
         case 2:
@@ -215,9 +226,6 @@ class DashboardTableViewController: UITableViewController {
     // MARK: Private
     
     private func setUpViews() {
-        updateBalances()
-        updateRemainingBudget()
-        
         transactionController.networkingController = networkingController
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             error?.log()
@@ -225,14 +233,6 @@ class DashboardTableViewController: UITableViewController {
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             error?.log()
         }
-        
-        let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
-
-        
-        // Temporary logout button until the profile page is set up
-        let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
-        navigationItem.rightBarButtonItem = logoutButton
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshTable(_:)), for: .valueChanged)
@@ -286,7 +286,7 @@ class DashboardTableViewController: UITableViewController {
         var totalBudget: Int64 = 0
         var totalSpending: Int64 = 0
         
-        for category in categoriesWithBudget ?? [] {
+        for category in categoriesWithBudget {
             totalBudget += category.budget
             totalSpending += transactionController.getTotalSpending(for: category)
         }
@@ -296,11 +296,16 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func adjustedSection(index: Int) -> Int {
-        return index + (networkingController.linkedAccount ? 1 : 0)
+        // Sections:
+        // 0. Connect bank acount with Plaid
+        // 1. View Transactions
+        // 2. List of categories
+        return index + networkingController.linkedAccount.int
     }
     
     private func viewBudget(forRowAt indexPath: IndexPath) {
-        let actionSheet = UIAlertController(title: nil, message: "Would you like to view transactions of this budget or create a new budget?", preferredStyle: .actionSheet)
+        let alertMessage = "Would you like to view transactions of this budget or create a new budget?"
+        let actionSheet = UIAlertController(title: nil, message: alertMessage, preferredStyle: .actionSheet)
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
             DispatchQueue.main.async {
@@ -330,7 +335,6 @@ class DashboardTableViewController: UITableViewController {
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let welcomeVC = segue.destination as? WelcomeViewController {
             welcomeVC.networkingController = networkingController
@@ -340,18 +344,21 @@ class DashboardTableViewController: UITableViewController {
             
             if let indexPath = tableView.indexPathForSelectedRow,
                 adjustedSection(index: indexPath.section) == 2 {
-                transactionsVC.category = categoriesFRC.fetchedObjects?[indexPath.row]
+                let index = indexPath.row - (categoriesWithBudget.count == 0).int
+                transactionsVC.category = categoriesFRC.fetchedObjects?[index]
             }
         } else if let navigationVC = segue.destination as? UINavigationController,
             let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
             blocksVC.transactionController = transactionController
-            if let budgets = categoriesWithBudget?.map({ ($0, $0.budget) }) {
-                blocksVC.budgets = budgets
-            }
-            if let indexPath = tableView.indexPathForSelectedRow,
-                let selectedCategory = categoriesFRC.fetchedObjects?[indexPath.row],
-                selectedCategory.budget == 0 {
-                blocksVC.budgets.append((selectedCategory, 0))
+            blocksVC.budgets = categoriesWithBudget.map({ ($0, $0.budget) })
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let index = indexPath.row - (categoriesWithBudget.count == 0).int
+                if index >= 0,
+                    let selectedCategory = categoriesFRC.fetchedObjects?[index],
+                    selectedCategory.budget == 0 {
+                    blocksVC.budgets.append((selectedCategory, 0))
+                }
             }
         }
     }
