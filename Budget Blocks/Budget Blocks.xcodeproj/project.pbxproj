@@ -39,6 +39,7 @@
 		596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; };
 		596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597E119623F310EF00E505C6 /* UIAlertController+Fix.swift */; };
+		598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 598B29F823FD994D0038B698 /* KeychainSwift */; };
 		59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAB9D323F361F900BF91F7 /* Error+Log.swift */; };
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */,
 				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
 				596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */,
 			);
@@ -305,6 +307,7 @@
 			name = "Budget Blocks";
 			packageProductDependencies = (
 				5939B1F423DF55F3003FB0E0 /* SwiftyJSON */,
+				598B29F823FD994D0038B698 /* KeychainSwift */,
 			);
 			productName = "Budget Blocks";
 			productReference = 5955B89423DB59B800A24A8F /* Budget Blocks.app */;
@@ -380,6 +383,7 @@
 			mainGroup = 5955B88B23DB59B800A24A8F;
 			packageReferences = (
 				5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 5955B89523DB59B800A24A8F /* Products */;
 			projectDirPath = "";
@@ -812,6 +816,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -819,6 +831,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		598B29F823FD994D0038B698 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

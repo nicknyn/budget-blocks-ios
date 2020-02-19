@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import KeychainSwift
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -35,22 +36,35 @@ class NetworkingController {
             .appendingPathComponent("\(bearer.userID)")
     }
     
-    private let bearerTokenKey = "bearerToken"
-    private let userIDKey = "userIDKey"
-    private let linkedAccountKey = "linkedAccount"
-    private let userDefaults = UserDefaults.standard
+    private let emailKey = "email"
+    private let passwordKey = "password"
+    private let keychain = KeychainSwift()
     
     var bearer: Bearer?
     var linkedAccount: Bool {
         return bearer?.linkedAccount ?? false
     }
     
-    init() {
-        let userID = userDefaults.integer(forKey: userIDKey)
-        let linkedAccount = userDefaults.bool(forKey: linkedAccountKey)
-        if let token = userDefaults.string(forKey: bearerTokenKey),
-            userID != 0 {
-            bearer = Bearer(token: token, userID: userID, linkedAccount: linkedAccount)
+    func loginWithKeychain(completion: @escaping (Bool) -> Void) {
+        guard let email = keychain.get(emailKey),
+            let password = keychain.get(passwordKey) else {
+                return completion(false)
+        }
+        
+        print("Logging in...")
+        login(email: email, password: password) { token, error in
+            if let error = error {
+                NSLog("\(error)")
+                return completion(false)
+            }
+            
+            guard let token = token else {
+                NSLog("No token returned from login.")
+                return completion(false)
+            }
+            
+            print("Login successful! Session token: \(token)")
+            completion(true)
         }
     }
     
@@ -76,9 +90,8 @@ class NetworkingController {
                         let userID = responseJSON["id"].int,
                         let linked = responseJSON["LinkedAccount"].bool {
                         self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked)
-                        self.userDefaults.set(token, forKey: self.bearerTokenKey)
-                        self.userDefaults.set(userID, forKey: self.userIDKey)
-                        self.userDefaults.set(linked, forKey: self.linkedAccountKey)
+                        self.keychain.set(email, forKey: self.emailKey)
+                        self.keychain.set(password, forKey: self.passwordKey)
                     }
                     completion(responseJSON["token"].string, nil)
                 } catch {
@@ -124,9 +137,7 @@ class NetworkingController {
     
     func logout() {
         bearer = nil
-        self.userDefaults.removeObject(forKey: bearerTokenKey)
-        self.userDefaults.removeObject(forKey: userIDKey)
-        self.userDefaults.removeObject(forKey: linkedAccountKey)
+        keychain.clear()
     }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
@@ -213,7 +224,6 @@ class NetworkingController {
     
     func setLinked() {
         bearer?.linkedAccount = true
-        self.userDefaults.set(true, forKey: self.linkedAccountKey)
     }
     
     // MARK: Private

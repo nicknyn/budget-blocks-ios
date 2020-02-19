@@ -76,31 +76,19 @@ class DashboardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateBalances()
-        updateRemainingBudget()
-        
-        transactionController.networkingController = networkingController
-        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
-            error?.log()
-        }
-        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
-            error?.log()
-        }
-        
-        let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
-
         if networkingController.bearer == nil {
-            performSegue(withIdentifier: "InitialLogin", sender: self)
+            networkingController.loginWithKeychain { success in
+                if success {
+                    DispatchQueue.main.async {
+                        self.setUpViews()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "InitialLogin", sender: self)
+                    }
+                }
+            }
         }
-        
-        // Temporary logout button until the profile page is set up
-        let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
-        navigationItem.rightBarButtonItem = logoutButton
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshTable(_:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -225,6 +213,31 @@ class DashboardTableViewController: UITableViewController {
     }
     
     // MARK: Private
+    
+    private func setUpViews() {
+        updateBalances()
+        updateRemainingBudget()
+        
+        transactionController.networkingController = networkingController
+        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+        }
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+        }
+        
+        let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
+
+        
+        // Temporary logout button until the profile page is set up
+        let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
+        navigationItem.rightBarButtonItem = logoutButton
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTable(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
     
     @objc private func refreshTable(_ refreshControl: UIRefreshControl) {
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
