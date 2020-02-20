@@ -11,6 +11,19 @@ import XCTest
 
 class NetworkingControllerTests: XCTestCase {
 
+    func testRegister() {
+        let networkingController = NetworkingController()
+        let expectation = self.expectation(description: "Login")
+        
+        networkingController.register(email: "email@example.com", password: "password", firstName: "Test", lastName: "Lambda") { message, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(message)
+            expectation.fulfill()
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
     func testLogin() {
         let networkingController = NetworkingController()
         let expectation = self.expectation(description: "Login")
@@ -18,19 +31,6 @@ class NetworkingControllerTests: XCTestCase {
         networkingController.login(email: "email@example.com", password: "password") { token, error in
             XCTAssertNil(error)
             XCTAssertNotNil(token)
-            expectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 5, handler: nil)
-    }
-    
-    func testRegister() {
-        let networkingController = NetworkingController()
-        let expectation = self.expectation(description: "Login")
-        
-        networkingController.register(email: "email@example.com", password: "password") { message, error in
-            XCTAssertNil(error)
-            XCTAssertNotNil(message)
             expectation.fulfill()
         }
         

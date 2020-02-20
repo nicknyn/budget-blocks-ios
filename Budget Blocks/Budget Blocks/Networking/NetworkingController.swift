@@ -105,8 +105,11 @@ class NetworkingController {
         }
     }
     
-    func register(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
-        let registerJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
+    func register(email: String, password: String, firstName: String, lastName: String, completion: @escaping (String?, Error?) -> Void) {
+        let registerJSON = JSON(["email": email,
+                                 "password": password,
+                                 "first_name": firstName,
+                                 "last_name": lastName])
         
         let url = authURL.appendingPathComponent("register")
         var request = URLRequest(url: url)

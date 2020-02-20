@@ -105,7 +105,7 @@ class LoginViewController: UIViewController {
     }
     
     private func signUp(email: String, password: String, firstName: String, lastName: String) {
-        networkingController.register(email: email, password: password) { message, error in
+        networkingController.register(email: email, password: password, firstName: firstName, lastName: lastName) { message, error in
             if let error = error {
                 return NSLog("Error signing up: \(error)")
             }
