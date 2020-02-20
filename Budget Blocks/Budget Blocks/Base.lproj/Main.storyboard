@@ -505,9 +505,7 @@
                             <outlet property="delegate" destination="s0a-F6-sdi" id="v6b-QV-SeL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dashboard" id="pBD-10-vz5">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="D51-27-LzN"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Dashboard" id="pBD-10-vz5"/>
                     <connections>
                         <outlet property="balanceLabel" destination="g04-Io-PNY" id="Pkc-y2-QuG"/>
                         <outlet property="expensesLabel" destination="gcO-Tg-kcs" id="Gnw-ZO-Dbx"/>
