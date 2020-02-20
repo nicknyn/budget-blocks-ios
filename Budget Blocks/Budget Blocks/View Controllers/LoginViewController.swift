@@ -171,7 +171,7 @@ class LoginViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Nacigation
+    // MARK: Navigation
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
