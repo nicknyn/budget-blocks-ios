@@ -55,11 +55,13 @@ class NetworkingController {
         login(email: email, password: password) { token, error in
             if let error = error {
                 NSLog("\(error)")
+                self.logout()
                 return completion(false)
             }
             
             guard let token = token else {
                 NSLog("No token returned from login.")
+                self.logout()
                 return completion(false)
             }
             

@@ -43,7 +43,8 @@ class WelcomeViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let loginVC = segue.destination as? LoginViewController {
+        if let navigationVC = segue.destination as? UINavigationController,
+            let loginVC = navigationVC.viewControllers.first as? LoginViewController {
             loginVC.delegate = self
             loginVC.signIn = segue.identifier == "SignIn"
             loginVC.networkingController = networkingController

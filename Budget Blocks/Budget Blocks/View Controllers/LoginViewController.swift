@@ -22,12 +22,19 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
     
     // MARK: Properties
     
     var networkingController: NetworkingController!
-    var signIn: Bool = true
     var delegate: LoginViewControllerDelegate?
+    var signIn: Bool = true
+    var firstName: String?
+    var lastName: String?
+    var namePage: Bool {
+        return !signIn && firstName == nil && lastName == nil
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +43,13 @@ class LoginViewController: UIViewController {
         updateViews()
     }
     
+    // MARK: Private
+    
     private func setUpViews() {
         let title = "Sign \(signIn ? "In" : "Up")"
         loginButton.setTitle(title, for: .normal)
         loginLabel.text = title
         
-        confirmPasswordTextField.isHidden = signIn
-        confirmPasswordLabel.isHidden = signIn
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -61,6 +68,30 @@ class LoginViewController: UIViewController {
         if let buttonFontSize = loginButton.titleLabel?.font.pointSize {
             loginButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
         }
+        
+        confirmPasswordTextField.isHidden = signIn || namePage
+        confirmPasswordLabel.isHidden = signIn || namePage
+        
+        if namePage {
+            confirmPasswordTextField.isHidden = true
+            confirmPasswordLabel.isHidden = true
+            
+            emailTextField.textContentType = .givenName
+            passwordTextField.textContentType = .familyName
+            
+            emailTextField.autocapitalizationType = .words
+            passwordTextField.autocapitalizationType = .words
+            
+            emailTextField.placeholder = "First Name"
+            passwordTextField.placeholder = "Last Name"
+            
+            emailLabel.text = "First Name"
+            passwordLabel.text = "Last Name"
+            
+            passwordTextField.isSecureTextEntry = false
+            
+            loginButton.setTitle("Continue", for: .normal)
+        }
     }
     
     private func updateViews() {
@@ -73,9 +104,29 @@ class LoginViewController: UIViewController {
         loginButton.setTitleColor(daybreakBlue, for: .normal)
     }
     
+    private func signUp(email: String, password: String, firstName: String, lastName: String) {
+        networkingController.register(email: email, password: password) { message, error in
+            if let error = error {
+                return NSLog("Error signing up: \(error)")
+            }
+            
+            guard let message = message else {
+                return NSLog("No message back from register.")
+            }
+            
+            if message == "success" {
+                NSLog("Sign up successful!")
+                self.signIn(email: email, password: password)
+            } else {
+                //TODO: alert the user
+                print(message)
+            }
+        }
+    }
+
     // MARK: Actions
     
-    @IBAction func login(_ sender: Any) {
+    @IBAction func loginTapped(_ sender: Any) {
         guard let email = emailTextField.text,
             let password = passwordTextField.text,
             !email.isEmpty,
@@ -84,29 +135,17 @@ class LoginViewController: UIViewController {
         if signIn {
             signIn(email: email, password: password)
         } else {
-            guard let confirmPassword = confirmPasswordTextField.text,
-                confirmPassword == password else {
-                    //TODO: indicate this to the user
-                    print("Passwords don't match!")
-                    return
-            }
-            
-            networkingController.register(email: email, password: password) { message, error in
-                if let error = error {
-                    return NSLog("Error signing up: \(error)")
+            if let firstName = firstName,
+                let lastName = lastName {
+                
+                guard let confirmPassword = confirmPasswordTextField.text,
+                    confirmPassword == password else {
+                        //TODO: indicate this to the user
+                        print("Passwords don't match!")
+                        return
                 }
                 
-                guard let message = message else {
-                    return NSLog("No message back from register.")
-                }
-                
-                if message == "success" {
-                    NSLog("Sign up successful!")
-                    self.signIn(email: email, password: password)
-                } else {
-                    //TODO: alert the user
-                    print(message)
-                }
+                signUp(email: email, password: password, firstName: firstName, lastName: lastName)
             }
         }
     }
@@ -127,6 +166,31 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Nacigation
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier {
+        case "SignUpNext":
+            return namePage && !(emailTextField.text?.isEmpty ?? true) && !(passwordTextField.text?.isEmpty ?? true)
+        default:
+            return true
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let loginVC = segue.destination as? LoginViewController {
+            loginVC.networkingController = networkingController
+            loginVC.delegate = delegate
+            loginVC.signIn = false
+            loginVC.firstName = emailTextField.text
+            loginVC.lastName = passwordTextField.text
+        }
+    }
 
 }
 
@@ -137,7 +201,7 @@ extension LoginViewController: UITextFieldDelegate {
         switch textField {
         case emailTextField:
             passwordTextField.becomeFirstResponder()
-        case passwordTextField where !signIn:
+        case passwordTextField where !signIn && !namePage:
             confirmPasswordTextField.becomeFirstResponder()
         default:
             textField.resignFirstResponder()
