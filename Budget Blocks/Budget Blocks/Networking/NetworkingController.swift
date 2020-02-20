@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import KeychainSwift
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -16,47 +17,71 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
+enum HTTPHeader: String {
+    case contentType = "Content-Type"
+    case auth = "Authorization"
+}
+
 class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
-    private let bearerTokenKey = "bearerToken"
-    private let userIDKey = "userIDKey"
-    private let linkedAccountKey = "linkedAccount"
-    private let userDefaults = UserDefaults.standard
+    private var authURL: URL {
+        baseURL.appendingPathComponent("api")
+            .appendingPathComponent("auth")
+    }
+    private var categoriesURL: URL? {
+        guard let bearer = bearer else { return nil }
+        return baseURL.appendingPathComponent("api")
+            .appendingPathComponent("users")
+            .appendingPathComponent("categories")
+            .appendingPathComponent("\(bearer.userID)")
+    }
+    
+    private let emailKey = "email"
+    private let passwordKey = "password"
+    private let keychain = KeychainSwift()
     
     var bearer: Bearer?
     var linkedAccount: Bool {
         return bearer?.linkedAccount ?? false
     }
     
-    init() {
-        let userID = userDefaults.integer(forKey: userIDKey)
-        let linkedAccount = userDefaults.bool(forKey: linkedAccountKey)
-        if let token = userDefaults.string(forKey: bearerTokenKey),
-            userID != 0 {
-            bearer = Bearer(token: token, userID: userID, linkedAccount: linkedAccount)
+    func loginWithKeychain(completion: @escaping (Bool) -> Void) {
+        guard let email = keychain.get(emailKey),
+            let password = keychain.get(passwordKey) else {
+                return completion(false)
+        }
+        
+        print("Logging in...")
+        login(email: email, password: password) { token, error in
+            if let error = error {
+                NSLog("\(error)")
+                return completion(false)
+            }
+            
+            guard let token = token else {
+                NSLog("No token returned from login.")
+                return completion(false)
+            }
+            
+            print("Login successful! Session token: \(token)")
+            completion(true)
         }
     }
     
     func login(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let loginJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
-        let url = baseURL.appendingPathComponent("api")
-            .appendingPathComponent("auth")
-            .appendingPathComponent("login")
+        let url = authURL.appendingPathComponent("login")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
         
         do {
             request.httpBody = try loginJSON.rawData()
             URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(nil, error)
-                }
-                
                 guard let data = data else {
                     NSLog("No data returned from login request")
-                    return completion(nil, nil)
+                    return completion(nil, error)
                 }
                 
                 do {
@@ -65,9 +90,8 @@ class NetworkingController {
                         let userID = responseJSON["id"].int,
                         let linked = responseJSON["LinkedAccount"].bool {
                         self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked)
-                        self.userDefaults.set(token, forKey: self.bearerTokenKey)
-                        self.userDefaults.set(userID, forKey: self.userIDKey)
-                        self.userDefaults.set(linked, forKey: self.linkedAccountKey)
+                        self.keychain.set(email, forKey: self.emailKey)
+                        self.keychain.set(password, forKey: self.passwordKey)
                     }
                     completion(responseJSON["token"].string, nil)
                 } catch {
@@ -82,23 +106,17 @@ class NetworkingController {
     func register(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
         let registerJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
         
-        let url = baseURL.appendingPathComponent("api")
-            .appendingPathComponent("auth")
-            .appendingPathComponent("register")
+        let url = authURL.appendingPathComponent("register")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
         
         do {
             request.httpBody = try registerJSON.rawData()
             URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(nil, error)
-                }
-                
                 guard let data = data else {
                     NSLog("No data returned from register request")
-                    return completion(nil, nil)
+                    return completion(nil, error)
                 }
                 
                 do {
@@ -119,9 +137,7 @@ class NetworkingController {
     
     func logout() {
         bearer = nil
-        self.userDefaults.removeObject(forKey: bearerTokenKey)
-        self.userDefaults.removeObject(forKey: userIDKey)
-        self.userDefaults.removeObject(forKey: linkedAccountKey)
+        keychain.clear()
     }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
@@ -132,18 +148,15 @@ class NetworkingController {
             .appendingPathComponent("token_exchange")
         var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
         do {
             request.httpBody = try tokenJSON.rawData()
             URLSession.shared.dataTask(with: request) { data, _, error in
-                if let error = error {
-                    return completion(error)
-                }
-                
                 guard let data = data else {
                     NSLog("No data returned from register request")
-                    return completion(nil)
+                    return completion(error)
                 }
                 
                 do {
@@ -176,57 +189,58 @@ class NetworkingController {
             .appendingPathComponent("transactions")
             .appendingPathComponent("\(bearer.userID)")
         var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.get.rawValue
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
-            guard let data = data else {
-                NSLog("No data returned from transactions request.")
-                return completion(nil, nil)
-            }
-            
-            do {
-                let responseJSON = try JSON(data: data)
-                completion(responseJSON, nil)
-            } catch {
-                completion(nil, error)
-            }
-        }.resume()
+        completeReturnedJSON(request: request, requestName: "transactions", completion: completion)
     }
     
     func fetchCategoriesFromServer(completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return completion(nil, nil) }
+        guard let bearer = bearer,
+            let url = categoriesURL else { return completion(nil, nil) }
+        var request = URLRequest(url: url)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
-        let url = baseURL
-            .appendingPathComponent("api")
-            .appendingPathComponent("users")
-            .appendingPathComponent("categories")
-            .appendingPathComponent("\(bearer.userID)")
+        completeReturnedJSON(request: request, requestName: "categories", completion: completion)
+    }
+    
+    func setCategoryBudget(categoryID: Int32, budget: Int64, completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer,
+            let url = categoriesURL else { return completion(nil, nil) }
+        let budgetFloat = Float(budget) / 100
+        let budgetJSON = JSON(dictionaryLiteral: ("categoryid", categoryID), ("budget", budgetFloat))
         
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
-            guard let data = data else {
-                NSLog("No data returned from categories request.")
-                return completion(nil, nil)
-            }
-            
-            do {
-                let responseJSON = try JSON(data: data)
-                completion(responseJSON, nil)
-            } catch {
-                completion(nil, error)
-            }
-        }.resume()
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.put.rawValue
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        
+        do {
+            request.httpBody = try budgetJSON.rawData()
+            completeReturnedJSON(request: request, requestName: "set category", completion: completion)
+        } catch {
+            completion(nil, error)
+        }
     }
     
     func setLinked() {
         bearer?.linkedAccount = true
-        self.userDefaults.set(true, forKey: self.linkedAccountKey)
+    }
+    
+    // MARK: Private
+    
+    private func completeReturnedJSON(request: URLRequest, requestName: String, completion: @escaping (JSON?, Error?) -> Void) {
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                NSLog("No data returned from \(requestName) request.")
+                return completion(nil, error)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                completion(responseJSON, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
     }
 }

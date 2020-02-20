@@ -24,18 +24,14 @@ class TransactionController {
     
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
             guard let categories = json?["Categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
-                    return completion(message, nil)
+                    return completion(message, error)
                 } else if let response = json?.rawString() {
                     NSLog("Response: \(response)")
                 }
-                return completion(nil, nil)
+                return completion(nil, error)
             }
             
             do {
@@ -69,7 +65,8 @@ class TransactionController {
                     for transactionJSON in transactions {
                         guard let transactionID = transactionJSON["id"].int,
                             let name = transactionJSON["name"].string,
-                            let amountFloat = transactionJSON["amount"].float,
+                            let amountString = transactionJSON["amount"].string,
+                            let amountFloat = Float(amountString),
                             let dateString = transactionJSON["payment_date"].string,
                             let date = dateFormatter.date(from: dateString) else { continue }
                         let amount = Int64(amountFloat * 100)
@@ -99,17 +96,13 @@ class TransactionController {
     
     func updateCategoriesFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchCategoriesFromServer(completion: { json, error in
-            if let error = error {
-                return completion(nil, error)
-            }
-            
             guard let categoriesJSON = json?.array else {
                 if let message = json?["message"].string {
-                    return completion(message, nil)
+                    return completion(message, error)
                 } else if let response = json?.rawString() {
                     NSLog("Response: \(response)")
                 }
-                return completion(nil, nil)
+                return completion(nil, error)
             }
             
             do {
@@ -127,7 +120,7 @@ class TransactionController {
                         category = TransactionCategory(categoryID: categoryID, name: name, context: context)
                     }
                     
-                    guard let budgetFloat = categoryJSON["budget"].float else { continue }
+                    let budgetFloat = categoryJSON["budget"].floatValue
                     let budget = Int64(budgetFloat * 100)
                     category.budget = budget
                 }
@@ -137,6 +130,19 @@ class TransactionController {
             } catch {
                 completion(nil, error)
             }
+        })
+    }
+    
+    func setCategoryBudget(category: TransactionCategory, budget: Int64, completion: @escaping (Error?) -> Void) {
+        networkingController?.setCategoryBudget(categoryID: category.categoryID, budget: budget, completion: { json, error in
+            guard let json = json,
+                let amount = json["amount"].float else {
+                NSLog("No `amount` returned from budget set request.")
+                return completion(error)
+            }
+            
+            category.budget = Int64(amount * 100)
+            completion(nil)
         })
     }
     
@@ -158,6 +164,11 @@ class TransactionController {
         } catch {
             NSLog("Error fetching transactions for deletion: \(error)")
         }
+    }
+    
+    func getTotalSpending(for category: TransactionCategory) -> Int64 {
+        let transactionAmounts = category.transactions?.compactMap({ ($0 as? Transaction)?.amount })
+        return transactionAmounts?.reduce(0, +) ?? 0
     }
     
 }

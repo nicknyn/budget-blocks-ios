@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590B3A5123FC554F0058D236 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3A5023FC554F0058D236 /* TransactionTableViewCell.swift */; };
+		590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3A5223FC63B50058D236 /* CreateTransactionViewController.swift */; };
+		590B3A5523FC846C0058D236 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590B3A5423FC846C0058D236 /* CategoriesTableViewController.swift */; };
 		592B3CAE23F1CBC90035FF3A /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CAD23F1CBC90035FF3A /* CategoryTableViewCell.swift */; };
+		592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB123F2132F0035FF3A /* BlocksViewController.swift */; };
+		592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */; };
+		592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B3CB523F2539E0035FF3A /* UIKit+Font.swift */; };
+		592B3CB823F25A950035FF3A /* Exo-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 592B3CB723F2594C0035FF3A /* Exo-SemiBold.otf */; };
 		5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F123DF5517003FB0E0 /* NetworkingController.swift */; };
 		5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5939B1F423DF55F3003FB0E0 /* SwiftyJSON */; };
 		5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */; };
@@ -31,6 +38,10 @@
 		5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */; };
 		596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; };
 		596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597E119623F310EF00E505C6 /* UIAlertController+Fix.swift */; };
+		598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 598B29F823FD994D0038B698 /* KeychainSwift */; };
+		598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598B29FA23FDB9FA0038B698 /* Bool+Int.swift */; };
+		59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAB9D323F361F900BF91F7 /* Error+Log.swift */; };
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
 /* End PBXBuildFile section */
@@ -67,7 +78,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		590B3A5023FC554F0058D236 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		590B3A5223FC63B50058D236 /* CreateTransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransactionViewController.swift; sourceTree = "<group>"; };
+		590B3A5423FC846C0058D236 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
 		592B3CAD23F1CBC90035FF3A /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		592B3CB123F2132F0035FF3A /* BlocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksViewController.swift; sourceTree = "<group>"; };
+		592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
+		592B3CB523F2539E0035FF3A /* UIKit+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Font.swift"; sourceTree = "<group>"; };
+		592B3CB723F2594C0035FF3A /* Exo-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-SemiBold.otf"; sourceTree = "<group>"; };
 		5939B1F123DF5517003FB0E0 /* NetworkingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingController.swift; sourceTree = "<group>"; };
 		5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingControllerTests.swift; sourceTree = "<group>"; };
 		593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +113,9 @@
 		5969C1F523E3904400BAA183 /* TransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionController.swift; sourceTree = "<group>"; };
 		5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		596C10FC23E0E09F003DF1D8 /* LinkKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LinkKit.framework; path = ../Carthage/Build/iOS/LinkKit.framework; sourceTree = "<group>"; };
+		597E119623F310EF00E505C6 /* UIAlertController+Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Fix.swift"; sourceTree = "<group>"; };
+		598B29FA23FDB9FA0038B698 /* Bool+Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Int.swift"; sourceTree = "<group>"; };
+		59BAB9D323F361F900BF91F7 /* Error+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Log.swift"; sourceTree = "<group>"; };
 		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */,
 				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
 				596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */,
 			);
@@ -140,6 +162,7 @@
 			children = (
 				5943B3EF23E491DD0050866D /* SquadaOne-Regular.ttf */,
 				5943B3F123E498600050866D /* Exo-Regular.otf */,
+				592B3CB723F2594C0035FF3A /* Exo-SemiBold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -211,6 +234,9 @@
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
 				5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */,
 				593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */,
+				592B3CB123F2132F0035FF3A /* BlocksViewController.swift */,
+				590B3A5223FC63B50058D236 /* CreateTransactionViewController.swift */,
+				590B3A5423FC846C0058D236 /* CategoriesTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -246,6 +272,8 @@
 			children = (
 				59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */,
 				592B3CAD23F1CBC90035FF3A /* CategoryTableViewCell.swift */,
+				592B3CB323F2441E0035FF3A /* BudgetTableViewCell.swift */,
+				590B3A5023FC554F0058D236 /* TransactionTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +282,10 @@
 			isa = PBXGroup;
 			children = (
 				59D1550923EB91DE003233C1 /* Int64+Currency.swift */,
+				592B3CB523F2539E0035FF3A /* UIKit+Font.swift */,
+				597E119623F310EF00E505C6 /* UIAlertController+Fix.swift */,
+				59BAB9D323F361F900BF91F7 /* Error+Log.swift */,
+				598B29FA23FDB9FA0038B698 /* Bool+Int.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -278,6 +310,7 @@
 			name = "Budget Blocks";
 			packageProductDependencies = (
 				5939B1F423DF55F3003FB0E0 /* SwiftyJSON */,
+				598B29F823FD994D0038B698 /* KeychainSwift */,
 			);
 			productName = "Budget Blocks";
 			productReference = 5955B89423DB59B800A24A8F /* Budget Blocks.app */;
@@ -353,6 +386,7 @@
 			mainGroup = 5955B88B23DB59B800A24A8F;
 			packageReferences = (
 				5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 5955B89523DB59B800A24A8F /* Products */;
 			projectDirPath = "";
@@ -371,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5943B3F223E498600050866D /* Exo-Regular.otf in Resources */,
+				592B3CB823F25A950035FF3A /* Exo-SemiBold.otf in Resources */,
 				5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */,
 				5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */,
 				5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */,
@@ -420,8 +455,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */,
+				590B3A5123FC554F0058D236 /* TransactionTableViewCell.swift in Sources */,
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
+				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
+				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,
+				592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */,
+				59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
 				5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */,
@@ -431,8 +472,11 @@
 				5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */,
 				59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */,
 				5969C1F623E3904400BAA183 /* TransactionController.swift in Sources */,
+				597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */,
+				590B3A5523FC846C0058D236 /* CategoriesTableViewController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
+				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 			);
@@ -776,6 +820,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -783,6 +835,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		598B29F823FD994D0038B698 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

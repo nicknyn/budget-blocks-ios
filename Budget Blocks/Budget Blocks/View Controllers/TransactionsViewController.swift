@@ -16,6 +16,7 @@ class TransactionsViewController: UIViewController {
     var networkingController: NetworkingController!
     var transactionController: TransactionController!
     var category: TransactionCategory?
+    let dateFormatter = DateFormatter()
     
     lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -50,6 +51,8 @@ class TransactionsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dateFormatter.dateFormat = "MM/dd/YYYY"
+        
         if let categoryName = category?.name {
             title = categoryName
         }
@@ -59,7 +62,7 @@ class TransactionsViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.alertAndReturn(title: "An error has occurred.", message: "There was an error fetching your transactions.")
                 }
-                return NSLog("\(error)")
+                return error.log()
             }
             
             guard let message = message else { return }
@@ -126,14 +129,29 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath)
+        let uiCell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath)
+        guard let cell = uiCell as? TransactionTableViewCell else { return uiCell }
         
         let transaction = fetchedResultsController.object(at: indexPath)
-        cell.textLabel?.text = transaction.name
-        cell.detailTextLabel?.text = "$\(transaction.amount.currency)"
+        cell.descriptionLabel.text = transaction.name
         
-        cell.textLabel?.font = UIFont(name: "Exo-Regular", size: 16)
-        cell.detailTextLabel?.font = UIFont(name: "Exo-Regular", size: 16)
+        let amount = transaction.amount * -1
+        cell.amountLabel.text = "$\(amount.currency)"
+        if amount < 0 {
+            cell.amountLabel.textColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+        } else {
+            cell.amountLabel.textColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+        }
+        
+        if let category = transaction.category?.name {
+            cell.categoryLabel.text = category
+        }
+        
+        if let date = transaction.date {
+            cell.dateLabel.text = dateFormatter.string(from: date)
+        }
+        
+        cell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
         
         return cell
     }

@@ -17,6 +17,7 @@ class DashboardTableViewController: UITableViewController {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var incomeLabel: UILabel!
     @IBOutlet weak var expensesLabel: UILabel!
+    @IBOutlet weak var totalBudgetLabel: UILabel!
     
     // MARK: Properties
     
@@ -46,11 +47,11 @@ class DashboardTableViewController: UITableViewController {
     
     lazy var categoriesFRC: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
         
-        let predicate = NSPredicate(format: "transactions.@count > 0 AND budget > 0")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "budget", ascending: false)]
+        
+        let predicate = NSPredicate(format: "transactions.@count > 0")
         fetchRequest.predicate = predicate
-        
         let context = CoreDataStack.shared.mainContext
         
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
@@ -67,43 +68,37 @@ class DashboardTableViewController: UITableViewController {
         
         return frc
     }()
+    
+    var categoriesWithBudget: [TransactionCategory] {
+        categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateBalances()
-        
-        transactionController.networkingController = networkingController
-        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
-            if let error = error {
-                return NSLog("\(error)")
-            }
-        }
-        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
-            DispatchQueue.main.async {
-                // This might be able to be removed since the FRC controllerDidChange function updates balances
-                self.updateBalances()
-            }
-            
-            if let error = error {
-                return NSLog("\(error)")
-            }
-        }
+        updateRemainingBudget()
         
         let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
-
-        if networkingController.bearer == nil {
-            performSegue(withIdentifier: "InitialLogin", sender: self)
-        }
         
         // Temporary logout button until the profile page is set up
         let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
         navigationItem.rightBarButtonItem = logoutButton
         
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshTable(_:)), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+        if networkingController.bearer == nil {
+            networkingController.loginWithKeychain { success in
+                if success {
+                    DispatchQueue.main.async {
+                        self.setUpViews()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "InitialLogin", sender: self)
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,13 +109,14 @@ class DashboardTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return networkingController.linkedAccount ? 2 : 3
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch adjustedSection(index: section) {
         case 2:
-            return categoriesFRC.fetchedObjects?.count ?? 0
+            let categoriesCount = categoriesFRC.fetchedObjects?.count ?? 0
+            return categoriesCount + (categoriesWithBudget.count == 0).int
         default:
             return 1
         }
@@ -130,17 +126,22 @@ class DashboardTableViewController: UITableViewController {
         let adjustedSection = self.adjustedSection(index: indexPath.section)
         
         switch adjustedSection {
-        case 0...1:
+        case 0...1,
+             2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
             let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
             guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
             
             let cellText: String
             var cellImage: UIImage?
-            if adjustedSection == 0 {
+            switch adjustedSection {
+            case 0:
                 cellText = "Connect your bank with Plaid"
                 cellImage = UIImage(named: "plaid-logo-icon")
-            } else {
-                cellText = "View All Transactions"
+            case 1:
+                cellText = "View Transactions"
+                cellImage = UIImage(named: "budget")
+            default:
+                cellText = "Create a budget"
                 cellImage = UIImage(named: "budget")
             }
             cell.titleLabel.text = cellText
@@ -151,26 +152,34 @@ class DashboardTableViewController: UITableViewController {
             let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
             guard let cell = uiCell as? CategoryTableViewCell else { return uiCell }
             
-            let textSize = cell.titleLabel.font.pointSize
-            cell.titleLabel.font = UIFont(name: "Exo-Regular", size: textSize)
+            cell.titleLabel.setApplicationTypeface()
             cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
             
-            if let category = categoriesFRC.fetchedObjects?[indexPath.row] {
+            let index = indexPath.row - (categoriesWithBudget.count == 0).int
+            if let category = categoriesFRC.fetchedObjects?[index] {
                 cell.titleLabel.text = category.name
                 var sum: Int64 = 0
                 for transaction in category.transactions ?? [] {
                     guard let transaction = transaction as? Transaction else { continue }
                     sum += transaction.amount
                 }
-                cell.detailLabel.text = "$\(sum.currency) / $\(category.budget.currency)"
+                var budgetString = "$\(sum.currency)"
                 
-                let progress = Float(sum) / Float(category.budget)
-                cell.progressBar.progress = progress
-                if progress < 0.8 {
-                    cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+                if category.budget > 0 {
+                    budgetString += " / $\(category.budget.currency)"
+                    
+                    let progress = Float(sum) / Float(category.budget)
+                    cell.progressBar.progress = progress
+                    if progress < 0.8 {
+                        cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+                    } else {
+                        cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+                    }
                 } else {
-                    cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+                    cell.progressBar.progress = 0
                 }
+                
+                cell.detailLabel.text = budgetString
             } else {
                 cell.titleLabel.text = nil
                 cell.detailLabel.text = nil
@@ -182,7 +191,8 @@ class DashboardTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch adjustedSection(index: indexPath.section) {
-        case 0...1:
+        case 0...1,
+             2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
             return 100
         default:
             return UITableView.automaticDimension
@@ -196,54 +206,38 @@ class DashboardTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 4
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch adjustedSection(index: indexPath.section) {
         case 0:
             linkAccount()
-        case 1...2:
+        case 1:
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
+        case 2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
+            self.performSegue(withIdentifier: "CreateBudget", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
+        case 2:
+            viewBudget(forRowAt: indexPath)
         default:
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
     // MARK: Private
+    
+    private func setUpViews() {
+        transactionController.networkingController = networkingController
+        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+        }
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+        }
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTable(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
     
     @objc private func refreshTable(_ refreshControl: UIRefreshControl) {
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
@@ -252,9 +246,7 @@ class DashboardTableViewController: UITableViewController {
                 refreshControl.endRefreshing()
             }
             
-            if let error = error {
-                return NSLog("\(error)")
-            }
+            error?.log()
         }
     }
     
@@ -278,7 +270,6 @@ class DashboardTableViewController: UITableViewController {
         guard let amounts = transactionsFRC.fetchedObjects?.map({ $0.amount }) else {
             incomeLabel.text = "+$0"
             expensesLabel.text = "-$0"
-            balanceLabel.text = "$0"
             return
         }
         let positiveTransactions = amounts.filter({ $0 > 0 })
@@ -289,16 +280,61 @@ class DashboardTableViewController: UITableViewController {
         
         incomeLabel.text = "+$\(income.currency)"
         expensesLabel.text = "-$\(expenses.currency)"
-        balanceLabel.text = "$\((income - expenses).currency)"
+    }
+    
+    private func updateRemainingBudget() {
+        var totalBudget: Int64 = 0
+        var totalSpending: Int64 = 0
+        
+        for category in categoriesWithBudget {
+            totalBudget += category.budget
+            totalSpending += transactionController.getTotalSpending(for: category)
+        }
+        
+        balanceLabel.text = "$\(totalSpending.currency)"
+        totalBudgetLabel.text = "$\(totalBudget.currency)"
     }
     
     private func adjustedSection(index: Int) -> Int {
-        return index + (networkingController.linkedAccount ? 1 : 0)
+        // Sections:
+        // 0. Connect bank acount with Plaid
+        // 1. View Transactions
+        // 2. List of categories
+        return index + networkingController.linkedAccount.int
+    }
+    
+    private func viewBudget(forRowAt indexPath: IndexPath) {
+        let alertMessage = "Would you like to view transactions of this budget or create a new budget?"
+        let actionSheet = UIAlertController(title: nil, message: alertMessage, preferredStyle: .actionSheet)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            DispatchQueue.main.async {
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        let viewTransactions = UIAlertAction(title: "View Transactions", style: .default) { _ in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "ShowTransactions", sender: self)
+            }
+        }
+        let newBudget = UIAlertAction(title: "Create Budget", style: .default) { _ in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "CreateBudget", sender: self)
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
+        actionSheet.addAction(cancel)
+        actionSheet.addAction(viewTransactions)
+        actionSheet.addAction(newBudget)
+        
+        actionSheet.pruneNegativeWidthConstraints()
+        
+        present(actionSheet, animated: true)
     }
 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let welcomeVC = segue.destination as? WelcomeViewController {
             welcomeVC.networkingController = networkingController
@@ -308,7 +344,21 @@ class DashboardTableViewController: UITableViewController {
             
             if let indexPath = tableView.indexPathForSelectedRow,
                 adjustedSection(index: indexPath.section) == 2 {
-                transactionsVC.category = categoriesFRC.fetchedObjects?[indexPath.row]
+                let index = indexPath.row - (categoriesWithBudget.count == 0).int
+                transactionsVC.category = categoriesFRC.fetchedObjects?[index]
+            }
+        } else if let navigationVC = segue.destination as? UINavigationController,
+            let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
+            blocksVC.transactionController = transactionController
+            blocksVC.budgets = categoriesWithBudget.map({ ($0, $0.budget) })
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let index = indexPath.row - (categoriesWithBudget.count == 0).int
+                if index >= 0,
+                    let selectedCategory = categoriesFRC.fetchedObjects?[index],
+                    selectedCategory.budget == 0 {
+                    blocksVC.budgets.append((selectedCategory, 0))
+                }
             }
         }
     }
@@ -346,6 +396,15 @@ extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
 
 extension DashboardTableViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        updateBalances()
+        updateRemainingBudget()
+        
+        switch controller {
+        case transactionsFRC:
+            updateBalances()
+        case categoriesFRC:
+            tableView.reloadData()
+        default:
+            break
+        }
     }
 }
