@@ -105,7 +105,12 @@ class LoginViewController: UIViewController {
     }
     
     private func signUp(email: String, password: String, firstName: String, lastName: String) {
+        loading(message: "Signing up...")
         networkingController.register(email: email, password: password, firstName: firstName, lastName: lastName) { message, error in
+            DispatchQueue.main.async {
+                self.dismissAlert()
+            }
+            
             if let error = error {
                 return NSLog("Error signing up: \(error)")
             }
@@ -116,11 +121,32 @@ class LoginViewController: UIViewController {
             
             if message == "success" {
                 NSLog("Sign up successful!")
-                self.signIn(email: email, password: password)
+                DispatchQueue.main.async {
+                    self.signIn(email: email, password: password)
+                }
             } else {
                 //TODO: alert the user
                 print(message)
             }
+        }
+    }
+    
+    private func loading(message: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func dismissAlert() {
+        if let vc = self.presentedViewController,
+            vc is UIAlertController {
+            dismiss(animated: true, completion: nil)
         }
     }
 
@@ -151,7 +177,12 @@ class LoginViewController: UIViewController {
     }
     
     private func signIn(email: String, password: String) {
+        loading(message: "Signing in...")
         networkingController.login(email: email, password: password) { token, error in
+            DispatchQueue.main.async {
+                self.dismissAlert()
+            }
+            
             if let error = error {
                 return NSLog("Error signing in: \(error)")
             }
