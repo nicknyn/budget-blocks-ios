@@ -8,6 +8,11 @@
 
 import UIKit
 import LinkKit
+import CoreData
+
+protocol OnboardingViewControllerDelegate {
+    func accountConnected()
+}
 
 class OnboardingViewController: UIViewController {
     
@@ -20,6 +25,7 @@ class OnboardingViewController: UIViewController {
     
     var transactionController: TransactionController!
     var networkingController: NetworkingController!
+    var delegate: OnboardingViewControllerDelegate?
     let loadingGroup = DispatchGroup()
     
     override func viewDidLoad() {
@@ -34,6 +40,14 @@ class OnboardingViewController: UIViewController {
         manualView.layer.cornerRadius = 56
         let manualTap = UITapGestureRecognizer(target: self, action: #selector(manual))
         manualView.addGestureRecognizer(manualTap)
+        
+        // Check if the user already selected manual but just never set any categories
+        let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+        if let allCategories = try? CoreDataStack.shared.mainContext.fetch(fetchRequest),
+            !allCategories.isEmpty {
+            // If there are categories already
+            self.performSegue(withIdentifier: "InitialBudgetNoAnimation", sender: self)
+        }
     }
     
     // MARK: Private
@@ -43,6 +57,7 @@ class OnboardingViewController: UIViewController {
         loading(message: "Fetching categories...", dispatchGroup: loadingGroup)
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             self.loadingGroup.notify(queue: .main, execute: {
+                self.delegate?.accountConnected()
                 self.loadingGroup.enter()
                 self.dismissAlert(dispatchGroup: self.loadingGroup)
             })
@@ -96,6 +111,8 @@ class OnboardingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let blocksVC = segue.destination as? BlocksViewController {
             blocksVC.transactionController = transactionController
+            blocksVC.isModalInPresentation = true
+            blocksVC.navigationItem.rightBarButtonItem = nil
         }
     }
 

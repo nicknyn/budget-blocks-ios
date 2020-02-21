@@ -232,7 +232,6 @@
         <!--Onboarding View Controller-->
         <scene sceneID="OzI-BT-Xmp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C25-vN-z5a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="HsJ-6l-96N" customClass="OnboardingViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LhH-hu-EYo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -309,10 +308,12 @@
                         <outlet property="manualView" destination="mJ2-4D-L3y" id="irM-Xm-uVD"/>
                         <outlet property="plaidView" destination="pko-Qw-yHW" id="XGj-Je-dzj"/>
                         <segue destination="hT9-id-g1g" kind="show" identifier="InitialBudget" id="iiQ-BQ-sX2"/>
+                        <segue destination="hT9-id-g1g" kind="show" identifier="InitialBudgetNoAnimation" animates="NO" id="pyi-hC-RJV"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C25-vN-z5a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2870" y="846"/>
+            <point key="canvasLocation" x="2686" y="846"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="MTt-cH-dRr">
@@ -1059,7 +1060,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gIB-OX-Qv2"/>
-        <segue reference="iiQ-BQ-sX2"/>
+        <segue reference="pyi-hC-RJV"/>
         <segue reference="X8e-tp-Xxn"/>
     </inferredMetricsTieBreakers>
 </document>

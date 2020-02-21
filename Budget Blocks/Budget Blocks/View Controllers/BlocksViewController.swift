@@ -145,6 +145,9 @@ class BlocksViewController: UIViewController {
             blocksVC.transactionController = transactionController
             blocksVC.budgets = budgets
             blocksVC.categoriesAreSet = true
+            if navigationItem.rightBarButtonItem == nil {
+                blocksVC.navigationItem.rightBarButtonItem = nil
+            }
         }
     }
 

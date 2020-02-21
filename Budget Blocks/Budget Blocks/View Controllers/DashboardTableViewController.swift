@@ -50,7 +50,7 @@ class DashboardTableViewController: UITableViewController {
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "budget", ascending: false)]
         
-        let predicate = NSPredicate(format: "transactions.@count > 0")
+        let predicate = NSPredicate(format: "transactions.@count > 0 OR budget > 0")
         fetchRequest.predicate = predicate
         let context = CoreDataStack.shared.mainContext
         
@@ -71,6 +71,10 @@ class DashboardTableViewController: UITableViewController {
     
     var categoriesWithBudget: [TransactionCategory] {
         categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
+    }
+    
+    var accountLinked: Bool {
+        networkingController.linkedAccount || categoriesFRC.fetchedObjects?.count ?? 0 > 0
     }
 
     override func viewDidLoad() {
@@ -242,6 +246,9 @@ class DashboardTableViewController: UITableViewController {
     }
     
     @objc private func refreshTable(_ refreshControl: UIRefreshControl) {
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+        }
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -302,7 +309,7 @@ class DashboardTableViewController: UITableViewController {
         // 0. Connect bank acount with Plaid
         // 1. View Transactions
         // 2. List of categories
-        return index + networkingController.linkedAccount.int
+        return index + accountLinked.int
     }
     
     private func viewBudget(forRowAt indexPath: IndexPath) {
@@ -336,10 +343,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func createInitalBudget() {
-        guard let bearer = networkingController.bearer,
-            !bearer.linkedAccount,
-            categoriesFRC.fetchedObjects?.count ?? 0 == 0 else { return }
-        
+        guard !accountLinked else { return }        
         performSegue(withIdentifier: "Onboarding", sender: self)
     }
 
@@ -374,6 +378,7 @@ class DashboardTableViewController: UITableViewController {
             } else if let onboardingVC = navigationVC.viewControllers.first as? OnboardingViewController {
                 onboardingVC.transactionController = transactionController
                 onboardingVC.networkingController = networkingController
+                onboardingVC.delegate = self
             }
         }
     }
@@ -444,6 +449,19 @@ extension DashboardTableViewController: LoginViewControllerDelegate {
             dismissGroup.notify(queue: .main, execute: {
                 self.createInitalBudget()
             })
+        }
+    }
+}
+
+// MARK: Onboarding view controller delegate
+
+extension DashboardTableViewController: OnboardingViewControllerDelegate {
+    func accountConnected() {
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
 }
