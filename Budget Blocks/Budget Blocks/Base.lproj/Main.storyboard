@@ -28,7 +28,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWx-tZ-WFt">
-                                <rect key="frame" x="49.666666666666657" y="396.33333333333331" width="315" height="63.666666666666686"/>
+                                <rect key="frame" x="9.6666666666666572" y="393" width="394.66666666666674" height="70"/>
                                 <fontDescription key="fontDescription" name="SquadaOne-Regular" family="Squada One" pointSize="60"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                                 </constraints>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="lZ8-dv-Duv">
-                                <rect key="frame" x="30" y="140.33333333333334" width="354" height="236.00000000000009"/>
+                                <rect key="frame" x="30" y="137" width="354" height="236"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="lZ8-dv-Duv" secondAttribute="height" multiplier="6:4" id="NFa-HA-y5u"/>
                                 </constraints>
@@ -128,32 +128,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlocksIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mt6-rd-orw">
-                                <rect key="frame" x="170" y="64" width="74" height="50.000000000000057"/>
+                                <rect key="frame" x="170" y="64" width="74" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="74" id="QxX-x5-bBw"/>
                                     <constraint firstAttribute="height" constant="50" id="uCy-85-xUU"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixL-LW-pJK">
-                                <rect key="frame" x="128.33333333333337" y="118" width="157.66666666666663" height="32"/>
+                                <rect key="frame" x="108.33333333333333" y="118" width="197.33333333333337" height="35"/>
                                 <fontDescription key="fontDescription" name="SquadaOne-Regular" family="Squada One" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSU-tg-btp">
-                                <rect key="frame" x="56" y="286" width="90" height="18"/>
+                                <rect key="frame" x="56" y="287.66666666666669" width="90" height="16.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9au-ti-kQU">
-                                <rect key="frame" x="56" y="384" width="62" height="18"/>
+                                <rect key="frame" x="56" y="385.66666666666669" width="62" height="16.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5T4-zq-XxR">
-                                <rect key="frame" x="55.999999999999993" y="482" width="115.33333333333331" height="18"/>
+                                <rect key="frame" x="55.999999999999993" y="483.66666666666669" width="115.33333333333331" height="16.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -207,16 +207,32 @@
                         <outlet property="loginLabel" destination="IYb-zA-YfR" id="cjE-ps-qlV"/>
                         <outlet property="passwordLabel" destination="9au-ti-kQU" id="pxF-ge-y35"/>
                         <outlet property="passwordTextField" destination="zfg-c6-9d2" id="bvg-9U-umt"/>
-                        <segue destination="HsJ-6l-96N" kind="show" identifier="Onboard" id="nIC-Jp-RSZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncl-dd-3ES" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2860.8695652173915" y="138.61607142857142"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mqD-R0-jI3">
+            <objects>
+                <navigationController id="FkK-oE-fXe" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fFM-uw-fbC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="HsJ-6l-96N" kind="relationship" relationship="rootViewController" id="XJm-Xz-8CG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yxs-HA-F9Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1951" y="846"/>
+        </scene>
         <!--Onboarding View Controller-->
         <scene sceneID="OzI-BT-Xmp">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C25-vN-z5a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="HsJ-6l-96N" customClass="OnboardingViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LhH-hu-EYo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -283,20 +299,20 @@
                         <viewLayoutGuide key="safeArea" id="n2w-B1-6ed"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZdD-eS-DDF">
-                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="Ryk-0y-4D2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="Ryk-0y-4D2">
                             <connections>
-                                <action selector="signOut:" destination="HsJ-6l-96N" id="oIp-xo-cZG"/>
+                                <action selector="cancel:" destination="HsJ-6l-96N" id="oIp-xo-cZG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="manualView" destination="mJ2-4D-L3y" id="irM-Xm-uVD"/>
                         <outlet property="plaidView" destination="pko-Qw-yHW" id="XGj-Je-dzj"/>
+                        <segue destination="hT9-id-g1g" kind="show" identifier="InitialBudget" id="iiQ-BQ-sX2"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C25-vN-z5a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3857" y="139"/>
+            <point key="canvasLocation" x="2870" y="846"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="MTt-cH-dRr">
@@ -516,6 +532,7 @@
                         <segue destination="UEm-MF-jgl" kind="show" identifier="ShowTransactions" id="foz-V8-adn"/>
                         <segue destination="BTl-tk-dum" kind="presentation" identifier="CreateBudget" id="V2T-sg-tD7"/>
                         <segue destination="EtC-B0-qbB" kind="presentation" identifier="AddTransaction" id="3Ry-ZO-vrO"/>
+                        <segue destination="FkK-oE-fXe" kind="presentation" identifier="Onboarding" id="bvm-Mb-4Uw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMs-46-nno" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -638,7 +655,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTb-s2-xyt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1951" y="846"/>
+            <point key="canvasLocation" x="1039" y="1558"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="srR-H7-YeM">
@@ -674,7 +691,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvZ-PX-Gsp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="1558"/>
+            <point key="canvasLocation" x="1951" y="1558"/>
         </scene>
         <!--Add Transaction-->
         <scene sceneID="NCg-WJ-eSB">
@@ -845,7 +862,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bOd-BD-VF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2809" y="2251"/>
+            <point key="canvasLocation" x="2870" y="2251"/>
         </scene>
         <!--Create Budget-->
         <scene sceneID="dmS-tq-Blc">
@@ -994,7 +1011,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8KG-g5-HeY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1951" y="1558"/>
+            <point key="canvasLocation" x="2861" y="1558"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ukS-ra-W3E">
@@ -1042,6 +1059,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gIB-OX-Qv2"/>
+        <segue reference="iiQ-BQ-sX2"/>
         <segue reference="X8e-tp-Xxn"/>
     </inferredMetricsTieBreakers>
 </document>

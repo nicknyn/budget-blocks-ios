@@ -16,6 +16,7 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     
     var networkingController: NetworkingController!
+    var delegate: LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class WelcomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let navigationVC = segue.destination as? UINavigationController,
             let loginVC = navigationVC.viewControllers.first as? LoginViewController {
-            loginVC.delegate = self
+            loginVC.delegate = delegate
             loginVC.signIn = segue.identifier == "SignIn"
             loginVC.networkingController = networkingController
         }
@@ -55,13 +56,13 @@ class WelcomeViewController: UIViewController {
 
 // MARK: Login view controller delegate
 
-extension WelcomeViewController: LoginViewControllerDelegate {
-    func loginSuccessful() {
-        dismiss(animated: true) {
-            DispatchQueue.main.async {
-                self.dismiss(animated: true)
-            }
-        }
-    }
-}
+//extension WelcomeViewController: LoginViewControllerDelegate {
+//    func loginSuccessful() {
+//        dismiss(animated: true) {
+//            DispatchQueue.main.async {
+//                self.dismiss(animated: true)
+//            }
+//        }
+//    }
+//}
 

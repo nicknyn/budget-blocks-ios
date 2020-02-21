@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
     
     var networkingController: NetworkingController!
     var delegate: LoginViewControllerDelegate?
+    var loadingGroup = DispatchGroup()
     var signIn: Bool = true
     var firstName: String?
     var lastName: String?
@@ -105,10 +106,11 @@ class LoginViewController: UIViewController {
     }
     
     private func signUp(email: String, password: String, firstName: String, lastName: String) {
+        loadingGroup.enter()
         loading(message: "Signing up...")
         networkingController.register(email: email, password: password, firstName: firstName, lastName: lastName) { message, error in
             DispatchQueue.main.async {
-                self.dismissAlert()
+                self.dismissAlert(dispatchGroup: self.loadingGroup)
             }
             
             if let error = error {
@@ -128,25 +130,6 @@ class LoginViewController: UIViewController {
                 //TODO: alert the user
                 print(message)
             }
-        }
-    }
-    
-    private func loading(message: String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.style = UIActivityIndicatorView.Style.medium
-        loadingIndicator.startAnimating();
-
-        alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    private func dismissAlert() {
-        if let vc = self.presentedViewController,
-            vc is UIAlertController {
-            dismiss(animated: true, completion: nil)
         }
     }
 
@@ -177,10 +160,11 @@ class LoginViewController: UIViewController {
     }
     
     private func signIn(email: String, password: String) {
+        loadingGroup.enter()
         loading(message: "Signing in...")
         networkingController.login(email: email, password: password) { token, error in
             DispatchQueue.main.async {
-                self.dismissAlert()
+                self.dismissAlert(dispatchGroup: self.loadingGroup)
             }
             
             if let error = error {
@@ -192,8 +176,9 @@ class LoginViewController: UIViewController {
             }
             
             print(token)
-            DispatchQueue.main.async {
+            self.loadingGroup.notify(queue: .main) {
                 self.delegate?.loginSuccessful()
+//                self.performSegue(withIdentifier: "Onboard", sender: self)
             }
         }
     }

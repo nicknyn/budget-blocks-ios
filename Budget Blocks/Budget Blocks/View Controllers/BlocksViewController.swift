@@ -79,6 +79,7 @@ class BlocksViewController: UIViewController {
         if !categoriesAreSet {
             titleLabel.text = "Choose spending blocks"
             promptLabel.text = "Choose which categories you would like to set budgets for."
+            navigationItem.setHidesBackButton(true, animated: false)
         } else {
             titleLabel.text = "Budgets"
             promptLabel.text = "Assign the value you want in each selected category."
