@@ -1,8 +1,8 @@
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
-# Title of project goes here
+# Budget Blocks
 
-You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project on [Apple TestFlight](https://testflight.apple.com/join/pUS0UdsD).
 
 ## Contributors
 
@@ -20,7 +20,7 @@ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste
 
 ## Project Overview
 
-You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project on [Apple TestFlight](https://testflight.apple.com/join/pUS0UdsD).
 
 [Trello Board](https://trello.com/b/emmxnHtH/labs-20-budget-blocks)
 
@@ -44,6 +44,13 @@ Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pelle
 -    Feature 4
 -    Feature 5
 
+## Requirements
+
+-   iOS 13.0+
+-   Xcode 11
+-   Carthage
+-   Swift Package Manager
+
 ### Plaid Link
 
 [Plaid Link iOS SKD](https://plaid.com/docs/link/ios/) allows the user to connect a bank account to their Budget Blocks account. Requires the `PLAID_PUBLIC_KEY` environment variable to be set.
@@ -55,13 +62,6 @@ Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pelle
 ### KeychainSwift
 
 [KeychainSwift](https://github.com/evgenyneu/keychain-swift) is used for easily storing login credentials using Apple's Keychain.
-
-## Requirements
-
--   iOS 13.0+
--   Xcode 11
--   Carthage
--   Swift Package Manager
 
 ## Contributing
 
