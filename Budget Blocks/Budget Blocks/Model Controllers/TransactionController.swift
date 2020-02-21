@@ -23,10 +23,8 @@ class TransactionController {
     }
     
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
-        // TODO: Check if the user is manual or Plaid
-        let manual = false
-        networkingController?.fetchTransactionsFromServer(manual: manual, completion: { json, error in
-            guard let categories = json?[manual ? "list" : "Categories"].array else {
+        networkingController?.fetchTransactionsFromServer(completion: { json, error in
+            guard let categories = json?[self.networkingController!.manualAccount ? "list" : "Categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
                     return completion(message, error)

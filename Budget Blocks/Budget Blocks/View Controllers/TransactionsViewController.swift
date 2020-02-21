@@ -66,20 +66,24 @@ class TransactionsViewController: UIViewController {
             }
             
             guard let message = message else { return }
-            if message == "No access_Token found for that user id provided" {
-                DispatchQueue.main.async {
-                    self.alertAndReturn(title: "No linked accounts", message: "Please link a bank account first")
-                }
-            } else if message == "insertion process hasn't started"
-                || message == "we are inserting your data" {
-                DispatchQueue.main.async {
-                    self.alertAndReturn(title: "Try again in a moment", message: "We're working on fetching your transactions. Please try again in a moment.")
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.alertAndReturn(title: "An error has occurred.", message: "There was an error fetching your transactions.")
-                }
+            let alertTitle: String
+            let alertMessage: String
+            
+            switch message {
+            case "No access_Token found for that user id provided":
+                alertTitle = "No linked accounts"
+                alertMessage = "Please link a bank account first"
+            case "insertion process hasn't started", "we are inserting your data":
+                alertTitle = "Try again in a moment"
+                alertMessage = "We're working on fetching your transactions. Please try again in a moment."
+            default:
+                alertTitle = "An error has occurred."
+                alertMessage = "There was an error fetching your transactions."
                 NSLog("Message: \(message)")
+            }
+            
+            DispatchQueue.main.async {
+                self.alertAndReturn(title: alertTitle, message: alertMessage)
             }
         }
     }

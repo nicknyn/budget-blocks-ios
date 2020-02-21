@@ -44,6 +44,12 @@ class NetworkingController {
     var linkedAccount: Bool {
         return bearer?.linkedAccount ?? false
     }
+    var manualAccount: Bool {
+        return bearer?.manualAccount ?? false
+    }
+    var accountSetUp: Bool {
+        return linkedAccount || manualAccount
+    }
     
     // MARK: Account
     
@@ -92,8 +98,9 @@ class NetworkingController {
                     let responseJSON = try JSON(data: data)
                     if let token = responseJSON["token"].string,
                         let userID = responseJSON["id"].int,
-                        let linked = responseJSON["LinkedAccount"].bool {
-                        self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked)
+                        let linked = responseJSON["LinkedAccount"].bool,
+                        let manual = responseJSON["ManualOnly"].bool {
+                        self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked, manualAccount: manual)
                         self.keychain.set(email, forKey: self.emailKey)
                         self.keychain.set(password, forKey: self.passwordKey)
                     }
@@ -170,7 +177,7 @@ class NetworkingController {
                     let responseJSON = try JSON(data: data)
                     if responseJSON["ItemCreated"].int != nil {
                         print("Access token inserted!")
-                        self.bearer?.linkedAccount = true
+                        self.setLinked()
                     } else {
                         if let response = responseJSON.rawString() {
                             NSLog("Unexpected response returned: \(response)")
@@ -199,18 +206,21 @@ class NetworkingController {
         request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
         
         URLSession.shared.dataTask(with: request) { _, _, error in
+            if error == nil {
+                self.setManual()
+            }
             completion(error)
         }.resume()
     }
     
     // MARK: Categories and transactions
     
-    func fetchTransactionsFromServer(manual: Bool = false, completion: @escaping (JSON?, Error?) -> Void) {
+    func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
         guard let bearer = bearer else { return completion(nil, nil) }
         
         let url = baseURL
-            .appendingPathComponent(manual ? "manual" : "plaid")
-            .appendingPathComponent("transaction\(manual ? "" : "s")")
+            .appendingPathComponent(manualAccount ? "manual" : "plaid")
+            .appendingPathComponent("transaction\(manualAccount ? "" : "s")")
             .appendingPathComponent("\(bearer.userID)")
         var request = URLRequest(url: url)
         request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
@@ -247,7 +257,15 @@ class NetworkingController {
     }
     
     func setLinked() {
-        bearer?.linkedAccount = true
+        if !accountSetUp {
+            bearer?.linkedAccount = true
+        }
+    }
+    
+    func setManual() {
+        if !accountSetUp {
+            bearer?.manualAccount = true
+        }
     }
     
     // MARK: Manual

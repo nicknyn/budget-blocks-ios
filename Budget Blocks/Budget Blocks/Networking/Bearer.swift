@@ -12,4 +12,5 @@ struct Bearer {
     let token: String
     let userID: Int
     var linkedAccount: Bool
+    var manualAccount: Bool
 }

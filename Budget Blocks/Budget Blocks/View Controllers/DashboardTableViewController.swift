@@ -72,14 +72,6 @@ class DashboardTableViewController: UITableViewController {
     var categoriesWithBudget: [TransactionCategory] {
         categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
     }
-    
-    var accountLinked: Bool {
-        networkingController.linkedAccount || categoriesFRC.fetchedObjects?.count ?? 0 > 0
-    }
-    
-    var manualAccount: Bool {
-        accountLinked && !networkingController.linkedAccount
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,7 +118,7 @@ class DashboardTableViewController: UITableViewController {
             let categoriesCount = categoriesFRC.fetchedObjects?.count ?? 0
             return categoriesCount + (categoriesWithBudget.count == 0).int
         default:
-            return 1 + manualAccount.int * 2
+            return 1 + networkingController.manualAccount.int * 2
         }
     }
 
@@ -325,7 +317,7 @@ class DashboardTableViewController: UITableViewController {
         // 0. Connect bank acount with Plaid
         // 1. View Transactions
         // 2. List of categories
-        return index + accountLinked.int
+        return index + networkingController.accountSetUp.int
     }
     
     private func viewBudget(forRowAt indexPath: IndexPath) {
@@ -359,7 +351,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func createInitalBudget() {
-        guard !accountLinked else { return }
+        guard !networkingController.accountSetUp else { return }
         performSegue(withIdentifier: "Onboarding", sender: self)
     }
 
