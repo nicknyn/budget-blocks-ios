@@ -39,7 +39,7 @@ class NetworkingControllerTests: XCTestCase {
     
     func testFetchTransactions() {
         let networkingController = NetworkingController()
-        networkingController.bearer = Bearer(token: "token", userID: 1, linkedAccount: false)
+        networkingController.bearer = Bearer(token: "token", userID: 1, linkedAccount: false, manualAccount: false)
         let expectation = self.expectation(description: "Fetch")
         
         networkingController.fetchTransactionsFromServer { json, error in
@@ -53,7 +53,7 @@ class NetworkingControllerTests: XCTestCase {
     
     func testFetchCategories() {
         let networkingController = NetworkingController()
-        networkingController.bearer = Bearer(token: "token", userID: 1, linkedAccount: false)
+        networkingController.bearer = Bearer(token: "token", userID: 1, linkedAccount: false, manualAccount: false)
         let expectation = self.expectation(description: "Fetch")
         
         networkingController.fetchCategoriesFromServer { json, error in
@@ -62,7 +62,7 @@ class NetworkingControllerTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 30, handler: nil)
     }
 
 }
