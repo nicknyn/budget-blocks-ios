@@ -811,6 +811,7 @@
                         <outlet property="categoryTextField" destination="O3K-dw-FLJ" id="b9S-On-f9U"/>
                         <outlet property="dateTextField" destination="Vbr-Vs-pak" id="299-ew-2Ey"/>
                         <outlet property="descriptionTextField" destination="iXk-88-G2N" id="M0o-lo-wko"/>
+                        <outlet property="paidSegmentedControl" destination="jSv-Qb-fvo" id="Zum-CH-j5U"/>
                         <outlet property="saveButton" destination="wxz-Jf-BXE" id="kkw-Pb-OD0"/>
                         <outlet property="scrollView" destination="zNN-DT-LpZ" id="Zp5-vp-D7i"/>
                         <segue destination="742-gO-lN5" kind="show" identifier="ShowCategories" id="BX1-Tm-xHp"/>

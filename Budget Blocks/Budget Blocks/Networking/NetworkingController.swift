@@ -45,6 +45,8 @@ class NetworkingController {
         return bearer?.linkedAccount ?? false
     }
     
+    // MARK: Account
+    
     func loginWithKeychain(completion: @escaping (Bool) -> Void) {
         guard let email = keychain.get(emailKey),
             let password = keychain.get(passwordKey) else {
@@ -201,12 +203,14 @@ class NetworkingController {
         }.resume()
     }
     
-    func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
+    // MARK: Categories and transactions
+    
+    func fetchTransactionsFromServer(manual: Bool = false, completion: @escaping (JSON?, Error?) -> Void) {
         guard let bearer = bearer else { return completion(nil, nil) }
         
         let url = baseURL
-            .appendingPathComponent("plaid")
-            .appendingPathComponent("transactions")
+            .appendingPathComponent(manual ? "manual" : "plaid")
+            .appendingPathComponent("transaction\(manual ? "" : "s")")
             .appendingPathComponent("\(bearer.userID)")
         var request = URLRequest(url: url)
         request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
@@ -244,6 +248,47 @@ class NetworkingController {
     
     func setLinked() {
         bearer?.linkedAccount = true
+    }
+    
+    // MARK: Manual
+    
+    func createTransaction(amount: Int64, date: Date, category: TransactionCategory, name: String?, completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer,
+            category.categoryID != 0 else { return completion(nil, nil) }
+        
+        let amountFloat = Float(amount) / 100
+        
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [
+            .withYear,
+            .withMonth,
+            .withDay,
+            .withDashSeparatorInDate
+        ]
+        let dateString = dateFormatter.string(from: date)
+        
+        var transactionJSON: JSON = ["amount": amountFloat,
+                                    "payment_date": dateString,
+                                    "category_id": category.categoryID]
+        if let name = name {
+            transactionJSON["name"].stringValue = name
+        }
+        
+        let url = baseURL
+            .appendingPathComponent("manual")
+            .appendingPathComponent("transaction")
+            .appendingPathComponent("\(bearer.userID)")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        
+        do {
+            request.httpBody = try transactionJSON.rawData()
+            completeReturnedJSON(request: request, requestName: "add transaction", completion: completion)
+        } catch {
+            completion(nil, error)
+        }
     }
     
     // MARK: Private

@@ -23,8 +23,10 @@ class TransactionController {
     }
     
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
-        networkingController?.fetchTransactionsFromServer(completion: { json, error in
-            guard let categories = json?["Categories"].array else {
+        // TODO: Check if the user is manual or Plaid
+        let manual = false
+        networkingController?.fetchTransactionsFromServer(manual: manual, completion: { json, error in
+            guard let categories = json?[manual ? "list" : "Categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
                     return completion(message, error)
@@ -143,6 +145,24 @@ class TransactionController {
             
             category.budget = Int64(amount * 100)
             completion(nil)
+        })
+    }
+    
+    func createTransaction(amount: Int64, date: Date, category: TransactionCategory, name: String?, context: NSManagedObjectContext, completion: @escaping (Transaction?, Error?) -> Void) {
+        networkingController?.createTransaction(amount: amount, date: date, category: category, name: name, completion: { json, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let json = json,
+                let transactionID = json["inserted"].int32 else {
+                    NSLog("No ID returned from create transaction request.")
+                    return completion(nil, nil)
+            }
+            
+            let transaction = Transaction(transactionID: "\(transactionID)", name: name, amount: amount, date: date, context: context)
+            CoreDataStack.shared.save(context: context)
+            completion(transaction, nil)
         })
     }
     

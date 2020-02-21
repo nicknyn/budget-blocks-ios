@@ -76,6 +76,10 @@ class DashboardTableViewController: UITableViewController {
     var accountLinked: Bool {
         networkingController.linkedAccount || categoriesFRC.fetchedObjects?.count ?? 0 > 0
     }
+    
+    var manualAccount: Bool {
+        accountLinked && !networkingController.linkedAccount
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +126,7 @@ class DashboardTableViewController: UITableViewController {
             let categoriesCount = categoriesFRC.fetchedObjects?.count ?? 0
             return categoriesCount + (categoriesWithBudget.count == 0).int
         default:
-            return 1
+            return 1 + manualAccount.int * 2
         }
     }
 
@@ -142,8 +146,17 @@ class DashboardTableViewController: UITableViewController {
                 cellText = "Connect your bank with Plaid"
                 cellImage = UIImage(named: "plaid-logo-icon")
             case 1:
-                cellText = "View Transactions"
-                cellImage = UIImage(named: "budget")
+                switch indexPath.row {
+                case 0:
+                    cellText = "View Transactions"
+                    cellImage = UIImage(named: "budget")
+                case 1:
+                    cellText = "Add an expense"
+                    cellImage = UIImage(named: "minus-icon")
+                default:
+                    cellText = "Add income"
+                    cellImage = UIImage(named: "plus-icon")
+                }
             default:
                 cellText = "Create a budget"
                 cellImage = UIImage(named: "budget")
@@ -215,8 +228,11 @@ class DashboardTableViewController: UITableViewController {
         switch adjustedSection(index: indexPath.section) {
         case 0:
             linkAccount()
-        case 1:
+        case 1 where indexPath.row == 0:
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
+        case 1:
+            self.performSegue(withIdentifier: "AddTransaction", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
         case 2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
             self.performSegue(withIdentifier: "CreateBudget", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
@@ -343,7 +359,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func createInitalBudget() {
-        guard !accountLinked else { return }        
+        guard !accountLinked else { return }
         performSegue(withIdentifier: "Onboarding", sender: self)
     }
 
@@ -379,6 +395,13 @@ class DashboardTableViewController: UITableViewController {
                 onboardingVC.transactionController = transactionController
                 onboardingVC.networkingController = networkingController
                 onboardingVC.delegate = self
+            } else if let createTransactionVC = navigationVC.viewControllers.first as? CreateTransactionViewController {
+                createTransactionVC.transactionController = transactionController
+                
+                if let indexPath = tableView.indexPathForSelectedRow,
+                indexPath.row == 2 {
+                    createTransactionVC.income = true
+                }
             }
         }
     }
