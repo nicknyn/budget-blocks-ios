@@ -20,6 +20,7 @@ class OnboardingViewController: UIViewController {
     
     var transactionController: TransactionController!
     var networkingController: NetworkingController!
+    let loadingGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +39,21 @@ class OnboardingViewController: UIViewController {
     // MARK: Private
     
     private func fetchCategoriesAndSegue() {
+        loadingGroup.enter()
+        loading(message: "Fetching categories...", dispatchGroup: loadingGroup)
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            self.loadingGroup.notify(queue: .main, execute: {
+                self.loadingGroup.enter()
+                self.dismissAlert(dispatchGroup: self.loadingGroup)
+            })
             
             if let error = error {
                 return NSLog("\(error)")
             }
             
-            DispatchQueue.main.async {
+            self.loadingGroup.notify(queue: .main, execute: {
                 self.performSegue(withIdentifier: "InitialBudget", sender: self)
-            }
+            })
         }
     }
     
@@ -69,7 +76,19 @@ class OnboardingViewController: UIViewController {
     
     @objc private func manual() {
         print("Manual")
-        fetchCategoriesAndSegue()
+        loadingGroup.enter()
+        loading(message: "Connecting account...", dispatchGroup: loadingGroup)
+        
+        networkingController.manualOnboard { error in
+            self.loadingGroup.notify(queue: .main, execute: {
+                self.loadingGroup.enter()
+                self.dismissAlert(dispatchGroup: self.loadingGroup)
+            })
+            
+            self.loadingGroup.notify(queue: .main, execute: {
+                self.fetchCategoriesAndSegue()
+            })
+        }
     }
     
     // MARK: - Navigation
@@ -88,20 +107,23 @@ extension OnboardingViewController: PLKPlaidLinkViewDelegate {
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
         dismiss(animated: true)
         print("Link successful. Public token: \(publicToken)")
-        loading(message: "Connecting account to Budget Blocks...")
+        loadingGroup.enter()
+        loading(message: "Connecting account to Budget Blocks...", dispatchGroup: loadingGroup)
+        
         networkingController.tokenExchange(publicToken: publicToken) { error in
-            DispatchQueue.main.async {
-                self.dismissAlert()
-            }
+            self.loadingGroup.notify(queue: .main, execute: {
+                self.loadingGroup.enter()
+                self.dismissAlert(dispatchGroup: self.loadingGroup)
+            })
             
             if let error = error {
                 return NSLog("Error exchanging token: \(error)")
             }
             
             self.networkingController.setLinked()
-            DispatchQueue.main.async {
+            self.loadingGroup.notify(queue: .main, execute: {
                 self.fetchCategoriesAndSegue()
-            }
+            })
         }
     }
     

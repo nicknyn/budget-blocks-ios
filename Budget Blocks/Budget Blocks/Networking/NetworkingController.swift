@@ -186,6 +186,21 @@ class NetworkingController {
         }
     }
     
+    func manualOnboard(completion: @escaping (Error?) -> Void) {
+        guard let bearer = bearer else { return completion(nil) }
+        
+        let url = baseURL
+            .appendingPathComponent("manual")
+            .appendingPathComponent("onboard")
+            .appendingPathComponent("\(bearer.userID)")
+        var request = URLRequest(url: url)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        
+        URLSession.shared.dataTask(with: request) { _, _, error in
+            completion(error)
+        }.resume()
+    }
+    
     func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
         guard let bearer = bearer else { return completion(nil, nil) }
         
