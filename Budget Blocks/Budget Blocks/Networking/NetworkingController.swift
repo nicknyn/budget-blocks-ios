@@ -309,6 +309,21 @@ class NetworkingController {
         }
     }
     
+    func deleteTransaction(transactionID: Int32, completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer else { return completion(nil, nil) }
+        
+        let url = baseURL
+            .appendingPathComponent("manual")
+            .appendingPathComponent("transaction")
+            .appendingPathComponent("\(bearer.userID)")
+            .appendingPathComponent("\(transactionID)")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.delete.rawValue
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        
+        completeReturnedJSON(request: request, requestName: "delete transaction", completion: completion)
+    }
+    
     // MARK: Private
     
     private func completeReturnedJSON(request: URLRequest, requestName: String, completion: @escaping (JSON?, Error?) -> Void) {

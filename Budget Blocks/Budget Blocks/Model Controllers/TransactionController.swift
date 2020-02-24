@@ -12,16 +12,6 @@ class TransactionController {
     
     var networkingController: NetworkingController?
     
-    func createTransaction(transactionID: String, name: String, amount: Int64, date: Date, context: NSManagedObjectContext) {
-        Transaction(transactionID: transactionID, name: name, amount: amount, date: date, context: context)
-        CoreDataStack.shared.save(context: context)
-    }
-    
-    func deleteTransaction(transaction: Transaction, context: NSManagedObjectContext) {
-        context.delete(transaction)
-        CoreDataStack.shared.save(context: context)
-    }
-    
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
             guard let categories = json?[self.networkingController!.manualAccount ? "list" : "Categories"].array else {
@@ -161,6 +151,29 @@ class TransactionController {
             let transaction = Transaction(transactionID: "\(transactionID)", name: name, amount: amount, date: date, context: context)
             CoreDataStack.shared.save(context: context)
             completion(transaction, nil)
+        })
+    }
+    
+    func delete(transaction: Transaction, context: NSManagedObjectContext, completion: @escaping (Bool, Error?) -> Void) {
+        guard let transactionID = Int32(transaction.transactionID ?? "") else { return completion(false, nil) }
+        networkingController?.deleteTransaction(transactionID: transactionID, completion: { json, error in
+            if let error = error {
+                return completion(false, error)
+            }
+            
+            guard let json = json else {
+                NSLog("No json returned from delete transaction request.")
+                return completion(false, nil)
+            }
+            
+            let deleted: Bool = json["deleted"].intValue.bool
+            
+            if deleted {
+                context.delete(transaction)
+                CoreDataStack.shared.save(context: context)
+            }
+            
+            completion(deleted, nil)
         })
     }
     
