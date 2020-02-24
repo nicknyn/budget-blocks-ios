@@ -15,10 +15,14 @@ protocol CategoriesTableViewControllerDelegate {
 
 class CategoriesTableViewController: UITableViewController {
     
+    @IBOutlet weak var showAllButton: UIButton!
+    
     var delegate: CategoriesTableViewControllerDelegate?
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+        
+        fetchRequest.predicate = NSPredicate(format: "budget > 0 OR transactions.@count > 0")
         
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "name", ascending: true)
@@ -34,7 +38,7 @@ class CategoriesTableViewController: UITableViewController {
         do {
             try frc.performFetch()
         } catch {
-            fatalError("Error fetching transactions: \(error)")
+            fatalError("Error fetching categories: \(error)")
         }
         
         return frc
@@ -70,5 +74,25 @@ class CategoriesTableViewController: UITableViewController {
         let category = fetchedResultsController.object(at: indexPath)
         delegate?.choose(category: category)
     }
-
+    
+    // MARK: Actions
+    
+    @IBAction func toggleShowAll(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        
+        if sender.isSelected {
+            fetchedResultsController.fetchRequest.predicate = nil
+        } else {
+            fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "budget > 0 OR transactions.@count > 0")
+        }
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Error fetching categories: \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
 }
