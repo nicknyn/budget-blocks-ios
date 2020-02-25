@@ -324,6 +324,28 @@ class NetworkingController {
         completeReturnedJSON(request: request, requestName: "delete transaction", completion: completion)
     }
     
+    func createCategory(named name: String, completion: @escaping (JSON?, Error?) -> Void) {
+        guard let bearer = bearer else { return completion(nil, nil) }
+        
+        let url = baseURL
+            .appendingPathComponent("manual")
+            .appendingPathComponent("categories")
+            .appendingPathComponent("\(bearer.userID)")
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        
+        let categoryJSON: JSON = ["name": name]
+        
+        do {
+            request.httpBody = try categoryJSON.rawData()
+            completeReturnedJSON(request: request, requestName: "create category", completion: completion)
+        } catch {
+            completion(nil, error)
+        }
+    }
+    
     // MARK: Private
     
     private func completeReturnedJSON(request: URLRequest, requestName: String, completion: @escaping (JSON?, Error?) -> Void) {

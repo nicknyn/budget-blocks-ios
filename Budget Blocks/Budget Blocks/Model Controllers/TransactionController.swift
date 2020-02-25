@@ -177,6 +177,24 @@ class TransactionController {
         })
     }
     
+    func createCategory(named name: String, context: NSManagedObjectContext, completion: @escaping (TransactionCategory?, Error?) -> Void) {
+        networkingController?.createCategory(named: name, completion: { json, error in
+            if let error = error {
+                completion(nil, error)
+            }
+            
+            guard let json = json,
+                let categoryID = json["addedCat"].int32 else {
+                    NSLog("No category ID returned from add category request.")
+                    return completion(nil, nil)
+            }
+            
+            let category = TransactionCategory(categoryID: categoryID, name: name, context: context)
+            CoreDataStack.shared.save(context: context)
+            completion(category, nil)
+        })
+    }
+    
     func clearStoredTransactions(context: NSManagedObjectContext) {
         let transactionsFetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         let categoriesFetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()

@@ -133,6 +133,7 @@ class CreateTransactionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let categoriesVC = segue.destination as? CategoriesTableViewController {
             categoriesVC.delegate = self
+            categoriesVC.transactionController = transactionController
         }
     }
 
