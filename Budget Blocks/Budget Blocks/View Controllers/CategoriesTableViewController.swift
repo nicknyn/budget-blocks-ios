@@ -82,13 +82,19 @@ class CategoriesTableViewController: UITableViewController {
             
             loadingGroup.enter()
             loading(message: "Deleting category...", dispatchGroup: loadingGroup)
-            transactionController?.delete(category: category, context: CoreDataStack.shared.mainContext) { _, error in
+            transactionController?.delete(category: category, context: CoreDataStack.shared.mainContext) { deleted, error in
                 self.loadingGroup.notify(queue: .main) {
                     self.loadingGroup.enter()
                     self.dismissAlert(dispatchGroup: self.loadingGroup)
                 }
                 
                 error?.log()
+                
+                if deleted {
+                    DispatchQueue.main.async {
+                        self.reloadTable()
+                    }
+                }
             }
         }
     }
