@@ -195,6 +195,28 @@ class TransactionController {
         })
     }
     
+    func delete(category: TransactionCategory, context: NSManagedObjectContext, completion: @escaping (Bool, Error?) -> Void) {
+        networkingController?.deleteCategory(categoryID: category.categoryID, completion: { json, error in
+            if let error = error {
+                return completion(false, error)
+            }
+            
+            guard let json = json else {
+                NSLog("No json returned from delete category request.")
+                return completion(false, nil)
+            }
+            
+            let deleted: Bool = json["deleted"].intValue.bool
+            
+            if deleted {
+                context.delete(category)
+                CoreDataStack.shared.save(context: context)
+            }
+            
+            completion(deleted, nil)
+        })
+    }
+    
     func clearStoredTransactions(context: NSManagedObjectContext) {
         let transactionsFetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         let categoriesFetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()

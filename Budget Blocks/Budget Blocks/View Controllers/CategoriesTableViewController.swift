@@ -20,6 +20,7 @@ class CategoriesTableViewController: UITableViewController {
     var delegate: CategoriesTableViewControllerDelegate?
     var transactionController: TransactionController?
     var newCategories: [TransactionCategory] = []
+    var loadingGroup = DispatchGroup()
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
@@ -70,6 +71,28 @@ class CategoriesTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return transactionController?.networkingController?.manualAccount ?? false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //TODO: Ask the user for confirmation
+            let category = fetchedResultsController.object(at: indexPath)
+            
+            loadingGroup.enter()
+            loading(message: "Deleting category...", dispatchGroup: loadingGroup)
+            transactionController?.delete(category: category, context: CoreDataStack.shared.mainContext) { _, error in
+                self.loadingGroup.notify(queue: .main) {
+                    self.loadingGroup.enter()
+                    self.dismissAlert(dispatchGroup: self.loadingGroup)
+                }
+                
+                error?.log()
+            }
+        }
+    }
+    
     // MARK: Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -80,15 +103,15 @@ class CategoriesTableViewController: UITableViewController {
     // MARK: Private
     
     private func reloadTable() {
-        var predicates: [NSPredicate] = []
+        let predicate: NSPredicate?
         
         if !showAllButton.isSelected {
-            predicates.append(NSPredicate(format: "budget > 0 OR transactions.@count > 0"))
+            predicate = NSPredicate(format: "budget > 0 OR transactions.@count > 0 OR SELF IN %@", newCategories)
+        } else {
+            predicate = nil
         }
         
-        predicates.append(NSPredicate(format: "SELF IN %@", newCategories))
-        
-        fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+        fetchedResultsController.fetchRequest.predicate = predicate
         
         do {
             try fetchedResultsController.performFetch()

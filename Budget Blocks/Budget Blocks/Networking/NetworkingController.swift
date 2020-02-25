@@ -46,7 +46,7 @@ class NetworkingController {
         case tokenExchange
         case manualOnboard
         case transactions(transactionID: Int32?)
-        case manualCategories
+        case manualCategories(categoryID: Int32?)
     }
     
     // MARK: Account
@@ -245,8 +245,13 @@ class NetworkingController {
     func createCategory(named name: String, completion: @escaping (JSON?, Error?) -> Void) {
         let categoryJSON: JSON = ["name": name]
         
-        guard let request = createRequest(urlComponents: .manualCategories, httpMethod: .post, json: categoryJSON) else { return completion(nil, nil) }
+        guard let request = createRequest(urlComponents: .manualCategories(categoryID: nil), httpMethod: .post, json: categoryJSON) else { return completion(nil, nil) }
         completeReturnedJSON(request: request, requestName: "create category", completion: completion)
+    }
+    
+    func deleteCategory(categoryID: Int32, completion: @escaping (JSON?, Error?) -> Void) {
+        guard let request = createRequest(urlComponents: .manualCategories(categoryID: categoryID), httpMethod: .delete) else { return completion(nil, nil) }
+        completeReturnedJSON(request: request, requestName: "delete category", completion: completion)
     }
     
     // MARK: Private
@@ -300,11 +305,14 @@ class NetworkingController {
             if let transactionID = transactionID {
                 url = url.appendingPathComponent("\(transactionID)")
             }
-        case .manualCategories:
+        case .manualCategories(let categoryID):
             url = baseURL
                 .appendingPathComponent("manual")
                 .appendingPathComponent("categories")
                 .appendingPathComponent("\(userID)")
+            if let categoryID = categoryID {
+                url = url.appendingPathComponent("\(categoryID)")
+            }
         }
         
         var request = URLRequest(url: url)
