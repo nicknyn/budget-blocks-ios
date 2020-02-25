@@ -24,17 +24,6 @@ enum HTTPHeader: String {
 
 class NetworkingController {
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
-    private var authURL: URL {
-        baseURL.appendingPathComponent("api")
-            .appendingPathComponent("auth")
-    }
-    private var categoriesURL: URL? {
-        guard let bearer = bearer else { return nil }
-        return baseURL.appendingPathComponent("api")
-            .appendingPathComponent("users")
-            .appendingPathComponent("categories")
-            .appendingPathComponent("\(bearer.userID)")
-    }
     
     private let emailKey = "email"
     private let passwordKey = "password"
@@ -49,6 +38,15 @@ class NetworkingController {
     }
     var accountSetUp: Bool {
         return linkedAccount || manualAccount
+    }
+    
+    enum URLPathComponent: Equatable {
+        case auth(register: Bool)
+        case categories
+        case tokenExchange
+        case manualOnboard
+        case transactions(transactionID: Int32?)
+        case manualCategories
     }
     
     // MARK: Account
@@ -79,74 +77,58 @@ class NetworkingController {
     }
     
     func login(email: String, password: String, completion: @escaping (String?, Error?) -> Void) {
-        let loginJSON = JSON(dictionaryLiteral: ("email", email), ("password", password))
+        let loginJSON: JSON = ["email": email, "password": password]
         
-        let url = authURL.appendingPathComponent("login")
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        guard let request = createRequest(urlComponents: .auth(register: false), httpMethod: .post, json: loginJSON) else { return completion(nil, nil) }
         
-        do {
-            request.httpBody = try loginJSON.rawData()
-            URLSession.shared.dataTask(with: request) { data, _, error in
-                guard let data = data else {
-                    NSLog("No data returned from login request")
-                    return completion(nil, error)
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                NSLog("No data returned from login request")
+                return completion(nil, error)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                if let token = responseJSON["token"].string,
+                    let userID = responseJSON["id"].int,
+                    let linked = responseJSON["LinkedAccount"].bool,
+                    let manual = responseJSON["ManualOnly"].bool {
+                    self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked, manualAccount: manual)
+                    self.keychain.set(email, forKey: self.emailKey)
+                    self.keychain.set(password, forKey: self.passwordKey)
                 }
-                
-                do {
-                    let responseJSON = try JSON(data: data)
-                    if let token = responseJSON["token"].string,
-                        let userID = responseJSON["id"].int,
-                        let linked = responseJSON["LinkedAccount"].bool,
-                        let manual = responseJSON["ManualOnly"].bool {
-                        self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked, manualAccount: manual)
-                        self.keychain.set(email, forKey: self.emailKey)
-                        self.keychain.set(password, forKey: self.passwordKey)
-                    }
-                    completion(responseJSON["token"].string, nil)
-                } catch {
-                    completion(nil, error)
-                }
-            }.resume()
-        } catch {
-            completion(nil, error)
-        }
+                completion(responseJSON["token"].string, nil)
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
     }
     
     func register(email: String, password: String, firstName: String, lastName: String, completion: @escaping (String?, Error?) -> Void) {
-        let registerJSON = JSON(["email": email,
-                                 "password": password,
-                                 "first_name": firstName,
-                                 "last_name": lastName])
+        let registerJSON: JSON = ["email": email,
+                                  "password": password,
+                                  "first_name": firstName,
+                                  "last_name": lastName]
         
-        let url = authURL.appendingPathComponent("register")
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+        guard let request = createRequest(urlComponents: .auth(register: true), httpMethod: .post, json: registerJSON) else { return completion(nil, nil) }
         
-        do {
-            request.httpBody = try registerJSON.rawData()
-            URLSession.shared.dataTask(with: request) { data, _, error in
-                guard let data = data else {
-                    NSLog("No data returned from register request")
-                    return completion(nil, error)
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                NSLog("No data returned from register request")
+                return completion(nil, error)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                if let email = responseJSON["message"].string {
+                    completion(email, nil)
+                } else {
+                    completion(responseJSON["error"].string, nil)
                 }
-                
-                do {
-                    let responseJSON = try JSON(data: data)
-                    if let email = responseJSON["message"].string {
-                        completion(email, nil)
-                    } else {
-                        completion(responseJSON["error"].string, nil)
-                    }
-                } catch {
-                    completion(nil, error)
-                }
-            }.resume()
-        } catch {
-            completion(nil, error)
-        }
+            } catch {
+                completion(nil, error)
+            }
+        }.resume()
     }
     
     func logout() {
@@ -156,54 +138,37 @@ class NetworkingController {
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
         guard let bearer = bearer else { return completion(nil) }
-        let tokenJSON = JSON(dictionaryLiteral: ("publicToken", publicToken), ("userid", bearer.userID))
+        let tokenJSON: JSON = ["publicToken": publicToken, "userid": bearer.userID]
         
-        let url = baseURL.appendingPathComponent("plaid")
-            .appendingPathComponent("token_exchange")
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        guard let request = createRequest(urlComponents: .tokenExchange, httpMethod: .post, json: tokenJSON) else { return completion(nil) }
         
-        do {
-            request.httpBody = try tokenJSON.rawData()
-            URLSession.shared.dataTask(with: request) { data, _, error in
-                guard let data = data else {
-                    NSLog("No data returned from register request")
-                    return completion(error)
-                }
-                
-                do {
-                    let responseJSON = try JSON(data: data)
-                    if responseJSON["ItemCreated"].int != nil {
-                        print("Access token inserted!")
-                        self.setLinked()
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data = data else {
+                NSLog("No data returned from register request")
+                return completion(error)
+            }
+            
+            do {
+                let responseJSON = try JSON(data: data)
+                if responseJSON["ItemCreated"].int != nil {
+                    print("Access token inserted!")
+                    self.setLinked()
+                } else {
+                    if let response = responseJSON.rawString() {
+                        NSLog("Unexpected response returned: \(response)")
                     } else {
-                        if let response = responseJSON.rawString() {
-                            NSLog("Unexpected response returned: \(response)")
-                        } else {
-                            NSLog("Unexpected response returned and can't be decoded.")
-                        }
+                        NSLog("Unexpected response returned and can't be decoded.")
                     }
-                    completion(nil)
-                } catch {
-                    completion(error)
                 }
-            }.resume()
-        } catch {
-            completion(error)
-        }
+                completion(nil)
+            } catch {
+                completion(error)
+            }
+        }.resume()
     }
     
     func manualOnboard(completion: @escaping (Error?) -> Void) {
-        guard let bearer = bearer else { return completion(nil) }
-        
-        let url = baseURL
-            .appendingPathComponent("manual")
-            .appendingPathComponent("onboard")
-            .appendingPathComponent("\(bearer.userID)")
-        var request = URLRequest(url: url)
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        guard let request = createRequest(urlComponents: .manualOnboard, httpMethod: .get) else { return completion(nil) }
         
         URLSession.shared.dataTask(with: request) { _, _, error in
             if error == nil {
@@ -216,44 +181,21 @@ class NetworkingController {
     // MARK: Categories and transactions
     
     func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return completion(nil, nil) }
-        
-        let url = baseURL
-            .appendingPathComponent(manualAccount ? "manual" : "plaid")
-            .appendingPathComponent("transaction\(manualAccount ? "" : "s")")
-            .appendingPathComponent("\(bearer.userID)")
-        var request = URLRequest(url: url)
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
-        
+        guard let request = createRequest(urlComponents: .transactions(transactionID: nil), httpMethod: .get) else { return completion(nil,nil) }
         completeReturnedJSON(request: request, requestName: "transactions", completion: completion)
     }
     
     func fetchCategoriesFromServer(completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer,
-            let url = categoriesURL else { return completion(nil, nil) }
-        var request = URLRequest(url: url)
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
-        
+        guard let request = createRequest(urlComponents: .categories, httpMethod: .get) else { return completion(nil, nil) }
         completeReturnedJSON(request: request, requestName: "categories", completion: completion)
     }
     
     func setCategoryBudget(categoryID: Int32, budget: Int64, completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer,
-            let url = categoriesURL else { return completion(nil, nil) }
         let budgetFloat = Float(budget) / 100
-        let budgetJSON = JSON(dictionaryLiteral: ("categoryid", categoryID), ("budget", budgetFloat))
+        let budgetJSON: JSON = ["categoryid": categoryID, "budget": budgetFloat]
         
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.put.rawValue
-        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
-        
-        do {
-            request.httpBody = try budgetJSON.rawData()
-            completeReturnedJSON(request: request, requestName: "set category", completion: completion)
-        } catch {
-            completion(nil, error)
-        }
+        guard let request = createRequest(urlComponents: .categories, httpMethod: .put, json: budgetJSON) else { return completion(nil, nil) }
+        completeReturnedJSON(request: request, requestName: "set category", completion: completion)
     }
     
     func setLinked() {
@@ -271,8 +213,7 @@ class NetworkingController {
     // MARK: Manual
     
     func createTransaction(amount: Int64, date: Date, category: TransactionCategory, name: String?, completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer,
-            category.categoryID != 0 else { return completion(nil, nil) }
+        guard category.categoryID != 0 else { return completion(nil, nil) }
         
         let amountFloat = Float(amount) / 100
         
@@ -286,64 +227,26 @@ class NetworkingController {
         let dateString = dateFormatter.string(from: date)
         
         var transactionJSON: JSON = ["amount": amountFloat,
-                                    "payment_date": dateString,
-                                    "category_id": category.categoryID]
+                                     "payment_date": dateString,
+                                     "category_id": category.categoryID]
         if let name = name {
             transactionJSON["name"].stringValue = name
         }
         
-        let url = baseURL
-            .appendingPathComponent("manual")
-            .appendingPathComponent("transaction")
-            .appendingPathComponent("\(bearer.userID)")
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
-        
-        do {
-            request.httpBody = try transactionJSON.rawData()
-            completeReturnedJSON(request: request, requestName: "add transaction", completion: completion)
-        } catch {
-            completion(nil, error)
-        }
+        guard let request = createRequest(urlComponents: .transactions(transactionID: nil), httpMethod: .post, json: transactionJSON) else { return completion(nil, nil) }
+        completeReturnedJSON(request: request, requestName: "add transaction", completion: completion)
     }
     
     func deleteTransaction(transactionID: Int32, completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return completion(nil, nil) }
-        
-        let url = baseURL
-            .appendingPathComponent("manual")
-            .appendingPathComponent("transaction")
-            .appendingPathComponent("\(bearer.userID)")
-            .appendingPathComponent("\(transactionID)")
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.delete.rawValue
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
-        
+        guard let request = createRequest(urlComponents: .transactions(transactionID: transactionID), httpMethod: .delete) else { return completion(nil, nil) }
         completeReturnedJSON(request: request, requestName: "delete transaction", completion: completion)
     }
     
     func createCategory(named name: String, completion: @escaping (JSON?, Error?) -> Void) {
-        guard let bearer = bearer else { return completion(nil, nil) }
-        
-        let url = baseURL
-            .appendingPathComponent("manual")
-            .appendingPathComponent("categories")
-            .appendingPathComponent("\(bearer.userID)")
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.post.rawValue
-        request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
-        request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
-        
         let categoryJSON: JSON = ["name": name]
         
-        do {
-            request.httpBody = try categoryJSON.rawData()
-            completeReturnedJSON(request: request, requestName: "create category", completion: completion)
-        } catch {
-            completion(nil, error)
-        }
+        guard let request = createRequest(urlComponents: .manualCategories, httpMethod: .post, json: categoryJSON) else { return completion(nil, nil) }
+        completeReturnedJSON(request: request, requestName: "create category", completion: completion)
     }
     
     // MARK: Private
@@ -362,5 +265,69 @@ class NetworkingController {
                 completion(nil, error)
             }
         }.resume()
+    }
+    
+    private func createRequest(urlComponents: URLPathComponent, httpMethod: HTTPMethod, json: JSON? = nil) -> URLRequest? {
+        var url: URL
+        
+        let userID = bearer?.userID ?? 0
+        switch urlComponents {
+        case .auth(let register):
+            url = baseURL
+                .appendingPathComponent("api")
+                .appendingPathComponent("auth")
+                .appendingPathComponent(register ? "register" : "login")
+        case .categories:
+            url = baseURL
+                .appendingPathComponent("api")
+                .appendingPathComponent("users")
+                .appendingPathComponent("categories")
+                .appendingPathComponent("\(userID)")
+        case .tokenExchange:
+            url = baseURL
+                .appendingPathComponent("plaid")
+                .appendingPathComponent("token_exchange")
+        case .manualOnboard:
+            url = baseURL
+                .appendingPathComponent("manual")
+                .appendingPathComponent("onboard")
+                .appendingPathComponent("\(userID)")
+        case .transactions(let transactionID):
+            url = baseURL
+                .appendingPathComponent(manualAccount ? "manual" : "plaid")
+                .appendingPathComponent("transaction\(manualAccount ? "" : "s")")
+                .appendingPathComponent("\(userID)")
+            if let transactionID = transactionID {
+                url = url.appendingPathComponent("\(transactionID)")
+            }
+        case .manualCategories:
+            url = baseURL
+                .appendingPathComponent("manual")
+                .appendingPathComponent("categories")
+                .appendingPathComponent("\(userID)")
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = httpMethod.rawValue
+        
+        switch urlComponents {
+        case .auth(_):
+            break
+        default:
+            guard let bearer = bearer else { return nil }
+            request.addValue(bearer.token, forHTTPHeaderField: HTTPHeader.auth.rawValue)
+        }
+        
+        if let json = json {
+            do {
+                request.addValue("application/json", forHTTPHeaderField: HTTPHeader.contentType.rawValue)
+                request.httpBody = try json.rawData()
+            } catch {
+                NSLog("Error encoding json: \(error)")
+                return nil
+            }
+        }
+        
+        return request
     }
 }
