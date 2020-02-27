@@ -47,10 +47,10 @@ class Budget_BlocksUITests: XCTestCase {
         
         app.textFields.firstMatch.tap()
         app.typeText("email@example.com")
-        app.keyboards.buttons["Return"].tap()
+        app.keyboards.buttons["return"].tap()
         
         app.typeText("password")
-        app.keyboards.buttons["Return"].tap()
+        app.keyboards.buttons["return"].tap()
         
         app.buttons.matching(identifier: "Sign In").element(boundBy: 1).tap()
     }
