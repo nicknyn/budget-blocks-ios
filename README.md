@@ -34,7 +34,7 @@ Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. U
 
 Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
 
-![](header.png)
+<img src="header.png" height=600 />
 
 ### Features
 
