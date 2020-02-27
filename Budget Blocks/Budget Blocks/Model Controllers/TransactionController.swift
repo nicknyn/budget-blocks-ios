@@ -12,19 +12,9 @@ class TransactionController {
     
     var networkingController: NetworkingController?
     
-    func createTransaction(transactionID: String, name: String, amount: Int64, date: Date, context: NSManagedObjectContext) {
-        Transaction(transactionID: transactionID, name: name, amount: amount, date: date, context: context)
-        CoreDataStack.shared.save(context: context)
-    }
-    
-    func deleteTransaction(transaction: Transaction, context: NSManagedObjectContext) {
-        context.delete(transaction)
-        CoreDataStack.shared.save(context: context)
-    }
-    
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
-            guard let categories = json?["Categories"].array else {
+            guard let categories = json?[self.networkingController!.manualAccount ? "list" : "Categories"].array else {
                 NSLog("Transaction fetch response did not contain transactions")
                 if let message = json?["message"].string {
                     return completion(message, error)
@@ -143,6 +133,87 @@ class TransactionController {
             
             category.budget = Int64(amount * 100)
             completion(nil)
+        })
+    }
+    
+    func createTransaction(amount: Int64, date: Date, category: TransactionCategory, name: String?, context: NSManagedObjectContext, completion: @escaping (Transaction?, Error?) -> Void) {
+        networkingController?.createTransaction(amount: amount, date: date, category: category, name: name, completion: { json, error in
+            if let error = error {
+                return completion(nil, error)
+            }
+            
+            guard let json = json,
+                let transactionID = json["inserted"].int32 else {
+                    NSLog("No ID returned from create transaction request.")
+                    return completion(nil, nil)
+            }
+            
+            let transaction = Transaction(transactionID: "\(transactionID)", name: name, amount: amount, date: date, context: context)
+            CoreDataStack.shared.save(context: context)
+            completion(transaction, nil)
+        })
+    }
+    
+    func delete(transaction: Transaction, context: NSManagedObjectContext, completion: @escaping (Bool, Error?) -> Void) {
+        guard let transactionID = Int32(transaction.transactionID ?? "") else { return completion(false, nil) }
+        networkingController?.deleteTransaction(transactionID: transactionID, completion: { json, error in
+            if let error = error {
+                return completion(false, error)
+            }
+            
+            guard let json = json else {
+                NSLog("No json returned from delete transaction request.")
+                return completion(false, nil)
+            }
+            
+            let deleted: Bool = json["deleted"].intValue.bool
+            
+            if deleted {
+                context.delete(transaction)
+                CoreDataStack.shared.save(context: context)
+            }
+            
+            completion(deleted, nil)
+        })
+    }
+    
+    func createCategory(named name: String, context: NSManagedObjectContext, completion: @escaping (TransactionCategory?, Error?) -> Void) {
+        networkingController?.createCategory(named: name, completion: { json, error in
+            if let error = error {
+                completion(nil, error)
+            }
+            
+            guard let json = json,
+                let categoryID = json["addedCat"].int32 else {
+                    NSLog("No category ID returned from add category request.")
+                    return completion(nil, nil)
+            }
+            
+            let category = TransactionCategory(categoryID: categoryID, name: name, context: context)
+            CoreDataStack.shared.save(context: context)
+            completion(category, nil)
+        })
+    }
+    
+    func delete(category: TransactionCategory, context: NSManagedObjectContext, completion: @escaping (Bool, Error?) -> Void) {
+        networkingController?.deleteCategory(categoryID: category.categoryID, completion: { json, error in
+            if let error = error {
+                return completion(false, error)
+            }
+            
+            guard let json = json else {
+                NSLog("No json returned from delete category request.")
+                return completion(false, nil)
+            }
+            
+            let deleted: Bool = json["deleted"].intValue.bool
+            
+            if deleted {
+                context.delete(category)
+                CoreDataStack.shared.save(context: context)
+            }
+            
+            completion(deleted, nil)
         })
     }
     

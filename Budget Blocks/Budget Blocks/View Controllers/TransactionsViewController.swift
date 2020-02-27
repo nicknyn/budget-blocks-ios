@@ -17,6 +17,7 @@ class TransactionsViewController: UIViewController {
     var transactionController: TransactionController!
     var category: TransactionCategory?
     let dateFormatter = DateFormatter()
+    let loadingGroup = DispatchGroup()
     
     lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -66,20 +67,24 @@ class TransactionsViewController: UIViewController {
             }
             
             guard let message = message else { return }
-            if message == "No access_Token found for that user id provided" {
-                DispatchQueue.main.async {
-                    self.alertAndReturn(title: "No linked accounts", message: "Please link a bank account first")
-                }
-            } else if message == "insertion process hasn't started"
-                || message == "we are inserting your data" {
-                DispatchQueue.main.async {
-                    self.alertAndReturn(title: "Try again in a moment", message: "We're working on fetching your transactions. Please try again in a moment.")
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.alertAndReturn(title: "An error has occurred.", message: "There was an error fetching your transactions.")
-                }
+            let alertTitle: String
+            let alertMessage: String
+            
+            switch message {
+            case "No access_Token found for that user id provided":
+                alertTitle = "No linked accounts"
+                alertMessage = "Please link a bank account first"
+            case "insertion process hasn't started", "we are inserting your data":
+                alertTitle = "Try again in a moment"
+                alertMessage = "We're working on fetching your transactions. Please try again in a moment."
+            default:
+                alertTitle = "An error has occurred."
+                alertMessage = "There was an error fetching your transactions."
                 NSLog("Message: \(message)")
+            }
+            
+            DispatchQueue.main.async {
+                self.alertAndReturn(title: alertTitle, message: alertMessage)
             }
         }
     }
@@ -154,6 +159,28 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         cell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return networkingController.manualAccount
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //TODO: Ask the user for confirmation
+            let transaction = fetchedResultsController.object(at: indexPath)
+            
+            loadingGroup.enter()
+            loading(message: "Deleting transaction...", dispatchGroup: loadingGroup)
+            transactionController.delete(transaction: transaction, context: CoreDataStack.shared.mainContext) { _, error in
+                self.loadingGroup.notify(queue: .main) {
+                    self.loadingGroup.enter()
+                    self.dismissAlert(dispatchGroup: self.loadingGroup)
+                }
+                
+                error?.log()
+            }
+        }
     }
 }
 

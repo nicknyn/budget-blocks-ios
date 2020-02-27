@@ -1,12 +1,8 @@
 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
 
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+# Budget Blocks
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
-# Title of project goes here
-
-You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project on [Apple TestFlight](https://testflight.apple.com/join/pUS0UdsD).
 
 ## Contributors
 
@@ -22,11 +18,9 @@ You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste
 [![Maintainability](https://api.codeclimate.com/v1/badges/bf07fe920bb7f2571c9b/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/budget-blocks-ios/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bf07fe920bb7f2571c9b/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/budget-blocks-ios/test_coverage)
 
-🚫 more info on using badges [here](https://github.com/badges/shields)
-
 ## Project Overview
 
-You can find the deployed project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the deployed project on [Apple TestFlight](https://testflight.apple.com/join/pUS0UdsD).
 
 [Trello Board](https://trello.com/b/emmxnHtH/labs-20-budget-blocks)
 
@@ -40,7 +34,7 @@ Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. U
 
 Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
 
-![](header.png)
+<img src="header.png" height=600 />
 
 ### Features
 
@@ -50,57 +44,30 @@ Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pelle
 -    Feature 4
 -    Feature 5
 
-### Authentication API here
-
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
-
-### Payment API here
-
-🚫Replace text below with a description of the API
-
-This is the way you take out your frustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-### Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
-
 ## Requirements
 
-🚫 These are examples, make sure this matches your project's requirements
+-   iOS 13.0+
+-   Xcode 11
+-   Carthage
+-   Swift Package Manager
 
--   iOS 8.0+
--   Xcode 7.3
--   Cocoa Pods
+### Plaid Link
+
+[Plaid Link iOS SKD](https://plaid.com/docs/link/ios/) allows the user to connect a bank account to their Budget Blocks account. Requires the `PLAID_PUBLIC_KEY` environment variable to be set.
+
+### SwiftyJSON
+
+[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON) is used for easily encoding and decoding JSON for network requests.
+
+### KeychainSwift
+
+[KeychainSwift](https://github.com/evgenyneu/keychain-swift) is used for easily storing login credentials using Apple's Keychain.
 
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
 Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
-
-### Issue/Bug Request
-
-    ## Contributing
-
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
-
-Please note we have a [code of conduct](./code_of_conduct.md). Please follow it in all your interactions with the project.
 
 ### Issue/Bug Request
 

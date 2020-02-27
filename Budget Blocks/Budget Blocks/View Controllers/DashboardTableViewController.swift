@@ -50,7 +50,7 @@ class DashboardTableViewController: UITableViewController {
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "budget", ascending: false)]
         
-        let predicate = NSPredicate(format: "transactions.@count > 0")
+        let predicate = NSPredicate(format: "transactions.@count > 0 OR budget > 0")
         fetchRequest.predicate = predicate
         let context = CoreDataStack.shared.mainContext
         
@@ -76,6 +76,8 @@ class DashboardTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        transactionController.networkingController = networkingController
+        
         updateBalances()
         updateRemainingBudget()
         
@@ -86,16 +88,14 @@ class DashboardTableViewController: UITableViewController {
         let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
         navigationItem.rightBarButtonItem = logoutButton
         
-        if networkingController.bearer == nil {
-            networkingController.loginWithKeychain { success in
-                if success {
-                    DispatchQueue.main.async {
-                        self.setUpViews()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "InitialLogin", sender: self)
-                    }
+        networkingController.loginWithKeychain { success in
+            if success {
+                DispatchQueue.main.async {
+                    self.setUpViews()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "InitialLogin", sender: self)
                 }
             }
         }
@@ -118,7 +118,7 @@ class DashboardTableViewController: UITableViewController {
             let categoriesCount = categoriesFRC.fetchedObjects?.count ?? 0
             return categoriesCount + (categoriesWithBudget.count == 0).int
         default:
-            return 1
+            return 1 + networkingController.manualAccount.int * 2
         }
     }
 
@@ -138,8 +138,17 @@ class DashboardTableViewController: UITableViewController {
                 cellText = "Connect your bank with Plaid"
                 cellImage = UIImage(named: "plaid-logo-icon")
             case 1:
-                cellText = "View Transactions"
-                cellImage = UIImage(named: "budget")
+                switch indexPath.row {
+                case 0:
+                    cellText = "View Transactions"
+                    cellImage = UIImage(named: "budget")
+                case 1:
+                    cellText = "Add an expense"
+                    cellImage = UIImage(named: "minus-icon")
+                default:
+                    cellText = "Add income"
+                    cellImage = UIImage(named: "plus-icon")
+                }
             default:
                 cellText = "Create a budget"
                 cellImage = UIImage(named: "budget")
@@ -211,8 +220,11 @@ class DashboardTableViewController: UITableViewController {
         switch adjustedSection(index: indexPath.section) {
         case 0:
             linkAccount()
-        case 1:
+        case 1 where indexPath.row == 0:
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
+        case 1:
+            self.performSegue(withIdentifier: "AddTransaction", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
         case 2 where indexPath.row == 0 && categoriesWithBudget.count == 0:
             self.performSegue(withIdentifier: "CreateBudget", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
@@ -226,9 +238,11 @@ class DashboardTableViewController: UITableViewController {
     // MARK: Private
     
     private func setUpViews() {
-        transactionController.networkingController = networkingController
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             error?.log()
+            DispatchQueue.main.async {
+                self.createInitalBudget()
+            }
         }
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             error?.log()
@@ -240,6 +254,9 @@ class DashboardTableViewController: UITableViewController {
     }
     
     @objc private func refreshTable(_ refreshControl: UIRefreshControl) {
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+        }
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -300,7 +317,7 @@ class DashboardTableViewController: UITableViewController {
         // 0. Connect bank acount with Plaid
         // 1. View Transactions
         // 2. List of categories
-        return index + networkingController.linkedAccount.int
+        return index + networkingController.accountSetUp.int
     }
     
     private func viewBudget(forRowAt indexPath: IndexPath) {
@@ -332,12 +349,18 @@ class DashboardTableViewController: UITableViewController {
         
         present(actionSheet, animated: true)
     }
+    
+    private func createInitalBudget() {
+        guard !networkingController.accountSetUp else { return }
+        performSegue(withIdentifier: "Onboarding", sender: self)
+    }
 
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let welcomeVC = segue.destination as? WelcomeViewController {
             welcomeVC.networkingController = networkingController
+            welcomeVC.delegate = self
         } else if let transactionsVC = segue.destination as? TransactionsViewController {
             transactionsVC.networkingController = networkingController
             transactionsVC.transactionController = transactionController
@@ -347,17 +370,29 @@ class DashboardTableViewController: UITableViewController {
                 let index = indexPath.row - (categoriesWithBudget.count == 0).int
                 transactionsVC.category = categoriesFRC.fetchedObjects?[index]
             }
-        } else if let navigationVC = segue.destination as? UINavigationController,
-            let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
-            blocksVC.transactionController = transactionController
-            blocksVC.budgets = categoriesWithBudget.map({ ($0, $0.budget) })
-            
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let index = indexPath.row - (categoriesWithBudget.count == 0).int
-                if index >= 0,
-                    let selectedCategory = categoriesFRC.fetchedObjects?[index],
-                    selectedCategory.budget == 0 {
-                    blocksVC.budgets.append((selectedCategory, 0))
+        } else if let navigationVC = segue.destination as? UINavigationController {
+            if let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
+                blocksVC.transactionController = transactionController
+                blocksVC.budgets = categoriesWithBudget.map({ ($0, $0.budget) })
+                
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    let index = indexPath.row - (categoriesWithBudget.count == 0).int
+                    if index >= 0,
+                        let selectedCategory = categoriesFRC.fetchedObjects?[index],
+                        selectedCategory.budget == 0 {
+                        blocksVC.budgets.append((selectedCategory, 0))
+                    }
+                }
+            } else if let onboardingVC = navigationVC.viewControllers.first as? OnboardingViewController {
+                onboardingVC.transactionController = transactionController
+                onboardingVC.networkingController = networkingController
+                onboardingVC.delegate = self
+            } else if let createTransactionVC = navigationVC.viewControllers.first as? CreateTransactionViewController {
+                createTransactionVC.transactionController = transactionController
+                
+                if let indexPath = tableView.indexPathForSelectedRow,
+                indexPath.row == 2 {
+                    createTransactionVC.income = true
                 }
             }
         }
@@ -405,6 +440,43 @@ extension DashboardTableViewController: NSFetchedResultsControllerDelegate {
             tableView.reloadData()
         default:
             break
+        }
+    }
+}
+
+// MARK: Login view controller delegate
+
+extension DashboardTableViewController: LoginViewControllerDelegate {
+    func loginSuccessful() {
+        let dismissGroup = DispatchGroup()
+        
+        dismissGroup.enter()
+        dismiss(animated: true) {
+            DispatchQueue.main.async {
+                self.dismiss(animated: true) {
+                    dismissGroup.leave()
+                }
+            }
+        }
+        
+        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+            dismissGroup.notify(queue: .main, execute: {
+                self.createInitalBudget()
+            })
+        }
+    }
+}
+
+// MARK: Onboarding view controller delegate
+
+extension DashboardTableViewController: OnboardingViewControllerDelegate {
+    func accountConnected() {
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
 }

@@ -15,10 +15,17 @@ protocol CategoriesTableViewControllerDelegate {
 
 class CategoriesTableViewController: UITableViewController {
     
+    @IBOutlet weak var showAllButton: UIButton!
+    
     var delegate: CategoriesTableViewControllerDelegate?
+    var transactionController: TransactionController?
+    var newCategories: [TransactionCategory] = []
+    var loadingGroup = DispatchGroup()
     
     lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
+        
+        fetchRequest.predicate = NSPredicate(format: "budget > 0 OR transactions.@count > 0")
         
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "name", ascending: true)
@@ -34,7 +41,7 @@ class CategoriesTableViewController: UITableViewController {
         do {
             try frc.performFetch()
         } catch {
-            fatalError("Error fetching transactions: \(error)")
+            fatalError("Error fetching categories: \(error)")
         }
         
         return frc
@@ -64,11 +71,115 @@ class CategoriesTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return transactionController?.networkingController?.manualAccount ?? false
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            //TODO: Ask the user for confirmation
+            let category = fetchedResultsController.object(at: indexPath)
+            
+            loadingGroup.enter()
+            loading(message: "Deleting category...", dispatchGroup: loadingGroup)
+            transactionController?.delete(category: category, context: CoreDataStack.shared.mainContext) { deleted, error in
+                self.loadingGroup.notify(queue: .main) {
+                    self.loadingGroup.enter()
+                    self.dismissAlert(dispatchGroup: self.loadingGroup)
+                }
+                
+                error?.log()
+                
+                if deleted {
+                    DispatchQueue.main.async {
+                        self.reloadTable()
+                    }
+                }
+            }
+        }
+    }
+    
     // MARK: Table view delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category = fetchedResultsController.object(at: indexPath)
         delegate?.choose(category: category)
     }
-
+    
+    // MARK: Private
+    
+    private func reloadTable() {
+        let predicate: NSPredicate?
+        
+        if !showAllButton.isSelected {
+            predicate = NSPredicate(format: "budget > 0 OR transactions.@count > 0 OR SELF IN %@", newCategories)
+        } else {
+            predicate = nil
+        }
+        
+        fetchedResultsController.fetchRequest.predicate = predicate
+        
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            fatalError("Error fetching categories: \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func toggleShowAll(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        reloadTable()
+    }
+    
+    @IBAction func createNewCategory(_ sender: Any) {
+        let alert = UIAlertController(title: "Create New Category", message: "Enter a category name", preferredStyle: .alert)
+        
+        var nameTextField: UITextField?
+        alert.addTextField { textField in
+            textField.placeholder = "Category name"
+            textField.autocapitalizationType = .words
+            textField.returnKeyType = .done
+            nameTextField = textField
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let create = UIAlertAction(title: "Create", style: .default) { _ in
+            guard let transactionController = self.transactionController,
+                let name = nameTextField?.text,
+                !name.isEmpty else { return }
+            
+            let loadingGroup = DispatchGroup()
+            loadingGroup.enter()
+            DispatchQueue.main.async {
+                self.loading(message: "Creating category...", dispatchGroup: loadingGroup)
+            }
+            
+            transactionController.createCategory(named: name, context: CoreDataStack.shared.mainContext, completion: { category, error in
+                loadingGroup.notify(queue: .main) {
+                    loadingGroup.enter()
+                    self.dismissAlert(dispatchGroup: loadingGroup)
+                }
+                
+                error?.log()
+                
+                if let category = category {
+                    self.newCategories.append(category)
+                    DispatchQueue.main.async {
+                        self.reloadTable()
+                    }
+                }
+            })
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(create)
+        
+        present(alert, animated: true)
+    }
+    
 }

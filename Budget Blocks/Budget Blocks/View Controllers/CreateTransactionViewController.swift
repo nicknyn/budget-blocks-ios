@@ -16,11 +16,14 @@ class CreateTransactionViewController: UIViewController {
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var paidSegmentedControl: UISegmentedControl!
     
     let datePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     var amount: Int64 = 0
     var category: TransactionCategory?
+    var income: Bool = false
+    var transactionController: TransactionController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +64,8 @@ class CreateTransactionViewController: UIViewController {
         saveButton.layer.backgroundColor = daybreakBlue.cgColor
         saveButton.layer.cornerRadius = 4
         saveButton.setTitleColor(.white, for: .normal)
+        
+        paidSegmentedControl.selectedSegmentIndex = income.int
     }
     
     private func updateViews() {
@@ -99,13 +104,28 @@ class CreateTransactionViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        guard let _ = category,
+        guard let category = category,
             !(dateTextField.text?.isEmpty ?? true),
             amount > 0 else { return }
         
-        //Save the transaction
+        let adjustedAmount = amount * (paidSegmentedControl.selectedSegmentIndex.bool ? -1 : 1)
         
-        dismiss(animated: true, completion: nil)
+        let loadingGroup = DispatchGroup()
+        loadingGroup.enter()
+        loading(message: "Creating transaction...", dispatchGroup: loadingGroup)
+        transactionController?.createTransaction(amount: adjustedAmount, date: datePicker.date, category: category, name: descriptionTextField.text, context: CoreDataStack.shared.mainContext, completion: { transaction, error in
+            error?.log()
+            loadingGroup.notify(queue: .main, execute: {
+                loadingGroup.enter()
+                self.dismissAlert(dispatchGroup: loadingGroup)
+            })
+            
+            guard transaction != nil else { return }
+            
+            loadingGroup.notify(queue: .main, execute: {
+                self.dismiss(animated: true, completion: nil)
+            })
+        })
     }
     
      // MARK: - Navigation
@@ -113,6 +133,7 @@ class CreateTransactionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let categoriesVC = segue.destination as? CategoriesTableViewController {
             categoriesVC.delegate = self
+            categoriesVC.transactionController = transactionController
         }
     }
 
