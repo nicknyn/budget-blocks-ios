@@ -31,11 +31,18 @@ class Budget_BlocksUITests: XCTestCase {
         login()
         sleep(5)
         
-        app.staticTexts["Dashboard"].tap()
+        XCTAssertTrue(app.staticTexts["Dashboard"].exists)
+    }
+    
+    func testViewTransactions() {
+        login()
+        sleep(5)
+        
+        app.staticTexts["View Transactions"].tap()
+        XCTAssertTrue(app.staticTexts["Transactions"].exists)
     }
     
     private func login() {
-        
         app.buttons["Sign In"].tap()
         
         app.textFields.firstMatch.tap()

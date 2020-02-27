@@ -27,7 +27,6 @@
 		5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */; };
 		5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A323DB59BA00A24A8F /* Assets.xcassets */; };
 		5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */; };
-		5955B8B223DB59BB00A24A8F /* Budget_BlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */; };
 		5955B8BD23DB59BB00A24A8F /* Budget_BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */; };
 		5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964123DFC1FD0062F794 /* WelcomeViewController.swift */; };
 		5967964423DFC8520062F794 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964323DFC8520062F794 /* LoginViewController.swift */; };
@@ -102,7 +101,6 @@
 		5955B8A623DB59BA00A24A8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5955B8A823DB59BA00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5955B8AD23DB59BB00A24A8F /* Budget BlocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget BlocksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BlocksTests.swift; sourceTree = "<group>"; };
 		5955B8B323DB59BB00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5955B8B823DB59BB00A24A8F /* Budget BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget BlocksUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BlocksUITests.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 		5955B8B023DB59BB00A24A8F /* Budget BlocksTests */ = {
 			isa = PBXGroup;
 			children = (
-				5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */,
 				5955B8B323DB59BB00A24A8F /* Info.plist */,
 				5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */,
 			);
@@ -494,7 +491,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5955B8B223DB59BB00A24A8F /* Budget_BlocksTests.swift in Sources */,
 				5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
