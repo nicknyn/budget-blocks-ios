@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+      - run: carthage update --platform iOS
       - name: Build and test
         run: |
           cd "Budget Blocks"
