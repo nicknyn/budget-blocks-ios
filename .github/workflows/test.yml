@@ -1,0 +1,21 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: macOS-latest
+    strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11 Pro Max']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - run: carthage update --platform iOS
+      - name: Build and test
+        run: |
+          cd "Budget Blocks"
+          xcodebuild clean test -project "Budget Blocks.xcodeproj" -scheme "Budget Blocks" -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+        env: 
+         destination: ${{ matrix.destination }}
