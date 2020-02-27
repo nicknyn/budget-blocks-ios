@@ -12,6 +12,20 @@ class TransactionController {
     
     var networkingController: NetworkingController?
     
+    init(networkingController: NetworkingController? = nil) {
+        self.networkingController = networkingController
+        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func logout() {
+        networkingController?.logout()
+        clearStoredTransactions(context: CoreDataStack.shared.mainContext)
+    }
+    
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
             guard let categories = json?[self.networkingController!.manualAccount ? "list" : "Categories"].array else {

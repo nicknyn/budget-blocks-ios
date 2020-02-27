@@ -85,8 +85,10 @@ class DashboardTableViewController: UITableViewController {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
         
         // Temporary logout button until the profile page is set up
-        let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
+        let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logoutTapped))
         navigationItem.rightBarButtonItem = logoutButton
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(logout), name: .logout, object: nil)
         
         networkingController.loginWithKeychain { success in
             if success {
@@ -104,6 +106,10 @@ class DashboardTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Table view data source
@@ -278,9 +284,11 @@ class DashboardTableViewController: UITableViewController {
     }
     
     @objc private func logout() {
-        networkingController.logout()
-        TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
         performSegue(withIdentifier: "AnimatedLogin", sender: self)
+    }
+    
+    @objc private func logoutTapped() {
+        NotificationCenter.default.post(name: .logout, object: self)
     }
     
     private func updateBalances() {

@@ -46,6 +46,7 @@
 		59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAB9D323F361F900BF91F7 /* Error+Log.swift */; };
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
+		59EA3C442408435E000A7601 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EA3C432408435E000A7601 /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		59BAB9D323F361F900BF91F7 /* Error+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Log.swift"; sourceTree = "<group>"; };
 		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
+		59EA3C432408435E000A7601 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +294,7 @@
 				59BAB9D323F361F900BF91F7 /* Error+Log.swift */,
 				598B29FA23FDB9FA0038B698 /* Bool+Int.swift */,
 				598B29FE23FF6D290038B698 /* UIViewController+Loading.swift */,
+				59EA3C432408435E000A7601 /* Notifications.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */,
 				590B3A5123FC554F0058D236 /* TransactionTableViewCell.swift in Sources */,
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
+				59EA3C442408435E000A7601 /* Notifications.swift in Sources */,
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
 				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,
@@ -661,6 +665,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = A4525544Q4;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Budget Blocks/Info.plist";
@@ -680,6 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = A4525544Q4;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Budget Blocks/Info.plist";
