@@ -27,7 +27,6 @@
 		5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */; };
 		5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A323DB59BA00A24A8F /* Assets.xcassets */; };
 		5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */; };
-		5955B8B223DB59BB00A24A8F /* Budget_BlocksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */; };
 		5955B8BD23DB59BB00A24A8F /* Budget_BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */; };
 		5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964123DFC1FD0062F794 /* WelcomeViewController.swift */; };
 		5967964423DFC8520062F794 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964323DFC8520062F794 /* LoginViewController.swift */; };
@@ -47,6 +46,8 @@
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
 		59EA3C442408435E000A7601 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EA3C432408435E000A7601 /* Notifications.swift */; };
+		59EA3C4824084A38000A7601 /* LinkKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; platformFilter = ios; };
+		59EA3C4B24084A8A000A7601 /* LinkKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 596C10FC23E0E09F003DF1D8 /* LinkKit.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,16 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		59EA3C4A24084A85000A7601 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				59EA3C4B24084A8A000A7601 /* LinkKit.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -103,7 +114,6 @@
 		5955B8A623DB59BA00A24A8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5955B8A823DB59BA00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5955B8AD23DB59BB00A24A8F /* Budget BlocksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget BlocksTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BlocksTests.swift; sourceTree = "<group>"; };
 		5955B8B323DB59BB00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5955B8B823DB59BB00A24A8F /* Budget BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget BlocksUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BlocksUITests.swift; sourceTree = "<group>"; };
@@ -148,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59EA3C4824084A38000A7601 /* LinkKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +228,6 @@
 		5955B8B023DB59BB00A24A8F /* Budget BlocksTests */ = {
 			isa = PBXGroup;
 			children = (
-				5955B8B123DB59BB00A24A8F /* Budget_BlocksTests.swift */,
 				5955B8B323DB59BB00A24A8F /* Info.plist */,
 				5939B1F623DF586D003FB0E0 /* NetworkingControllerTests.swift */,
 			);
@@ -350,6 +360,8 @@
 				5955B8B423DB59BB00A24A8F /* Sources */,
 				5955B8B523DB59BB00A24A8F /* Frameworks */,
 				5955B8B623DB59BB00A24A8F /* Resources */,
+				59EA3C4A24084A85000A7601 /* CopyFiles */,
+				59EA3C4C24084AE8000A7601 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -357,6 +369,8 @@
 				5955B8BA23DB59BB00A24A8F /* PBXTargetDependency */,
 			);
 			name = "Budget BlocksUITests";
+			packageProductDependencies = (
+			);
 			productName = "Budget BlocksUITests";
 			productReference = 5955B8B823DB59BB00A24A8F /* Budget BlocksUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -457,6 +471,23 @@
 			shellPath = /bin/sh;
 			shellScript = "LINK_ROOT=${PODS_ROOT:+$PODS_ROOT/Plaid/ios}\ncp \"${LINK_ROOT:-$PROJECT_DIR}/../Carthage/Build/iOS/\"/LinkKit.framework/prepare_for_distribution.sh \"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n\"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n";
 		};
+		59EA3C4C24084AE8000A7601 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "LINK_ROOT=${PODS_ROOT:+$PODS_ROOT/Plaid/ios}\ncp \"${LINK_ROOT:-$PROJECT_DIR}/../Carthage/Build/iOS/\"/LinkKit.framework/prepare_for_distribution.sh \"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n\"${CODESIGNING_FOLDER_PATH}\"/Frameworks/LinkKit.framework/prepare_for_distribution.sh\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -498,7 +529,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5955B8B223DB59BB00A24A8F /* Budget_BlocksTests.swift in Sources */,
 				5939B1F723DF586E003FB0E0 /* NetworkingControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -750,6 +780,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A4525544Q4;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Budget BlocksUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -770,6 +801,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A4525544Q4;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
 				INFOPLIST_FILE = "Budget BlocksUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
