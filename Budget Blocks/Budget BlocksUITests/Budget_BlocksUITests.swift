@@ -47,7 +47,7 @@ class Budget_BlocksUITests: XCTestCase {
         
         app.textFields.firstMatch.tap()
         app.typeText("email@example.com")
-        app.keyboards.buttons["Return"].tap()
+        app.secureTextFields.firstMatch.tap()
         
         app.typeText("password")
         app.keyboards.buttons["Return"].tap()
