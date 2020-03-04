@@ -1,5 +1,3 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
 # Budget Blocks
 
 You can find the deployed project on [Apple TestFlight](https://testflight.apple.com/join/pUS0UdsD).
@@ -28,21 +26,16 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 [UX Design files](https://www.figma.com/file/PRObUGqKAPZE2lo7A2eeV1/Budget-Blocks-Aaryn-M.?node-id=1%3A4)
 
-🚫 One to two paragraph statement about your product and what it does.
-
-Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. Ut aliquam purus sit amet luctus venenatis lectus magna fringilla. Orci dapibus ultrices in iaculis nunc sed augue. Euismod in pellentesque massa placerat duis ultricies. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Lectus quam id leo in vitae. Purus sit amet luctus venenatis lectus magna fringilla urna porttitor.
-
-Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
+Budget Blocks is a personal finance app that brings the Envelope System to your smartphone so you can better manage your money and track your expenses.
 
 <img src="header.png" height=600 />
 
 ### Features
 
--    Feature 1
--    Feature 2
--    Feature 3
--    Feature 4
--    Feature 5
+-    Connect your bank account with Plaid
+-    Manually enter income and expenses
+-    Automatically sort transactions into categories
+-    Create Budget Blocks (virtual envolopes) to limit spending in categories
 
 ## Requirements
 
