@@ -85,10 +85,27 @@ class Budget_BlocksUITests: XCTestCase {
         
         loginTwo()
         sleep(3)
-        
-        
-       
-        
     }
+    
+    // wrote this test in the UI need to re-do it in the Networkingtest
+//    func testBadInfo() {
+//
+//        let loggedin = true
+//
+//        app.buttons["Sign In"].tap()
+//
+//        app.textFields.firstMatch.tap()
+//        app.typeText("badEmail@example.com")
+//
+//        app.secureTextFields.firstMatch.tap()
+//        app.typeText("BadPassword")
+//
+//        app.keyboards.buttons["Return"].tap()
+//        app.secureTextFields.firstMatch.tap()
+//
+//        app.buttons.matching(identifier: "Sign In").element(boundBy: 1).tap()
+//        XCTAssertFalse(loggedin)
+//
+//    }
     
 }
