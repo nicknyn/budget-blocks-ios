@@ -27,6 +27,9 @@ class Budget_BlocksUITests: XCTestCase {
     override func tearDown() {
     }
 
+    //Both test now pass issue was with how simulator was set up
+    // by disconnecting the keyboard of the mac the first responder will change
+    
     func testLogin() {
         login()
         sleep(5)

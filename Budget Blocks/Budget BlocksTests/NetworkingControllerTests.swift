@@ -64,5 +64,12 @@ class NetworkingControllerTests: XCTestCase {
         
         waitForExpectations(timeout: 30, handler: nil)
     }
+    
+    
+    func testLogout() {
+        let networkingController = NetworkingController()
+        networkingController.logout()
+        
+    }
 
 }
