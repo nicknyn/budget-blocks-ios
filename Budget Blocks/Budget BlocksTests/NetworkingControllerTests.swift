@@ -71,5 +71,17 @@ class NetworkingControllerTests: XCTestCase {
         networkingController.logout()
         
     }
+    
+    func testCreateTransaction() {
+        let networkingController = NetworkingController()
+        let expectation = self.expectation(description: "Fetch")
+        
+        networkingController.createCategory(named: "Computer") { json, error in
+            XCTAssertNil(error)
+            XCTAssertNil(json)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 
 }

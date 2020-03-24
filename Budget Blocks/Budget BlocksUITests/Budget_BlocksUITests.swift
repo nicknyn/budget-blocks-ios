@@ -58,4 +58,37 @@ class Budget_BlocksUITests: XCTestCase {
         app.buttons.matching(identifier: "Sign In").element(boundBy: 1).tap()
     }
     
+    
+    private func loginTwo() {
+        app.buttons["Sign In"].tap()
+        
+        app.textFields.firstMatch.tap()
+        app.typeText("tylerc71197@gmail.com")
+        app.secureTextFields.firstMatch.tap()
+        
+        app.typeText("123456")
+        app.keyboards.buttons["Return"].tap()
+        
+        app.buttons.matching(identifier: "Sign In").element(boundBy: 1).tap()
+    }
+    
+    
+    private func logout() {
+        app.buttons["Sign out"].tap()
+    }
+    
+    func testSwitchingAccounts() {
+        login()
+        sleep(3)
+        
+        logout()
+        
+        loginTwo()
+        sleep(3)
+        
+        
+       
+        
+    }
+    
 }
