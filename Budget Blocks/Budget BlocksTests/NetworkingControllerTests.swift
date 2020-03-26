@@ -85,7 +85,15 @@ class NetworkingControllerTests: XCTestCase {
     }
     
     func testBadInfo() {
+        // the hope of this test is for it to fail
+        let networkingController = NetworkingController()
+        let expectation = self.expectation(description: "Login")
         
+        networkingController.login(email: "Email@example.com", password: "password") { token, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(token)
+            expectation.fulfill()
+        }
     }
 
 }
