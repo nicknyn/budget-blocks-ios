@@ -77,10 +77,10 @@ class Budget_BlocksUITests: XCTestCase {
         app.buttons["Sign In"].tap()
         
         app.textFields.firstMatch.tap()
-        app.typeText("tylerc71197@gmail.com")
+        app.typeText("realemail@gmail.com")
         app.secureTextFields.firstMatch.tap()
         
-        app.typeText("123456")
+        app.typeText("1234")
         app.keyboards.buttons["Return"].tap()
         
         app.buttons.matching(identifier: "Sign In").element(boundBy: 1).tap()
@@ -141,7 +141,7 @@ class Budget_BlocksUITests: XCTestCase {
         //
         //        app.buttons["Save"].tap()
     }
-    
+    //comment for commit 
     
     
 }
