@@ -723,20 +723,36 @@
                                                             </segmentedControl>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="$0.00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8hH-ds-ff6">
                                                                 <rect key="frame" x="159" y="0.0" width="143" height="31"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="AmountTF">
+                                                                    <accessibilityTraits key="traits" keyboardKey="YES"/>
+                                                                </accessibility>
                                                                 <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="24"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="string" keyPath="AmountTF" value=""/>
+                                                                </userDefinedRuntimeAttributes>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vbr-Vs-pak">
                                                         <rect key="frame" x="0.0" y="51" width="302" height="34"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="DateTF">
+                                                            <accessibilityTraits key="traits" keyboardKey="YES"/>
+                                                        </accessibility>
                                                         <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="DateTF" value=""/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O3K-dw-FLJ">
                                                         <rect key="frame" x="0.0" y="105" width="302" height="34"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="CategoryTF"/>
                                                         <fontDescription key="fontDescription" name="Exo-Regular" family="Exo" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="Category" value=""/>
+                                                        </userDefinedRuntimeAttributes>
                                                     </textField>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nfe-mM-T61">
                                                         <rect key="frame" x="0.0" y="159" width="302" height="52"/>
@@ -756,6 +772,7 @@
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxz-Jf-BXE">
                                                         <rect key="frame" x="0.0" y="231" width="302" height="42"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="SaveButton"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="42" id="Sgv-70-CHt"/>
                                                         </constraints>
@@ -871,6 +888,10 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="Food and Drink"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="Food and Drink" value=""/>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1089,6 +1110,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="gIB-OX-Qv2"/>
         <segue reference="pyi-hC-RJV"/>
-        <segue reference="X8e-tp-Xxn"/>
+        <segue reference="uQU-Uy-dUC"/>
     </inferredMetricsTieBreakers>
 </document>
