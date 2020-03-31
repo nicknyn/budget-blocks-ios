@@ -199,15 +199,15 @@ class DashboardTableViewController: UITableViewController {
             case 0:
                 cellText = "View Transactions"
                 cellImage = UIImage(named: "budget")
-                print("case is 0")
+                
             case 1:
                 cellText = "Add an expense"
                 cellImage = UIImage(named: "minus-icon")
-                print("case is 1")
+               
             default:
                 cellText = "Add income"
                 cellImage = UIImage(named: "plus-icon")
-                print("case is default")
+                
             }
         default:
             cellText = "Create a budget"
