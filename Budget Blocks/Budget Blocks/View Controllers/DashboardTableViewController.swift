@@ -136,32 +136,11 @@ class DashboardTableViewController: UITableViewController {
             let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
             guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
             
-            let cellText: String
-            var cellImage: UIImage?
-            switch adjustedSection {
-            case 0:
-                cellText = "Connect your bank with Plaid"
-                cellImage = UIImage(named: "plaid-logo-icon")
-            case 1:
-                switch indexPath.row {
-                case 0:
-                    cellText = "View Transactions"
-                    cellImage = UIImage(named: "budget")
-                case 1:
-                    cellText = "Add an expense"
-                    cellImage = UIImage(named: "minus-icon")
-                default:
-                    cellText = "Add income"
-                    cellImage = UIImage(named: "plus-icon")
-                }
-            default:
-                cellText = "Create a budget"
-                cellImage = UIImage(named: "budget")
-            }
-            cell.titleLabel.text = cellText
-            cell.rightImageView.image = cellImage
+        
+            let completedCell = setCellTextAndIamge(cell: cell, adjustedSection: adjustedSection, row: indexPath.row)
             
-            return cell
+            return completedCell
+            
         default:
             let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
             guard let cell = uiCell as? CategoryTableViewCell else { return uiCell }
@@ -201,6 +180,43 @@ class DashboardTableViewController: UITableViewController {
             
             return cell
         }
+    }
+    
+    func setCellTextAndIamge(cell: DashboardTableViewCell, adjustedSection: Int, row: Int) -> DashboardTableViewCell {
+        
+        var cellText: String
+        var cellImage: UIImage?
+        
+        //guard let indexPath = tableView.indexPath(for: cell as UITableViewCell) else { return DashboardTableViewCell() }
+
+        
+        switch adjustedSection {
+        case 0:
+            cellText = "Connect your bank with Plaid"
+            cellImage = UIImage(named: "plaid-logo-icon")
+        case 1:
+            switch row {
+            case 0:
+                cellText = "View Transactions"
+                cellImage = UIImage(named: "budget")
+                print("case is 0")
+            case 1:
+                cellText = "Add an expense"
+                cellImage = UIImage(named: "minus-icon")
+                print("case is 1")
+            default:
+                cellText = "Add income"
+                cellImage = UIImage(named: "plus-icon")
+                print("case is default")
+            }
+        default:
+            cellText = "Create a budget"
+            cellImage = UIImage(named: "budget")
+        }
+        cell.titleLabel.text = cellText
+        cell.rightImageView.image = cellImage
+        
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
