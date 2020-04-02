@@ -72,7 +72,7 @@ class DashboardTableViewController: UITableViewController {
     var categoriesWithBudget: [TransactionCategory] {
         categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,13 +110,13 @@ class DashboardTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch adjustedSection(index: section) {
         case 2:
@@ -126,7 +126,7 @@ class DashboardTableViewController: UITableViewController {
             return 1 + networkingController.manualAccount.int * 2
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let adjustedSection = self.adjustedSection(index: indexPath.section)
         
@@ -136,7 +136,7 @@ class DashboardTableViewController: UITableViewController {
             let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
             guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
             
-        
+            
             let completedCell = setCellTextAndIamge(cell: cell, adjustedSection: adjustedSection, row: indexPath.row)
             
             return completedCell
@@ -182,13 +182,14 @@ class DashboardTableViewController: UITableViewController {
         }
     }
     
+//    func setCategoryCell(cell: CategoryTableViewCell, index: Int ) -> CategoryTableViewCell {
+//
+//    }
+    
     func setCellTextAndIamge(cell: DashboardTableViewCell, adjustedSection: Int, row: Int) -> DashboardTableViewCell {
         
         var cellText: String
         var cellImage: UIImage?
-        
-        //guard let indexPath = tableView.indexPath(for: cell as UITableViewCell) else { return DashboardTableViewCell() }
-
         
         switch adjustedSection {
         case 0:
@@ -203,7 +204,7 @@ class DashboardTableViewController: UITableViewController {
             case 1:
                 cellText = "Add an expense"
                 cellImage = UIImage(named: "minus-icon")
-               
+                
             default:
                 cellText = "Add income"
                 cellImage = UIImage(named: "plus-icon")
@@ -375,9 +376,9 @@ class DashboardTableViewController: UITableViewController {
         guard !networkingController.accountSetUp else { return }
         performSegue(withIdentifier: "Onboarding", sender: self)
     }
-
+    
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let welcomeVC = segue.destination as? WelcomeViewController {
             welcomeVC.networkingController = networkingController
@@ -412,13 +413,13 @@ class DashboardTableViewController: UITableViewController {
                 createTransactionVC.transactionController = transactionController
                 
                 if let indexPath = tableView.indexPathForSelectedRow,
-                indexPath.row == 2 {
+                    indexPath.row == 2 {
                     createTransactionVC.income = true
                 }
             }
         }
     }
-
+    
 }
 
 // MARK: Plaid Link view delegate
