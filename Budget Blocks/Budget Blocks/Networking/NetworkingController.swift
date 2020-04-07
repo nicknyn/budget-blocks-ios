@@ -107,6 +107,7 @@ class NetworkingController {
             guard let myToken = responseJSON["token"].string else { fatalError() }
             return myToken
         } catch {
+            //TODO: add action alert to tell user the error happened
             print("logging error: \(error.localizedDescription)")
         }
           return myToken
