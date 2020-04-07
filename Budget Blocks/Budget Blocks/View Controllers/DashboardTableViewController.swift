@@ -182,9 +182,9 @@ class DashboardTableViewController: UITableViewController {
         }
     }
     
-//    func setCategoryCell(cell: CategoryTableViewCell, index: Int ) -> CategoryTableViewCell {
-//
-//    }
+    func setCategoryCells() {
+        
+    }
     
     func setCellTextAndIamge(cell: DashboardTableViewCell, adjustedSection: Int, row: Int) -> DashboardTableViewCell {
         

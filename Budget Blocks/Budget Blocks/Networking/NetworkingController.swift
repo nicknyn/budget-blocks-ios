@@ -86,23 +86,32 @@ class NetworkingController {
                 NSLog("No data returned from login request")
                 return completion(nil, error)
             }
-            
-            do {
-                let responseJSON = try JSON(data: data)
-                if let token = responseJSON["token"].string,
-                    let userID = responseJSON["id"].int,
-                    let linked = responseJSON["LinkedAccount"].bool,
-                    let manual = responseJSON["ManualOnly"].bool {
-                    self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked, manualAccount: manual)
-                    self.keychain.set(email, forKey: self.emailKey)
-                    self.keychain.set(password, forKey: self.passwordKey)
-                }
-                completion(responseJSON["token"].string, nil)
-            } catch {
-                completion(nil, error)
-            }
+            completion(self.jsonData(data: data, email: email, password: password), nil)
         }.resume()
     }
+    
+    func jsonData(data: Data, email: String,password: String) -> String {
+        let _: JSON = ["email": email, "password": password]
+        let myToken = ""
+        
+        do {
+            let responseJSON = try JSON(data: data)
+            if  let token = responseJSON["token"].string,
+                let userID = responseJSON["id"].int,
+                let linked = responseJSON["LinkedAccount"].bool,
+                let manual = responseJSON["ManualOnly"].bool {
+                self.bearer = Bearer(token: token, userID: userID, linkedAccount: linked, manualAccount: manual)
+                self.keychain.set(email, forKey: self.emailKey)
+                self.keychain.set(password, forKey: self.passwordKey)
+            }
+            guard let myToken = responseJSON["token"].string else { fatalError() }
+            return myToken
+        } catch {
+            print("logging error: \(error.localizedDescription)")
+        }
+          return myToken
+    }
+
     
     func register(email: String, password: String, firstName: String, lastName: String, completion: @escaping (String?, Error?) -> Void) {
         let registerJSON: JSON = ["email": email,
