@@ -136,55 +136,56 @@ class DashboardTableViewController: UITableViewController {
             let uiCell = tableView.dequeueReusableCell(withIdentifier: "DashboardCell", for: indexPath)
             guard let cell = uiCell as? DashboardTableViewCell else { return uiCell }
             
-            
             let completedCell = setCellTextAndIamge(cell: cell, adjustedSection: adjustedSection, row: indexPath.row)
             
             return completedCell
             
         default:
-            let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-            guard let cell = uiCell as? CategoryTableViewCell else { return uiCell }
-            
-            cell.titleLabel.setApplicationTypeface()
-            cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
-            
-            let index = indexPath.row - (categoriesWithBudget.count == 0).int
-            if let category = categoriesFRC.fetchedObjects?[index] {
-                cell.titleLabel.text = category.name
-                var sum: Int64 = 0
-                for transaction in category.transactions ?? [] {
-                    guard let transaction = transaction as? Transaction else { continue }
-                    sum += transaction.amount
-                }
-                var budgetString = "$\(sum.currency)"
-                
-                if category.budget > 0 {
-                    budgetString += " / $\(category.budget.currency)"
-                    
-                    let progress = Float(sum) / Float(category.budget)
-                    cell.progressBar.progress = progress
-                    if progress < 0.8 {
-                        cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
-                    } else {
-                        cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
-                    }
-                } else {
-                    cell.progressBar.progress = 0
-                }
-                
-                cell.detailLabel.text = budgetString
-            } else {
-                cell.titleLabel.text = nil
-                cell.detailLabel.text = nil
-            }
-            
-            return cell
+            let cell = CategoryTableViewCell()
+            let catCell = setCategoryCells(cell: cell, indexPath: indexPath, adjustedSection: adjustedSection)
+            return catCell
         }
     }
     
-//    func setCategoryCell(cell: CategoryTableViewCell, index: Int ) -> CategoryTableViewCell {
-//
-//    }
+    func setCategoryCells(cell: CategoryTableViewCell, indexPath: IndexPath, adjustedSection: Int ) -> CategoryTableViewCell {
+        let uiCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        guard let cell = uiCell as? CategoryTableViewCell else { return uiCell as! CategoryTableViewCell }
+        
+        cell.titleLabel.setApplicationTypeface()
+        cell.detailLabel.font = UIFont(name: "Exo-Regular", size: 12.0)
+        
+        let index = indexPath.row - (categoriesWithBudget.count == 0).int
+        if let category = categoriesFRC.fetchedObjects?[index] {
+            cell.titleLabel.text = category.name
+            var sum: Int64 = 0
+            for transaction in category.transactions ?? [] {
+                guard let transaction = transaction as? Transaction else { continue }
+                sum += transaction.amount
+            }
+            var budgetString = "$\(sum.currency)"
+            
+            if category.budget > 0 {
+                budgetString += " / $\(category.budget.currency)"
+                
+                let progress = Float(sum) / Float(category.budget)
+                cell.progressBar.progress = progress
+                if progress < 0.8 {
+                    cell.progressBar.progressTintColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
+                } else {
+                    cell.progressBar.progressTintColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
+                }
+            } else {
+                cell.progressBar.progress = 0
+            }
+            
+            cell.detailLabel.text = budgetString
+        } else {
+            cell.titleLabel.text = nil
+            cell.detailLabel.text = nil
+        }
+        
+        return cell
+    }
     
     func setCellTextAndIamge(cell: DashboardTableViewCell, adjustedSection: Int, row: Int) -> DashboardTableViewCell {
         

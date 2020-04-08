@@ -52,7 +52,7 @@ class Budget_BlocksUITests: XCTestCase {
     }
     
     func testViewTransactions() {
-        login()
+        loginTwo()
         sleep(5)
         
         app.staticTexts["View Transactions"].tap()
@@ -85,6 +85,7 @@ class Budget_BlocksUITests: XCTestCase {
         
         app.buttons.matching(identifier: "Sign In").element(boundBy: 1).tap()
     }
+   
     
     
     private func logout() {
@@ -123,25 +124,17 @@ class Budget_BlocksUITests: XCTestCase {
         CatCell.staticTexts["Food and Drink"].tap()
         
         SaveButton.tap()
-        
-        
-        
-        //        app.staticTexts["Add an expense"].tap()
-        //
-        //        app.textFields.firstMatch.tap()
-        //        app.typeText("20.00")
-        //        app.textFields
-        //
-        //        app.textFields.firstMatch.tap()
-        //        app.cells["March 25 2020"].tap()
-        //
-        //        app.textFields.firstMatch.tap()
-        //        app.cells["Education"].tap()
-        //        app.buttons["Done"].tap()
-        //
-        //        app.buttons["Save"].tap()
+
     }
-    //comment for commit 
+    
+    // test to see if the CategoryCells are showing up
+    func testCategoryCellsExist() {
+        app.launch()
+        loginTwo()
+        
+        app.staticTexts["Food and Drink"].tap()
+    }
+    
     
     
 }
