@@ -127,6 +127,7 @@ class Budget_BlocksUITests: XCTestCase {
 
     }
     
+    // test to see if the CategoryCells are showing up
     func testCategoryCellsExist() {
         app.launch()
         loginTwo()
