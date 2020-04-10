@@ -28,11 +28,10 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 [UX Design files](https://www.figma.com/file/PRObUGqKAPZE2lo7A2eeV1/Budget-Blocks-Aaryn-M.?node-id=1%3A4)
 
-🚫 One to two paragraph statement about your product and what it does.
-
-Quis hendrerit dolor magna eget. Pretium quam vulputate dignissim suspendisse. Ut aliquam purus sit amet luctus venenatis lectus magna fringilla. Orci dapibus ultrices in iaculis nunc sed augue. Euismod in pellentesque massa placerat duis ultricies. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Lectus quam id leo in vitae. Purus sit amet luctus venenatis lectus magna fringilla urna porttitor.
-
-Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Donec et odio pellentesque diam volutpat. Id diam maecenas ultricies mi eget mauris. Est pellentesque elit ullamcorper dignissim. Orci dapibus ultrices in iaculis nunc.
+Budget Blocks is a budget tracking app that helps our user know how much money out of a amount that they have set 
+the user can create a block that and select a category for it to be put under and then set how much money they want that block to be budgeted too 
+for example:
+When i sign in and create a budget I can select the category "Food and drink" and give that an amount of how ever much I think would be good and everytime i make a perchues I can go into the app and put the date i made the purches how much it cost and an optinal discription of what i bought then when I save that transaction it will put it into the right category and a progress bar will be visiable showing a visual of how much money I have to spend in that category till I have spent to much.
 
 <img src="header.png" height=600 />
 
