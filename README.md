@@ -6,7 +6,7 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 ## Contributors
 
-| [Isaac Lyons](https://github.com/Isvvc) |
+| [Isaac Lyons](https://github.com/Isvvc) |[Tyler Christian] 
 | :-----------------------------------------------------------------------------------------------------------: |
 | [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULRD89HA7-e4096b799aec-512" width = "200" />](https://github.com/Isvvc) |
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Isvvc) |
