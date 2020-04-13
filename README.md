@@ -12,6 +12,9 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Isvvc) |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
+| (Tyler Christian] (https://github.com/TylerChristian711) |
+
+
 [![Swift Version][swift-image]][swift-url]
 [![License][license-image]][license-url]
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
