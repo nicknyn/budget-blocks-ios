@@ -136,50 +136,55 @@ class CategoriesTableViewController: UITableViewController {
     }
     
     @IBAction func createNewCategory(_ sender: Any) {
-        let alert = UIAlertController(title: "Create New Category", message: "Enter a category name", preferredStyle: .alert)
-        
-        var nameTextField: UITextField?
-        alert.addTextField { textField in
-            textField.placeholder = "Category name"
-            textField.autocapitalizationType = .words
-            textField.returnKeyType = .done
-            nameTextField = textField
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        let create = UIAlertAction(title: "Create", style: .default) { _ in
-            guard let transactionController = self.transactionController,
-                let name = nameTextField?.text,
-                !name.isEmpty else { return }
+    
+          newCategoryFunction()
+   }
+        // The newCategoryFunction is made to create the actionAlerts for when creating a new Category in app
+    func newCategoryFunction() {
+            let alert = UIAlertController(title: "Create New Category", message: "Enter a category name", preferredStyle: .alert)
             
-            let loadingGroup = DispatchGroup()
-            loadingGroup.enter()
-            DispatchQueue.main.async {
-                self.loading(message: "Creating category...", dispatchGroup: loadingGroup)
+            var nameTextField: UITextField?
+            alert.addTextField { textField in
+                textField.placeholder = "Category name"
+                textField.autocapitalizationType = .words
+                textField.returnKeyType = .done
+                nameTextField = textField
             }
             
-            transactionController.createCategory(named: name, context: CoreDataStack.shared.mainContext, completion: { category, error in
-                loadingGroup.notify(queue: .main) {
-                    loadingGroup.enter()
-                    self.dismissAlert(dispatchGroup: loadingGroup)
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            let create = UIAlertAction(title: "Create", style: .default) { _ in
+                guard let transactionController = self.transactionController,
+                    let name = nameTextField?.text,
+                    !name.isEmpty else { return }
+                
+                let loadingGroup = DispatchGroup()
+                loadingGroup.enter()
+                DispatchQueue.main.async {
+                    self.loading(message: "Creating category...", dispatchGroup: loadingGroup)
                 }
                 
-                error?.log()
-                
-                if let category = category {
-                    self.newCategories.append(category)
-                    DispatchQueue.main.async {
-                        self.reloadTable()
+                transactionController.createCategory(named: name, context: CoreDataStack.shared.mainContext, completion: { category, error in
+                    loadingGroup.notify(queue: .main) {
+                        loadingGroup.enter()
+                        self.dismissAlert(dispatchGroup: loadingGroup)
                     }
-                }
-            })
-        }
-        
-        alert.addAction(cancel)
-        alert.addAction(create)
-        
-        present(alert, animated: true)
+                    
+                    error?.log()
+                    
+                    if let category = category {
+                        self.newCategories.append(category)
+                        DispatchQueue.main.async {
+                            self.reloadTable()
+                        }
+                    }
+                })
+            }
+            
+            alert.addAction(cancel)
+            alert.addAction(create)
+            
+            present(alert, animated: true)
     }
     
 }

@@ -10,6 +10,12 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Isvvc) |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
+| [Tyler Christian](https://github.com/TylerChristian711) |
+| :-----------------------------------------------------------------------------------------------------------: |
+| [<img scr="https://ca.slack-edge.com/T4JUEB3ME-ULZSEQXAR-3b670f940ff2-512" width = "200" />](https://github.com/TylerChristian711)|
+| [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/TylerChristian711)|
+
+
 [![Swift Version][swift-image]][swift-url]
 [![License][license-image]][license-url]
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
@@ -26,7 +32,13 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 [UX Design files](https://www.figma.com/file/PRObUGqKAPZE2lo7A2eeV1/Budget-Blocks-Aaryn-M.?node-id=1%3A4)
 
+
 Budget Blocks is a personal finance app that brings the Envelope System to your smartphone so you can better manage your money and track your expenses.
+
+Users can create a block that and select a category for it to be put under and then set how much money they want that block to be budgeted to.
+for example:
+When i sign in and create a budget I can select the category "Food and drink" and give that an amount of how ever much I think would be good and everytime i make a perchues I can go into the app and put the date i made the purches how much it cost and an optinal discription of what i bought then when I save that transaction it will put it into the right category and a progress bar will be visiable showing a visual of how much money I have to spend in that category till I have spent to much.
+
 
 <img src="header.png" height=600 />
 
@@ -43,6 +55,7 @@ Budget Blocks is a personal finance app that brings the Envelope System to your 
 -   Xcode 11
 -   Carthage
 -   Swift Package Manager
+-   *Note* when first cloning this into a project be sure to run the command in terminal Carthage build in order to remove any       errors you might start with 
 
 ### Plaid Link
 

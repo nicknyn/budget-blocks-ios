@@ -64,5 +64,36 @@ class NetworkingControllerTests: XCTestCase {
         
         waitForExpectations(timeout: 30, handler: nil)
     }
+    
+    
+    func testLogout() {
+        let networkingController = NetworkingController()
+        networkingController.logout()
+        
+    }
+    
+    func testCreateTransaction() {
+        let networkingController = NetworkingController()
+        let expectation = self.expectation(description: "Fetch")
+        
+        networkingController.createCategory(named: "Computer") { json, error in
+            XCTAssertNil(error)
+            XCTAssertNil(json)
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 5, handler: nil)
+    }
+    
+    func testBadInfo() {
+        // the hope of this test is for it to fail
+        let networkingController = NetworkingController()
+        let expectation = self.expectation(description: "Login")
+        
+        networkingController.login(email: "Email@example.com", password: "password") { token, error in
+            XCTAssertNil(error)
+            XCTAssertNotNil(token)
+            expectation.fulfill()
+        }
+    }
 
 }
