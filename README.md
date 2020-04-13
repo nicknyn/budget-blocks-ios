@@ -1,5 +1,3 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
 # Budget Blocks
 
 You can find the deployed project on [Apple TestFlight](https://testflight.apple.com/join/pUS0UdsD).
@@ -34,20 +32,22 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 [UX Design files](https://www.figma.com/file/PRObUGqKAPZE2lo7A2eeV1/Budget-Blocks-Aaryn-M.?node-id=1%3A4)
 
-Budget Blocks is a budget tracking app that helps our user know how much money out of a amount that they have set 
-the user can create a block that and select a category for it to be put under and then set how much money they want that block to be budgeted too 
+
+Budget Blocks is a personal finance app that brings the Envelope System to your smartphone so you can better manage your money and track your expenses.
+
+Users can create a block that and select a category for it to be put under and then set how much money they want that block to be budgeted to.
 for example:
 When i sign in and create a budget I can select the category "Food and drink" and give that an amount of how ever much I think would be good and everytime i make a perchues I can go into the app and put the date i made the purches how much it cost and an optinal discription of what i bought then when I save that transaction it will put it into the right category and a progress bar will be visiable showing a visual of how much money I have to spend in that category till I have spent to much.
+
 
 <img src="header.png" height=600 />
 
 ### Features
 
--    Feature 1
--    Feature 2
--    Feature 3
--    Feature 4
--    Feature 5
+-    Connect your bank account with Plaid
+-    Manually enter income and expenses
+-    Automatically sort transactions into categories
+-    Create Budget Blocks (virtual envolopes) to limit spending in categories
 
 ## Requirements
 
