@@ -54,6 +54,7 @@ When i sign in and create a budget I can select the category "Food and drink" an
 -   Xcode 11
 -   Carthage
 -   Swift Package Manager
+-   *Note* when first cloning this into a project be sure to run the command in terminal Carthage build in order to remove any       errors you might start with 
 
 ### Plaid Link
 
