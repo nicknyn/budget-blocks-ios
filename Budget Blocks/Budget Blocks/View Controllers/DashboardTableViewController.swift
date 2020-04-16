@@ -75,7 +75,8 @@ class DashboardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // this is adding the observer
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
         transactionController.networkingController = networkingController
         
         updateBalances()
@@ -276,6 +277,21 @@ class DashboardTableViewController: UITableViewController {
         tableView.refreshControl = refreshControl
     }
     
+    @objc func refreshHelper() {
+        print("refreshHelper is being called!")
+        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            error?.log()
+        }
+        transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
+            error?.log()
+        }
+    }
+
+    
     @objc private func refreshTable(_ refreshControl: UIRefreshControl) {
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             error?.log()
@@ -364,9 +380,17 @@ class DashboardTableViewController: UITableViewController {
             }
         }
         
+        let editBudget = UIAlertAction(title: "Edit Budget", style: .default) { _ in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "CreateBudget", sender: self)
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
         actionSheet.addAction(cancel)
         actionSheet.addAction(viewTransactions)
         actionSheet.addAction(newBudget)
+        actionSheet.addAction(editBudget)
         
         actionSheet.pruneNegativeWidthConstraints()
         

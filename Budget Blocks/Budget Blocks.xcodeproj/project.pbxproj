@@ -45,6 +45,7 @@
 		59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAB9D323F361F900BF91F7 /* Error+Log.swift */; };
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
+		E3509F082448F92C0091592C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F072448F92C0091592C /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		59BAB9D323F361F900BF91F7 /* Error+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Log.swift"; sourceTree = "<group>"; };
 		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
+		E3509F072448F92C0091592C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			children = (
 				5955B89723DB59B800A24A8F /* AppDelegate.swift */,
 				5955B89923DB59B800A24A8F /* SceneDelegate.swift */,
+				E3509F072448F92C0091592C /* Notifications.swift */,
 				5969C1EF23E38CC800BAA183 /* Model */,
 				5969C1F423E3903400BAA183 /* Model Controllers */,
 				5967964023DFC1C70062F794 /* View Controllers */,
@@ -461,6 +464,7 @@
 				592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */,
 				590B3A5123FC554F0058D236 /* TransactionTableViewCell.swift in Sources */,
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
+				E3509F082448F92C0091592C /* Notifications.swift in Sources */,
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
 				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,

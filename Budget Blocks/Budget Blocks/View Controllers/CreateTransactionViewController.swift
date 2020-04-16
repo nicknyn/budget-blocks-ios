@@ -124,6 +124,7 @@ class CreateTransactionViewController: UIViewController {
             
             loadingGroup.notify(queue: .main, execute: {
                 self.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: .refreshInfo, object: self)
             })
         })
     }
