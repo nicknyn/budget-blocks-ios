@@ -12,7 +12,7 @@ import CoreData
 protocol newCategoriesTableViewControllerDelegate {
     func choose(category: TransactionCategory)
 }
-
+// comment for commit
 class CustomCategoriesTableViewController: UITableViewController {
     
     @IBOutlet weak var showAllButton: UIButton!
