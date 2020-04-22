@@ -46,6 +46,7 @@
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
 		E3509F082448F92C0091592C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F072448F92C0091592C /* Notifications.swift */; };
+		E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
 		E3509F072448F92C0091592C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 				590B3A5223FC63B50058D236 /* CreateTransactionViewController.swift */,
 				590B3A5423FC846C0058D236 /* CategoriesTableViewController.swift */,
 				598B29FC23FDDC7A0038B698 /* OnboardingViewController.swift */,
+				E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */,
 				590B3A5523FC846C0058D236 /* CategoriesTableViewController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
+				E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */,
 				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
 				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,

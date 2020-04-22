@@ -136,7 +136,6 @@ class CategoriesTableViewController: UITableViewController {
     }
     
     @IBAction func createNewCategory(_ sender: Any) {
-    
           newCategoryFunction()
    }
         // The newCategoryFunction is made to create the actionAlerts for when creating a new Category in app

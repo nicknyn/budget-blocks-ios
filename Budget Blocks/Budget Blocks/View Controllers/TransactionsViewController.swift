@@ -11,6 +11,7 @@ import CoreData
 
 class TransactionsViewController: UIViewController {
     
+    
     @IBOutlet weak var tableView: UITableView!
     
     var networkingController: NetworkingController!

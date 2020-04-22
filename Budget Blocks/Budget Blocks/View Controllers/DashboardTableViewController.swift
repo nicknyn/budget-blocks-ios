@@ -23,6 +23,9 @@ class DashboardTableViewController: UITableViewController {
     
     let networkingController = NetworkingController()
     let transactionController = TransactionController()
+    var newTransactionController: TransactionController?
+    var newCategories: [TransactionCategory] = []
+    var loadingGroup = DispatchGroup()
     
     lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -68,6 +71,7 @@ class DashboardTableViewController: UITableViewController {
         
         return frc
     }()
+            
     
     var categoriesWithBudget: [TransactionCategory] {
         categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
@@ -111,6 +115,11 @@ class DashboardTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
+    
+    @IBAction func goToCustomeView(_ sender: Any) {
+        performSegue(withIdentifier: "CustomCat", sender: self)
+      }
+    
     
     // MARK: - Table view data source
     
@@ -443,9 +452,14 @@ class DashboardTableViewController: UITableViewController {
                 }
             }
         }
+        
+        if let customVC = segue.destination as? CustomCategoriesTableViewController {
+            customVC.transactionController = transactionController
+        }
     }
     
 }
+
 
 // MARK: Plaid Link view delegate
 
@@ -526,4 +540,6 @@ extension DashboardTableViewController: OnboardingViewControllerDelegate {
             }
         }
     }
+    
+    
 }

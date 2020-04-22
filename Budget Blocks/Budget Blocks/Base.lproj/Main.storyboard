@@ -522,7 +522,14 @@
                             <outlet property="delegate" destination="s0a-F6-sdi" id="v6b-QV-SeL"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Dashboard" id="pBD-10-vz5"/>
+                    <navigationItem key="navigationItem" title="Dashboard" id="pBD-10-vz5">
+                        <barButtonItem key="leftBarButtonItem" image="plus" catalog="system" id="lwx-mi-oj3">
+                            <connections>
+                                <action selector="goToCustomeView:" destination="s0a-F6-sdi" id="N4h-Ah-8iw"/>
+                                <segue destination="wIb-IX-6fd" kind="show" identifier="CustomCat" id="ADB-vZ-lja"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="balanceLabel" destination="g04-Io-PNY" id="Pkc-y2-QuG"/>
                         <outlet property="expensesLabel" destination="gcO-Tg-kcs" id="Gnw-ZO-Dbx"/>
@@ -539,6 +546,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMs-46-nno" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1039.1304347826087" y="845.75892857142856"/>
+        </scene>
+        <!--Categories-->
+        <scene sceneID="0Dc-Tg-qUt">
+            <objects>
+                <tableViewController title="Categories" id="wIb-IX-6fd" customClass="CustomCategoriesTableViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="qWZ-Ul-xtq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="QOL-Pt-E2T">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baW-1y-kxr">
+                                    <rect key="frame" x="140.66666666666666" y="7" width="132.99999999999997" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="baW-1y-kxr" secondAttribute="height" multiplier="21:10" id="D81-oN-ii4"/>
+                                    </constraints>
+                                    <state key="normal" title="Show All "/>
+                                    <connections>
+                                        <action selector="toggleShowAll:" destination="wIb-IX-6fd" eventType="touchUpInside" id="qnH-Fc-rvw"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="baW-1y-kxr" secondAttribute="trailing" constant="140.33000000000001" id="IS2-uS-pbQ"/>
+                                <constraint firstItem="baW-1y-kxr" firstAttribute="top" secondItem="QOL-Pt-E2T" secondAttribute="top" constant="7" id="kX9-gt-Lx3"/>
+                                <constraint firstItem="baW-1y-kxr" firstAttribute="leading" secondItem="QOL-Pt-E2T" secondAttribute="leading" constant="140.66999999999999" id="n3H-U9-kBE"/>
+                                <constraint firstAttribute="bottom" secondItem="baW-1y-kxr" secondAttribute="bottom" constant="7" id="yl3-cW-2MN"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" textLabel="3Dv-2k-ATe" detailTextLabel="eDG-aX-x1e" style="IBUITableViewCellStyleSubtitle" id="3ZY-QS-tOE">
+                                <rect key="frame" x="0.0" y="87" width="414" height="55.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3ZY-QS-tOE" id="5qk-oX-Q0L">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Dv-2k-ATe">
+                                            <rect key="frame" x="20.000000000000004" y="8.9999999999999982" width="33.333333333333336" height="20.333333333333332"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eDG-aX-x1e">
+                                            <rect key="frame" x="19.999999999999996" y="31.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wIb-IX-6fd" id="mbd-6f-PqS"/>
+                            <outlet property="delegate" destination="wIb-IX-6fd" id="q4i-qk-eU0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Categoires" id="6go-gG-fRu">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YuZ-cS-R5H">
+                            <connections>
+                                <action selector="createNewCategory:" destination="wIb-IX-6fd" id="jUH-hR-Kod"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="showAllButton" destination="baW-1y-kxr" id="e8h-Ek-xQD"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pao-rH-itP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="1558"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="xWZ-ME-HmN">
@@ -1105,6 +1189,7 @@
         <image name="BlocksIcon" width="315" height="214"/>
         <image name="minus-icon" width="40" height="40"/>
         <image name="plaid-logo-icon" width="75" height="75"/>
+        <image name="plus" catalog="system" width="64" height="56"/>
         <image name="plus-icon" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>

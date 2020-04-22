@@ -135,6 +135,25 @@ class Budget_BlocksUITests: XCTestCase {
         app.staticTexts["Food and Drink"].tap()
     }
     
+    func testAddIncome() {
+        app.launch()
+        
+        loginTwo()
+        
+        app.staticTexts["Add income"].tap()
+        
+        AmountTF.tap()
+        AmountTF.typeText("24.50")
+        
+        DateTF.tap()
+        DateTF.typeText("04/17/2020")
+        
+        CategoryTF.tap()
+        CatCell.staticTexts["Food and Drink"].tap()
+        
+        SaveButton.tap()
+    }
+    
     
     
 }

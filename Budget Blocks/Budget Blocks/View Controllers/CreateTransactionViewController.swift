@@ -202,4 +202,10 @@ extension CreateTransactionViewController: CategoriesTableViewControllerDelegate
         navigationController?.popViewController(animated: true)
         updateViews()
     }
+    
+    func newChoose(category: TransactionCategory) {
+        self.category = category
+        navigationController?.popViewController(animated: true)
+        updateViews()
+    }
 }
