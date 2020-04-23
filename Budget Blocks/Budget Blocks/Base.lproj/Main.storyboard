@@ -610,7 +610,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Categoires" id="6go-gG-fRu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="YuZ-cS-R5H">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="YuZ-cS-R5H">
                             <connections>
                                 <action selector="createNewCategory:" destination="wIb-IX-6fd" id="jUH-hR-Kod"/>
                             </connections>
@@ -1101,6 +1101,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNO-tF-dd0">
                                 <rect key="frame" x="56" y="702" width="302" height="42"/>
+                                <accessibility key="accessibilityConfiguration" identifier="doubleBtn"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="yUg-ec-8nL"/>
                                 </constraints>
