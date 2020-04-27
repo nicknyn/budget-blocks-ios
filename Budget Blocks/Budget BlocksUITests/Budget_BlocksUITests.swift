@@ -17,6 +17,7 @@ class Budget_BlocksUITests: XCTestCase {
     private var AmountTF: XCUIElement!
     private var DateTF: XCUIElement!
     private var SaveButton: XCUIElement!
+    private var doubleBtn: XCUIElement!
     private var CategoryTF: XCUIElement!
     private var CatCell: XCUIElement! {
         app.cells["Food and Drink"]
@@ -36,6 +37,7 @@ class Budget_BlocksUITests: XCTestCase {
         SaveButton = app.buttons["SaveButton"]
         CategoryTF = app.textFields["CategoryTF"]
         //CatCell = app.cells["Food and Drink"]
+        
     }
     
     override func tearDown() {
@@ -102,11 +104,6 @@ class Budget_BlocksUITests: XCTestCase {
         sleep(3)
     }
     
-    
-    private func addExpense() {
-        
-    }
-    
     func testAddExpense() {
         
         app.launch()
@@ -154,6 +151,25 @@ class Budget_BlocksUITests: XCTestCase {
         SaveButton.tap()
     }
     
-    
-    
+    func testAddCustomCategory() {
+        app.launch()
+        
+        loginTwo()
+        
+        app.buttons["plus"].tap()
+        
+        app.buttons["plus"].tap()
+        addUIInterruptionMonitor(withDescription: "DashBoard") { (textField) -> Bool in
+            let customTF = textField.textFields.otherElements.firstMatch
+            if customTF.exists {
+                textField.tap()
+                textField.typeText("Palidan Things")
+            } else {
+                return false
+            }
+            textField.tap()
+            textField.typeText("Palidan Things")
+            return true
+        }
+    }
 }
