@@ -18,7 +18,11 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.becomeFirstResponder()
+        }
+    }
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var confirmPasswordLabel: UILabel!

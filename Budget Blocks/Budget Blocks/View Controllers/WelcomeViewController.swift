@@ -54,15 +54,4 @@ class WelcomeViewController: UIViewController {
 
 }
 
-// MARK: Login view controller delegate
-
-//extension WelcomeViewController: LoginViewControllerDelegate {
-//    func loginSuccessful() {
-//        dismiss(animated: true) {
-//            DispatchQueue.main.async {
-//                self.dismiss(animated: true)
-//            }
-//        }
-//    }
-//}
 
