@@ -10,6 +10,8 @@ import UIKit
 
 class CreateTransactionViewController: UIViewController {
     
+    //MARK:- Outlets
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
@@ -18,12 +20,17 @@ class CreateTransactionViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var paidSegmentedControl: UISegmentedControl!
     
+    
+    //MARK:- Properties
+    
     let datePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
     var amount: Int64 = 0
     var category: TransactionCategory?
     var income: Bool = false
     var transactionController: TransactionController?
+    
+    //MARK:- Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

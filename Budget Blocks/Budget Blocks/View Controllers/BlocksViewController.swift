@@ -11,7 +11,7 @@ import CoreData
 
 class BlocksViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK:- Outlets
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nextButton: UIButton!
@@ -21,7 +21,7 @@ class BlocksViewController: UIViewController {
     @IBOutlet weak var totalSubtitleLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
-    // MARK: Properties
+    // MARK:- Properties
     
     var transactionController: TransactionController?
     var budgets: [(category: TransactionCategory, budget: Int64)] = []
@@ -56,7 +56,7 @@ class BlocksViewController: UIViewController {
         updateViews()
     }
     
-    // MARK: Private
+    // MARK:- Private
     
     @objc private func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -112,7 +112,7 @@ class BlocksViewController: UIViewController {
         totalLabel.text = "$" + total.currency
     }
     
-    // MARK: Actions
+    // MARK:- Actions
     
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)

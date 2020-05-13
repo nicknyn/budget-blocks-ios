@@ -43,7 +43,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        hideKeyboardWhenTappedAround()
         setUpViews()
         updateViews()
     }
@@ -87,8 +87,8 @@ class LoginViewController: UIViewController {
             emailTextField.autocapitalizationType = .words
             passwordTextField.autocapitalizationType = .words
             
-            emailTextField.placeholder = "First Name"
-            passwordTextField.placeholder = "Last Name"
+            emailTextField.placeholder = ""
+            passwordTextField.placeholder = ""
             
             emailLabel.text = "First Name"
             passwordLabel.text = "Last Name"
