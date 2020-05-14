@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 protocol LoginViewControllerDelegate {
     func loginSuccessful()
 }
@@ -41,11 +43,38 @@ class LoginViewController: UIViewController {
         return !signIn && firstName == nil && lastName == nil
     }
     
+    private lazy var  forgotPasswordButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Forgot Password?", for: .normal)
+        button.contentHorizontalAlignment = .right
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(#colorLiteral(red: 0.03921568627, green: 0.5176470588, blue: 1, alpha: 1), for: .normal)
+        button.addTarget(self, action: #selector(moveToForgotPasswordScreen), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    
+    @objc func moveToForgotPasswordScreen() {
+      let forgotPasswordViewController = ForgotPasswordViewController()
+        self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
         setUpViews()
         updateViews()
+        hideNavigationItemBackground()
+     
+        
+    }
+    
+    private func hideNavigationItemBackground() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
     }
     
     // MARK: Private
@@ -53,31 +82,46 @@ class LoginViewController: UIViewController {
     private func setUpViews() {
         let title = "Sign \(signIn ? "In" : "Up")"
         loginButton.setTitle(title, for: .normal)
-        loginLabel.text = title
-        
+//        loginLabel.text = title
+        navigationItem.title = title
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
+      
+       
         
-        let loginLabelFontSize = loginLabel.font.pointSize
-        loginLabel.font = UIFont(name: "Exo-Regular", size: loginLabelFontSize)
+//        let loginLabelFontSize = loginLabel.font.pointSize
+//        loginLabel.font = UIFont(name: "Exo-Regular", size: loginLabelFontSize)
         
         if let textFieldFontSize = emailTextField.font?.pointSize {
-            let exo = UIFont(name: "Exo-Regular", size: textFieldFontSize)
+            let exo = UIFont(name: "Avenir Next", size: textFieldFontSize)
             emailTextField.font = exo
             passwordTextField.font = exo
             confirmPasswordTextField.font = exo
         }
         
         if let buttonFontSize = loginButton.titleLabel?.font.pointSize {
-            loginButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
+            loginButton.titleLabel?.font = UIFont(name: "Avenir Next", size: buttonFontSize)
         }
         
         confirmPasswordTextField.isHidden = signIn || namePage
         confirmPasswordLabel.isHidden = signIn || namePage
         
+        view.addSubview(forgotPasswordButton)
+        
+        NSLayoutConstraint.activate([
+            forgotPasswordButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
+            forgotPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 8),
+            forgotPasswordButton.widthAnchor.constraint(equalToConstant: 200),
+            forgotPasswordButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        
         if namePage {
+            
+            forgotPasswordButton.isHidden = true
+            
             confirmPasswordTextField.isHidden = true
             confirmPasswordLabel.isHidden = true
             
@@ -106,7 +150,7 @@ class LoginViewController: UIViewController {
         loginButton.layer.cornerRadius = 4
         loginButton.layer.borderWidth = 1
         loginButton.layer.borderColor = daybreakBlue.cgColor
-        loginButton.setTitleColor(daybreakBlue, for: .normal)
+
     }
     
     private func signUp(email: String, password: String, firstName: String, lastName: String) {

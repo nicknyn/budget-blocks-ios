@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let bodyFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
 //        UILabel.appearance().font = UIFont(name: "Exo-Regular", size: bodyFont.pointSize)
         
+      
+        
+        
         let captionFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
         if let captionFontExo = UIFont(name: "Exo-Regular", size: captionFont.pointSize) {
             UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font : captionFontExo], for: .normal)

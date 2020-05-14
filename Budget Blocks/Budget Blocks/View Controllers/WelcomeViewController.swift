@@ -32,11 +32,11 @@ class WelcomeViewController: UIViewController {
         
         signInButton.layer.cornerRadius = 4
         signInButton.layer.borderWidth = 1
-        signInButton.layer.borderColor = daybreakBlue
+//        signInButton.layer.borderColor = daybreakBlue
         
         if let buttonFontSize = signUpButton.titleLabel?.font.pointSize {
-            signUpButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
-            signInButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
+            signUpButton.titleLabel?.font = UIFont(name: "Avenir Next", size: buttonFontSize)
+            signInButton.titleLabel?.font = UIFont(name: "Avenir Next", size: buttonFontSize)
         }
     }
     
