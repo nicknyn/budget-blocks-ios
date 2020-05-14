@@ -15,14 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // The below lines for setting the label font currently aren't being used
-        // as it would cause issues with navigation bar titles
-//        let bodyFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-//        UILabel.appearance().font = UIFont(name: "Exo-Regular", size: bodyFont.pointSize)
-        
-      
-        
-        
+     
         let captionFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
         if let captionFontExo = UIFont(name: "Exo-Regular", size: captionFont.pointSize) {
             UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font : captionFontExo], for: .normal)
@@ -34,15 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
+     
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+     
     }
 
     // MARK: - Core Data stack

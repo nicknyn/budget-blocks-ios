@@ -9,6 +9,13 @@
 import UIKit
 
 extension UIViewController {
+    
+    func showAlert(title: String,message:String) {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        present(ac, animated: true, completion: nil)
+    }
+    
     func loading(message: String, dispatchGroup: DispatchGroup? = nil) {
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
 
@@ -39,5 +46,11 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    public func hideNavigationItemBackground() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
     }
 }

@@ -51,7 +51,7 @@ class CustomCategoriesTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    // MARK: - Table view data source
+    // MARK: - Table view data source-
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.fetchedObjects?.count ?? 0
@@ -99,14 +99,14 @@ class CustomCategoriesTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Table view delegate
+    // MARK:- Table view delegate-
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category = fetchedResultsController.object(at: indexPath)
         delegate?.choose(category: category)
     }
      
-     // MARK: Private
+     // MARK:- Private-
      
      private func reloadTable() {
          let predicate: NSPredicate?
@@ -128,7 +128,7 @@ class CustomCategoriesTableViewController: UITableViewController {
          tableView.reloadData()
      }
      
-     // MARK: Actions
+     // MARK:- Actions -
      
      @IBAction func toggleShowAll(_ sender: UIButton) {
          sender.isSelected.toggle()

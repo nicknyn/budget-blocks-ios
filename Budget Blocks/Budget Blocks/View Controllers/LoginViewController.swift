@@ -22,14 +22,32 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField! {
         didSet {
+            emailTextField.clearButtonMode = .whileEditing
             emailTextField.becomeFirstResponder()
         }
     }
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField! {
+        didSet {
+            passwordTextField.clearButtonMode = .whileEditing
+        }
+    }
+    @IBOutlet weak var confirmPasswordTextField: UITextField! {
+        didSet {
+            confirmPasswordTextField.clearButtonMode = .whileEditing
+        }
+    }
     @IBOutlet weak var confirmPasswordLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
+    
+    @IBOutlet weak var imageView: UIImageView! {
+        didSet {
+            imageView.layer.cornerRadius = imageView.bounds.size.width / 2
+            imageView.layer.borderColor = UIColor.black.cgColor
+            imageView.layer.borderWidth = 2
+        }
+    }
+    
     
     // MARK: Properties
     
@@ -56,6 +74,7 @@ class LoginViewController: UIViewController {
     
     
     @objc func moveToForgotPasswordScreen() {
+     
       let forgotPasswordViewController = ForgotPasswordViewController()
         self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
     }
@@ -71,14 +90,16 @@ class LoginViewController: UIViewController {
         
     }
     
-    private func hideNavigationItemBackground() {
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+          
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    // MARK: Private
+  
     
+    // MARK: Private
+  
     private func setUpViews() {
         let title = "Sign \(signIn ? "In" : "Up")"
         loginButton.setTitle(title, for: .normal)
@@ -89,10 +110,18 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
       
+        if signIn {
+            view.addSubview(forgotPasswordButton)
+            
+            NSLayoutConstraint.activate([
+                forgotPasswordButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
+                forgotPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 8),
+                forgotPasswordButton.widthAnchor.constraint(equalToConstant: 200),
+                forgotPasswordButton.heightAnchor.constraint(equalToConstant: 30)
+            ])
+        }
        
         
-//        let loginLabelFontSize = loginLabel.font.pointSize
-//        loginLabel.font = UIFont(name: "Exo-Regular", size: loginLabelFontSize)
         
         if let textFieldFontSize = emailTextField.font?.pointSize {
             let exo = UIFont(name: "Avenir Next", size: textFieldFontSize)
@@ -108,14 +137,7 @@ class LoginViewController: UIViewController {
         confirmPasswordTextField.isHidden = signIn || namePage
         confirmPasswordLabel.isHidden = signIn || namePage
         
-        view.addSubview(forgotPasswordButton)
-        
-        NSLayoutConstraint.activate([
-            forgotPasswordButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
-            forgotPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 8),
-            forgotPasswordButton.widthAnchor.constraint(equalToConstant: 200),
-            forgotPasswordButton.heightAnchor.constraint(equalToConstant: 30)
-        ])
+       
         
         
         if namePage {
@@ -131,8 +153,8 @@ class LoginViewController: UIViewController {
             emailTextField.autocapitalizationType = .words
             passwordTextField.autocapitalizationType = .words
             
-            emailTextField.placeholder = ""
-            passwordTextField.placeholder = ""
+            emailTextField.placeholder = "David"
+            passwordTextField.placeholder = "Beckham"
             
             emailLabel.text = "First Name"
             passwordLabel.text = "Last Name"
@@ -144,13 +166,11 @@ class LoginViewController: UIViewController {
     }
     
     private func updateViews() {
-        let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1)
-        
+    
         //TODO: check the status of the form
-        loginButton.layer.cornerRadius = 4
+        loginButton.layer.cornerRadius = 6
         loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = daybreakBlue.cgColor
-
+      
     }
     
     private func signUp(email: String, password: String, firstName: String, lastName: String) {
