@@ -18,15 +18,15 @@ class LoginViewController: UIViewController {
     
     // MARK: Outlets
 
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var loginLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField! {
+    @IBOutlet private weak var loginButton: UIButton!
+    
+    @IBOutlet private weak var emailTextField: UITextField! {
         didSet {
             emailTextField.clearButtonMode = .whileEditing
             emailTextField.becomeFirstResponder()
         }
     }
-    @IBOutlet weak var passwordTextField: UITextField! {
+    @IBOutlet private weak var passwordTextField: UITextField! {
         didSet {
             passwordTextField.clearButtonMode = .whileEditing
         }
@@ -36,11 +36,11 @@ class LoginViewController: UIViewController {
             confirmPasswordTextField.clearButtonMode = .whileEditing
         }
     }
-    @IBOutlet weak var confirmPasswordLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet private weak var confirmPasswordLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var passwordLabel: UILabel!
     
-    @IBOutlet weak var imageView: UIImageView! {
+    @IBOutlet private weak var imageView: UIImageView! {
         didSet {
             imageView.layer.cornerRadius = imageView.bounds.size.width / 2
             imageView.layer.borderColor = UIColor.black.cgColor
@@ -138,8 +138,6 @@ class LoginViewController: UIViewController {
         confirmPasswordLabel.isHidden = signIn || namePage
         
        
-        
-        
         if namePage {
             
             forgotPasswordButton.isHidden = true
@@ -201,7 +199,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-    // MARK: Actions
+    // MARK:- Actions-
     
     @IBAction func loginTapped(_ sender: Any) {
         guard let email = emailTextField.text,
@@ -255,7 +253,7 @@ class LoginViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Navigation
+    // MARK:- Navigation-
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
@@ -278,7 +276,7 @@ class LoginViewController: UIViewController {
 
 }
 
-// MARK: Text field delegate
+// MARK:- Text field delegate-
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

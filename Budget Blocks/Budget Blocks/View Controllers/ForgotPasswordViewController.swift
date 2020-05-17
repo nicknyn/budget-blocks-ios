@@ -8,11 +8,10 @@
 
 import UIKit
 
-class ForgotPasswordViewController: UIViewController, UITextFieldDelegate
+class ForgotPasswordViewController: UIViewController
 {
 
     //MARK:- Properties-
-    
     
     private let imageView: UIImageView = {
        let im = UIImageView()
@@ -43,6 +42,9 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate
         textField.delegate = self
         textField.rightViewMode = .always
         textField.clearButtonMode = .whileEditing
+        textField.textContentType = .emailAddress
+        textField.keyboardType = .emailAddress
+        textField.autocorrectionType = .yes
         return textField
     }()
     
@@ -94,6 +96,13 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.title = "Forgot Password"
     }
+  
+    private func sendEmailToUser() {
+        //
+    }
+
+}
+extension ForgotPasswordViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("Sending Email")
         if  !textField.hasText  {
@@ -105,5 +114,4 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate
         
         return true
     }
-
 }

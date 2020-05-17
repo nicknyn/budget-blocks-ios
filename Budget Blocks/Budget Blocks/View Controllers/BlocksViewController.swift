@@ -13,13 +13,13 @@ class BlocksViewController: UIViewController {
     
     // MARK:- Outlets
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var promptLabel: UILabel!
-    @IBOutlet weak var totalStackView: UIStackView!
-    @IBOutlet weak var totalLabel: UILabel!
-    @IBOutlet weak var totalSubtitleLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var promptLabel: UILabel!
+    @IBOutlet private weak var totalStackView: UIStackView!
+    @IBOutlet private weak var totalLabel: UILabel!
+    @IBOutlet private weak var totalSubtitleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
     // MARK:- Properties
     
@@ -27,7 +27,7 @@ class BlocksViewController: UIViewController {
     var budgets: [(category: TransactionCategory, budget: Int64)] = []
     var categoriesAreSet: Bool = false
     
-    lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
+   private(set) lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         
         fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "name", ascending: true) ]

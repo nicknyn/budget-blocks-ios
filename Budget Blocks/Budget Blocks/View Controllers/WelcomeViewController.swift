@@ -10,10 +10,10 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK:- Outlets-
     
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet private weak var signUpButton: UIButton!
+    @IBOutlet private weak var signInButton: UIButton!
     
     var networkingController: NetworkingController!
     var delegate: LoginViewControllerDelegate?
@@ -40,7 +40,7 @@ class WelcomeViewController: UIViewController {
         }
     }
     
-    // MARK: - Navigation
+    // MARK: - Navigation-
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

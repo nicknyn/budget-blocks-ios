@@ -10,7 +10,7 @@ import UIKit
 import LinkKit
 import CoreData
 
-protocol OnboardingViewControllerDelegate {
+protocol OnboardingViewControllerDelegate: AnyObject {
     func accountConnected()
 }
 
@@ -18,15 +18,17 @@ class OnboardingViewController: UIViewController {
     
     // MARK: Outlets
     
-    @IBOutlet weak var plaidView: UIView!
-    @IBOutlet weak var manualView: UIView!
+    @IBOutlet private weak var plaidView: UIView!
+    @IBOutlet private weak var manualView: UIView!
     
     // MARK: Properties
     
     var transactionController: TransactionController!
     var networkingController: NetworkingController!
-    var delegate: OnboardingViewControllerDelegate?
+    weak var delegate: OnboardingViewControllerDelegate?
     let loadingGroup = DispatchGroup()
+    
+    //MARK:- Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

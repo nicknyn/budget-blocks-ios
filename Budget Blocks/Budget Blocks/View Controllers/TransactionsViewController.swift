@@ -12,15 +12,15 @@ import CoreData
 class TransactionsViewController: UIViewController {
     
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     var networkingController: NetworkingController!
     var transactionController: TransactionController!
     var category: TransactionCategory?
-    let dateFormatter = DateFormatter()
-    let loadingGroup = DispatchGroup()
+    private let dateFormatter = DateFormatter()
+    private let loadingGroup = DispatchGroup()
     
-    lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
+    private lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         
         fetchRequest.sortDescriptors = [
@@ -50,6 +50,8 @@ class TransactionsViewController: UIViewController {
         return frc
     }()
 
+    //MARK:- Life Cycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

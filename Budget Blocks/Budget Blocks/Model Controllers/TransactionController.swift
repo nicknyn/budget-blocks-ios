@@ -10,7 +10,7 @@ import CoreData
 
 class TransactionController {
     
-    var networkingController: NetworkingController?
+     var networkingController: NetworkingController?
     
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in

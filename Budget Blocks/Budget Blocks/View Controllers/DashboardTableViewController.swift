@@ -14,10 +14,10 @@ class DashboardTableViewController: UITableViewController {
     
     // MARK: Outlets
     
-    @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var incomeLabel: UILabel!
-    @IBOutlet weak var expensesLabel: UILabel!
-    @IBOutlet weak var totalBudgetLabel: UILabel!
+    @IBOutlet private weak var balanceLabel: UILabel!
+    @IBOutlet private weak var incomeLabel: UILabel!
+    @IBOutlet private weak var expensesLabel: UILabel!
+    @IBOutlet private weak var totalBudgetLabel: UILabel!
     
     // MARK: Properties
     
@@ -27,7 +27,7 @@ class DashboardTableViewController: UITableViewController {
     var newCategories: [TransactionCategory] = []
     var loadingGroup = DispatchGroup()
     
-    lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
+    private(set) lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
@@ -48,7 +48,7 @@ class DashboardTableViewController: UITableViewController {
         return frc
     }()
     
-    lazy var categoriesFRC: NSFetchedResultsController<TransactionCategory> = {
+    private(set) lazy var categoriesFRC: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "budget", ascending: false)]
@@ -76,6 +76,9 @@ class DashboardTableViewController: UITableViewController {
     var categoriesWithBudget: [TransactionCategory] {
         categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
     }
+    
+    //MARK:- Life Cycle-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +119,8 @@ class DashboardTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    
+    //MARK:-
     @IBAction func goToCustomeView(_ sender: Any) {
         performSegue(withIdentifier: "CustomCat", sender: self)
       }
@@ -268,7 +273,7 @@ class DashboardTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Private
+    // MARK:- Private-
     
     private func setUpViews() {
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
