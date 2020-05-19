@@ -8,15 +8,13 @@
 
 import UIKit
 
-
-
 protocol LoginViewControllerDelegate {
     func loginSuccessful()
 }
 
 class LoginViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK:- Outlets -
 
     @IBOutlet private weak var loginButton: UIButton!
     
@@ -49,9 +47,10 @@ class LoginViewController: UIViewController {
     }
     
     
-    // MARK: Properties
+    // MARK:- Properties-
     
     var networkingController: NetworkingController!
+    var userController : UserController!
     var delegate: LoginViewControllerDelegate?
     var loadingGroup = DispatchGroup()
     var signIn: Bool = true
@@ -79,21 +78,23 @@ class LoginViewController: UIViewController {
         self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
     }
     
+    //MARK:- Life Cycle -
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardWhenTappedAround()
+        
         setUpViews()
         updateViews()
         hideNavigationItemBackground()
-     
+        hideKeyboardWhenTappedAround()
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-          
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
     }
     
   
@@ -103,7 +104,7 @@ class LoginViewController: UIViewController {
     private func setUpViews() {
         let title = "Sign \(signIn ? "In" : "Up")"
         loginButton.setTitle(title, for: .normal)
-//        loginLabel.text = title
+
         navigationItem.title = title
         
         emailTextField.delegate = self
@@ -151,8 +152,8 @@ class LoginViewController: UIViewController {
             emailTextField.autocapitalizationType = .words
             passwordTextField.autocapitalizationType = .words
             
-            emailTextField.placeholder = "David"
-            passwordTextField.placeholder = "Beckham"
+            emailTextField.placeholder = "Enter legal first name"
+            passwordTextField.placeholder = "Enter legal last name"
             
             emailLabel.text = "First Name"
             passwordLabel.text = "Last Name"

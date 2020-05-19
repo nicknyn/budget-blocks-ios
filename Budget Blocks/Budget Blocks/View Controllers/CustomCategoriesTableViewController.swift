@@ -9,13 +9,13 @@
 import UIKit
 import CoreData
 
-protocol newCategoriesTableViewControllerDelegate: AnyObject {
-    func choose(category: TransactionCategory)
+protocol CustomCategoriesTableViewControllerDelegate: AnyObject {
+    func didChooseCategory(category: TransactionCategory)
 }
 // comment for commit
 class CustomCategoriesTableViewController: UITableViewController {
     
-    @IBOutlet private weak var showAllButton: UIButton!
+    @IBOutlet weak private var showAllButton: UIButton!
     
     weak var delegate: CategoriesTableViewControllerDelegate?
     var transactionController: TransactionController?
@@ -86,6 +86,7 @@ class CustomCategoriesTableViewController: UITableViewController {
                 self.loadingGroup.notify(queue: .main) {
                     self.loadingGroup.enter()
                     self.dismissAlert(dispatchGroup: self.loadingGroup)
+                    
                 }
                 
                 error?.log()

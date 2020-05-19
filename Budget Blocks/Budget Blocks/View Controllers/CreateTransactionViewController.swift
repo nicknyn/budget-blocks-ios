@@ -12,13 +12,17 @@ class CreateTransactionViewController: UIViewController {
     
     //MARK:- Outlets
     
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var dateTextField: UITextField!
-    @IBOutlet private weak var categoryTextField: UITextField!
-    @IBOutlet private weak var descriptionTextField: UITextField!
-    @IBOutlet private weak var amountTextField: UITextField!
-    @IBOutlet private weak var saveButton: UIButton!
-    @IBOutlet private weak var paidSegmentedControl: UISegmentedControl!
+    @IBOutlet weak private var scrollView: UIScrollView!
+    @IBOutlet weak private var dateTextField: UITextField! {
+        didSet {
+            dateTextField.becomeFirstResponder()
+        }
+    }
+    @IBOutlet weak private var categoryTextField: UITextField!
+    @IBOutlet weak private var descriptionTextField: UITextField!
+    @IBOutlet weak private var amountTextField: UITextField!
+    @IBOutlet weak private var saveButton: UIButton!
+    @IBOutlet weak private var paidSegmentedControl: UISegmentedControl!
     
     
     //MARK:- Properties

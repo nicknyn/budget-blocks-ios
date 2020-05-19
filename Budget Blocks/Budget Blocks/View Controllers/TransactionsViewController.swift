@@ -12,7 +12,7 @@ import CoreData
 class TransactionsViewController: UIViewController {
     
     
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet weak private var tableView: UITableView!
     
     var networkingController: NetworkingController!
     var transactionController: TransactionController!

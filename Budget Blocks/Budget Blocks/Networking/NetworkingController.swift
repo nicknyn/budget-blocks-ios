@@ -30,6 +30,7 @@ class NetworkingController {
     private let keychain = KeychainSwift()
     
     var bearer: Bearer?
+    
     var linkedAccount: Bool {
         return bearer?.linkedAccount ?? false
     }

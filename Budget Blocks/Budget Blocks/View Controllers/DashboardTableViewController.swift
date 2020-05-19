@@ -14,10 +14,10 @@ class DashboardTableViewController: UITableViewController {
     
     // MARK: Outlets
     
-    @IBOutlet private weak var balanceLabel: UILabel!
-    @IBOutlet private weak var incomeLabel: UILabel!
-    @IBOutlet private weak var expensesLabel: UILabel!
-    @IBOutlet private weak var totalBudgetLabel: UILabel!
+    @IBOutlet weak private var balanceLabel: UILabel!
+    @IBOutlet weak private var incomeLabel: UILabel!
+    @IBOutlet weak private var expensesLabel: UILabel!
+    @IBOutlet weak private var totalBudgetLabel: UILabel!
     
     // MARK: Properties
     
@@ -82,7 +82,7 @@ class DashboardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // this is adding the observer
+      
         NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
         transactionController.networkingController = networkingController
         

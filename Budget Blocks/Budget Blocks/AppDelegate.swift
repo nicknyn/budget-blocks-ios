@@ -12,12 +12,10 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
      
         let captionFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
-        if let captionFontExo = UIFont(name: "Exo-Regular", size: captionFont.pointSize) {
+        if let captionFontExo = UIFont(name: "Avenir Next", size: captionFont.pointSize) {
             UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font : captionFontExo], for: .normal)
         }
         

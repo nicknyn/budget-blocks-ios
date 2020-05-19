@@ -13,8 +13,13 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Transaction" inverseName="category" inverseEntity="Transaction"/>
     </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Transaction" positionX="142" positionY="29" width="128" height="118"/>
         <element name="TransactionCategory" positionX="-63" positionY="9" width="128" height="103"/>
+        <element name="User" positionX="54" positionY="81" width="128" height="73"/>
     </elements>
 </model>

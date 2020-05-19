@@ -46,6 +46,9 @@
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
 		B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */; };
+		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
+		B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */; };
+		B6F023122473399B004FE006 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F023112473399B004FE006 /* UserController.swift */; };
 		E3509F082448F92C0091592C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F072448F92C0091592C /* Notifications.swift */; };
 		E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -124,6 +127,10 @@
 		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
 		B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		B6F0230C24733836004FE006 /* Budget_Blocks 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Budget_Blocks 2.xcdatamodel"; sourceTree = "<group>"; };
+		B6F023112473399B004FE006 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		E3509F072448F92C0091592C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,10 +214,8 @@
 				5967964023DFC1C70062F794 /* View Controllers */,
 				59D1550523EB8D3F003233C1 /* Views */,
 				5939B1F023DF54E4003FB0E0 /* Networking */,
-				5955B89D23DB59B800A24A8F /* Main.storyboard */,
-				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
-				5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */,
-				5955B8A823DB59BA00A24A8F /* Info.plist */,
+				B6F022452470B841004FE006 /* Storyboards */,
+				B6F022462470B84A004FE006 /* Resources */,
 				59D1550823EB91BD003233C1 /* Helpers */,
 				5943B3EE23E491A10050866D /* Fonts */,
 			);
@@ -248,6 +253,8 @@
 				598B29FC23FDDC7A0038B698 /* OnboardingViewController.swift */,
 				E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */,
 				B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */,
+				B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */,
+				B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -266,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				5969C1F523E3904400BAA183 /* TransactionController.swift */,
+				B6F023112473399B004FE006 /* UserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -300,6 +308,24 @@
 				598B29FE23FF6D290038B698 /* UIViewController+Loading.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B6F022452470B841004FE006 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5955B89D23DB59B800A24A8F /* Main.storyboard */,
+				5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		B6F022462470B84A004FE006 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5955B8A823DB59BA00A24A8F /* Info.plist */,
+				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -473,12 +499,15 @@
 				E3509F082448F92C0091592C /* Notifications.swift in Sources */,
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
+				B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */,
 				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,
 				592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */,
+				B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */,
 				598B29FF23FF6D2A0038B698 /* UIViewController+Loading.swift in Sources */,
 				59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
+				B6F023122473399B004FE006 /* UserController.swift in Sources */,
 				5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */,
 				592B3CAE23F1CBC90035FF3A /* CategoryTableViewCell.swift in Sources */,
 				598B29FD23FDDC7A0038B698 /* OnboardingViewController.swift in Sources */,
@@ -671,7 +700,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4939K9623X;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
-				INFOPLIST_FILE = "Budget Blocks/Info.plist";
+				INFOPLIST_FILE = "Budget Blocks/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -691,7 +720,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4939K9623X;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
-				INFOPLIST_FILE = "Budget Blocks/Info.plist";
+				INFOPLIST_FILE = "Budget Blocks/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -865,9 +894,10 @@
 		5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B6F0230C24733836004FE006 /* Budget_Blocks 2.xcdatamodel */,
 				5955B8A123DB59B800A24A8F /* Budget_Blocks.xcdatamodel */,
 			);
-			currentVersion = 5955B8A123DB59B800A24A8F /* Budget_Blocks.xcdatamodel */;
+			currentVersion = B6F0230C24733836004FE006 /* Budget_Blocks 2.xcdatamodel */;
 			path = Budget_Blocks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

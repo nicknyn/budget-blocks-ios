@@ -11,7 +11,7 @@ import CoreData
 
 class BlocksViewController: UIViewController {
     
-    // MARK:- Outlets
+    // MARK:- Outlets-
     
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var nextButton: UIButton!
@@ -21,7 +21,7 @@ class BlocksViewController: UIViewController {
     @IBOutlet private weak var totalSubtitleLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     
-    // MARK:- Properties
+    // MARK:- Properties-
     
     var transactionController: TransactionController?
     var budgets: [(category: TransactionCategory, budget: Int64)] = []
@@ -49,6 +49,8 @@ class BlocksViewController: UIViewController {
         return frc
     }()
 
+    //MARK:- Life Cycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

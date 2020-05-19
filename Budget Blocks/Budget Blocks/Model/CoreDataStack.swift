@@ -23,6 +23,10 @@ class CoreDataStack {
             }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.undoManager = nil
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        
         return container
     }()
     
