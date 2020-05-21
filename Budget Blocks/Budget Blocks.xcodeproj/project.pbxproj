@@ -238,7 +238,6 @@
 			children = (
 				5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */,
 				5955B8BE23DB59BB00A24A8F /* Info.plist */,
-				B678947D2476245000A47332 /* Okta.plist */,
 			);
 			path = "Budget BlocksUITests";
 			sourceTree = "<group>";
@@ -326,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				5955B8A823DB59BA00A24A8F /* Info.plist */,
+				B678947D2476245000A47332 /* Okta.plist */,
 				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
 			);
 			path = Resources;
