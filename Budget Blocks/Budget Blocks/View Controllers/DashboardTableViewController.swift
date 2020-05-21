@@ -9,6 +9,8 @@
 import UIKit
 import LinkKit
 import CoreData
+import OktaOidc
+import OktaAuthNative
 
 class DashboardTableViewController: UITableViewController {
     
@@ -26,6 +28,10 @@ class DashboardTableViewController: UITableViewController {
     var newTransactionController: TransactionController?
     var newCategories: [TransactionCategory] = []
     var loadingGroup = DispatchGroup()
+    
+    
+    var oktaOidc: OktaOidc?
+    var stateManager: OktaOidcStateManager?
     
     private(set) lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -82,6 +88,9 @@ class DashboardTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.navigationItem.hidesBackButton = true
+        self.tabBarController?.navigationController?.navigationBar.isHidden = true
+        print("AHAHAHAH \(stateManager?.accessToken)")
       
         NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
         transactionController.networkingController = networkingController
@@ -102,16 +111,21 @@ class DashboardTableViewController: UITableViewController {
                     self.setUpViews()
                 }
             } else {
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "InitialLogin", sender: self)
-                }
+//                DispatchQueue.main.async {
+//                    self.performSegue(withIdentifier: "InitialLogin", sender: self)
+//                }
             }
         }
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+       
+         
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -331,9 +345,21 @@ class DashboardTableViewController: UITableViewController {
     }
     
     @objc private func logout() {
-        networkingController.logout()
-        TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
-        performSegue(withIdentifier: "AnimatedLogin", sender: self)
+//        networkingController.logout()
+//        TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
+//        performSegue(withIdentifier: "AnimatedLogin", sender: self)
+        
+        guard let oktaOidc = self.oktaOidc, let stateManager = self.stateManager else { return }
+        oktaOidc.signOutOfOkta(stateManager, from: self) { [weak self ] error in
+            if let error = error {
+                let ac = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(ac, animated: true, completion: nil)
+                return
+            }
+            self?.stateManager?.clear()
+            self?.tabBarController?.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func updateBalances() {

@@ -33,7 +33,8 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
-        
+        navigationController?.navigationBar.isHidden = true
+        navigationItem.hidesBackButton = true
         do {
             if let configForUITests = self.configForUITests {
                 oktaOidc = try OktaOidc(configuration: OktaOidcConfig(with: configForUITests))
@@ -107,15 +108,17 @@ class WelcomeViewController: UIViewController {
     
     // MARK: - Navigation-
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let navigationVC = segue.destination as? UINavigationController,
-//            let loginVC = navigationVC.viewControllers.first as? LoginViewController {
-//            loginVC.delegate = delegate
-//            loginVC.signIn = segue.identifier == "SignIn"
-//            loginVC.networkingController = networkingController
-//        }
-//    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destVC = segue.destination as? UITabBarController {
+            if let vc = destVC.viewControllers?.first as? UINavigationController {
+                if let correctVC = vc.viewControllers.first as? DashboardTableViewController {
+                    correctVC.oktaOidc = self.oktaOidc
+                    correctVC.stateManager = self.stateManager
+                }
+            }
+        }
+    }
 
 }
 // UI Tests

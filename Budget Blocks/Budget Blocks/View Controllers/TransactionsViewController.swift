@@ -54,9 +54,9 @@ class TransactionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
         dateFormatter.dateFormat = "MM/dd/YYYY"
-        
+       
         if let categoryName = category?.name {
             title = categoryName
         }
