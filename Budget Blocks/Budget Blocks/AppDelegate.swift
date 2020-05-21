@@ -8,10 +8,13 @@
 
 import UIKit
 import CoreData
+import OktaOidc
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+   
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
      
         let captionFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
@@ -32,7 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
      
     }
-
+    var oktaOidc: OktaOidc?
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -61,6 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+    
+   
+    
 
     // MARK: - Core Data Saving support
 

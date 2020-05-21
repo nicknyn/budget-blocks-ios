@@ -47,7 +47,11 @@
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
 		B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */; };
 		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
-		B678947E2476245000A47332 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = B678947D2476245000A47332 /* Okta.plist */; };
+		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
+		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; };
+		B6789484247626EE00A47332 /* OktaOidc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B678948624762D0B00A47332 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = B678948524762D0B00A47332 /* Okta.plist */; };
 		B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */; };
 		B6F023122473399B004FE006 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F023112473399B004FE006 /* UserController.swift */; };
 		E3509F082448F92C0091592C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F072448F92C0091592C /* Notifications.swift */; };
@@ -78,6 +82,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B6789484247626EE00A47332 /* OktaOidc.framework in Embed Frameworks */,
+				B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */,
 				596C10FE23E0E09F003DF1D8 /* LinkKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -129,7 +135,9 @@
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
 		B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
-		B678947D2476245000A47332 /* Okta.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
+		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
+		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
+		B678948524762D0B00A47332 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
 		B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		B6F0230C24733836004FE006 /* Budget_Blocks 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Budget_Blocks 2.xcdatamodel"; sourceTree = "<group>"; };
 		B6F023112473399B004FE006 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -142,8 +150,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */,
 				598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */,
 				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
+				B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */,
 				596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +293,8 @@
 		596C10FB23E0E09F003DF1D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B6789482247626ED00A47332 /* OktaOidc.framework */,
+				B678947F247626EA00A47332 /* OktaAuthNative.framework */,
 				596C10FC23E0E09F003DF1D8 /* LinkKit.framework */,
 			);
 			name = Frameworks;
@@ -324,8 +336,8 @@
 		B6F022462470B84A004FE006 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B678948524762D0B00A47332 /* Okta.plist */,
 				5955B8A823DB59BA00A24A8F /* Info.plist */,
-				B678947D2476245000A47332 /* Okta.plist */,
 				5955B8A323DB59BA00A24A8F /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -448,6 +460,7 @@
 				5943B3F223E498600050866D /* Exo-Regular.otf in Resources */,
 				592B3CB823F25A950035FF3A /* Exo-SemiBold.otf in Resources */,
 				5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */,
+				B678948624762D0B00A47332 /* Okta.plist in Resources */,
 				5943B3F023E491DD0050866D /* SquadaOne-Regular.ttf in Resources */,
 				5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */,
 				5955B89F23DB59B800A24A8F /* Main.storyboard in Resources */,
@@ -465,7 +478,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B678947E2476245000A47332 /* Okta.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
