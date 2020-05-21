@@ -14,7 +14,12 @@ class WelcomeViewController: UIViewController {
     
     // MARK:- Outlets-
     
-    @IBOutlet private weak var signUpButton: UIButton!
+    @IBOutlet private weak var signUpButton: UIButton! {
+        didSet {
+            signUpButton.isEnabled = false
+            signUpButton.isHidden = true
+        }
+    }
     @IBOutlet private weak var signInButton: UIButton!
     
     var oktaOidc: OktaOidc?
@@ -70,9 +75,10 @@ class WelcomeViewController: UIViewController {
                 self?.present(alert, animated: true, completion: nil)
                 return
             }
-            print(stateManager?.accessToken)
-            print(stateManager?.idToken)
-            print(stateManager?.refreshToken)
+            
+            print("Access token is \(stateManager!.accessToken!)")
+            print("id token is \(stateManager!.idToken!)")
+            print(stateManager?.refreshToken ?? 2)
             self?.stateManager?.clear()
             self?.stateManager = stateManager
             self?.stateManager?.writeToSecureStorage()
