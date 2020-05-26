@@ -57,9 +57,7 @@ class WelcomeViewController: UIViewController {
                 
                 self.performSegue(withIdentifier: "ShowDashboard", sender: self)
             
-          
         }
-        
     }
    
     
@@ -98,7 +96,6 @@ class WelcomeViewController: UIViewController {
         
         signInButton.layer.cornerRadius = 4
         signInButton.layer.borderWidth = 1
-//        signInButton.layer.borderColor = daybreakBlue
         
         if let buttonFontSize = signUpButton.titleLabel?.font.pointSize {
             signUpButton.titleLabel?.font = UIFont(name: "Avenir Next", size: buttonFontSize)

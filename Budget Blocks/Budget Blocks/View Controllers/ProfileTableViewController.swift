@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ProfileTableViewController : UITableViewController
-{
+class ProfileTableViewController : UITableViewController {
     
     //MARK:- Outlets
     

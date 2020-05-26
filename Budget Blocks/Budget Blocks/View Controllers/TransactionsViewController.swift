@@ -11,12 +11,11 @@ import CoreData
 
 class TransactionsViewController: UIViewController {
     
-    
-    @IBOutlet weak private var tableView: UITableView!
-    
     var networkingController: NetworkingController!
     var transactionController: TransactionController!
     var category: TransactionCategory?
+    
+    @IBOutlet weak private var tableView: UITableView!
     private let dateFormatter = DateFormatter()
     private let loadingGroup = DispatchGroup()
     
