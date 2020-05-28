@@ -131,7 +131,6 @@ class BlocksViewController: UIViewController {
                 }
             })
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -152,7 +151,6 @@ class BlocksViewController: UIViewController {
             }
         }
     }
-
 }
 
 // MARK: Table view data source and delegate
@@ -193,13 +191,11 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
             titleLabel?.font = UIFont(name: "Exo-Regular",size: textSize)
         }
         
-        if !categoriesAreSet,
-            budgets.contains(where: { $0.category == category }) {
+        if !categoriesAreSet,budgets.contains(where: { $0.category == category }) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
         }
-        
         return cell
     }
     

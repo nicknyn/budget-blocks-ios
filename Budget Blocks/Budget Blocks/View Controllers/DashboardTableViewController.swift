@@ -84,14 +84,38 @@ class DashboardTableViewController: UITableViewController {
     }
     
     //MARK:- Life Cycle-
+    var userInfo: [String: Any]!
+      
     
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.navigationItem.hidesBackButton = true
         self.tabBarController?.navigationController?.navigationBar.isHidden = true
-        print("AHAHAHAH \(stateManager?.accessToken)")
-      
+        print("AHAHAHAH \(stateManager!.accessToken!)")
+        stateManager?.getUser({ (response, error) in
+            print(response?.description)
+            let user = User(context: CoreDataStack.shared.mainContext)
+            user.name = response!["name"] as? String
+            user.email = response!["email"] as? String
+            print("USER NAME is \(user.name!)")
+            print("EMAIL IS \(user.email!)")
+           try? CoreDataStack.shared.mainContext.save()
+            NetworkingController.shared.registerUserToDatabase(user: user.userRepresentation!) { (error) in
+                print(error?.localizedDescription)
+                self.userInfo = ["user": user]
+              
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        NotificationCenter.default.post(name: Notification.Name("GetUser"), object: nil, userInfo: self.userInfo)
+                }
+                
+            }
+            
+          
+        })
+        
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
         transactionController.networkingController = networkingController
         
@@ -124,12 +148,13 @@ class DashboardTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.reloadData()
        
-         
+            
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    
         tableView.reloadData()
     }
     
@@ -497,14 +522,20 @@ class DashboardTableViewController: UITableViewController {
 extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
         print("Link successful. Public token: \(publicToken)")
-        networkingController.tokenExchange(publicToken: publicToken) { error in
-            if let error = error {
-                return NSLog("Error exchanging token: \(error)")
-            }
-            
-            self.networkingController.setLinked()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+//        networkingController.tokenExchange(publicToken: publicToken) { error in
+//            if let error = error {
+//                return NSLog("Error exchanging token: \(error)")
+//            }
+//
+//            self.networkingController.setLinked()
+//
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+        NetworkingController.shared.sendPlaidTokenToServer(publicToken: publicToken, id: "4") { (error) in
+            if let err = error {
+                print(err)
             }
         }
         dismiss(animated: true)

@@ -22,24 +22,36 @@ class ProfileTableViewController : UITableViewController {
     
     //MARK:- Life Cycle -
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor  = . secondarySystemBackground
-        
         tableView.tableFooterView = UIView()
-      
+        
+          NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: Notification.Name("GetUser"), object: nil)
+       
+    }
+    
+    @objc func updateUserInfo(_ notification: Notification) {
+        if let userInfo = notification.userInfo, let user = userInfo["user"] as? User {
+            nameLabel.text = user.name
+            emailLabel.text = user.email
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if #available(iOS 13, *)
-        {
+      
+        if #available(iOS 13, *) {
             navigationController?.navigationBar.isHidden = true
             let statusBar = UIView(frame: ( UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.windowScene?.statusBarManager?.statusBarFrame)!)
             statusBarView = statusBar
             statusBar.backgroundColor = UIColor.white
             UIApplication.shared.windows.filter {$0.isKeyWindow}.first?.addSubview(statusBar)
-            
         }
     }
     
@@ -56,7 +68,6 @@ class ProfileTableViewController : UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return options.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell", for: indexPath)
@@ -76,8 +87,4 @@ class ProfileTableViewController : UITableViewController {
             break
         }
     }
-    
-   
-
-  
 }

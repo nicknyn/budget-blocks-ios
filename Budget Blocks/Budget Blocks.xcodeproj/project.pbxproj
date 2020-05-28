@@ -46,6 +46,8 @@
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
 		B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */; };
+		B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6228847248022EA009FF6E5 /* UserRepresentation.swift */; };
+		B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884924802334009FF6E5 /* User+Convenience.swift */; };
 		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
 		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
 		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -134,6 +136,8 @@
 		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
 		B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		B6228847248022EA009FF6E5 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
+		B622884924802334009FF6E5 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
 		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				5955B8A023DB59B800A24A8F /* Budget_Blocks.xcdatamodeld */,
 				5969C1F023E38D3200BAA183 /* CoreDataStack.swift */,
 				5969C1F223E38EBF00BAA183 /* Budget_Blocks+Convenience.swift */,
+				B6228847248022EA009FF6E5 /* UserRepresentation.swift */,
+				B622884924802334009FF6E5 /* User+Convenience.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -529,6 +535,7 @@
 				598B29FD23FDDC7A0038B698 /* OnboardingViewController.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
 				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,
+				B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */,
 				5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */,
 				59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */,
 				5969C1F623E3904400BAA183 /* TransactionController.swift in Sources */,
@@ -541,6 +548,7 @@
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
 				B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
+				B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

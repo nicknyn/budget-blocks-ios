@@ -96,9 +96,7 @@ class LoginViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
     }
-    
   
-    
     // MARK: Private
   
     private func setUpViews() {

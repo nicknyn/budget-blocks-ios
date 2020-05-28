@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import OktaOidc
+import OktaAuthNative
 
 class ChangePasswordViewController: UIViewController {
 
@@ -26,7 +28,7 @@ class ChangePasswordViewController: UIViewController {
         return lb
     }()
     
-    private lazy var currentPasswordTextField: UITextField = {
+    private lazy var oldPasswordField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Enter current password"
@@ -36,7 +38,7 @@ class ChangePasswordViewController: UIViewController {
         return textField
     }()
     
-    private lazy var newPasswordTextField : UITextField = {
+    private lazy var newPasswordField : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = "Enter new password"
@@ -46,7 +48,7 @@ class ChangePasswordViewController: UIViewController {
     }()
     
     private lazy var currentPasswordStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.currentPasswordLabel,self.currentPasswordTextField])
+        let stackView = UIStackView(arrangedSubviews: [self.currentPasswordLabel,self.oldPasswordField])
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 5
@@ -55,7 +57,7 @@ class ChangePasswordViewController: UIViewController {
     }()
     
     private lazy var newPasswordStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.newPasswordLabel,self.newPasswordTextField])
+        let stackView = UIStackView(arrangedSubviews: [self.newPasswordLabel,self.newPasswordField])
         stackView.alignment = .fill
         stackView.axis = .vertical
         
@@ -70,10 +72,10 @@ class ChangePasswordViewController: UIViewController {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
         view.backgroundColor = .secondarySystemBackground
-        view.addSubview(currentPasswordTextField)
-        view.addSubview(newPasswordTextField)
-        currentPasswordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        newPasswordTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        view.addSubview(oldPasswordField)
+        view.addSubview(newPasswordField)
+        oldPasswordField.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        newPasswordField.heightAnchor.constraint(equalToConstant: 40).isActive = true
         view.addSubview(currentPasswordStackView)
         view.addSubview(newPasswordStackView)
         
@@ -95,8 +97,15 @@ class ChangePasswordViewController: UIViewController {
     }
     @objc func saveTapped() {
         print("Change password")
+        
+        guard let oldPassword = oldPasswordField.text, !oldPassword.isEmpty,
+            let newPassword = newPasswordField.text, !newPassword.isEmpty else { return }
+        
+//        if let expiredStatus = status as? OktaAuthStatusPasswordExpired {
+//            
+//        }
+        
+        
+        
     }
-    
-
-
 }

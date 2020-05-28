@@ -148,7 +148,6 @@ class CreateTransactionViewController: UIViewController {
             categoriesVC.transactionController = transactionController
         }
     }
-
 }
 
 // MARK: Text field delegate
@@ -159,7 +158,6 @@ extension CreateTransactionViewController: UITextFieldDelegate {
             performSegue(withIdentifier: "ShowCategories", sender: self)
             return false
         }
-        
         return true
     }
     

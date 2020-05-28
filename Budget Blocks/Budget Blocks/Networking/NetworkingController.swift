@@ -10,6 +10,8 @@ import Foundation
 import SwiftyJSON
 import KeychainSwift
 
+
+
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
@@ -23,11 +25,17 @@ enum HTTPHeader: String {
 }
 
 class NetworkingController {
-    private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     
+    static let shared = NetworkingController()
+    
+    private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     private let emailKey = "email"
     private let passwordKey = "password"
     private let keychain = KeychainSwift()
+    private let jsonEncoder = JSONEncoder()
+    private let jsonDecoder = JSONDecoder()
+    
+    
     
     var bearer: Bearer?
     
@@ -91,6 +99,37 @@ class NetworkingController {
         }.resume()
     }
     
+    func registerUserToDatabase(user:UserRepresentation, completion: @escaping (Error?) -> Void) {
+        let registerURL = baseURL.appendingPathComponent("api")
+        .appendingPathComponent("users")
+        
+        var request = URLRequest(url: registerURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            let jsonData = try self.jsonEncoder.encode(user)
+            request.httpBody = jsonData
+        } catch {
+            print(error.localizedDescription)
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            print(response)
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                print(response)
+                completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
+            }
+            completion(nil)
+        }.resume()
+       
+    }
+    
     func jsonData(data: Data, email: String,password: String) -> String {
         let _: JSON = ["email": email, "password": password]
         let myToken = ""
@@ -147,12 +186,46 @@ class NetworkingController {
         keychain.clear()
     }
     
+    func sendPlaidTokenToServer(publicToken: String,id: String, completion: @escaping (Error?) -> Void) {
+        let endpoint = baseURL
+            .appendingPathComponent("plaid")
+            .appendingPathComponent("token_exchange")
+            .appendingPathComponent(id)
+        print(endpoint)
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+       
+      
+        do {
+            let jsonData = try jsonEncoder.encode(publicToken)
+            request.httpBody = jsonData
+        } catch {
+            NSLog("Error encoding user object: \(error)")
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, reponse, error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            if let response = reponse as? HTTPURLResponse, response.statusCode != 200 {
+                print(response)
+                completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
+            }
+            completion(nil)
+        }.resume()
+        
+    }
+    
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
         guard let bearer = bearer else { return completion(nil) }
         let tokenJSON: JSON = ["publicToken": publicToken, "userid": bearer.userID]
         
         guard let request = createRequest(urlComponents: .tokenExchange, httpMethod: .post, json: tokenJSON) else { return completion(nil) }
-        
+        print(request)
         URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 NSLog("No data returned from register request")
@@ -349,4 +422,5 @@ class NetworkingController {
         
         return request
     }
+
 }

@@ -231,5 +231,4 @@ class CustomCategoriesTableViewController: UITableViewController {
              
              present(alert, animated: true)
      }
-  
 }

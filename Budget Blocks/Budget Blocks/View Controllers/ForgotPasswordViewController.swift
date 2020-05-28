@@ -70,7 +70,6 @@ class ForgotPasswordViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         self.view.endEditing(true)
     }
-
     
     //MARK:- Privates-
     

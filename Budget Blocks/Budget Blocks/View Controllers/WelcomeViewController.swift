@@ -24,15 +24,15 @@ class WelcomeViewController: UIViewController {
     
     var oktaOidc: OktaOidc?
     var stateManager: OktaOidcStateManager?
+    var status : OktaAuthStatus?
     
     var networkingController: NetworkingController!
     var delegate: LoginViewControllerDelegate?
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
+       
         navigationController?.navigationBar.isHidden = true
         navigationItem.hidesBackButton = true
         do {
@@ -40,6 +40,7 @@ class WelcomeViewController: UIViewController {
                 oktaOidc = try OktaOidc(configuration: OktaOidcConfig(with: configForUITests))
             } else {
                 oktaOidc = try OktaOidc()
+                
             }
         } catch let error {
             DispatchQueue.main.async {
@@ -60,13 +61,12 @@ class WelcomeViewController: UIViewController {
         }
     }
    
-    
     @IBAction func signUpTapped(_ sender: UIButton) {
         
     }
     
-    
     @IBAction func signInTapped(_ sender: UIButton) {
+       
         oktaOidc?.signInWithBrowser(from: self, callback: { [weak self] stateManager, error in
             if let error = error {
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -84,9 +84,7 @@ class WelcomeViewController: UIViewController {
             self?.performSegue(withIdentifier: "ShowDashboard", sender: self)
         })
     }
-    
-    
-    
+     
     private func setUpViews() {
         let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1).cgColor
         
@@ -112,11 +110,11 @@ class WelcomeViewController: UIViewController {
                 if let correctVC = vc.viewControllers.first as? DashboardTableViewController {
                     correctVC.oktaOidc = self.oktaOidc
                     correctVC.stateManager = self.stateManager
+                    
                 }
             }
         }
     }
-
 }
 // UI Tests
 private extension WelcomeViewController {
