@@ -16,12 +16,9 @@ class ProfileTableViewController : UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     private(set) var statusBarView: UIView?
-    
     private let options = ["Change Password","Share app with friends","Visit website"]
     
-    
     //MARK:- Life Cycle -
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +26,6 @@ class ProfileTableViewController : UITableViewController {
         tableView.tableFooterView = UIView()
         
           NotificationCenter.default.addObserver(self, selector: #selector(updateUserInfo), name: Notification.Name("GetUser"), object: nil)
-       
-    }
-    
-    @objc func updateUserInfo(_ notification: Notification) {
-        if let userInfo = notification.userInfo, let user = userInfo["user"] as? User {
-            nameLabel.text = user.name
-            emailLabel.text = user.email
-        }
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +46,16 @@ class ProfileTableViewController : UITableViewController {
          navigationController?.navigationBar.isHidden = false
     }
     
+    @objc func updateUserInfo(_ notification: Notification) {
+        if let userInfo = notification.userInfo, let user = userInfo["user"] as? User {
+            nameLabel.text = user.name
+            emailLabel.text = user.email
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     //MARK:- Datasource-
     

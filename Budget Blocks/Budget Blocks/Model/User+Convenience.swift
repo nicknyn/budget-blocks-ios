@@ -8,9 +8,7 @@
 
 import Foundation
 
-
 extension User {
-    
     var userRepresentation: UserRepresentation? {
         guard let name = name, let email = email else { return nil }
         return UserRepresentation(name: name, email: email)

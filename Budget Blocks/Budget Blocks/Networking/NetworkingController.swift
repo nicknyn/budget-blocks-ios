@@ -11,6 +11,9 @@ import SwiftyJSON
 import KeychainSwift
 
 
+struct BodyForPlaidPost: Encodable {
+    let publicToken: String
+}
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -24,10 +27,6 @@ enum HTTPHeader: String {
     case auth = "Authorization"
 }
 
-
-
-
-
 class NetworkingController {
     
     static let shared = NetworkingController()
@@ -39,8 +38,6 @@ class NetworkingController {
     private let keychain = KeychainSwift()
     private let jsonEncoder = JSONEncoder()
     private let jsonDecoder = JSONDecoder()
-    
-    
     
     var bearer: Bearer?
     
@@ -140,7 +137,6 @@ class NetworkingController {
             } catch {
                 print(error.localizedDescription)
             }
-//            print(response)
         
         }.resume()
        
@@ -201,22 +197,19 @@ class NetworkingController {
         bearer = nil
         keychain.clear()
     }
-    
-    struct BodyForPlaidPost: Encodable {
-        let publicToken: String
-    }
+  
     
     func sendPlaidTokenToServer(publicToken: String,userID: Int, completion: @escaping (Error?) -> Void) {
         let endpoint = newBaseURL
             .appendingPathComponent("plaid")
             .appendingPathComponent("token_exchange")
             .appendingPathComponent(String(userID))
+        
         print(endpoint)
         var request = URLRequest(url: endpoint)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-     //access_token
-//
+   
         let body = BodyForPlaidPost(publicToken: publicToken)
    
         guard let uploadData = try? jsonEncoder.encode(body) else { return }
@@ -226,13 +219,12 @@ class NetworkingController {
                 print ("error: \(error)")
                 return
             }
-            print(response)
-            guard let response = response as? HTTPURLResponse,
-                (200...299).contains(response.statusCode) else {
-                    print ("server error")
-                    return
+           
+            if let response = response as? HTTPURLResponse,
+                (200...299).contains(response.statusCode)  {
+                print(response.statusCode)
             }
-            if let mimeType = response.mimeType,
+            if let mimeType = response?.mimeType,
                 mimeType == "application/json",
                 let data = data,
                 let dataString = String(data: data, encoding: .utf8) {
@@ -240,24 +232,6 @@ class NetworkingController {
             }
         }
         task.resume()
-//        URLSession.shared.uploadTask(with: request) { (data, response, error) in
-//
-//            if let error = error {
-//                completion(error)
-//                return
-//            }
-//            print("This is response \(response!)")
-//            if let data = data, let dataString = String(data: data, encoding: .utf8) {
-//                do {
-//                    try?
-//                print("Response data string: \n \(dataString)")
-//                }
-//                catch {
-//                    print(error)
-//                }
-//            }
-//            completion(nil)
-//        }.resume()
     }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
@@ -265,7 +239,7 @@ class NetworkingController {
         let tokenJSON: JSON = ["publicToken": publicToken, "userid": bearer.userID]
         
         guard let request = createRequest(urlComponents: .tokenExchange, httpMethod: .post, json: tokenJSON) else { return completion(nil) }
-        print(request)
+ 
         URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 NSLog("No data returned from register request")
@@ -302,7 +276,7 @@ class NetworkingController {
         }.resume()
     }
     
-    // MARK: Categories and transactions
+    // MARK: -Categories and transactions-
     
     func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
         guard let request = createRequest(urlComponents: .transactions(transactionID: nil), httpMethod: .get) else { return completion(nil,nil) }
@@ -334,7 +308,7 @@ class NetworkingController {
         }
     }
     
-    // MARK: Manual
+    // MARK:- Manual-
     
     func createTransaction(amount: Int64, date: Date, category: TransactionCategory, name: String?, completion: @escaping (JSON?, Error?) -> Void) {
         guard category.categoryID != 0 else { return completion(nil, nil) }
@@ -459,7 +433,6 @@ class NetworkingController {
                 return nil
             }
         }
-        
         return request
     }
 

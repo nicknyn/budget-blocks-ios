@@ -86,16 +86,20 @@ class DashboardTableViewController: UITableViewController {
     //MARK:- Life Cycle-
     var userInfo: [String: Any]!
       
-    
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.navigationItem.hidesBackButton = true
         self.tabBarController?.navigationController?.navigationBar.isHidden = true
         print("ACCESS TOKEN \(stateManager!.accessToken!)")
-        print("ID TOKEN \(stateManager!.idToken)")
+        print("ID TOKEN \(stateManager!.idToken!)")
         stateManager?.getUser({ (response, error) in
-            print(response?.description)
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            if let response = response {
+                print(response.description)
+            }
+            
             let user = User(context: CoreDataStack.shared.mainContext)
             user.name = response!["name"] as? String
             user.email = response!["email"] as? String
@@ -103,20 +107,18 @@ class DashboardTableViewController: UITableViewController {
             print("EMAIL IS \(user.email!)")
            try? CoreDataStack.shared.mainContext.save()
             NetworkingController.shared.registerUserToDatabase(user: user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
-                print(error?.localizedDescription)
-                self.userInfo = ["user": user]
-                print(user?.data.id)
-                self.userID = user?.data.id
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        NotificationCenter.default.post(name: Notification.Name("GetUser"), object: nil, userInfo: self.userInfo)
+                guard let user = user else { return }
+                if let err = error {
+                    fatalError(err.localizedDescription)
                 }
                 
+                self.userInfo = ["user": user]
+                print(user.data.id!)
+                self.userID = user.data.id
+              
+                
             }
-            
-          
         })
-        
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
         transactionController.networkingController = networkingController
@@ -156,7 +158,9 @@ class DashboardTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name("GetUser"), object: nil, userInfo: self.userInfo)
+        }
         tableView.reloadData()
     }
     

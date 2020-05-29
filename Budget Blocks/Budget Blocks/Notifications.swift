@@ -9,6 +9,5 @@
 import Foundation
 
 extension NSNotification.Name {
-    
     static let refreshInfo = NSNotification.Name("refreshInfo")
 }

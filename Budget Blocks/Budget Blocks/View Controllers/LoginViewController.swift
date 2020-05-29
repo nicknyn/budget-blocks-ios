@@ -45,8 +45,7 @@ class LoginViewController: UIViewController {
             imageView.layer.borderWidth = 2
         }
     }
-    
-    
+
     // MARK:- Properties-
     
     var networkingController: NetworkingController!
@@ -120,8 +119,6 @@ class LoginViewController: UIViewController {
             ])
         }
        
-        
-        
         if let textFieldFontSize = emailTextField.font?.pointSize {
             let exo = UIFont(name: "Avenir Next", size: textFieldFontSize)
             emailTextField.font = exo

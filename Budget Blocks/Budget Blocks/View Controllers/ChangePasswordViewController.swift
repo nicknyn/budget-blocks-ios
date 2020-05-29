@@ -101,11 +101,5 @@ class ChangePasswordViewController: UIViewController {
         guard let oldPassword = oldPasswordField.text, !oldPassword.isEmpty,
             let newPassword = newPasswordField.text, !newPassword.isEmpty else { return }
         
-//        if let expiredStatus = status as? OktaAuthStatusPasswordExpired {
-//            
-//        }
-        
-        
-        
     }
 }

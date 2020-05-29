@@ -45,7 +45,7 @@ class WelcomeViewController: UIViewController {
         } catch let error {
             DispatchQueue.main.async {
                 let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                print(error.localizedDescription)
+                print("This is error \(error.localizedDescription)")
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -69,9 +69,7 @@ class WelcomeViewController: UIViewController {
        
         oktaOidc?.signInWithBrowser(from: self, callback: { [weak self] stateManager, error in
             if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self?.present(alert, animated: true, completion: nil)
+                print("Cancel from Okta \(error.localizedDescription)")
                 return
             }
             
@@ -89,10 +87,10 @@ class WelcomeViewController: UIViewController {
         let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1).cgColor
         
         signUpButton.layer.backgroundColor = daybreakBlue
-        signUpButton.layer.cornerRadius = 4
+        signUpButton.layer.cornerRadius = 6
         signUpButton.setTitleColor(.white, for: .normal)
         
-        signInButton.layer.cornerRadius = 4
+        signInButton.layer.cornerRadius = 6
         signInButton.layer.borderWidth = 1
         
         if let buttonFontSize = signUpButton.titleLabel?.font.pointSize {
@@ -102,7 +100,6 @@ class WelcomeViewController: UIViewController {
     }
     
     // MARK: - Navigation-
-
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destVC = segue.destination as? UITabBarController {
