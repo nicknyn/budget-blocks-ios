@@ -28,7 +28,7 @@ class DashboardTableViewController: UITableViewController {
     var newTransactionController: TransactionController?
     var newCategories: [TransactionCategory] = []
     var loadingGroup = DispatchGroup()
-    
+    private var userID: Int?
     
     var oktaOidc: OktaOidc?
     var stateManager: OktaOidcStateManager?
@@ -92,7 +92,8 @@ class DashboardTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tabBarController?.navigationItem.hidesBackButton = true
         self.tabBarController?.navigationController?.navigationBar.isHidden = true
-        print("AHAHAHAH \(stateManager!.accessToken!)")
+        print("ACCESS TOKEN \(stateManager!.accessToken!)")
+        print("ID TOKEN \(stateManager!.idToken)")
         stateManager?.getUser({ (response, error) in
             print(response?.description)
             let user = User(context: CoreDataStack.shared.mainContext)
@@ -101,10 +102,11 @@ class DashboardTableViewController: UITableViewController {
             print("USER NAME is \(user.name!)")
             print("EMAIL IS \(user.email!)")
            try? CoreDataStack.shared.mainContext.save()
-            NetworkingController.shared.registerUserToDatabase(user: user.userRepresentation!) { (error) in
+            NetworkingController.shared.registerUserToDatabase(user: user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
                 print(error?.localizedDescription)
                 self.userInfo = ["user": user]
-              
+                print(user?.data.id)
+                self.userID = user?.data.id
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         NotificationCenter.default.post(name: Notification.Name("GetUser"), object: nil, userInfo: self.userInfo)
                 }
@@ -522,22 +524,12 @@ class DashboardTableViewController: UITableViewController {
 extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
         print("Link successful. Public token: \(publicToken)")
-//        networkingController.tokenExchange(publicToken: publicToken) { error in
-//            if let error = error {
-//                return NSLog("Error exchanging token: \(error)")
-//            }
-//
-//            self.networkingController.setLinked()
-//
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-        NetworkingController.shared.sendPlaidTokenToServer(publicToken: publicToken, id: "4") { (error) in
-            if let err = error {
-                print(err)
-            }
+        print("USER ID IS \(userID)")
+        NetworkingController.shared.sendPlaidTokenToServer(publicToken: publicToken, userID: userID!) { (error) in
+            print(error)
+            // POST the database
         }
+        
         dismiss(animated: true)
     }
     

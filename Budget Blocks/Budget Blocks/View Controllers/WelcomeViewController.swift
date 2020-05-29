@@ -55,7 +55,7 @@ class WelcomeViewController: UIViewController {
         if  let oktaOidc = oktaOidc,
             let _ = OktaOidcStateManager.readFromSecureStorage(for: oktaOidc.configuration)?.accessToken {
             self.stateManager = OktaOidcStateManager.readFromSecureStorage(for: oktaOidc.configuration)
-                
+         
                 self.performSegue(withIdentifier: "ShowDashboard", sender: self)
             
         }
