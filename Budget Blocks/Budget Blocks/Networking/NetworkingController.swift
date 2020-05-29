@@ -10,6 +10,11 @@ import Foundation
 import SwiftyJSON
 import KeychainSwift
 
+
+struct BodyForPlaidPost: Encodable {
+    let publicToken: String
+}
+
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
@@ -23,13 +28,19 @@ enum HTTPHeader: String {
 }
 
 class NetworkingController {
-    private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     
+    static let shared = NetworkingController()
+    static var userID : Int = 0
+    private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
+    private let newBaseURL = URL(string: "https://budget-blocks-production-new.herokuapp.com")!
     private let emailKey = "email"
     private let passwordKey = "password"
     private let keychain = KeychainSwift()
+    private let jsonEncoder = JSONEncoder()
+    private let jsonDecoder = JSONDecoder()
     
     var bearer: Bearer?
+    
     var linkedAccount: Bool {
         return bearer?.linkedAccount ?? false
     }
@@ -90,6 +101,47 @@ class NetworkingController {
         }.resume()
     }
     
+    func registerUserToDatabase(user:UserRepresentation,bearer: String, completion: @escaping (UserRep?,Error?) -> Void) {
+        let registerURL = newBaseURL.appendingPathComponent("api")
+            .appendingPathComponent("users")
+        
+        var request = URLRequest(url: registerURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        do {
+            let jsonData = try self.jsonEncoder.encode(user)
+            request.httpBody = jsonData
+        } catch {
+            print(error.localizedDescription)
+            completion(nil,error)
+            return
+        }
+        print(registerURL)
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+          
+            if let error = error {
+                completion(nil,error)
+                return
+            }
+            guard let data = data else { return }
+           print(String(data: data, encoding: .utf8)!)
+            if let response = response as? HTTPURLResponse, response.statusCode != 200 {
+                print(response)
+                completion( nil, NSError(domain: "", code: response.statusCode, userInfo: nil))
+            }
+            do {
+                let user = try self.jsonDecoder.decode(UserRep.self, from: data)
+                print("HERE IS ID \(user.data.id!)")
+              completion(user,nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+        
+        }.resume()
+       
+    }
+    
     func jsonData(data: Data, email: String,password: String) -> String {
         let _: JSON = ["email": email, "password": password]
         let myToken = ""
@@ -145,13 +197,49 @@ class NetworkingController {
         bearer = nil
         keychain.clear()
     }
+  
+    
+    func sendPlaidTokenToServer(publicToken: String,userID: Int, completion: @escaping (Error?) -> Void) {
+        let endpoint = newBaseURL
+            .appendingPathComponent("plaid")
+            .appendingPathComponent("token_exchange")
+            .appendingPathComponent(String(userID))
+        
+        print(endpoint)
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+   
+        let body = BodyForPlaidPost(publicToken: publicToken)
+   
+        guard let uploadData = try? jsonEncoder.encode(body) else { return }
+
+        let task = URLSession.shared.uploadTask(with: request, from:uploadData) { (data, response, error) in
+            if let error = error {
+                print ("error: \(error)")
+                return
+            }
+           
+            if let response = response as? HTTPURLResponse,
+                (200...299).contains(response.statusCode)  {
+                print(response.statusCode)
+            }
+            if let mimeType = response?.mimeType,
+                mimeType == "application/json",
+                let data = data,
+                let dataString = String(data: data, encoding: .utf8) {
+                print ("got data: \(dataString)")
+            }
+        }
+        task.resume()
+    }
     
     func tokenExchange(publicToken: String, completion: @escaping (Error?) -> Void) {
         guard let bearer = bearer else { return completion(nil) }
         let tokenJSON: JSON = ["publicToken": publicToken, "userid": bearer.userID]
         
         guard let request = createRequest(urlComponents: .tokenExchange, httpMethod: .post, json: tokenJSON) else { return completion(nil) }
-        
+ 
         URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data = data else {
                 NSLog("No data returned from register request")
@@ -188,7 +276,7 @@ class NetworkingController {
         }.resume()
     }
     
-    // MARK: Categories and transactions
+    // MARK: -Categories and transactions-
     
     func fetchTransactionsFromServer(completion: @escaping (JSON?, Error?) -> Void) {
         guard let request = createRequest(urlComponents: .transactions(transactionID: nil), httpMethod: .get) else { return completion(nil,nil) }
@@ -220,7 +308,7 @@ class NetworkingController {
         }
     }
     
-    // MARK: Manual
+    // MARK:- Manual-
     
     func createTransaction(amount: Int64, date: Date, category: TransactionCategory, name: String?, completion: @escaping (JSON?, Error?) -> Void) {
         guard category.categoryID != 0 else { return completion(nil, nil) }
@@ -345,7 +433,7 @@ class NetworkingController {
                 return nil
             }
         }
-        
         return request
     }
+
 }

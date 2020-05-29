@@ -10,7 +10,7 @@ import UIKit
 import LinkKit
 import CoreData
 
-protocol OnboardingViewControllerDelegate {
+protocol OnboardingViewControllerDelegate: AnyObject {
     func accountConnected()
 }
 
@@ -18,26 +18,36 @@ class OnboardingViewController: UIViewController {
     
     // MARK: Outlets
     
-    @IBOutlet weak var plaidView: UIView!
-    @IBOutlet weak var manualView: UIView!
+    @IBOutlet private weak var plaidView: UIView! {
+        didSet {
+            plaidView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
+            plaidView.layer.cornerRadius = 56
+        }
+    }
+    @IBOutlet private weak var manualView: UIView! {
+        didSet {
+            manualView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
+            manualView.layer.cornerRadius = 56
+        }
+    }
     
     // MARK: Properties
     
     var transactionController: TransactionController!
     var networkingController: NetworkingController!
-    var delegate: OnboardingViewControllerDelegate?
+    weak var delegate: OnboardingViewControllerDelegate?
     let loadingGroup = DispatchGroup()
+    
+    //MARK:- Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        plaidView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-        plaidView.layer.cornerRadius = 56
+        
         let plaidTap = UITapGestureRecognizer(target: self, action: #selector(plaid))
         plaidView.addGestureRecognizer(plaidTap)
         
-        manualView.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
-        manualView.layer.cornerRadius = 56
+       
         let manualTap = UITapGestureRecognizer(target: self, action: #selector(manual))
         manualView.addGestureRecognizer(manualTap)
         
@@ -86,6 +96,7 @@ class OnboardingViewController: UIViewController {
         let linkConfiguration = PLKConfiguration(key: publicKey, env: .sandbox, product: [.auth, .transactions, .identity])
         linkConfiguration.webhook = URL(string: "https://lambda-budget-blocks.herokuapp.com/plaid/webhook")!
         let linkViewController = PLKPlaidLinkViewController(configuration: linkConfiguration, delegate: self)
+        linkViewController.modalPresentationStyle = .fullScreen
         present(linkViewController, animated: true)
     }
     

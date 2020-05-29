@@ -11,23 +11,23 @@ import CoreData
 
 class BlocksViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK:- Outlets-
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var promptLabel: UILabel!
-    @IBOutlet weak var totalStackView: UIStackView!
-    @IBOutlet weak var totalLabel: UILabel!
-    @IBOutlet weak var totalSubtitleLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var promptLabel: UILabel!
+    @IBOutlet private weak var totalStackView: UIStackView!
+    @IBOutlet private weak var totalLabel: UILabel!
+    @IBOutlet private weak var totalSubtitleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
-    // MARK: Properties
+    // MARK:- Properties-
     
     var transactionController: TransactionController?
     var budgets: [(category: TransactionCategory, budget: Int64)] = []
     var categoriesAreSet: Bool = false
     
-    lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
+   private(set) lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         
         fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "name", ascending: true) ]
@@ -49,6 +49,8 @@ class BlocksViewController: UIViewController {
         return frc
     }()
 
+    //MARK:- Life Cycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,7 +58,7 @@ class BlocksViewController: UIViewController {
         updateViews()
     }
     
-    // MARK: Private
+    // MARK:- Private
     
     @objc private func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -112,7 +114,7 @@ class BlocksViewController: UIViewController {
         totalLabel.text = "$" + total.currency
     }
     
-    // MARK: Actions
+    // MARK:- Actions
     
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -129,7 +131,6 @@ class BlocksViewController: UIViewController {
                 }
             })
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -150,7 +151,6 @@ class BlocksViewController: UIViewController {
             }
         }
     }
-
 }
 
 // MARK: Table view data source and delegate
@@ -191,13 +191,11 @@ extension BlocksViewController: UITableViewDataSource, UITableViewDelegate {
             titleLabel?.font = UIFont(name: "Exo-Regular",size: textSize)
         }
         
-        if !categoriesAreSet,
-            budgets.contains(where: { $0.category == category }) {
+        if !categoriesAreSet,budgets.contains(where: { $0.category == category }) {
             cell.accessoryType = .checkmark
         } else {
             cell.accessoryType = .none
         }
-        
         return cell
     }
     

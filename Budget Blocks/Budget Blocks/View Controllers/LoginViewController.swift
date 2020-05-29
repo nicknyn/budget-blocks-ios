@@ -14,20 +14,42 @@ protocol LoginViewControllerDelegate {
 
 class LoginViewController: UIViewController {
     
-    // MARK: Outlets
+    // MARK:- Outlets -
 
-    @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var loginLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
-    @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet private weak var loginButton: UIButton!
     
-    // MARK: Properties
+    @IBOutlet private weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.clearButtonMode = .whileEditing
+            emailTextField.becomeFirstResponder()
+        }
+    }
+    @IBOutlet private weak var passwordTextField: UITextField! {
+        didSet {
+            passwordTextField.clearButtonMode = .whileEditing
+        }
+    }
+    @IBOutlet weak var confirmPasswordTextField: UITextField! {
+        didSet {
+            confirmPasswordTextField.clearButtonMode = .whileEditing
+        }
+    }
+    @IBOutlet private weak var confirmPasswordLabel: UILabel!
+    @IBOutlet private weak var emailLabel: UILabel!
+    @IBOutlet private weak var passwordLabel: UILabel!
+    
+    @IBOutlet private weak var imageView: UIImageView! {
+        didSet {
+            imageView.layer.cornerRadius = imageView.bounds.size.width / 2
+            imageView.layer.borderColor = UIColor.black.cgColor
+            imageView.layer.borderWidth = 2
+        }
+    }
+
+    // MARK:- Properties-
     
     var networkingController: NetworkingController!
+    var userController : UserController!
     var delegate: LoginViewControllerDelegate?
     var loadingGroup = DispatchGroup()
     var signIn: Bool = true
@@ -37,43 +59,85 @@ class LoginViewController: UIViewController {
         return !signIn && firstName == nil && lastName == nil
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setUpViews()
-        updateViews()
+    private lazy var  forgotPasswordButton : UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Forgot Password?", for: .normal)
+        button.contentHorizontalAlignment = .right
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(#colorLiteral(red: 0.03921568627, green: 0.5176470588, blue: 1, alpha: 1), for: .normal)
+        button.addTarget(self, action: #selector(moveToForgotPasswordScreen), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    
+    @objc func moveToForgotPasswordScreen() {
+     
+      let forgotPasswordViewController = ForgotPasswordViewController()
+        self.navigationController?.pushViewController(forgotPasswordViewController, animated: true)
     }
     
-    // MARK: Private
+    //MARK:- Life Cycle -
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setUpViews()
+        updateViews()
+        hideNavigationItemBackground()
+        hideKeyboardWhenTappedAround()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+    }
+  
+    // MARK: Private
+  
     private func setUpViews() {
         let title = "Sign \(signIn ? "In" : "Up")"
         loginButton.setTitle(title, for: .normal)
-        loginLabel.text = title
-        
+
+        navigationItem.title = title
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
         confirmPasswordTextField.delegate = self
-        
-        let loginLabelFontSize = loginLabel.font.pointSize
-        loginLabel.font = UIFont(name: "Exo-Regular", size: loginLabelFontSize)
-        
+      
+        if signIn {
+            view.addSubview(forgotPasswordButton)
+            
+            NSLayoutConstraint.activate([
+                forgotPasswordButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
+                forgotPasswordButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 8),
+                forgotPasswordButton.widthAnchor.constraint(equalToConstant: 200),
+                forgotPasswordButton.heightAnchor.constraint(equalToConstant: 30)
+            ])
+        }
+       
         if let textFieldFontSize = emailTextField.font?.pointSize {
-            let exo = UIFont(name: "Exo-Regular", size: textFieldFontSize)
+            let exo = UIFont(name: "Avenir Next", size: textFieldFontSize)
             emailTextField.font = exo
             passwordTextField.font = exo
             confirmPasswordTextField.font = exo
         }
         
         if let buttonFontSize = loginButton.titleLabel?.font.pointSize {
-            loginButton.titleLabel?.font = UIFont(name: "Exo-Regular", size: buttonFontSize)
+            loginButton.titleLabel?.font = UIFont(name: "Avenir Next", size: buttonFontSize)
         }
         
         confirmPasswordTextField.isHidden = signIn || namePage
         confirmPasswordLabel.isHidden = signIn || namePage
         
+       
         if namePage {
+            
+            forgotPasswordButton.isHidden = true
+            
             confirmPasswordTextField.isHidden = true
             confirmPasswordLabel.isHidden = true
             
@@ -83,8 +147,8 @@ class LoginViewController: UIViewController {
             emailTextField.autocapitalizationType = .words
             passwordTextField.autocapitalizationType = .words
             
-            emailTextField.placeholder = "First Name"
-            passwordTextField.placeholder = "Last Name"
+            emailTextField.placeholder = "Enter legal first name"
+            passwordTextField.placeholder = "Enter legal last name"
             
             emailLabel.text = "First Name"
             passwordLabel.text = "Last Name"
@@ -96,13 +160,11 @@ class LoginViewController: UIViewController {
     }
     
     private func updateViews() {
-        let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1)
-        
+    
         //TODO: check the status of the form
-        loginButton.layer.cornerRadius = 4
+        loginButton.layer.cornerRadius = 6
         loginButton.layer.borderWidth = 1
-        loginButton.layer.borderColor = daybreakBlue.cgColor
-        loginButton.setTitleColor(daybreakBlue, for: .normal)
+      
     }
     
     private func signUp(email: String, password: String, firstName: String, lastName: String) {
@@ -133,7 +195,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-    // MARK: Actions
+    // MARK:- Actions-
     
     @IBAction func loginTapped(_ sender: Any) {
         guard let email = emailTextField.text,
@@ -187,7 +249,7 @@ class LoginViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Navigation
+    // MARK:- Navigation-
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         switch identifier {
@@ -210,7 +272,7 @@ class LoginViewController: UIViewController {
 
 }
 
-// MARK: Text field delegate
+// MARK:- Text field delegate-
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

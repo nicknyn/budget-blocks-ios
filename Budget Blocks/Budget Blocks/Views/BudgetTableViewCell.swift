@@ -20,5 +20,4 @@ class BudgetTableViewCell: UITableViewCell {
             textField.font = UIFont(name: "Exo-Regular", size: textSize)
         }
     }
-
 }

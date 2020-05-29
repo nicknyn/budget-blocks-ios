@@ -9,20 +9,20 @@
 import UIKit
 import CoreData
 
-protocol newCategoriesTableViewControllerDelegate {
-    func choose(category: TransactionCategory)
+protocol CustomCategoriesTableViewControllerDelegate: AnyObject {
+    func didChooseCategory(category: TransactionCategory)
 }
 // comment for commit
 class CustomCategoriesTableViewController: UITableViewController {
     
-    @IBOutlet weak var showAllButton: UIButton!
+    @IBOutlet weak private var showAllButton: UIButton!
     
-    var delegate: CategoriesTableViewControllerDelegate?
+    weak var delegate: CategoriesTableViewControllerDelegate?
     var transactionController: TransactionController?
     var newCategories: [TransactionCategory] = []
     var loadingGroup = DispatchGroup()
     
-    lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
+    private(set) lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         
         fetchRequest.predicate = NSPredicate(format: "budget > 0 OR transactions.@count > 0")
@@ -51,7 +51,7 @@ class CustomCategoriesTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
-    // MARK: - Table view data source
+    // MARK: - Table view data source-
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.fetchedObjects?.count ?? 0
@@ -86,6 +86,7 @@ class CustomCategoriesTableViewController: UITableViewController {
                 self.loadingGroup.notify(queue: .main) {
                     self.loadingGroup.enter()
                     self.dismissAlert(dispatchGroup: self.loadingGroup)
+                    
                 }
                 
                 error?.log()
@@ -99,14 +100,14 @@ class CustomCategoriesTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Table view delegate
+    // MARK:- Table view delegate-
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let category = fetchedResultsController.object(at: indexPath)
         delegate?.choose(category: category)
     }
      
-     // MARK: Private
+     // MARK:- Private-
      
      private func reloadTable() {
          let predicate: NSPredicate?
@@ -128,7 +129,7 @@ class CustomCategoriesTableViewController: UITableViewController {
          tableView.reloadData()
      }
      
-     // MARK: Actions
+     // MARK:- Actions -
      
      @IBAction func toggleShowAll(_ sender: UIButton) {
          sender.isSelected.toggle()
@@ -230,7 +231,4 @@ class CustomCategoriesTableViewController: UITableViewController {
              
              present(alert, animated: true)
      }
-    
-    
-    
 }

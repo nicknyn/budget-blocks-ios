@@ -10,13 +10,22 @@ import UIKit
 
 class CreateTransactionViewController: UIViewController {
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var dateTextField: UITextField!
-    @IBOutlet weak var categoryTextField: UITextField!
-    @IBOutlet weak var descriptionTextField: UITextField!
-    @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var paidSegmentedControl: UISegmentedControl!
+    //MARK:- Outlets
+    
+    @IBOutlet weak private var scrollView: UIScrollView!
+    @IBOutlet weak private var dateTextField: UITextField! {
+        didSet {
+            dateTextField.becomeFirstResponder()
+        }
+    }
+    @IBOutlet weak private var categoryTextField: UITextField!
+    @IBOutlet weak private var descriptionTextField: UITextField!
+    @IBOutlet weak private var amountTextField: UITextField!
+    @IBOutlet weak private var saveButton: UIButton!
+    @IBOutlet weak private var paidSegmentedControl: UISegmentedControl!
+    
+    
+    //MARK:- Properties
     
     let datePicker = UIDatePicker()
     let dateFormatter = DateFormatter()
@@ -24,6 +33,8 @@ class CreateTransactionViewController: UIViewController {
     var category: TransactionCategory?
     var income: Bool = false
     var transactionController: TransactionController?
+    
+    //MARK:- Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +148,6 @@ class CreateTransactionViewController: UIViewController {
             categoriesVC.transactionController = transactionController
         }
     }
-
 }
 
 // MARK: Text field delegate
@@ -148,7 +158,6 @@ extension CreateTransactionViewController: UITextFieldDelegate {
             performSegue(withIdentifier: "ShowCategories", sender: self)
             return false
         }
-        
         return true
     }
     

@@ -10,7 +10,7 @@ import CoreData
 
 class TransactionController {
     
-    var networkingController: NetworkingController?
+     var networkingController: NetworkingController?
     
     func updateTransactionsFromServer(context: NSManagedObjectContext, completion: @escaping (String?, Error?) -> Void) {
         networkingController?.fetchTransactionsFromServer(completion: { json, error in
@@ -241,5 +241,4 @@ class TransactionController {
         let transactionAmounts = category.transactions?.compactMap({ ($0 as? Transaction)?.amount })
         return transactionAmounts?.reduce(0, +) ?? 0
     }
-    
 }

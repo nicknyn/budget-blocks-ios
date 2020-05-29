@@ -9,20 +9,20 @@
 import UIKit
 import CoreData
 
-protocol CategoriesTableViewControllerDelegate {
+protocol CategoriesTableViewControllerDelegate: AnyObject {
     func choose(category: TransactionCategory)
 }
 
 class CategoriesTableViewController: UITableViewController {
     
-    @IBOutlet weak var showAllButton: UIButton!
+    @IBOutlet private weak var showAllButton: UIButton!
     
-    var delegate: CategoriesTableViewControllerDelegate?
+    weak var delegate: CategoriesTableViewControllerDelegate?
     var transactionController: TransactionController?
     var newCategories: [TransactionCategory] = []
     var loadingGroup = DispatchGroup()
     
-    lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
+    private(set) lazy var fetchedResultsController: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         
         fetchRequest.predicate = NSPredicate(format: "budget > 0 OR transactions.@count > 0")
@@ -70,6 +70,7 @@ class CategoriesTableViewController: UITableViewController {
 
         return cell
     }
+   
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return transactionController?.networkingController?.manualAccount ?? false

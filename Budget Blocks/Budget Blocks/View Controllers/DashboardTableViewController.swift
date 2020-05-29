@@ -9,15 +9,17 @@
 import UIKit
 import LinkKit
 import CoreData
+import OktaOidc
+import OktaAuthNative
 
 class DashboardTableViewController: UITableViewController {
     
     // MARK: Outlets
     
-    @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var incomeLabel: UILabel!
-    @IBOutlet weak var expensesLabel: UILabel!
-    @IBOutlet weak var totalBudgetLabel: UILabel!
+    @IBOutlet weak private var balanceLabel: UILabel!
+    @IBOutlet weak private var incomeLabel: UILabel!
+    @IBOutlet weak private var expensesLabel: UILabel!
+    @IBOutlet weak private var totalBudgetLabel: UILabel!
     
     // MARK: Properties
     
@@ -26,8 +28,12 @@ class DashboardTableViewController: UITableViewController {
     var newTransactionController: TransactionController?
     var newCategories: [TransactionCategory] = []
     var loadingGroup = DispatchGroup()
+    private var userID: Int?
     
-    lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
+    var oktaOidc: OktaOidc?
+    var stateManager: OktaOidcStateManager?
+    
+    private(set) lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
         
@@ -48,7 +54,7 @@ class DashboardTableViewController: UITableViewController {
         return frc
     }()
     
-    lazy var categoriesFRC: NSFetchedResultsController<TransactionCategory> = {
+    private(set) lazy var categoriesFRC: NSFetchedResultsController<TransactionCategory> = {
         let fetchRequest: NSFetchRequest<TransactionCategory> = TransactionCategory.fetchRequest()
         
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "budget", ascending: false)]
@@ -77,9 +83,43 @@ class DashboardTableViewController: UITableViewController {
         categoriesFRC.fetchedObjects?.filter({ $0.budget > 0 }) ?? []
     }
     
+    //MARK:- Life Cycle-
+    var userInfo: [String: Any]!
+      
     override func viewDidLoad() {
         super.viewDidLoad()
-        // this is adding the observer
+        self.tabBarController?.navigationItem.hidesBackButton = true
+        self.tabBarController?.navigationController?.navigationBar.isHidden = true
+        print("ACCESS TOKEN \(stateManager!.accessToken!)")
+        print("ID TOKEN \(stateManager!.idToken!)")
+        stateManager?.getUser({ (response, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            if let response = response {
+                print(response.description)
+            }
+            
+            let user = User(context: CoreDataStack.shared.mainContext)
+            user.name = response!["name"] as? String
+            user.email = response!["email"] as? String
+            print("USER NAME is \(user.name!)")
+            print("EMAIL IS \(user.email!)")
+           try? CoreDataStack.shared.mainContext.save()
+            NetworkingController.shared.registerUserToDatabase(user: user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
+                guard let user = user else { return }
+                if let err = error {
+                    fatalError(err.localizedDescription)
+                }
+                
+                self.userInfo = ["user": user]
+                print(user.data.id!)
+                self.userID = user.data.id
+              
+                
+            }
+        })
+        
         NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
         transactionController.networkingController = networkingController
         
@@ -99,23 +139,33 @@ class DashboardTableViewController: UITableViewController {
                     self.setUpViews()
                 }
             } else {
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "InitialLogin", sender: self)
-                }
+//                DispatchQueue.main.async {
+//                    self.performSegue(withIdentifier: "InitialLogin", sender: self)
+//                }
             }
         }
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
+       
+            
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name: Notification.Name("GetUser"), object: nil, userInfo: self.userInfo)
+        }
         tableView.reloadData()
     }
     
+    
+    //MARK:-
     @IBAction func goToCustomeView(_ sender: Any) {
         performSegue(withIdentifier: "CustomCat", sender: self)
       }
@@ -268,7 +318,7 @@ class DashboardTableViewController: UITableViewController {
         }
     }
     
-    // MARK: Private
+    // MARK:- Private-
     
     private func setUpViews() {
         transactionController.updateCategoriesFromServer(context: CoreDataStack.shared.mainContext) { _, error in
@@ -326,9 +376,21 @@ class DashboardTableViewController: UITableViewController {
     }
     
     @objc private func logout() {
-        networkingController.logout()
-        TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
-        performSegue(withIdentifier: "AnimatedLogin", sender: self)
+//        networkingController.logout()
+//        TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
+//        performSegue(withIdentifier: "AnimatedLogin", sender: self)
+        
+        guard let oktaOidc = self.oktaOidc, let stateManager = self.stateManager else { return }
+        oktaOidc.signOutOfOkta(stateManager, from: self) { [weak self ] error in
+            if let error = error {
+                let ac = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self?.present(ac, animated: true, completion: nil)
+                return
+            }
+            self?.stateManager?.clear()
+            self?.tabBarController?.navigationController?.popViewController(animated: true)
+        }
     }
     
     private func updateBalances() {
@@ -466,16 +528,12 @@ class DashboardTableViewController: UITableViewController {
 extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
         print("Link successful. Public token: \(publicToken)")
-        networkingController.tokenExchange(publicToken: publicToken) { error in
-            if let error = error {
-                return NSLog("Error exchanging token: \(error)")
-            }
-            
-            self.networkingController.setLinked()
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+        print("USER ID IS \(userID)")
+        NetworkingController.shared.sendPlaidTokenToServer(publicToken: publicToken, userID: userID!) { (error) in
+            print(error)
+            // POST the database
         }
+        
         dismiss(animated: true)
     }
     
