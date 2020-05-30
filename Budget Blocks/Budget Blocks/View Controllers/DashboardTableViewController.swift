@@ -84,8 +84,9 @@ import OktaAuthNative
     }
     
     //MARK:- Life Cycle-
-    var userInfo: [String: Any]!
-      
+  
+      static  let user = User(context: CoreDataStack.shared.mainContext)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.navigationItem.hidesBackButton = true
@@ -96,24 +97,20 @@ import OktaAuthNative
             if let err = error {
                 print(err.localizedDescription)
             }
-            if let response = response {
-                print(response.description)
-            }
+            guard let response = response  else { return }
             
-            let user = User(context: CoreDataStack.shared.mainContext)
-            user.name = response!["name"] as? String
-            user.email = response!["email"] as? String
-            print("USER NAME is \(user.name!)")
-            print("EMAIL IS \(user.email!)")
+          
+            DashboardTableViewController.user.name = response["name"] as? String
+            DashboardTableViewController.user.email = response["email"] as? String
+            print("USER NAME is \(DashboardTableViewController.user.name!)")
+            print("EMAIL IS \(DashboardTableViewController.user.email!)")
            try? CoreDataStack.shared.mainContext.save()
-            NetworkingController.shared.registerUserToDatabase(user: user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
+            NetworkingController.shared.registerUserToDatabase(user: DashboardTableViewController.user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
                 guard let user = user else { return }
                 if let err = error {
                     fatalError(err.localizedDescription)
                 }
                 
-                self.userInfo = ["user": user]
-                print(user.data.id!)
                 self.userID = user.data.id
               
                 
@@ -138,10 +135,6 @@ import OktaAuthNative
                 DispatchQueue.main.async {
                     self.setUpViews()
                 }
-            } else {
-//                DispatchQueue.main.async {
-//                    self.performSegue(withIdentifier: "InitialLogin", sender: self)
-//                }
             }
         }
     }
@@ -152,18 +145,7 @@ import OktaAuthNative
         super.viewWillAppear(animated)
         tableView.reloadData()
        
-            
-        
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        DispatchQueue.main.async {
-            NotificationCenter.default.post(name: Notification.Name("GetUser"), object: nil, userInfo: self.userInfo)
-        }
-        tableView.reloadData()
-    }
-    
     
     //MARK:-
     @IBAction func goToCustomeView(_ sender: Any) {

@@ -14,21 +14,21 @@ class ChartViewController: UIViewController {
     lazy var iosDataEntry : PieChartDataEntry = {
         let iosDataEntry = PieChartDataEntry(value: 20)
         iosDataEntry.value = 60.0
-        iosDataEntry.label = "iOS"
+        iosDataEntry.label = "Ice Cream"
         return iosDataEntry
     }()
     
     lazy var macDataEntry : PieChartDataEntry = {
         let macDataEntry = PieChartDataEntry(value: 20)
         macDataEntry.value = 100.0
-        macDataEntry.label = "macOS"
+        macDataEntry.label = "Rent"
         return macDataEntry
     }()
     
     lazy var tvOSDataEntry : PieChartDataEntry = {
         let macDataEntry = PieChartDataEntry(value: 20)
         macDataEntry.value = 80.0
-        macDataEntry.label = "macOS"
+        macDataEntry.label = "Gas"
         
         
         return macDataEntry
@@ -67,10 +67,10 @@ class ChartViewController: UIViewController {
 
     private func setupUI() {
         NSLayoutConstraint.activate([
-            pieChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 100),
-            pieChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -100),
-            pieChartView.topAnchor.constraint(equalTo: view.topAnchor,constant: 100),
-            pieChartView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -100)
+            pieChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 50),
+            pieChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -50),
+            pieChartView.topAnchor.constraint(equalTo: view.topAnchor,constant: 50),
+            pieChartView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -50)
         ])
     }
 }
