@@ -496,7 +496,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pao-rH-itP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="134" y="2052"/>
+            <point key="canvasLocation" x="1353" y="2590"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="xWZ-ME-HmN">
@@ -614,7 +614,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTb-s2-xyt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025" y="2384"/>
+            <point key="canvasLocation" x="2186" y="2649"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="srR-H7-YeM">
@@ -652,7 +652,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JvZ-PX-Gsp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5130" y="1827"/>
+            <point key="canvasLocation" x="5398" y="2137"/>
         </scene>
         <!--Add Transaction-->
         <scene sceneID="NCg-WJ-eSB">
@@ -796,7 +796,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chx-no-smm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2957" y="2384"/>
+            <point key="canvasLocation" x="3654" y="2646"/>
         </scene>
         <!--Categories-->
         <scene sceneID="TR5-NI-oJs">
@@ -872,7 +872,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bOd-BD-VF1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3943" y="2226"/>
+            <point key="canvasLocation" x="4498" y="2588"/>
         </scene>
         <!--Create Budget-->
         <scene sceneID="dmS-tq-Blc">
@@ -1022,7 +1022,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8KG-g5-HeY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6311" y="1827"/>
+            <point key="canvasLocation" x="6364" y="1995"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ukS-ra-W3E">
@@ -1040,12 +1040,28 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOc-78-Yj3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1974" y="2415"/>
+            <point key="canvasLocation" x="2886" y="2681"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Chart-->
+        <scene sceneID="Cwh-XE-dLn">
+            <objects>
+                <viewController id="p6j-Pn-qo8" customClass="ChartViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PcK-DV-Oz0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="42b-IF-Mb2"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chart" id="8US-BS-EtY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yQw-yY-djq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2983.1999999999998" y="-165.06746626686657"/>
+        </scene>
+        <!--Custom Tab Bar Controller-->
         <scene sceneID="dv8-wF-4UQ">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qxf-o2-3Eg" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="qxf-o2-3Eg" customClass="CustomTabBarController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="4yu-3D-ORx"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="E3m-VE-f4r">
@@ -1055,6 +1071,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="8Cn-UY-Ybz" kind="relationship" relationship="viewControllers" id="JFn-Ad-6nd"/>
+                        <segue destination="mLa-bP-yyl" kind="relationship" relationship="viewControllers" id="X7l-Zf-yCk"/>
                         <segue destination="xOI-Ja-vro" kind="relationship" relationship="viewControllers" id="IQY-6E-f2i"/>
                     </connections>
                 </tabBarController>
@@ -1125,7 +1142,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JBZ-rt-Qfk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-681" y="1799"/>
+            <point key="canvasLocation" x="260" y="2589"/>
         </scene>
         <!--Profile-->
         <scene sceneID="HBU-gN-4qR">
@@ -1144,7 +1161,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9q3-Cz-jcf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1684" y="1799"/>
+            <point key="canvasLocation" x="-1031" y="2589"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XiB-8c-tFc">
@@ -1164,6 +1181,25 @@
             </objects>
             <point key="canvasLocation" x="-119.2" y="844.22788605697156"/>
         </scene>
+        <!--Chart-->
+        <scene sceneID="5hG-7d-3QC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mLa-bP-yyl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Chart" image="chart.pie.fill" catalog="system" id="Pyh-nr-qe5"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XyW-0D-L52">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="p6j-Pn-qo8" kind="relationship" relationship="rootViewController" id="x1d-zj-gka"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gfd-FR-oV0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2044" y="-165.06746626686657"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="H0w-Vf-iu2"/>
@@ -1171,6 +1207,7 @@
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="BlocksIcon" width="1358" height="963"/>
+        <image name="chart.pie.fill" catalog="system" width="128" height="124"/>
         <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
         <image name="minus-icon" width="40" height="40"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>

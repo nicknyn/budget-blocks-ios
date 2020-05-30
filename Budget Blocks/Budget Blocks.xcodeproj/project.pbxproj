@@ -48,6 +48,9 @@
 		B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */; };
 		B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6228847248022EA009FF6E5 /* UserRepresentation.swift */; };
 		B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884924802334009FF6E5 /* User+Convenience.swift */; };
+		B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884C2482D7D9009FF6E5 /* ChartViewController.swift */; };
+		B62288502482DAF2009FF6E5 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B622884F2482DAF2009FF6E5 /* Charts */; };
+		B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */; };
 		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
 		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
 		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -138,6 +141,9 @@
 		B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		B6228847248022EA009FF6E5 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
 		B622884924802334009FF6E5 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
+		B622884C2482D7D9009FF6E5 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		B622884E2482DADB009FF6E5 /* Charts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Charts; path = ../Carthage/Checkouts/Charts; sourceTree = "<group>"; };
+		B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
@@ -155,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */,
+				B62288502482DAF2009FF6E5 /* Charts in Frameworks */,
 				598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */,
 				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
 				B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */,
@@ -225,6 +232,7 @@
 				5955B89723DB59B800A24A8F /* AppDelegate.swift */,
 				5955B89923DB59B800A24A8F /* SceneDelegate.swift */,
 				E3509F072448F92C0091592C /* Notifications.swift */,
+				B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */,
 				5969C1EF23E38CC800BAA183 /* Model */,
 				5969C1F423E3903400BAA183 /* Model Controllers */,
 				5967964023DFC1C70062F794 /* View Controllers */,
@@ -271,6 +279,7 @@
 				B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */,
 				B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */,
 				B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */,
+				B622884C2482D7D9009FF6E5 /* ChartViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -299,6 +308,7 @@
 		596C10FB23E0E09F003DF1D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B622884E2482DADB009FF6E5 /* Charts */,
 				B6789482247626ED00A47332 /* OktaOidc.framework */,
 				B678947F247626EA00A47332 /* OktaAuthNative.framework */,
 				596C10FC23E0E09F003DF1D8 /* LinkKit.framework */,
@@ -370,6 +380,7 @@
 			packageProductDependencies = (
 				5939B1F423DF55F3003FB0E0 /* SwiftyJSON */,
 				598B29F823FD994D0038B698 /* KeychainSwift */,
+				B622884F2482DAF2009FF6E5 /* Charts */,
 			);
 			productName = "Budget Blocks";
 			productReference = 5955B89423DB59B800A24A8F /* Budget Blocks.app */;
@@ -541,9 +552,11 @@
 				5969C1F623E3904400BAA183 /* TransactionController.swift in Sources */,
 				597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */,
 				590B3A5523FC846C0058D236 /* CategoriesTableViewController.swift in Sources */,
+				B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */,
 				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
+				B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */,
 				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
 				B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */,
@@ -653,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -707,7 +720,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -911,6 +924,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		B622884F2482DAF2009FF6E5 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Charts;
 		};
 /* End XCSwiftPackageProductDependency section */
 

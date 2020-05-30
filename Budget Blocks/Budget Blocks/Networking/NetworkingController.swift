@@ -103,7 +103,7 @@ class NetworkingController {
     
     func registerUserToDatabase(user:UserRepresentation,bearer: String, completion: @escaping (UserRep?,Error?) -> Void) {
         let registerURL = newBaseURL.appendingPathComponent("api")
-            .appendingPathComponent("users")
+                                    .appendingPathComponent("users")
         
         var request = URLRequest(url: registerURL)
         request.httpMethod = HTTPMethod.post.rawValue

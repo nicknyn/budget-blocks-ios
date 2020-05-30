@@ -12,7 +12,7 @@ import CoreData
 import OktaOidc
 import OktaAuthNative
 
-class DashboardTableViewController: UITableViewController {
+@objcMembers class DashboardTableViewController: UITableViewController {
     
     // MARK: Outlets
     
@@ -336,7 +336,7 @@ class DashboardTableViewController: UITableViewController {
         tableView.refreshControl = refreshControl
     }
     
-    @objc func refreshHelper() {
+     func refreshHelper() {
         print("refreshHelper is being called!")
         transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { _, error in
             error?.log()

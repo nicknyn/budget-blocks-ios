@@ -14,7 +14,11 @@ import OktaOidc
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-     
+        
+        let appearance = UITabBarItem.appearance()
+        let attributes = [NSAttributedString.Key.font:UIFont(name: "Avenir Next", size: 14)]
+        appearance.setTitleTextAttributes(attributes as [NSAttributedString.Key : Any], for: .normal)
+        
         let captionFont = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
         if let captionFontExo = UIFont(name: "Avenir Next", size: captionFont.pointSize) {
             UISegmentedControl.appearance().setTitleTextAttributes([NSAttributedString.Key.font : captionFontExo], for: .normal)
