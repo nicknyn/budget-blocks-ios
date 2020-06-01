@@ -10,6 +10,11 @@ import Foundation
 import SwiftyJSON
 import KeychainSwift
 
+enum NetworkError:String, Error {
+    case badURL = "Bad URL"
+    case badResponse = "Bad Response"
+    case invalidData = "Invalid Data"
+}
 
 struct BodyForPlaidPost: Encodable {
     let publicToken: String
@@ -33,6 +38,8 @@ class NetworkingController {
     static var userID : Int = 0
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     private let newBaseURL = URL(string: "https://budget-blocks-production-new.herokuapp.com")!
+//    https://sandbox.plaid.com/transactions/get
+    private let plaidBaseURL = URL(string: "https://sandbox.plaid.com/")!
     private let emailKey = "email"
     private let passwordKey = "password"
     private let keychain = KeychainSwift()
@@ -198,8 +205,48 @@ class NetworkingController {
         keychain.clear()
     }
   
+    func getTransactionsFromPlaid(of client: Client,completion: @escaping (Error?) -> Void) {
+        let endpoint = plaidBaseURL
+        .appendingPathComponent("transactions")
+        .appendingPathComponent("get")
+        print(endpoint)
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+    }
+    func getAccessTokenFromUserId(userID: Int,completion: @escaping (Result<BankInfos,NetworkError>) -> Void ) {
+        let endpoint = newBaseURL
+            .appendingPathComponent("plaid")
+            .appendingPathComponent("accessToken")
+            .appendingPathComponent(String(userID))
+        print(endpoint)
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.get.rawValue
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let err = error {
+                completion(.failure(.badURL))
+                print(err.localizedDescription)
+            }
+            print(response!)
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.badResponse))
+                return
+            }
+            guard let data = data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let jsonBankInfo = try self.jsonDecoder.decode(BankInfos.self, from: data)
+                completion(.success(jsonBankInfo))
+            } catch let err {
+                print(err.localizedDescription)
+            }
+        }.resume()
+    }
     
-    func sendPlaidTokenToServer(publicToken: String,userID: Int, completion: @escaping (Error?) -> Void) {
+    
+    func sendPlaidPublicTokenToServerToGetAccessToken(publicToken: String,userID: Int, completion: @escaping (Error?) -> Void) {
         let endpoint = newBaseURL
             .appendingPathComponent("plaid")
             .appendingPathComponent("token_exchange")
@@ -219,11 +266,13 @@ class NetworkingController {
                 print ("error: \(error)")
                 return
             }
-           
+          
             if let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode)  {
                 print(response.statusCode)
             }
+            let json = try? JSON(data: data!)
+            print(json)
             if let mimeType = response?.mimeType,
                 mimeType == "application/json",
                 let data = data,

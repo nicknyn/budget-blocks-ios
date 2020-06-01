@@ -52,6 +52,8 @@
 		B62288502482DAF2009FF6E5 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B622884F2482DAF2009FF6E5 /* Charts */; };
 		B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */; };
 		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
+		B653B5ED2485612A0005446C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EC2485612A0005446C /* Client.swift */; };
+		B653B5EF2485785D0005446C /* BankInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EE2485785D0005446C /* BankInfo.swift */; };
 		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
 		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; };
@@ -145,6 +147,8 @@
 		B622884E2482DADB009FF6E5 /* Charts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Charts; path = ../Carthage/Checkouts/Charts; sourceTree = "<group>"; };
 		B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		B653B5EC2485612A0005446C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		B653B5EE2485785D0005446C /* BankInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInfo.swift; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
 		B678948524762D0B00A47332 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
@@ -292,6 +296,8 @@
 				5969C1F223E38EBF00BAA183 /* Budget_Blocks+Convenience.swift */,
 				B6228847248022EA009FF6E5 /* UserRepresentation.swift */,
 				B622884924802334009FF6E5 /* User+Convenience.swift */,
+				B653B5EC2485612A0005446C /* Client.swift */,
+				B653B5EE2485785D0005446C /* BankInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -533,6 +539,7 @@
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
 				B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */,
+				B653B5ED2485612A0005446C /* Client.swift in Sources */,
 				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,
 				592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */,
 				B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */,
@@ -562,6 +569,7 @@
 				B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 				B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */,
+				B653B5EF2485785D0005446C /* BankInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

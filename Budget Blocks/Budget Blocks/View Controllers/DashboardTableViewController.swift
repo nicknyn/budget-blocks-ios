@@ -91,8 +91,8 @@ import OktaAuthNative
         super.viewDidLoad()
         self.tabBarController?.navigationItem.hidesBackButton = true
         self.tabBarController?.navigationController?.navigationBar.isHidden = true
-        print("ACCESS TOKEN \(stateManager!.accessToken!)")
-        print("ID TOKEN \(stateManager!.idToken!)")
+        print("OKTA ACCESS TOKEN \(stateManager!.accessToken!)")
+        print("OKTA ID TOKEN \(stateManager!.idToken!)")
         stateManager?.getUser({ (response, error) in
             if let err = error {
                 print(err.localizedDescription)
@@ -105,6 +105,7 @@ import OktaAuthNative
             print("USER NAME is \(DashboardTableViewController.user.name!)")
             print("EMAIL IS \(DashboardTableViewController.user.email!)")
            try? CoreDataStack.shared.mainContext.save()
+            
             NetworkingController.shared.registerUserToDatabase(user: DashboardTableViewController.user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
                 guard let user = user else { return }
                 if let err = error {
@@ -286,6 +287,14 @@ import OktaAuthNative
         case 0:
             linkAccount()
         case 1 where indexPath.row == 0:
+            NetworkingController.shared.getAccessTokenFromUserId(userID: userID!) { (result) in
+                switch result {
+                    case .success(let bankInfos):
+                        print(bankInfos.data.first!.accessToken)
+                    case .failure(let error):
+                    print(error)
+                }
+            }
             self.performSegue(withIdentifier: "ShowTransactions", sender: self)
         case 1:
             self.performSegue(withIdentifier: "AddTransaction", sender: self)
@@ -511,7 +520,7 @@ extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
         print("Link successful. Public token: \(publicToken)")
         print("USER ID IS \(userID)")
-        NetworkingController.shared.sendPlaidTokenToServer(publicToken: publicToken, userID: userID!) { (error) in
+        NetworkingController.shared.sendPlaidPublicTokenToServerToGetAccessToken(publicToken: publicToken, userID: userID!) { (error) in
             print(error)
             // POST the database
         }
