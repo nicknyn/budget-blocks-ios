@@ -107,6 +107,7 @@ import OktaAuthNative
            try? CoreDataStack.shared.mainContext.save()
             
             NetworkingController.shared.registerUserToDatabase(user: DashboardTableViewController.user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
+                // okta
                 guard let user = user else { return }
                 if let err = error {
                     fatalError(err.localizedDescription)
@@ -139,8 +140,6 @@ import OktaAuthNative
             }
         }
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -521,7 +520,7 @@ extension DashboardTableViewController: PLKPlaidLinkViewDelegate {
         print("Link successful. Public token: \(publicToken)")
         print("USER ID IS \(userID)")
         NetworkingController.shared.sendPlaidPublicTokenToServerToGetAccessToken(publicToken: publicToken, userID: userID!) { (error) in
-            print(error)
+            print(error?.localizedDescription)
             // POST the database
         }
         

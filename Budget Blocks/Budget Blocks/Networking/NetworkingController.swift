@@ -48,6 +48,15 @@ class NetworkingController {
     
     var bearer: Bearer?
     
+    static let dateFormatter: DateFormatter = {
+       let fm = DateFormatter()
+        fm.calendar = .current
+        fm.locale = Locale(identifier: "en_US_POSIX")
+        fm.dateFormat = "yyyy-MM-dd"
+        return fm
+    }()
+    
+    
     var linkedAccount: Bool {
         return bearer?.linkedAccount ?? false
     }
@@ -172,7 +181,6 @@ class NetworkingController {
           return myToken
     }
 
-    
     func register(email: String, password: String, firstName: String, lastName: String, completion: @escaping (String?, Error?) -> Void) {
         let registerJSON: JSON = ["email": email,
                                   "password": password,
@@ -204,15 +212,89 @@ class NetworkingController {
         bearer = nil
         keychain.clear()
     }
-  
-    func getTransactionsFromPlaid(of client: Client,completion: @escaping (Error?) -> Void) {
+    static var transactions : DataScienceTransactionRepresentations?
+    func sendTransactionsToDataScience(_ transaction: OnlineTransactions, completion: @escaping (DataScienceTransactionRepresentations, Error?) -> Void) {
+        let endpoint = URL(string: "http://budget-blocks-ds-env.eba-msi2nje2.us-east-1.elasticbeanstalk.com/transaction")!
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        jsonEncoder.dateEncodingStrategy = .formatted(NetworkingController.dateFormatter)
+        jsonEncoder.dataEncodingStrategy = .base64
+        
+          
+        guard let dataToSend = try? jsonEncoder.encode(transaction) else { return }
+//            request.httpBody = dataToSend
+        print("DATA TO SEND \(String(data:dataToSend,encoding: .utf8))")
+        URLSession.shared.uploadTask(with: request, from: dataToSend) { (data, response, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+        
+            print(response!)
+            print("DATA COMING BACK FROM DATA SCIENCE \(String(data: data!,encoding: .utf8))")
+            guard let data = data else { return }
+            do {
+                let dataScienceDataArray = try self.jsonDecoder.decode(DataScienceTransactionRepresentations.self, from: data)
+                NetworkingController.transactions = dataScienceDataArray
+                print(dataScienceDataArray.transactions)
+                completion(dataScienceDataArray,nil)
+                // CoreData
+                for transaction in dataScienceDataArray.transactions {
+                    let coreDataTransaction = DataScienceTransaction(dataScienceTransactionRepresentation: transaction, context: CoreDataStack.shared.mainContext)
+//                     CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
+//                    if CoreDataStack.shared.mainContext.hasChanges {
+//                        try? CoreDataStack.shared.mainContext.save() // Crash
+//                    }
+                    print(coreDataTransaction?.name)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }.resume()
+    }
+    
+    
+    func getTransactionsFromPlaid(of client: Client,completion: @escaping (Result<OnlineTransactions,NetworkError>) -> Void) {
         let endpoint = plaidBaseURL
-        .appendingPathComponent("transactions")
-        .appendingPathComponent("get")
+            .appendingPathComponent("transactions")
+            .appendingPathComponent("get")
         print(endpoint)
         var request = URLRequest(url: endpoint)
         request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            jsonEncoder.dateEncodingStrategy = .formatted(NetworkingController.dateFormatter)
+            jsonEncoder.dataEncodingStrategy = .base64
+            let jsonClientData = try jsonEncoder.encode(client)
+            request.httpBody = jsonClientData
+        } catch let err as NSError {
+            print(err.localizedDescription)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            guard let response = response else { return }
+            print("RESPONSE \(response)")
+            guard let data = data else { return }
+            
+            do {
+                self.jsonDecoder.dataDecodingStrategy = .deferredToData
+                self.jsonDecoder.dateDecodingStrategy = .formatted(NetworkingController.dateFormatter)
+            
+                let transactions = try self.jsonDecoder.decode(OnlineTransactions.self, from: data)
+
+                completion(.success(transactions))
+        
+            } catch {
+                print("Error DECODING \(error.localizedDescription)")
+            }
+        }.resume()
     }
+    
+    
     func getAccessTokenFromUserId(userID: Int,completion: @escaping (Result<BankInfos,NetworkError>) -> Void ) {
         let endpoint = newBaseURL
             .appendingPathComponent("plaid")

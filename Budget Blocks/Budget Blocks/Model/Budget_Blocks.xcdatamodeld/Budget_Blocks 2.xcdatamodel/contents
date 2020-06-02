@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F83c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DataScienceTransaction" representedClassName="DataScienceTransaction" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="category" optional="YES" attributeType="Transformable"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="Transformable"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -21,5 +28,6 @@
         <element name="Transaction" positionX="142" positionY="29" width="128" height="118"/>
         <element name="TransactionCategory" positionX="-63" positionY="9" width="128" height="103"/>
         <element name="User" positionX="54" positionY="81" width="128" height="73"/>
+        <element name="DataScienceTransaction" positionX="36" positionY="63" width="128" height="118"/>
     </elements>
 </model>

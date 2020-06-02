@@ -55,6 +55,7 @@
 		B653B5ED2485612A0005446C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EC2485612A0005446C /* Client.swift */; };
 		B653B5EF2485785D0005446C /* BankInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EE2485785D0005446C /* BankInfo.swift */; };
 		B653B5F1248590020005446C /* OnlineTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F0248590020005446C /* OnlineTransaction.swift */; };
+		B653B5F32486FBD70005446C /* DataScienceTransactionRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */; };
 		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
 		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; };
@@ -151,6 +152,7 @@
 		B653B5EC2485612A0005446C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		B653B5EE2485785D0005446C /* BankInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInfo.swift; sourceTree = "<group>"; };
 		B653B5F0248590020005446C /* OnlineTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTransaction.swift; sourceTree = "<group>"; };
+		B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScienceTransactionRepresentation.swift; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
 		B678948524762D0B00A47332 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				B653B5EC2485612A0005446C /* Client.swift */,
 				B653B5EE2485785D0005446C /* BankInfo.swift */,
 				B653B5F0248590020005446C /* OnlineTransaction.swift */,
+				B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				B653B5ED2485612A0005446C /* Client.swift in Sources */,
 				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,
 				592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */,
+				B653B5F32486FBD70005446C /* DataScienceTransactionRepresentation.swift in Sources */,
 				B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */,
 				598B29FF23FF6D2A0038B698 /* UIViewController+Loading.swift in Sources */,
 				59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */,
