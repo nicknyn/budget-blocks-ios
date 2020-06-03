@@ -235,22 +235,16 @@ class NetworkingController {
             guard let data = data else { return }
             do {
                 let dataScienceDataArray = try self.jsonDecoder.decode(DataScienceTransactionRepresentations.self, from: data)
-                NetworkingController.transactions = dataScienceDataArray
+
                 print(dataScienceDataArray.transactions)
                 completion(dataScienceDataArray,nil)
                 // CoreData
                 for transaction in dataScienceDataArray.transactions {
                     let coreDataTransaction = DataScienceTransaction(dataScienceTransactionRepresentation: transaction, context: CoreDataStack.shared.mainContext)
-//                     CoreDataStack.shared.save(context: CoreDataStack.shared.mainContext)
-//                    if CoreDataStack.shared.mainContext.hasChanges {
-//                        try? CoreDataStack.shared.mainContext.save() // Crash
-//                    }
-                    print(coreDataTransaction?.name)
                 }
             } catch {
                 print(error.localizedDescription)
             }
-            
         }.resume()
     }
     

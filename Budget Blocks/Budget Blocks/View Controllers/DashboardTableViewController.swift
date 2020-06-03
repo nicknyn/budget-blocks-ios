@@ -286,7 +286,8 @@ import OktaAuthNative
         case 0:
             linkAccount()
         case 1 where indexPath.row == 0:
-            NetworkingController.shared.getAccessTokenFromUserId(userID: userID!) { (result) in
+            guard let userID = userID else { return }
+            NetworkingController.shared.getAccessTokenFromUserId(userID: userID) { (result) in
                 switch result {
                     case .success(let bankInfos):
                         print(bankInfos.data.first!.accessToken)

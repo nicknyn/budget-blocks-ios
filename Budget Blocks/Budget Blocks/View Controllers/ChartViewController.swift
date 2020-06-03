@@ -12,21 +12,21 @@ import Charts
 class ChartViewController: UIViewController {
 
     lazy var iosDataEntry : PieChartDataEntry = {
-        let iosDataEntry = PieChartDataEntry(value: 20)
+        let iosDataEntry   = PieChartDataEntry(value: 20)
         iosDataEntry.value = 60.0
         iosDataEntry.label = "Ice Cream"
         return iosDataEntry
     }()
     
     lazy var macDataEntry : PieChartDataEntry = {
-        let macDataEntry = PieChartDataEntry(value: 20)
+        let macDataEntry   = PieChartDataEntry(value: 20)
         macDataEntry.value = 100.0
         macDataEntry.label = "Rent"
         return macDataEntry
     }()
     
     lazy var tvOSDataEntry : PieChartDataEntry = {
-        let macDataEntry = PieChartDataEntry(value: 20)
+        let macDataEntry   = PieChartDataEntry(value: 20)
         macDataEntry.value = 80.0
         macDataEntry.label = "Gas"
         
@@ -48,7 +48,7 @@ class ChartViewController: UIViewController {
         view.addSubview(pieChartView)
         pieChartView.chartDescription?.text = "TRANSACTION"
     
-        numberOfDownloadsDataEntries = [iosDataEntry,macDataEntry,tvOSDataEntry]
+        numberOfDownloadsDataEntries        = [iosDataEntry,macDataEntry,tvOSDataEntry]
         updateChartData()
         setupUI()
     
@@ -56,12 +56,12 @@ class ChartViewController: UIViewController {
     }
     
     private func updateChartData() {
-        let chartDataSet = PieChartDataSet(entries: numberOfDownloadsDataEntries, label: nil)
-        let chartData = PieChartData(dataSet: chartDataSet)
+        let chartDataSet    = PieChartDataSet(entries: numberOfDownloadsDataEntries, label: nil)
+        let chartData       = PieChartData(dataSet: chartDataSet)
         
-        let colors = [#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1),#colorLiteral(red: 0.6909318566, green: 0.7678380609, blue: 0.870224297, alpha: 1),#colorLiteral(red: 0.5790472627, green: 0.9850887656, blue: 0.8092169166, alpha: 1)]
+        let colors          = [#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1),#colorLiteral(red: 0.6909318566, green: 0.7678380609, blue: 0.870224297, alpha: 1),#colorLiteral(red: 0.5790472627, green: 0.9850887656, blue: 0.8092169166, alpha: 1)]
         chartDataSet.colors = colors 
-        pieChartView.data = chartData
+        pieChartView.data   = chartData
     }
     
 
