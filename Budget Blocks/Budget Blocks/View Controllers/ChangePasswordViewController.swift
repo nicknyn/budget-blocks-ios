@@ -99,7 +99,7 @@ class ChangePasswordViewController: UIViewController {
         print("Change password")
         
         guard let oldPassword = oldPasswordField.text, !oldPassword.isEmpty,
-            let newPassword = newPasswordField.text, !newPassword.isEmpty else { return }
+            let newPassword   = newPasswordField.text, !newPassword.isEmpty else { return }
         
     }
 }

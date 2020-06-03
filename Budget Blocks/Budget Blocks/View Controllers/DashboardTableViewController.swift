@@ -91,8 +91,8 @@ import OktaAuthNative
         super.viewDidLoad()
         self.tabBarController?.navigationItem.hidesBackButton = true
         self.tabBarController?.navigationController?.navigationBar.isHidden = true
-        print("OKTA ACCESS TOKEN \(stateManager!.accessToken!)")
-        print("OKTA ID TOKEN \(stateManager!.idToken!)")
+        print("OKTA ACCESS TOKEN \(stateManager?.accessToken)")
+        print("OKTA ID TOKEN \(stateManager?.idToken)")
         stateManager?.getUser({ (response, error) in
             if let err = error {
                 print(err.localizedDescription)
