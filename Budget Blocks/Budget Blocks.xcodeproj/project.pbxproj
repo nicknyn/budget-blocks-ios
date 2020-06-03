@@ -155,6 +155,7 @@
 		B653B5F0248590020005446C /* OnlineTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTransaction.swift; sourceTree = "<group>"; };
 		B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScienceTransactionRepresentation.swift; sourceTree = "<group>"; };
 		B653B5F4248849120005446C /* NativeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLoginViewController.swift; sourceTree = "<group>"; };
+		B653B5F624885A370005446C /* SVProgressHUD */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SVProgressHUD; path = ../Carthage/Checkouts/SVProgressHUD; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
 		B678948524762D0B00A47332 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 		596C10FB23E0E09F003DF1D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B653B5F624885A370005446C /* SVProgressHUD */,
 				B622884E2482DADB009FF6E5 /* Charts */,
 				B6789482247626ED00A47332 /* OktaOidc.framework */,
 				B678947F247626EA00A47332 /* OktaAuthNative.framework */,
