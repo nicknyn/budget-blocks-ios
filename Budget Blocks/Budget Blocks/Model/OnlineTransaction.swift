@@ -19,17 +19,17 @@ struct OnlineTransactions: Codable {
 }
 
 struct OnlineTransaction: Codable {
-    let accountId : String // account_id
-    let accountOwner: String? // account_owner
+    let accountId : String
+    let accountOwner: String?
     let amount : Double
-    let authorizedDate: String? // authorized_date
+    let authorizedDate: String?
     let category : [String]
     let categoryId : String
     let date : String
-    let isoCurrencyCode : String // iso_currency_code
+    let isoCurrencyCode : String
     let location : Location
     let name: String
-    let paymentChannel: String? // payment_channel
+    let paymentChannel: String?
     let paymentMeta : PaymentMeta
     let pending: Bool?
     let pendingTransactionId: String?
@@ -66,9 +66,9 @@ class Location:NSObject, Codable {
     let country: String?
     let latitude: String?
     let longitude: String?
-    let postalCode: String? // postal_code
+    let postalCode: String? 
     let region: String?
-    let storeNumber: String? // store_number
+    let storeNumber: String?
     
     enum CodingKeys: String,CodingKey {
         case address       = "address"
@@ -81,8 +81,7 @@ class Location:NSObject, Codable {
         case storeNumber   = "store_number"
     }
 }
-//
-//
+
 struct PaymentMeta: Codable {
     let byOrderOf: String?
     let payee: String?

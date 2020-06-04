@@ -214,7 +214,7 @@ class NetworkingController {
     }
     static var transactions : DataScienceTransactionRepresentations?
     func sendTransactionsToDataScience(_ transaction: OnlineTransactions, completion: @escaping (DataScienceTransactionRepresentations, Error?) -> Void) {
-        let endpoint = URL(string: "http://budget-blocks-ds-env.eba-msi2nje2.us-east-1.elasticbeanstalk.com/transaction")!
+        let endpoint = URL(string: "https://api.budgetblocks.org/transaction")!
         var request = URLRequest(url: endpoint)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -223,8 +223,7 @@ class NetworkingController {
         
           
         guard let dataToSend = try? jsonEncoder.encode(transaction) else { return }
-//            request.httpBody = dataToSend
-//        print("DATA TO SEND \(String(data:dataToSend,encoding: .utf8))")
+
         URLSession.shared.uploadTask(with: request, from: dataToSend) { (data, response, error) in
             if let err = error {
                 print(err.localizedDescription)
@@ -240,7 +239,7 @@ class NetworkingController {
                 completion(dataScienceDataArray,nil)
                 // CoreData
                 for transaction in dataScienceDataArray.transactions {
-                    let coreDataTransaction = DataScienceTransaction(dataScienceTransactionRepresentation: transaction, context: CoreDataStack.shared.mainContext)
+                    let _ = DataScienceTransaction(dataScienceTransactionRepresentation: transaction, context: CoreDataStack.shared.mainContext)
                 }
             } catch {
                 print(error.localizedDescription)
