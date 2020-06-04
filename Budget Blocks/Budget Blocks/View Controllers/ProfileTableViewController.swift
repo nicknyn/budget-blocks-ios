@@ -54,9 +54,6 @@ class ProfileTableViewController : UITableViewController {
          navigationController?.navigationBar.isHidden = false
     }
     
-  
-   
-    
     //MARK:- Datasource-
     
     

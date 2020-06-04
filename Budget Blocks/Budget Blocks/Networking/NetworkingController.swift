@@ -117,14 +117,14 @@ class NetworkingController {
         }.resume()
     }
     
-    func registerUserToDatabase(user:UserRepresentation,bearer: String, completion: @escaping (UserRep?,Error?) -> Void) {
+    func registerUserToDatabase(user:UserRepresentation,accessToken: String, completion: @escaping (UserRep?,Error?) -> Void) {
         let registerURL = newBaseURL.appendingPathComponent("api")
                                     .appendingPathComponent("users")
         
         var request = URLRequest(url: registerURL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         do {
             let jsonData = try self.jsonEncoder.encode(user)
             request.httpBody = jsonData
@@ -224,7 +224,7 @@ class NetworkingController {
           
         guard let dataToSend = try? jsonEncoder.encode(transaction) else { return }
 //            request.httpBody = dataToSend
-        print("DATA TO SEND \(String(data:dataToSend,encoding: .utf8))")
+//        print("DATA TO SEND \(String(data:dataToSend,encoding: .utf8))")
         URLSession.shared.uploadTask(with: request, from: dataToSend) { (data, response, error) in
             if let err = error {
                 print(err.localizedDescription)

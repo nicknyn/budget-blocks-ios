@@ -146,7 +146,6 @@ private enum CheckmarkState {
         }
     }
     
-    
     @IBAction func signUpTapped(_ sender: UIButton) {
         print("Sign up")
     }
