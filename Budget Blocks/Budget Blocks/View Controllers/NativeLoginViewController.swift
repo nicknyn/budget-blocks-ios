@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import SVProgressHUD
 import OktaOidc
 import OktaAuthNative
+import SVProgressHUD
 
 private enum EyeState {
     case hidePassword
@@ -22,17 +22,28 @@ private enum CheckmarkState {
 }
  class NativeLoginViewController: UIViewController {
     
- 
+     var successStatus: OktaAuthStatus?
+    
     @IBOutlet weak var appTitleLabel: UILabel!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField! {
+        didSet {
+            emailTextField.text = "ptnguyen1901@gmail.com"
+        }
+    }
     @IBOutlet weak var passwordTextField: UITextField! {
         didSet {
+            passwordTextField.text = "Kiemcho1234"
             passwordTextField.rightViewMode = .always
             passwordTextField.isSecureTextEntry = true
         }
     }
     @IBOutlet weak var signInButton: UIButton! { didSet { signInButton.layer.cornerRadius = 4 } }
     @IBOutlet weak var checkmarkButton: UIButton!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
+    var urlString = "https://dev-985629.okta.com/oauth2/default"
+    
     
     fileprivate var state: CheckmarkState = .notRemember
     fileprivate var eyeState: EyeState = .hidePassword
@@ -41,7 +52,8 @@ private enum CheckmarkState {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        SVProgressHUD.setBackgroundColor(.black)
+        SVProgressHUD.setForegroundColor(.white)
     
         
         navigationController?.navigationBar.isHidden = true
@@ -100,8 +112,39 @@ private enum CheckmarkState {
     
     @IBAction func signInTapped(_ sender: UIButton) {
         print("Sign in")
+        guard let username = usernameField.text, !username.isEmpty,
+            let password = passwordField.text,!password.isEmpty else { return }
+      
+            
+        SVProgressHUD.show()
+        OktaAuthSdk.authenticate(with: URL(string: urlString)!, username: username, password: password, onStatusChange: { (status) in
+            
+            DispatchQueue.main.async {
+                  print(status)
+                self.successStatus = status
+                SVProgressHUD.dismiss()
+                self.performSegue(withIdentifier: "LoginSuccess", sender: self)
+            }
+              
+            }) { (error) in
+                print(error.localizedDescription)
+                print("Wrong password")
+            }
+        
     }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "LoginSuccess" {
+            
+            if let destVC = segue.destination as? UITabBarController {
+                if let vc = destVC.viewControllers?.first as? UINavigationController {
+                    if let correctVC = vc.viewControllers.first as? DashboardTableViewController {
+                         correctVC.successStatus = self.successStatus
+                    }
+                }
+            }
+           
+        }
+    }
     
     
     @IBAction func signUpTapped(_ sender: UIButton) {

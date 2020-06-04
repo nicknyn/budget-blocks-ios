@@ -81,7 +81,6 @@
                     <connections>
                         <outlet property="signInButton" destination="ReI-gj-VUh" id="Roj-8Q-J7N"/>
                         <outlet property="signUpButton" destination="sew-FY-ZfX" id="231-bd-hmf"/>
-                        <segue destination="qxf-o2-3Eg" kind="show" identifier="ShowDashboard" id="SaJ-Yn-Tok"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -634,7 +633,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8C-f8-0qJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2732" y="841.52923538230891"/>
+            <point key="canvasLocation" x="2537" y="1019"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wN7-Rz-aPh">
@@ -1083,7 +1082,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="74e-sd-1FP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1834.4000000000001" y="843.32833583208401"/>
+            <point key="canvasLocation" x="1194" y="844"/>
         </scene>
         <!--Profile Table View Controller-->
         <scene sceneID="w67-mv-CeY">
@@ -1260,7 +1259,6 @@
                                 </state>
                                 <connections>
                                     <action selector="signInTapped:" destination="soH-1x-dm1" eventType="touchUpInside" id="K1U-9T-7xE"/>
-                                    <segue destination="qxf-o2-3Eg" kind="show" id="BhI-9D-SMe"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="b9K-cn-bSn">
@@ -1317,8 +1315,11 @@
                         <outlet property="appTitleLabel" destination="WWi-CT-DgT" id="S27-t3-ZEX"/>
                         <outlet property="checkmarkButton" destination="0Ud-uD-R67" id="KtB-uW-N8o"/>
                         <outlet property="emailTextField" destination="ySY-9R-nqA" id="6oV-Fa-9gu"/>
+                        <outlet property="passwordField" destination="Bwk-Cg-XQN" id="kv1-Ar-g6H"/>
                         <outlet property="passwordTextField" destination="Bwk-Cg-XQN" id="vbv-cs-z11"/>
                         <outlet property="signInButton" destination="eqV-11-pr1" id="EFy-qQ-i9B"/>
+                        <outlet property="usernameField" destination="ySY-9R-nqA" id="pu9-Zn-FYl"/>
+                        <segue destination="qxf-o2-3Eg" kind="show" identifier="LoginSuccess" id="eoK-Yc-O9B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JcP-4d-b8x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1384,7 +1385,6 @@
         <!--Chart-->
         <scene sceneID="5hG-7d-3QC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gfd-FR-oV0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mLa-bP-yyl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Chart" image="chart.pie.fill" catalog="system" id="Pyh-nr-qe5"/>
                     <toolbarItems/>
@@ -1397,6 +1397,7 @@
                         <segue destination="p6j-Pn-qo8" kind="relationship" relationship="rootViewController" id="x1d-zj-gka"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gfd-FR-oV0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3922.4000000000001" y="-165.51724137931035"/>
         </scene>
@@ -1438,7 +1439,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BhI-9D-SMe"/>
         <segue reference="H0w-Vf-iu2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

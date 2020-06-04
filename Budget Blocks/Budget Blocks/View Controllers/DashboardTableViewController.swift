@@ -32,6 +32,7 @@ import OktaAuthNative
     
     var oktaOidc: OktaOidc?
     var stateManager: OktaOidcStateManager?
+    var successStatus: OktaAuthStatus?
     
     private(set) lazy var transactionsFRC: NSFetchedResultsController<Transaction> = {
         let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -89,41 +90,7 @@ import OktaAuthNative
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBarController?.navigationItem.hidesBackButton = true
-        self.tabBarController?.navigationController?.navigationBar.isHidden = true
-        print("OKTA ACCESS TOKEN \(stateManager?.accessToken)")
-        print("OKTA ID TOKEN \(stateManager?.idToken)")
-        stateManager?.getUser({ (response, error) in
-            if let err = error {
-                print(err.localizedDescription)
-            }
-            guard let response = response  else { return }
-            
-          
-            DashboardTableViewController.user.name = response["name"] as? String
-            DashboardTableViewController.user.email = response["email"] as? String
-            print("USER NAME is \(DashboardTableViewController.user.name!)")
-            print("EMAIL IS \(DashboardTableViewController.user.email!)")
-           try? CoreDataStack.shared.mainContext.save()
-            
-            NetworkingController.shared.registerUserToDatabase(user: DashboardTableViewController.user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
-                // okta
-                guard let user = user else { return }
-                if let err = error {
-                    fatalError(err.localizedDescription)
-                }
-                
-                self.userID = user.data.id
-              
-                
-            }
-        })
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
-        transactionController.networkingController = networkingController
-        
-        updateBalances()
-        updateRemainingBudget()
+        setUpViews()
         
         let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
@@ -131,20 +98,91 @@ import OktaAuthNative
         // Temporary logout button until the profile page is set up
         let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
         navigationItem.rightBarButtonItem = logoutButton
-        
-        networkingController.loginWithKeychain { success in
-            if success {
-                DispatchQueue.main.async {
-                    self.setUpViews()
-                }
-            }
-        }
     }
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.tabBarController?.navigationItem.hidesBackButton = true
+//        self.tabBarController?.navigationController?.navigationBar.isHidden = true
+//        print("OKTA ACCESS TOKEN \(stateManager?.accessToken)")
+//        print("OKTA ID TOKEN \(stateManager?.idToken)")
+//        stateManager?.getUser({ (response, error) in
+//            if let err = error {
+//                print(err.localizedDescription)
+//            }
+//            guard let response = response  else { return }
+//
+////
+////            DashboardTableViewController.user.name = response["name"] as? String
+////            DashboardTableViewController.user.email = response["email"] as? String
+////            print("USER NAME is \(DashboardTableViewController.user.name!)")
+////            print("EMAIL IS \(DashboardTableViewController.user.email!)")
+//           try? CoreDataStack.shared.mainContext.save()
+//
+//            NetworkingController.shared.registerUserToDatabase(user: DashboardTableViewController.user.userRepresentation!, bearer: self.stateManager!.accessToken!) { user,error  in
+//                // okta
+//                guard let user = user else { return }
+//                if let err = error {
+//                    fatalError(err.localizedDescription)
+//                }
+//
+//                self.userID = user.data.id
+//
+//
+//            }
+//        })
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(refreshHelper), name: .refreshInfo, object: nil)
+//        transactionController.networkingController = networkingController
+//
+//        updateBalances()
+//        updateRemainingBudget()
+//
+//        let largeTitleFontSize = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.largeTitle).pointSize
+//        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Exo-Regular", size: largeTitleFontSize)!]
+//
+//        // Temporary logout button until the profile page is set up
+//        let logoutButton = UIBarButtonItem(title: "Sign out", style: .plain, target: self, action: #selector(logout))
+//        navigationItem.rightBarButtonItem = logoutButton
+//
+//        networkingController.loginWithKeychain { success in
+//            if success {
+//                DispatchQueue.main.async {
+//                    self.setUpViews()
+//                }
+//            }
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("THIS IS status \(successStatus)")
+
+
+        DashboardTableViewController.user.name =
+            [(successStatus?.model.embedded?.user?.profile?.firstName)!,  (successStatus?.model.embedded?.user?.profile?.lastName)!].joined(separator: " ")
+        DashboardTableViewController.user.email = successStatus?.model.embedded?.user?.profile?.login
+        try? CoreDataStack.shared.mainContext.save()
+
+        guard let oidcClient = self.createOidcClient() else { return }
+        oidcClient.authenticate(withSessionToken: (successStatus?.model.sessionToken!)!) { [weak self] (stateManager, error) in
+            print(stateManager?.accessToken!)
+            print(stateManager?.idToken!)
+
+        }
         tableView.reloadData()
-       
+
+    }
+    
+    func createOidcClient() -> OktaOidc? {
+        var oidcClient: OktaOidc?
+        if let config = self.readTestConfig() {
+            oidcClient = try? OktaOidc(configuration: config)
+        } else {
+            oidcClient = try? OktaOidc()
+        }
+        
+        return oidcClient
     }
     
     //MARK:-
@@ -370,18 +408,33 @@ import OktaAuthNative
 //        networkingController.logout()
 //        TransactionController().clearStoredTransactions(context: CoreDataStack.shared.mainContext)
 //        performSegue(withIdentifier: "AnimatedLogin", sender: self)
-        
-        guard let oktaOidc = self.oktaOidc, let stateManager = self.stateManager else { return }
-        oktaOidc.signOutOfOkta(stateManager, from: self) { [weak self ] error in
-            if let error = error {
-                let ac = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self?.present(ac, animated: true, completion: nil)
-                return
-            }
-            self?.stateManager?.clear()
-            self?.tabBarController?.navigationController?.popViewController(animated: true)
+        print("WANT TO LOG OUT")
+        if let oidcStateManager = self.stateManager {
+            let oidcClient = self.createOidcClient()
+            
+            oidcClient!.signOutOfOkta(oidcStateManager, from: self, callback: { [weak self] error in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    self?.tabBarController?.navigationController?.popViewController(animated: true)
+                    print("HEE")
+                      self?.tabBarController?.navigationController?.popToRootViewController(animated: true)
+//                    self?.flowCoordinatorDelegate?.onLoggedOut()
+                }
+            })
         }
+        
+//        guard let oktaOidc = self.oktaOidc, let stateManager = self.stateManager else { return }
+//        oktaOidc.signOutOfOkta(stateManager, from: self) { [weak self ] error in
+//            if let error = error {
+//                let ac = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//                self?.present(ac, animated: true, completion: nil)
+//                return
+//            }
+//            self?.stateManager?.clear()
+//            self?.tabBarController?.navigationController?.popViewController(animated: true)
+//        }
     }
     
     private func updateBalances() {
@@ -591,4 +644,32 @@ extension DashboardTableViewController: OnboardingViewControllerDelegate {
     }
     
     // comment for commit 
+}
+
+private extension DashboardTableViewController {
+    func readTestConfig() -> OktaOidcConfig? {
+        guard let _ = ProcessInfo.processInfo.environment["OKTA_URL"],
+            let testConfig = configForUITests else {
+                return nil
+                
+        }
+        
+        return try? OktaOidcConfig(with: testConfig)
+    }
+    
+    var configForUITests: [String: String]? {
+        let env = ProcessInfo.processInfo.environment
+        guard let oktaURL = env["OKTA_URL"],
+            let clientID = env["CLIENT_ID"],
+            let redirectURI = env["REDIRECT_URI"],
+            let logoutRedirectURI = env["LOGOUT_REDIRECT_URI"] else {
+                return nil
+        }
+        return ["issuer": "\(oktaURL)/oauth2/default",
+            "clientId": clientID,
+            "redirectUri": redirectURI,
+            "logoutRedirectUri": logoutRedirectURI,
+            "scopes": "openid profile offline_access"
+        ]
+    }
 }

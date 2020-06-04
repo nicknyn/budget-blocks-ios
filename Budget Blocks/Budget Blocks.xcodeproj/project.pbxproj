@@ -58,6 +58,7 @@
 		B653B5F32486FBD70005446C /* DataScienceTransactionRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */; };
 		B653B5F5248849130005446C /* NativeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F4248849120005446C /* NativeLoginViewController.swift */; };
 		B653B5F824885F5F0005446C /* NativeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F724885F5F0005446C /* NativeOnboardingViewController.swift */; };
+		B653B603248875AE0005446C /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B653B602248875AE0005446C /* SVProgressHUD */; };
 		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
 		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; };
@@ -156,7 +157,6 @@
 		B653B5F0248590020005446C /* OnlineTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTransaction.swift; sourceTree = "<group>"; };
 		B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScienceTransactionRepresentation.swift; sourceTree = "<group>"; };
 		B653B5F4248849120005446C /* NativeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLoginViewController.swift; sourceTree = "<group>"; };
-		B653B5F624885A370005446C /* SVProgressHUD */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SVProgressHUD; path = ../Carthage/Checkouts/SVProgressHUD; sourceTree = "<group>"; };
 		B653B5F724885F5F0005446C /* NativeOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeOnboardingViewController.swift; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
@@ -176,6 +176,7 @@
 				B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */,
 				B62288502482DAF2009FF6E5 /* Charts in Frameworks */,
 				598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */,
+				B653B603248875AE0005446C /* SVProgressHUD in Frameworks */,
 				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
 				B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */,
 				596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */,
@@ -327,7 +328,6 @@
 		596C10FB23E0E09F003DF1D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B653B5F624885A370005446C /* SVProgressHUD */,
 				B622884E2482DADB009FF6E5 /* Charts */,
 				B6789482247626ED00A47332 /* OktaOidc.framework */,
 				B678947F247626EA00A47332 /* OktaAuthNative.framework */,
@@ -401,6 +401,7 @@
 				5939B1F423DF55F3003FB0E0 /* SwiftyJSON */,
 				598B29F823FD994D0038B698 /* KeychainSwift */,
 				B622884F2482DAF2009FF6E5 /* Charts */,
+				B653B602248875AE0005446C /* SVProgressHUD */,
 			);
 			productName = "Budget Blocks";
 			productReference = 5955B89423DB59B800A24A8F /* Budget Blocks.app */;
@@ -477,6 +478,7 @@
 			packageReferences = (
 				5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				B653B601248875AE0005446C /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
 			);
 			productRefGroup = 5955B89523DB59B800A24A8F /* Products */;
 			projectDirPath = "";
@@ -938,6 +940,14 @@
 				minimumVersion = 19.0.0;
 			};
 		};
+		B653B601248875AE0005446C /* XCRemoteSwiftPackageReference "SVProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/epitonium/SVProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -954,6 +964,11 @@
 		B622884F2482DAF2009FF6E5 /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Charts;
+		};
+		B653B602248875AE0005446C /* SVProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B653B601248875AE0005446C /* XCRemoteSwiftPackageReference "SVProgressHUD" */;
+			productName = SVProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 
