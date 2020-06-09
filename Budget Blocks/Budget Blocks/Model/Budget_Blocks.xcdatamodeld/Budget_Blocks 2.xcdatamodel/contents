@@ -6,6 +6,7 @@
         <attribute name="date" optional="YES" attributeType="String"/>
         <attribute name="location" optional="YES" attributeType="Transformable"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="transactionID" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -25,9 +26,9 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
+        <element name="DataScienceTransaction" positionX="36" positionY="63" width="128" height="133"/>
         <element name="Transaction" positionX="142" positionY="29" width="128" height="118"/>
         <element name="TransactionCategory" positionX="-63" positionY="9" width="128" height="103"/>
         <element name="User" positionX="54" positionY="81" width="128" height="73"/>
-        <element name="DataScienceTransaction" positionX="36" positionY="63" width="128" height="118"/>
     </elements>
 </model>

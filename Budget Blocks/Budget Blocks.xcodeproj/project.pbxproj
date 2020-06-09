@@ -52,6 +52,7 @@
 		B62288502482DAF2009FF6E5 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B622884F2482DAF2009FF6E5 /* Charts */; };
 		B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */; };
 		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
+		B650C3DB248FF45000DED736 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DA248FF45000DED736 /* SignUpViewController.swift */; };
 		B653B5ED2485612A0005446C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EC2485612A0005446C /* Client.swift */; };
 		B653B5EF2485785D0005446C /* BankInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EE2485785D0005446C /* BankInfo.swift */; };
 		B653B5F1248590020005446C /* OnlineTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F0248590020005446C /* OnlineTransaction.swift */; };
@@ -65,7 +66,6 @@
 		B6789484247626EE00A47332 /* OktaOidc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B678948624762D0B00A47332 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = B678948524762D0B00A47332 /* Okta.plist */; };
 		B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */; };
-		B6F023122473399B004FE006 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F023112473399B004FE006 /* UserController.swift */; };
 		E3509F082448F92C0091592C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F072448F92C0091592C /* Notifications.swift */; };
 		E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -152,6 +152,7 @@
 		B622884E2482DADB009FF6E5 /* Charts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Charts; path = ../Carthage/Checkouts/Charts; sourceTree = "<group>"; };
 		B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		B650C3DA248FF45000DED736 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B653B5EC2485612A0005446C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		B653B5EE2485785D0005446C /* BankInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInfo.swift; sourceTree = "<group>"; };
 		B653B5F0248590020005446C /* OnlineTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTransaction.swift; sourceTree = "<group>"; };
@@ -163,7 +164,6 @@
 		B678948524762D0B00A47332 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
 		B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		B6F0230C24733836004FE006 /* Budget_Blocks 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Budget_Blocks 2.xcdatamodel"; sourceTree = "<group>"; };
-		B6F023112473399B004FE006 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		E3509F072448F92C0091592C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -296,6 +296,7 @@
 				B622884C2482D7D9009FF6E5 /* ChartViewController.swift */,
 				B653B5F4248849120005446C /* NativeLoginViewController.swift */,
 				B653B5F724885F5F0005446C /* NativeOnboardingViewController.swift */,
+				B650C3DA248FF45000DED736 /* SignUpViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -320,7 +321,6 @@
 			isa = PBXGroup;
 			children = (
 				5969C1F523E3904400BAA183 /* TransactionController.swift */,
-				B6F023112473399B004FE006 /* UserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -566,7 +566,6 @@
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
 				B653B5F1248590020005446C /* OnlineTransaction.swift in Sources */,
-				B6F023122473399B004FE006 /* UserController.swift in Sources */,
 				5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */,
 				592B3CAE23F1CBC90035FF3A /* CategoryTableViewCell.swift in Sources */,
 				598B29FD23FDDC7A0038B698 /* OnboardingViewController.swift in Sources */,
@@ -585,6 +584,7 @@
 				B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */,
 				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
+				B650C3DB248FF45000DED736 /* SignUpViewController.swift in Sources */,
 				B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */,
 				B653B5F5248849130005446C /* NativeLoginViewController.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,

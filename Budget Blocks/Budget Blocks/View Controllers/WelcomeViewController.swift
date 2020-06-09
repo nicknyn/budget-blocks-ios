@@ -87,11 +87,11 @@ class WelcomeViewController: UIViewController {
         let daybreakBlue = UIColor(red: 0.094, green: 0.565, blue: 1, alpha: 1).cgColor
         
         signUpButton.layer.backgroundColor = daybreakBlue
-        signUpButton.layer.cornerRadius = 6
+        signUpButton.layer.cornerRadius    = 6
         signUpButton.setTitleColor(.white, for: .normal)
         
         signInButton.layer.cornerRadius = 6
-        signInButton.layer.borderWidth = 1
+        signInButton.layer.borderWidth  = 1
         
         if let buttonFontSize = signUpButton.titleLabel?.font.pointSize {
             signUpButton.titleLabel?.font = UIFont(name: "Avenir Next", size: buttonFontSize)
@@ -116,11 +116,11 @@ class WelcomeViewController: UIViewController {
 // UI Tests
 private extension WelcomeViewController {
     var configForUITests: [String: String]? {
-        let env = ProcessInfo.processInfo.environment
-        guard let oktaURL = env["OKTA_URL"], oktaURL.count > 0,
-            let clientID = env["CLIENT_ID"],
-            let redirectURI = env["REDIRECT_URI"],
-            let logoutRedirectURI = env["LOGOUT_REDIRECT_URI"] else {
+              let env               = ProcessInfo.processInfo.environment
+        guard let oktaURL           = env["OKTA_URL"], oktaURL.count > 0,
+              let clientID          = env["CLIENT_ID"],
+              let redirectURI       = env["REDIRECT_URI"],
+              let logoutRedirectURI = env["LOGOUT_REDIRECT_URI"] else {
                 return nil
         }
         return ["issuer": "\(oktaURL)/oauth2/default",

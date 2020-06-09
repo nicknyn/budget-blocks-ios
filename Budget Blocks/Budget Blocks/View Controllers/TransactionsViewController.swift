@@ -97,6 +97,7 @@ class TransactionsViewController: UIViewController {
 
 extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(fetchedResultsController.fetchedObjects?.count)
         return fetchedResultsController.fetchedObjects?.count ?? 0
 
       
@@ -108,12 +109,12 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         
         let transaction = fetchedResultsController.object(at: indexPath)
 
-        cell.amountLabel.text = String(transaction.amount) + "$"
+        cell.amountLabel.text      = String(transaction.amount) + "$"
         cell.descriptionLabel.text = transaction.name
 //
         let ac = transaction.category as! [String]
-        cell.categoryLabel.text = ac.joined()
-        cell.dateLabel.text = transaction.date?.description
+        cell.categoryLabel.text    = ac.joined()
+        cell.dateLabel.text        = transaction.date?.description
         cell.amountLabel.textColor = transaction.amount < 0 ?  UIColor.red : UIColor.link
         
         cell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
@@ -158,8 +159,8 @@ extension TransactionsViewController: NSFetchedResultsControllerDelegate {
             guard let indexPath = indexPath else { return }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         case .move:
-            guard let indexPath = indexPath,
-                let newIndexPath = newIndexPath else { return }
+            guard let indexPath    = indexPath,
+                  let newIndexPath = newIndexPath else { return }
             tableView.moveRow(at: indexPath, to: newIndexPath)
         case .update:
             guard let indexPath = indexPath else { return }

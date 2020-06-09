@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import KeychainSwift
+import CoreData
 
 enum NetworkError:String, Error {
     case badURL = "Bad URL"
@@ -213,6 +214,7 @@ class NetworkingController {
         keychain.clear()
     }
     static var transactions : DataScienceTransactionRepresentations?
+    
     func sendTransactionsToDataScience(_ transaction: OnlineTransactions, completion: @escaping (DataScienceTransactionRepresentations, Error?) -> Void) {
         let endpoint = URL(string: "https://api.budgetblocks.org/transaction")!
         var request = URLRequest(url: endpoint)
@@ -239,13 +241,40 @@ class NetworkingController {
                 completion(dataScienceDataArray,nil)
                 // CoreData
                 for transaction in dataScienceDataArray.transactions {
-                    let _ = DataScienceTransaction(dataScienceTransactionRepresentation: transaction, context: CoreDataStack.shared.mainContext)
+                    guard let _ = self.fetchTransaction(transaction.transactionID) else {
+                          let _ = DataScienceTransaction(dataScienceTransactionRepresentation: transaction, context: CoreDataStack.shared.mainContext)
+                        continue
+                        
+                        
+                    }
+                  
+                    
                 }
+//                do {
+//                       try CoreDataStack.shared.save()
+//                } catch {
+//                    print(error.localizedDescription)
+//                }
+             
             } catch {
                 print(error.localizedDescription)
             }
         }.resume()
     }
+    
+    func fetchTransaction(_ transactionID: String) -> DataScienceTransaction? {
+        let moc = CoreDataStack.shared.mainContext
+        let dataScienceTransactionFetch = NSFetchRequest<DataScienceTransaction>(entityName: String(describing: DataScienceTransaction.self))
+        dataScienceTransactionFetch.predicate = NSPredicate(format: "transactionID == %@",transactionID)
+        do {
+            let fetchedTransactions = try moc.fetch(dataScienceTransactionFetch)
+            return fetchedTransactions.first
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+//
+    }
+    
     
     
     func getTransactionsFromPlaid(of client: Client,completion: @escaping (Result<OnlineTransactions,NetworkError>) -> Void) {
@@ -306,6 +335,7 @@ class NetworkingController {
                 completion(.failure(.badResponse))
                 return
             }
+           
             guard let data = data else {
                 completion(.failure(.invalidData))
                 return
