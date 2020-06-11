@@ -10,13 +10,9 @@ import UIKit
 
 class FirstOnboardingViewController: UIViewController {
 
-    
-    
-    @IBOutlet weak var toolBar: UIToolbar!
-   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "skip", style: .plain, target: self, action: #selector(skipTapped))
         let leftRecognizer = UISwipeGestureRecognizer(target: self, action:
             #selector(swipeMade(_:)))
         leftRecognizer.direction = .left
@@ -27,15 +23,21 @@ class FirstOnboardingViewController: UIViewController {
         self.view.addGestureRecognizer(leftRecognizer)
         self.view.addGestureRecognizer(rightRecognizer)
         
-        navigationController?.toolbar.barTintColor = .white
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.toolbar.setShadowImage(UIImage(), forToolbarPosition: .any)
+       
+//        navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.layoutIfNeeded()
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
  
+    @objc func skipTapped() {
+        print("skipping")
+    }
+    
     @objc func swipeMade(_ sender: UISwipeGestureRecognizer) {
         if sender.direction == .right  {
             

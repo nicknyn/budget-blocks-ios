@@ -25,7 +25,11 @@ class SecondOnboardingViewController: UIViewController {
         
         
         navigationItem.hidesBackButton = true
-        
+        navigationItem.rightBarButtonItem  = UIBarButtonItem(title: "skip", style: .plain, target: self, action: #selector(skipTapped))
+       
+    }
+    @objc func skipTapped() {
+        print("skipping")
     }
     
 
