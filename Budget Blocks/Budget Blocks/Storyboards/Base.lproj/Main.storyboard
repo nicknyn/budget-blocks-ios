@@ -2038,11 +2038,11 @@
             <objects>
                 <viewController id="aqk-em-FTL" customClass="FourthOnboardingViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LCj-nL-s8C">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6H-RC-PRB">
-                                <rect key="frame" x="0.0" y="632" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="656" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="65s-5v-Rb7"/>
                                     <barButtonItem title="skip" id="Seh-3A-ghw">
@@ -2051,7 +2051,7 @@
                                 </items>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijI-ef-adG">
-                                <rect key="frame" x="48" y="576" width="318" height="40"/>
+                                <rect key="frame" x="48" y="600" width="318" height="40"/>
                                 <color key="backgroundColor" red="0.40302401780000002" green="0.79367810490000001" blue="0.76756912470000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="plM-RI-xna"/>
@@ -2114,7 +2114,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="u3s-c2-xYc">
-                                <rect key="frame" x="48" y="241.33333333333331" width="350" height="60"/>
+                                <rect key="frame" x="48" y="241.33333333333337" width="350" height="60"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D1i-ro-MFC">
                                         <rect key="frame" x="0.0" y="2" width="20" height="56.666666666666671"/>
@@ -2180,7 +2180,7 @@
             <objects>
                 <viewController id="xjE-yR-ZNs" customClass="FiveOnboardingViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mdH-yg-Wj5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build Your Budget" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LD5-fv-gV6">
@@ -2267,7 +2267,7 @@
                                 </prototypes>
                             </tableView>
                             <toolbar clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Dp-FD-zVm">
-                                <rect key="frame" x="0.0" y="632" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="656" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="gtj-2R-L7L"/>
                                     <barButtonItem title="skip" id="ILm-tT-PHQ"/>
@@ -2275,7 +2275,7 @@
                                 <color key="tintColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vQF-Rj-ZyT">
-                                <rect key="frame" x="64" y="576" width="286" height="40"/>
+                                <rect key="frame" x="64" y="600" width="286" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DN5-Lg-E18">
                                         <rect key="frame" x="0.0" y="0.0" width="143" height="40"/>
@@ -2341,11 +2341,11 @@
             <objects>
                 <viewController id="ZC7-Xz-JVh" customClass="SixOnboardingViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hAO-Th-Xjc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9JI-gf-5AT">
-                                <rect key="frame" x="20" y="316.66666666666669" width="374" height="239.33333333333331"/>
+                                <rect key="frame" x="20" y="316.66666666666674" width="374" height="263.33333333333326"/>
                                 <connections>
                                     <segue destination="9OI-Ff-Bfr" kind="embed" id="gCi-go-ACe"/>
                                 </connections>
@@ -2357,7 +2357,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <toolbar clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Os-AV-zaM">
-                                <rect key="frame" x="0.0" y="632" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="656" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="8oV-Bw-SlN"/>
                                     <barButtonItem title="skip" id="c8S-h6-sBq"/>
@@ -2391,7 +2391,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="vVE-Ci-caq">
-                                <rect key="frame" x="64" y="576" width="286" height="40"/>
+                                <rect key="frame" x="64" y="600" width="286" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDy-ha-L9T">
                                         <rect key="frame" x="0.0" y="0.0" width="143" height="40"/>
@@ -2452,11 +2452,11 @@
             <objects>
                 <viewController id="uC9-n4-7LU" customClass="SevenOnboardingViewController" customModule="Budget_Blocks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jYF-0f-p52">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BV3-Uj-ERI">
-                                <rect key="frame" x="0.0" y="632" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="656" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="2Vj-04-zJj"/>
                                     <barButtonItem title="skip" id="1O6-rL-qDT"/>
@@ -2464,7 +2464,7 @@
                                 <color key="tintColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oiF-M1-7TZ">
-                                <rect key="frame" x="64" y="576" width="286" height="40"/>
+                                <rect key="frame" x="64" y="600" width="286" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ysp-D2-J2a">
                                         <rect key="frame" x="0.0" y="0.0" width="143" height="40"/>
@@ -2518,7 +2518,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gn-VF-tvl">
-                                <rect key="frame" x="16" y="273.33333333333326" width="382" height="286.66666666666674"/>
+                                <rect key="frame" x="16" y="273.33333333333326" width="382" height="310.66666666666674"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBf-WC-fac">
                                         <rect key="frame" x="32" y="172.33333333333337" width="60" height="30"/>
@@ -2725,23 +2725,11 @@
             <objects>
                 <viewController id="9OI-Ff-Bfr" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Be-G0-uL1">
-                        <rect key="frame" x="0.0" y="0.0" width="374" height="239.33333333333334"/>
+                        <rect key="frame" x="0.0" y="0.0" width="374" height="263.33333333333331"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MlV-D8-yhz">
-                                <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="MFr-Aa-NDt"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Month"/>
-                                    <segment title="Week"/>
-                                </segments>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="selectedSegmentTintColor" red="0.40302401780000002" green="0.79367810490000001" blue="0.76756912470000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r05-WQ-He3">
-                                <rect key="frame" x="64" y="72.000000000000014" width="246" height="135.33333333333337"/>
+                                <rect key="frame" x="64" y="72.000000000000014" width="246" height="159.33333333333337"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="uk4-CA-bqO">
                                         <rect key="frame" x="32" y="32" width="182" height="36"/>
@@ -2780,6 +2768,18 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="MlV-D8-yhz">
+                                <rect key="frame" x="0.0" y="0.0" width="374" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MFr-Aa-NDt"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Month"/>
+                                    <segment title="Week"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="selectedSegmentTintColor" red="0.40302401780000002" green="0.79367810490000001" blue="0.76756912470000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -2800,7 +2800,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="trB-Nr-6rW"/>
+        <segue reference="ozt-Tv-3Wg"/>
         <segue reference="H0w-Vf-iu2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

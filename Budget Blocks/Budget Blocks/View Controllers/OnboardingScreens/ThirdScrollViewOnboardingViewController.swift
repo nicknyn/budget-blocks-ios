@@ -27,7 +27,7 @@ extension UIViewController {
     func createtextField(placeholder: String) -> UITextField {
         let textField = UITextField()
         textField.placeholder = placeholder
-        textField.tintColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
+        
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }
@@ -54,7 +54,7 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
     
     private let redView: UIView = {
         let view = UIView()
-        view.heightAnchor.constraint(equalToConstant: 1200).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 920).isActive = true
         view.backgroundColor = .white
         return view
     }()
@@ -83,7 +83,10 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
     private lazy var stackView: UIStackView = {
         let lb = createLabel(text: "Account information")
         let button = createButton(title: "Edit")
+  
+        button.contentHorizontalAlignment = .leading
         
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.setTitleColor(#colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1), for: .normal)
         button.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
        let stackView = UIStackView(arrangedSubviews: [lb,button])
@@ -128,15 +131,84 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         print("skipping")
     }
     
+    lazy var nameLabel = createLabel(text: "Name")
+    lazy var nameTextField : UITextField = {
+       let tf = createtextField(placeholder: "")
+        tf.text = "Dummy"
+        return tf
+    }()
+    lazy var emailLabel = createLabel(text: "Email")
+    lazy var emailTextField : UITextField = {
+        let tf = createtextField(placeholder: "")
+        tf.text = "DummyEmail"
+        return tf
+    }()
+    lazy var passwordLabel = createLabel(text: "Password")
+    lazy var passwordTextField : UITextField = {
+        let tf = createtextField(placeholder: "")
+        tf.text = "**********"
+        return tf
+    }()
+    lazy var countryLabel = createLabel(text: "Country")
+    lazy var unitedStateLabel = createLabel(text: "United States")
+    
+    lazy var cityLabel = createLabel(text: "City")
+    lazy var cityTextField: UITextField = {
+       let tf = createtextField(placeholder: "Garland")
+        tf.tintColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
+        tf.backgroundColor = .red
+        tf.layer.cornerRadius = 4
+        return tf
+    }()
+    lazy var stateLabel = createLabel(text: "State")
+    lazy var stateTextField : UITextField = {
+       let tf = createtextField(placeholder: "TX")
+        tf.tintColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
+        tf.layer.cornerRadius = 4
+        return tf
+    }()
+    lazy var zipcodeLabel = createLabel(text: "Zipcode")
+    lazy var zipcodeTextField : UITextField = {
+       let tf = createtextField(placeholder: "75041")
+        tf.keyboardType = .numberPad
+        tf.layer.cornerRadius = 4
+        return tf
+    }()
+    
+    
+    //MARK:- Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "skip", style: .plain, target: self, action: #selector(skipTapped))
         view.addSubview(scrollView)
+        
         scrollView.addSubview(scrollViewContainer)
+        
         redView.addSubview(profileLabel)
         redView.addSubview(introduceLabel)
         redView.addSubview(stackView)
         redView.addSubview(bottomStackView)
+        redView.addSubview(nameLabel)
+        redView.addSubview(nameTextField)
+        redView.addSubview(emailLabel)
+        redView.addSubview(emailTextField)
+        redView.addSubview(passwordLabel)
+        redView.addSubview(passwordTextField)
+        redView.addSubview(countryLabel)
+        redView.addSubview(unitedStateLabel)
+        redView.addSubview(cityLabel)
+        redView.addSubview(cityTextField)
+        redView.addSubview(stateLabel)
+        redView.addSubview(stateTextField)
+        redView.addSubview(zipcodeLabel)
+        redView.addSubview(zipcodeTextField)
+        
+        
+        
+        
+        
+        unitedStateLabel.font = UIFont.systemFont(ofSize: 16)
         
         NSLayoutConstraint.activate([
             profileLabel.topAnchor.constraint(equalTo: redView.topAnchor,constant: 40),
@@ -156,7 +228,63 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
             bottomStackView.bottomAnchor.constraint(equalTo: redView.bottomAnchor,constant: -32),
             bottomStackView.leadingAnchor.constraint(equalTo: redView.leadingAnchor,constant: 48),
             bottomStackView.trailingAnchor.constraint(equalTo: redView.trailingAnchor,constant: -48),
-            bottomStackView.heightAnchor.constraint(equalToConstant: 40)
+            bottomStackView.heightAnchor.constraint(equalToConstant: 40),
+            
+            
+            nameLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            nameLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor,constant: 16),
+            
+            nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor,constant: 0),
+            nameTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            nameTextField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            nameTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            emailLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            emailLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor,constant: 16),
+            
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor),
+            emailTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            emailTextField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            emailTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            passwordLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor,constant: 16),
+            
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            passwordTextField.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            countryLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            countryLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 16),
+            
+            unitedStateLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            unitedStateLabel.topAnchor.constraint(equalTo: countryLabel.bottomAnchor,constant: 8),
+            
+            cityLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            cityLabel.topAnchor.constraint(equalTo: unitedStateLabel.bottomAnchor,constant: 16),
+            
+            cityTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            cityTextField.topAnchor.constraint(equalTo: cityLabel.bottomAnchor,constant: 4),
+            cityTextField.widthAnchor.constraint(equalToConstant: 240),
+            cityTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            stateLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            stateLabel.topAnchor.constraint(equalTo: cityTextField.bottomAnchor,constant: 16),
+            
+            stateTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            stateTextField.topAnchor.constraint(equalTo: stateLabel.bottomAnchor,constant: 4),
+            stateTextField.widthAnchor.constraint(equalToConstant: 240),
+            stateTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            zipcodeLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            zipcodeLabel.topAnchor.constraint(equalTo: stateTextField.bottomAnchor,constant: 16),
+            
+            zipcodeTextField.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            zipcodeTextField.topAnchor.constraint(equalTo: zipcodeLabel.bottomAnchor,constant: 4),
+            zipcodeTextField.widthAnchor.constraint(equalToConstant: 240),
+            zipcodeTextField.heightAnchor.constraint(equalToConstant: 40)
+            
         ])
        
         
