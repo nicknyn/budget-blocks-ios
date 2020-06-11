@@ -10,9 +10,10 @@ import UIKit
 
 class SecondOnboardingViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("Static \(UserController.userID)")
         let leftRecognizer = UISwipeGestureRecognizer(target: self, action:
             #selector(swipeMade(_:)))
         leftRecognizer.direction = .left

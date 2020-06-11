@@ -55,7 +55,7 @@ private enum CheckmarkState {
         SVProgressHUD.setBackgroundColor(.black)
         SVProgressHUD.setForegroundColor(.white)
     
-        
+        hideKeyboardWhenTappedAround()
         navigationController?.navigationBar.isHidden = true
         setUpEyeButtonForTextField()
     }
@@ -127,27 +127,24 @@ private enum CheckmarkState {
             }
               
             }) { (error) in
+                self.showAlert(title: "Wrong username of password", message: "")
                 print(error.localizedDescription)
                 print("Wrong password")
+                SVProgressHUD.dismiss()
             }
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "LoginSuccess" {
-            
-            if let destVC = segue.destination as? UITabBarController {
-                if let vc = destVC.viewControllers?.first as? UINavigationController {
-                    if let correctVC = vc.viewControllers.first as? DashboardTableViewController {
-                         correctVC.successStatus = self.successStatus
-                    }
+            if let destVC = segue.destination as? UINavigationController {
+                if let vc = destVC.viewControllers.first as? FirstOnboardingViewController {
+                    vc.successStatus = self.successStatus
                 }
             }
-           
         }
     }
     
     @IBAction func signUpTapped(_ sender: UIButton) {
         print("Sign up")
     }
-    
 }

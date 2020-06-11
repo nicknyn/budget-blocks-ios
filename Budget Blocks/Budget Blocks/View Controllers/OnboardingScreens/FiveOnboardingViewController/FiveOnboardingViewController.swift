@@ -7,13 +7,42 @@
 //
 
 import UIKit
+import CoreData
 
 class FiveOnboardingViewController: UIViewController {
 
-    @IBOutlet weak var tableView: UITableView!
+    private lazy var fetchedResultsController: NSFetchedResultsController<DataScienceTransaction> = {
+        let fetchRequest: NSFetchRequest<DataScienceTransaction> = DataScienceTransaction.fetchRequest()
+        
+        fetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "date", ascending: false),
+        ]
+        
+        
+        let context = CoreDataStack.shared.mainContext
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                             managedObjectContext: context,
+                                             sectionNameKeyPath: nil,
+                                             cacheName: nil)
+        frc.delegate = self
+        
+        do {
+            try frc.performFetch()
+            
+        } catch {
+            fatalError("Error fetching transactions: \(error)")
+        }
+        
+        return frc
+    }()
     
     
-    
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.delegate = self
+            tableView.dataSource = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +55,70 @@ class FiveOnboardingViewController: UIViewController {
     @IBAction func backTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
+}
+extension FiveOnboardingViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(fetchedResultsController.fetchedObjects?.count)
+        return fetchedResultsController.fetchedObjects?.count ?? 0
+    }
     
-  
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as! CustomCell
+        let transaction = fetchedResultsController.object(at: indexPath)
+        
+        cell.dateLabel.text = transaction.date
+        cell.nameLabel.text = transaction.name
+        cell.dollarLabel.text = String(transaction.amount) + "$"
+        cell.dollarLabel.textColor = transaction.amount > 0 ? .link : .red
+        cell.transactionImageView.image = transaction.amount > 0 ? UIImage(systemName: "shift") : UIImage(systemName: "chevron.down")
+        
+        
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+extension FiveOnboardingViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        let indexSet = IndexSet(integer: sectionIndex)
+        
+        switch type {
+            case .insert:
+                tableView.insertSections(indexSet, with: .automatic)
+            case .delete:
+                tableView.deleteSections(indexSet, with: .automatic)
+            default:
+                return
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+            case .insert:
+                guard let newIndexPath = newIndexPath else { return }
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            case .delete:
+                guard let indexPath = indexPath else { return }
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            case .move:
+                guard let indexPath    = indexPath,
+                    let newIndexPath = newIndexPath else { return }
+                tableView.moveRow(at: indexPath, to: newIndexPath)
+            case .update:
+                guard let indexPath = indexPath else { return }
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            @unknown default:
+                fatalError()
+        }
+    }
 }

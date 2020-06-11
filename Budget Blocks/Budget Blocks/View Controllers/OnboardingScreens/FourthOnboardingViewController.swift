@@ -14,6 +14,10 @@ class FourthOnboardingViewController: UIViewController, PLKPlaidLinkViewDelegate
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
         print("Hello")
         dismiss(animated: true, completion: nil)
+        NetworkingController.shared.sendPlaidPublicTokenToServerToGetAccessToken(publicToken: publicToken, userID: UserController.userID!) { (error) in
+            print(error?.localizedDescription)
+            // POST the database
+        }
         performSegue(withIdentifier: "LinkToDashboard", sender: self)
     }
     
@@ -26,8 +30,8 @@ class FourthOnboardingViewController: UIViewController, PLKPlaidLinkViewDelegate
         super.viewDidLoad()
         view.backgroundColor = .white
         
+   
     }
-    
 
     @IBAction func linkAccountTapped(_ sender: UIButton) {
                 guard let publicKey       = ProcessInfo.processInfo.environment["PLAID_PUBLIC_KEY"] else { return NSLog("No public key found!") }

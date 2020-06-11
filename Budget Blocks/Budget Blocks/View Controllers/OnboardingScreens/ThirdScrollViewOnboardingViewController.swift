@@ -123,6 +123,9 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @objc func nextButtonTapped() {
+        NetworkingController.shared.sendCensusToDataScience(location: [cityTextField.text!,stateTextField.text!], userId: UserController.userID!) { (error) in
+            print(error!)
+        }
         performSegue(withIdentifier: "3To4", sender: self)
     }
     
@@ -134,13 +137,13 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
     lazy var nameLabel = createLabel(text: "Name")
     lazy var nameTextField : UITextField = {
        let tf = createtextField(placeholder: "")
-        tf.text = "Dummy"
+        tf.text = UserController.shared.user.name
         return tf
     }()
     lazy var emailLabel = createLabel(text: "Email")
     lazy var emailTextField : UITextField = {
         let tf = createtextField(placeholder: "")
-        tf.text = "DummyEmail"
+        tf.text = UserController.shared.user.email
         return tf
     }()
     lazy var passwordLabel = createLabel(text: "Password")
@@ -153,18 +156,21 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
     lazy var unitedStateLabel = createLabel(text: "United States")
     
     lazy var cityLabel = createLabel(text: "City")
+    
     lazy var cityTextField: UITextField = {
        let tf = createtextField(placeholder: "Garland")
-        tf.tintColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
-        tf.backgroundColor = .red
+        tf.layer.borderWidth = 1.0
+        tf.layer.borderColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
         tf.layer.cornerRadius = 4
         return tf
     }()
     lazy var stateLabel = createLabel(text: "State")
     lazy var stateTextField : UITextField = {
        let tf = createtextField(placeholder: "TX")
-        tf.tintColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
+       
         tf.layer.cornerRadius = 4
+        tf.layer.borderWidth = 1.0
+        tf.layer.borderColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
         return tf
     }()
     lazy var zipcodeLabel = createLabel(text: "Zipcode")
@@ -172,6 +178,8 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
        let tf = createtextField(placeholder: "75041")
         tf.keyboardType = .numberPad
         tf.layer.cornerRadius = 4
+        tf.layer.borderWidth = 1.0
+        tf.layer.borderColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
         return tf
     }()
     

@@ -49,6 +49,8 @@
 		B61D0CBA2491912B00BADBFF /* SixOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */; };
 		B61D0CBC249197E800BADBFF /* SevenOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */; };
 		B61D0CBE249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */; };
+		B61D0CC02492CCEC00BADBFF /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBF2492CCEC00BADBFF /* UserController.swift */; };
+		B61D0CC22492CEC000BADBFF /* Census.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC12492CEC000BADBFF /* Census.swift */; };
 		B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6228847248022EA009FF6E5 /* UserRepresentation.swift */; };
 		B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884924802334009FF6E5 /* User+Convenience.swift */; };
 		B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884C2482D7D9009FF6E5 /* ChartViewController.swift */; };
@@ -61,7 +63,6 @@
 		B650C3DB248FF45000DED736 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DA248FF45000DED736 /* SignUpViewController.swift */; };
 		B650C3DD249013C400DED736 /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */; };
 		B650C3DF24901B7200DED736 /* SecondOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */; };
-		B650C3E224901D9400DED736 /* ThirdOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3E124901D9400DED736 /* ThirdOnboardingViewController.swift */; };
 		B653B5ED2485612A0005446C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EC2485612A0005446C /* Client.swift */; };
 		B653B5EF2485785D0005446C /* BankInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EE2485785D0005446C /* BankInfo.swift */; };
 		B653B5F1248590020005446C /* OnlineTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F0248590020005446C /* OnlineTransaction.swift */; };
@@ -158,6 +159,8 @@
 		B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOnboardingViewController.swift; sourceTree = "<group>"; };
 		B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenOnboardingViewController.swift; sourceTree = "<group>"; };
 		B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdScrollViewOnboardingViewController.swift; sourceTree = "<group>"; };
+		B61D0CBF2492CCEC00BADBFF /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		B61D0CC12492CEC000BADBFF /* Census.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Census.swift; sourceTree = "<group>"; };
 		B6228847248022EA009FF6E5 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
 		B622884924802334009FF6E5 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
 		B622884C2482D7D9009FF6E5 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -170,7 +173,6 @@
 		B650C3DA248FF45000DED736 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
 		B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewController.swift; sourceTree = "<group>"; };
-		B650C3E124901D9400DED736 /* ThirdOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboardingViewController.swift; sourceTree = "<group>"; };
 		B653B5EC2485612A0005446C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		B653B5EE2485785D0005446C /* BankInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInfo.swift; sourceTree = "<group>"; };
 		B653B5F0248590020005446C /* OnlineTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTransaction.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				B653B5EE2485785D0005446C /* BankInfo.swift */,
 				B653B5F0248590020005446C /* OnlineTransaction.swift */,
 				B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */,
+				B61D0CC12492CEC000BADBFF /* Census.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				5969C1F523E3904400BAA183 /* TransactionController.swift */,
+				B61D0CBF2492CCEC00BADBFF /* UserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -394,7 +398,6 @@
 				B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */,
 				B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */,
 				B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */,
-				B650C3E124901D9400DED736 /* ThirdOnboardingViewController.swift */,
 				B64B162D24904303000D9656 /* FourthOnboardingViewController.swift */,
 				B64B163324918A4B000D9656 /* FiveOnboardingViewController */,
 				B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */,
@@ -597,6 +600,7 @@
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
 				E3509F082448F92C0091592C /* Notifications.swift in Sources */,
 				B653B5F824885F5F0005446C /* NativeOnboardingViewController.swift in Sources */,
+				B61D0CC02492CCEC00BADBFF /* UserController.swift in Sources */,
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
 				B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */,
@@ -618,6 +622,7 @@
 				B650C3DD249013C400DED736 /* FirstOnboardingViewController.swift in Sources */,
 				B64B162E24904303000D9656 /* FourthOnboardingViewController.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
+				B61D0CC22492CEC000BADBFF /* Census.swift in Sources */,
 				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,
 				B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */,
 				B64B16302491878B000D9656 /* FiveOnboardingViewController.swift in Sources */,
@@ -630,7 +635,6 @@
 				B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */,
-				B650C3E224901D9400DED736 /* ThirdOnboardingViewController.swift in Sources */,
 				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
 				B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */,
 				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,

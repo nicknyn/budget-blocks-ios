@@ -275,6 +275,23 @@ class NetworkingController {
 //
     }
     
+    func sendCensusToDataScience(location:[String],userId: Int,completion: @escaping (Error?) -> Void) {
+        let endpoint = URL(string: "https://api.budgetblocks.org/census")!
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            let census = Census(location: location, userId: userId)
+            let jsonCensusData = try jsonEncoder.encode(census)
+            request.httpBody = jsonCensusData
+        } catch let err as NSError {
+            print(err.localizedDescription)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            print(response!)
+            print(String(data: data!, encoding: .utf8))
+        }.resume()
+    }
     
     
     func getTransactionsFromPlaid(of client: Client,completion: @escaping (Result<OnlineTransactions,NetworkError>) -> Void) {

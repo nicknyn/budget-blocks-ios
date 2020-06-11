@@ -11,10 +11,11 @@ import Foundation
 struct OnlineTransactions: Codable {
     let transactions : [OnlineTransaction]
     var userId : Int?
-    
+
     enum CodingKeys: String, CodingKey {
         case transactions
         case userId = "user_id"
+
     }
 }
 
