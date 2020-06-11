@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19F83c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CensusData" representedClassName="CensusData" syncable="YES" codeGenerationType="class">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="debt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="food" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="giving" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="housing" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="income" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="personal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="savings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="transfer" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="transportation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="DataScienceTransaction" representedClassName="DataScienceTransaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="category" optional="YES" attributeType="Transformable"/>
@@ -26,9 +38,10 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="DataScienceTransaction" positionX="36" positionY="63" width="128" height="133"/>
-        <element name="Transaction" positionX="142" positionY="29" width="128" height="118"/>
-        <element name="TransactionCategory" positionX="-63" positionY="9" width="128" height="103"/>
-        <element name="User" positionX="54" positionY="81" width="128" height="73"/>
+        <element name="DataScienceTransaction" positionX="-325.9765625" positionY="104.34375" width="128" height="133"/>
+        <element name="Transaction" positionX="174.5625" positionY="-139.46484375" width="128" height="118"/>
+        <element name="TransactionCategory" positionX="-104.4609375" positionY="-182.73046875" width="128" height="103"/>
+        <element name="User" positionX="-526.93359375" positionY="117.46875" width="128" height="73"/>
+        <element name="CensusData" positionX="-229.296875" positionY="352.02734375" width="128" height="193"/>
     </elements>
 </model>

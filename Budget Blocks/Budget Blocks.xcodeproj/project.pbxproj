@@ -28,7 +28,6 @@
 		5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A323DB59BA00A24A8F /* Assets.xcassets */; };
 		5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */; };
 		5955B8BD23DB59BB00A24A8F /* Budget_BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */; };
-		5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964123DFC1FD0062F794 /* WelcomeViewController.swift */; };
 		5967964423DFC8520062F794 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964323DFC8520062F794 /* LoginViewController.swift */; };
 		5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1ED23E239C000BAA183 /* Bearer.swift */; };
 		5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F023E38D3200BAA183 /* CoreDataStack.swift */; };
@@ -50,7 +49,9 @@
 		B61D0CBC249197E800BADBFF /* SevenOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */; };
 		B61D0CBE249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */; };
 		B61D0CC02492CCEC00BADBFF /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBF2492CCEC00BADBFF /* UserController.swift */; };
-		B61D0CC22492CEC000BADBFF /* Census.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC12492CEC000BADBFF /* Census.swift */; };
+		B61D0CC22492CEC000BADBFF /* CensusToPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC12492CEC000BADBFF /* CensusToPost.swift */; };
+		B61D0CC42492E03D00BADBFF /* CensusDataRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */; };
+		B61D0CC62492E0DE00BADBFF /* CensusData+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */; };
 		B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6228847248022EA009FF6E5 /* UserRepresentation.swift */; };
 		B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884924802334009FF6E5 /* User+Convenience.swift */; };
 		B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884C2482D7D9009FF6E5 /* ChartViewController.swift */; };
@@ -140,7 +141,6 @@
 		5955B8B823DB59BB00A24A8F /* Budget BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget BlocksUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BlocksUITests.swift; sourceTree = "<group>"; };
 		5955B8BE23DB59BB00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5967964123DFC1FD0062F794 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5967964323DFC8520062F794 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5969C1ED23E239C000BAA183 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		5969C1F023E38D3200BAA183 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -160,7 +160,9 @@
 		B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenOnboardingViewController.swift; sourceTree = "<group>"; };
 		B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdScrollViewOnboardingViewController.swift; sourceTree = "<group>"; };
 		B61D0CBF2492CCEC00BADBFF /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		B61D0CC12492CEC000BADBFF /* Census.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Census.swift; sourceTree = "<group>"; };
+		B61D0CC12492CEC000BADBFF /* CensusToPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CensusToPost.swift; sourceTree = "<group>"; };
+		B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CensusDataRepresentation.swift; sourceTree = "<group>"; };
+		B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CensusData+Convenience.swift"; sourceTree = "<group>"; };
 		B6228847248022EA009FF6E5 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
 		B622884924802334009FF6E5 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
 		B622884C2482D7D9009FF6E5 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -301,7 +303,6 @@
 		5967964023DFC1C70062F794 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5967964123DFC1FD0062F794 /* WelcomeViewController.swift */,
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
 				5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */,
 				593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */,
@@ -334,7 +335,9 @@
 				B653B5EE2485785D0005446C /* BankInfo.swift */,
 				B653B5F0248590020005446C /* OnlineTransaction.swift */,
 				B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */,
-				B61D0CC12492CEC000BADBFF /* Census.swift */,
+				B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */,
+				B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */,
+				B61D0CC12492CEC000BADBFF /* CensusToPost.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				B653B5F32486FBD70005446C /* DataScienceTransactionRepresentation.swift in Sources */,
 				B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */,
 				598B29FF23FF6D2A0038B698 /* UIViewController+Loading.swift in Sources */,
+				B61D0CC62492E0DE00BADBFF /* CensusData+Convenience.swift in Sources */,
 				59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
@@ -621,9 +625,9 @@
 				B64B163224918A46000D9656 /* CustomCell.swift in Sources */,
 				B650C3DD249013C400DED736 /* FirstOnboardingViewController.swift in Sources */,
 				B64B162E24904303000D9656 /* FourthOnboardingViewController.swift in Sources */,
+				B61D0CC42492E03D00BADBFF /* CensusDataRepresentation.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
-				B61D0CC22492CEC000BADBFF /* Census.swift in Sources */,
-				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,
+				B61D0CC22492CEC000BADBFF /* CensusToPost.swift in Sources */,
 				B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */,
 				B64B16302491878B000D9656 /* FiveOnboardingViewController.swift in Sources */,
 				5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */,

@@ -34,12 +34,12 @@ struct DataScienceTransactionRepresentation : Codable {
 extension DataScienceTransaction {
     
     var dataScienceTransactionRepresentation : DataScienceTransactionRepresentation {
-        guard let location = location as? Location else { fatalError()}
+        guard let location = location as? Location else { preconditionFailure("No data")}
         guard let date     = date,
             let name     = name,
             let category = category as? [String],
             let transactionID = transactionID
-            else { fatalError() }
+            else { preconditionFailure("No data") }
         return DataScienceTransactionRepresentation(amount: amount,
                                                     location: location,
                                                     date: date,

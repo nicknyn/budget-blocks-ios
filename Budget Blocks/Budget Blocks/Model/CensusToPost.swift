@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Census: Codable {
+struct CensusToPost: Codable {
     let location: [String]
     let userId: Int
     

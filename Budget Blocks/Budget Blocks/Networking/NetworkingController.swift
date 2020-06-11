@@ -281,7 +281,7 @@ class NetworkingController {
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-            let census = Census(location: location, userId: userId)
+            let census = CensusToPost(location: location, userId: userId)
             let jsonCensusData = try jsonEncoder.encode(census)
             request.httpBody = jsonCensusData
         } catch let err as NSError {

@@ -461,50 +461,50 @@ import SVProgressHUD
     
     // MARK: - Navigation
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let welcomeVC = segue.destination as? WelcomeViewController {
-            welcomeVC.networkingController = networkingController
-            welcomeVC.delegate = self
-        } else if let transactionsVC = segue.destination as? TransactionsViewController {
-            transactionsVC.networkingController = networkingController
-            transactionsVC.transactionController = transactionController
-            
-            if let indexPath = tableView.indexPathForSelectedRow,
-                adjustedSection(index: indexPath.section) == 2 {
-                let index = indexPath.row - (categoriesWithBudget.count == 0).int
-                transactionsVC.category = categoriesFRC.fetchedObjects?[index]
-            }
-        } else if let navigationVC = segue.destination as? UINavigationController {
-            if let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
-                blocksVC.transactionController = transactionController
-                blocksVC.budgets = categoriesWithBudget.map({ ($0, $0.budget) })
-                
-                if let indexPath = tableView.indexPathForSelectedRow {
-                    let index = indexPath.row - (categoriesWithBudget.count == 0).int
-                    if index >= 0,
-                        let selectedCategory = categoriesFRC.fetchedObjects?[index],
-                        selectedCategory.budget == 0 {
-                        blocksVC.budgets.append((selectedCategory, 0))
-                    }
-                }
-            } else if let onboardingVC = navigationVC.viewControllers.first as? OnboardingViewController {
-                onboardingVC.transactionController = transactionController
-                onboardingVC.networkingController = networkingController
-                onboardingVC.delegate = self
-            } else if let createTransactionVC = navigationVC.viewControllers.first as? CreateTransactionViewController {
-                createTransactionVC.transactionController = transactionController
-                
-                if let indexPath = tableView.indexPathForSelectedRow,
-                    indexPath.row == 2 {
-                    createTransactionVC.income = true
-                }
-            }
-        }
-        
-        if let customVC = segue.destination as? CustomCategoriesTableViewController {
-            customVC.transactionController = transactionController
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let welcomeVC = segue.destination as? WelcomeViewController {
+//            welcomeVC.networkingController = networkingController
+//            welcomeVC.delegate = self
+//        } else if let transactionsVC = segue.destination as? TransactionsViewController {
+//            transactionsVC.networkingController = networkingController
+//            transactionsVC.transactionController = transactionController
+//
+//            if let indexPath = tableView.indexPathForSelectedRow,
+//                adjustedSection(index: indexPath.section) == 2 {
+//                let index = indexPath.row - (categoriesWithBudget.count == 0).int
+//                transactionsVC.category = categoriesFRC.fetchedObjects?[index]
+//            }
+//        } else if let navigationVC = segue.destination as? UINavigationController {
+//            if let blocksVC = navigationVC.viewControllers.first as? BlocksViewController {
+//                blocksVC.transactionController = transactionController
+//                blocksVC.budgets = categoriesWithBudget.map({ ($0, $0.budget) })
+//
+//                if let indexPath = tableView.indexPathForSelectedRow {
+//                    let index = indexPath.row - (categoriesWithBudget.count == 0).int
+//                    if index >= 0,
+//                        let selectedCategory = categoriesFRC.fetchedObjects?[index],
+//                        selectedCategory.budget == 0 {
+//                        blocksVC.budgets.append((selectedCategory, 0))
+//                    }
+//                }
+//            } else if let onboardingVC = navigationVC.viewControllers.first as? OnboardingViewController {
+//                onboardingVC.transactionController = transactionController
+//                onboardingVC.networkingController = networkingController
+//                onboardingVC.delegate = self
+//            } else if let createTransactionVC = navigationVC.viewControllers.first as? CreateTransactionViewController {
+//                createTransactionVC.transactionController = transactionController
+//
+//                if let indexPath = tableView.indexPathForSelectedRow,
+//                    indexPath.row == 2 {
+//                    createTransactionVC.income = true
+//                }
+//            }
+//        }
+//
+//        if let customVC = segue.destination as? CustomCategoriesTableViewController {
+//            customVC.transactionController = transactionController
+//        }
+//    }
     
 }
 
