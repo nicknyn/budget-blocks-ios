@@ -33,8 +33,6 @@ class SecondOnboardingViewController: UIViewController {
         print("skipping")
     }
     
-
-   
     @IBAction func backButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }

@@ -8,33 +8,15 @@
 
 import UIKit
 
-extension UIViewController {
-    func createLabel(text: String) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }
-    func createButton(title: String) -> UIButton {
-        let button = UIButton(type: .system)
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle(title, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        return button
-    }
-    func createtextField(placeholder: String) -> UITextField {
-        let textField = UITextField()
-        textField.placeholder = placeholder
-        
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }
+enum EditState {
+    case edit
+    case save
 }
 
 class ThirdScrollViewOnboardingViewController: UIViewController {
 
+    private var editState = EditState.edit
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -52,7 +34,7 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         return view
     }()
     
-    private let redView: UIView = {
+    private let containerView: UIView = {
         let view = UIView()
         view.heightAnchor.constraint(equalToConstant: 920).isActive = true
         view.backgroundColor = .white
@@ -78,18 +60,40 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
     }()
     @objc func editTapped() {
         print("edit")
+        switch editState {
+            case .edit:
+                editState = .save
+                editButton.setTitle("Save", for: .normal)
+                nameTextField.isUserInteractionEnabled = true
+                emailTextField.isUserInteractionEnabled = true
+                passwordTextField.isUserInteractionEnabled = true
+                nameTextField.becomeFirstResponder()
+            case .save:
+            print("POST TO save password")
+            editState = .edit
+            editButton.setTitle("Edit", for: .normal)
+            nameTextField.isUserInteractionEnabled = false
+            emailTextField.isUserInteractionEnabled = false
+            passwordTextField.isUserInteractionEnabled = false
+        }
     }
     
-    private lazy var stackView: UIStackView = {
-        let lb = createLabel(text: "Account information")
+    lazy var editButton: UIButton = {
         let button = createButton(title: "Edit")
-  
+        
         button.contentHorizontalAlignment = .leading
         
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.setTitleColor(#colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1), for: .normal)
+        
         button.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
-       let stackView = UIStackView(arrangedSubviews: [lb,button])
+        return button
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let lb = createLabel(text: "Account information")
+       
+       let stackView = UIStackView(arrangedSubviews: [lb,editButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
@@ -116,9 +120,6 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         return stackView
     }()
     
-    
-    
-    
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -129,7 +130,6 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         performSegue(withIdentifier: "3To4", sender: self)
     }
     
-    
     @objc func skipTapped() {
         print("skipping")
     }
@@ -138,18 +138,21 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
     lazy var nameTextField : UITextField = {
        let tf = createtextField(placeholder: "")
         tf.text = UserController.shared.user.name
+        tf.isUserInteractionEnabled = false
         return tf
     }()
     lazy var emailLabel = createLabel(text: "Email")
     lazy var emailTextField : UITextField = {
         let tf = createtextField(placeholder: "")
         tf.text = UserController.shared.user.email
+         tf.isUserInteractionEnabled = false
         return tf
     }()
     lazy var passwordLabel = createLabel(text: "Password")
     lazy var passwordTextField : UITextField = {
         let tf = createtextField(placeholder: "")
         tf.text = "**********"
+         tf.isUserInteractionEnabled = false
         return tf
     }()
     lazy var countryLabel = createLabel(text: "Country")
@@ -193,24 +196,24 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         
         scrollView.addSubview(scrollViewContainer)
         
-        redView.addSubview(profileLabel)
-        redView.addSubview(introduceLabel)
-        redView.addSubview(stackView)
-        redView.addSubview(bottomStackView)
-        redView.addSubview(nameLabel)
-        redView.addSubview(nameTextField)
-        redView.addSubview(emailLabel)
-        redView.addSubview(emailTextField)
-        redView.addSubview(passwordLabel)
-        redView.addSubview(passwordTextField)
-        redView.addSubview(countryLabel)
-        redView.addSubview(unitedStateLabel)
-        redView.addSubview(cityLabel)
-        redView.addSubview(cityTextField)
-        redView.addSubview(stateLabel)
-        redView.addSubview(stateTextField)
-        redView.addSubview(zipcodeLabel)
-        redView.addSubview(zipcodeTextField)
+        containerView.addSubview(profileLabel)
+        containerView.addSubview(introduceLabel)
+        containerView.addSubview(stackView)
+        containerView.addSubview(bottomStackView)
+        containerView.addSubview(nameLabel)
+        containerView.addSubview(nameTextField)
+        containerView.addSubview(emailLabel)
+        containerView.addSubview(emailTextField)
+        containerView.addSubview(passwordLabel)
+        containerView.addSubview(passwordTextField)
+        containerView.addSubview(countryLabel)
+        containerView.addSubview(unitedStateLabel)
+        containerView.addSubview(cityLabel)
+        containerView.addSubview(cityTextField)
+        containerView.addSubview(stateLabel)
+        containerView.addSubview(stateTextField)
+        containerView.addSubview(zipcodeLabel)
+        containerView.addSubview(zipcodeTextField)
         
         
         
@@ -219,9 +222,9 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         unitedStateLabel.font = UIFont.systemFont(ofSize: 16)
         
         NSLayoutConstraint.activate([
-            profileLabel.topAnchor.constraint(equalTo: redView.topAnchor,constant: 40),
-            profileLabel.leadingAnchor.constraint(equalTo: redView.leadingAnchor,constant: 32),
-            profileLabel.trailingAnchor.constraint(equalTo: redView.trailingAnchor,constant: -32),
+            profileLabel.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 40),
+            profileLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor,constant: 32),
+            profileLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,constant: -32),
             
             introduceLabel.heightAnchor.constraint(equalToConstant: 100),
             introduceLabel.leadingAnchor.constraint(equalTo: profileLabel.leadingAnchor),
@@ -233,9 +236,9 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: profileLabel.trailingAnchor),
             
             
-            bottomStackView.bottomAnchor.constraint(equalTo: redView.bottomAnchor,constant: -32),
-            bottomStackView.leadingAnchor.constraint(equalTo: redView.leadingAnchor,constant: 48),
-            bottomStackView.trailingAnchor.constraint(equalTo: redView.trailingAnchor,constant: -48),
+            bottomStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,constant: -32),
+            bottomStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor,constant: 48),
+            bottomStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,constant: -48),
             bottomStackView.heightAnchor.constraint(equalToConstant: 40),
             
             
@@ -297,7 +300,7 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
        
         
         
-        scrollViewContainer.addArrangedSubview(redView)
+        scrollViewContainer.addArrangedSubview(containerView)
 
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true

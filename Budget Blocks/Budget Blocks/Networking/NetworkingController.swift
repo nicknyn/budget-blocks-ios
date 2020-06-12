@@ -46,7 +46,7 @@ class NetworkingController {
     private let keychain = KeychainSwift()
     private let jsonEncoder = JSONEncoder()
     private let jsonDecoder = JSONDecoder()
-    
+     var census: CensusData?
     var bearer: Bearer?
     
     static let dateFormatter: DateFormatter = {
@@ -288,8 +288,18 @@ class NetworkingController {
             print(err.localizedDescription)
         }
         URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            guard let data = data else { return }
             print(response!)
-            print(String(data: data!, encoding: .utf8))
+            do {
+                let jsonCensus = try self.jsonDecoder.decode(CensusDataRepresentation.self, from: data)
+                self.census = CensusData(censusRepresentation: jsonCensus, context: CoreDataStack.shared.mainContext)
+                
+            } catch {
+                print(error.localizedDescription)
+            }
         }.resume()
     }
     

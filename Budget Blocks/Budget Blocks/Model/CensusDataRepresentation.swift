@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CensusDataRepresentation {
+struct CensusDataRepresentation : Codable {
     let city: String
     let personal: Double
     let food: Double

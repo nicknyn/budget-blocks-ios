@@ -23,8 +23,8 @@ class FirstOnboardingViewController: UIViewController {
         _ = UserController.shared.createUser(with: [(successStatus?.model.embedded?.user?.profile?.firstName)!,  (successStatus?.model.embedded?.user?.profile?.lastName)!].joined(separator: " "), email: (successStatus?.model.embedded?.user?.profile?.login)!)
         
         guard let oidcClient = self.createOidcClient() else { return }
-        oidcClient.authenticate(withSessionToken: (successStatus?.model.sessionToken!)!) { [weak self] (stateManager, error) in
-            guard let self = self else { return }
+        oidcClient.authenticate(withSessionToken: (successStatus?.model.sessionToken!)!) {  (stateManager, error) in
+           
             print("Access token is \(stateManager?.accessToken!)")
             NetworkingController.shared.registerUserToDatabase(user: UserController.shared.user.userRepresentation!, accessToken: (stateManager!.accessToken!)) { (user, error) in
                 if let error = error {
@@ -49,7 +49,7 @@ class FirstOnboardingViewController: UIViewController {
         self.view.addGestureRecognizer(rightRecognizer)
         
        
-//        navigationController?.navigationBar.isHidden = true
+
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.layoutIfNeeded()
@@ -73,8 +73,7 @@ class FirstOnboardingViewController: UIViewController {
             
         }
     }
-    
-    
+        
     func createOidcClient() -> OktaOidc? {
         var oidcClient: OktaOidc?
         if let config = self.readTestConfig() {
@@ -85,7 +84,6 @@ class FirstOnboardingViewController: UIViewController {
         
         return oidcClient
     }
-    
 }
 private extension FirstOnboardingViewController {
     func readTestConfig() -> OktaOidcConfig? {
@@ -94,10 +92,8 @@ private extension FirstOnboardingViewController {
                 return nil
                 
         }
-        
         return try? OktaOidcConfig(with: testConfig)
     }
-    
     var configForUITests: [String: String]? {
         let env = ProcessInfo.processInfo.environment
         guard let oktaURL = env["OKTA_URL"],

@@ -41,6 +41,7 @@ class FiveOnboardingViewController: UIViewController {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
+            tableView.tableFooterView = UIView()
         }
     }
     
@@ -58,7 +59,7 @@ class FiveOnboardingViewController: UIViewController {
 }
 extension FiveOnboardingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(fetchedResultsController.fetchedObjects?.count)
+      
         return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     

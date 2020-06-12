@@ -97,7 +97,7 @@ class TransactionsViewController: UIViewController {
 
 extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(fetchedResultsController.fetchedObjects?.count)
+        
         return fetchedResultsController.fetchedObjects?.count ?? 0
 
       

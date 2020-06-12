@@ -10,7 +10,28 @@ import UIKit
 import LinkKit
 import LinkPresentation
 
-class FourthOnboardingViewController: UIViewController, PLKPlaidLinkViewDelegate {
+class FourthOnboardingViewController: UIViewController {
+  
+    
+    //MARK:- View Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+    }
+
+    //MARK:- Actions
+    
+    @IBAction func linkAccountTapped(_ sender: UIButton) {
+        guard let publicKey       = ProcessInfo.processInfo.environment["PLAID_PUBLIC_KEY"] else { return NSLog("No public key found!") }
+        let linkConfiguration     = PLKConfiguration(key: publicKey, env: .sandbox, product: [.auth, .transactions, .identity])
+        linkConfiguration.webhook = URL(string: "https://lambda-budget-blocks.herokuapp.com/plaid/webhook")!
+        let linkViewController    = PLKPlaidLinkViewController(configuration: linkConfiguration, delegate: self)
+        present(linkViewController, animated: true)
+    }
+}
+
+extension FourthOnboardingViewController: PLKPlaidLinkViewDelegate {
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didSucceedWithPublicToken publicToken: String, metadata: [String : Any]?) {
         print("Hello")
         dismiss(animated: true, completion: nil)
@@ -23,22 +44,6 @@ class FourthOnboardingViewController: UIViewController, PLKPlaidLinkViewDelegate
     
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didExitWithError error: Error?, metadata: [String : Any]?) {
         
-    }
-    
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-   
-    }
-
-    @IBAction func linkAccountTapped(_ sender: UIButton) {
-                guard let publicKey       = ProcessInfo.processInfo.environment["PLAID_PUBLIC_KEY"] else { return NSLog("No public key found!") }
-                let linkConfiguration     = PLKConfiguration(key: publicKey, env: .sandbox, product: [.auth, .transactions, .identity])
-                linkConfiguration.webhook = URL(string: "https://lambda-budget-blocks.herokuapp.com/plaid/webhook")!
-                let linkViewController    = PLKPlaidLinkViewController(configuration: linkConfiguration, delegate: self)
-                present(linkViewController, animated: true)
     }
     
 }

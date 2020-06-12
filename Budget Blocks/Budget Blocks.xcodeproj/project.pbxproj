@@ -52,6 +52,9 @@
 		B61D0CC22492CEC000BADBFF /* CensusToPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC12492CEC000BADBFF /* CensusToPost.swift */; };
 		B61D0CC42492E03D00BADBFF /* CensusDataRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */; };
 		B61D0CC62492E0DE00BADBFF /* CensusData+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */; };
+		B61D0CC82492E4EA00BADBFF /* EmbeddedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC72492E4EA00BADBFF /* EmbeddedViewController.swift */; };
+		B61D0CCB2493C75300BADBFF /* EighthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CCA2493C75300BADBFF /* EighthOnboardingViewController.swift */; };
+		B61D0CCD2493C84A00BADBFF /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CCC2493C84A00BADBFF /* OptionCell.swift */; };
 		B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6228847248022EA009FF6E5 /* UserRepresentation.swift */; };
 		B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884924802334009FF6E5 /* User+Convenience.swift */; };
 		B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884C2482D7D9009FF6E5 /* ChartViewController.swift */; };
@@ -163,6 +166,9 @@
 		B61D0CC12492CEC000BADBFF /* CensusToPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CensusToPost.swift; sourceTree = "<group>"; };
 		B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CensusDataRepresentation.swift; sourceTree = "<group>"; };
 		B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CensusData+Convenience.swift"; sourceTree = "<group>"; };
+		B61D0CC72492E4EA00BADBFF /* EmbeddedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedViewController.swift; sourceTree = "<group>"; };
+		B61D0CCA2493C75300BADBFF /* EighthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EighthOnboardingViewController.swift; sourceTree = "<group>"; };
+		B61D0CCC2493C84A00BADBFF /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		B6228847248022EA009FF6E5 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
 		B622884924802334009FF6E5 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
 		B622884C2482D7D9009FF6E5 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
@@ -386,6 +392,24 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		B61D0CC92493C73100BADBFF /* SixOnboardingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */,
+				B61D0CC72492E4EA00BADBFF /* EmbeddedViewController.swift */,
+			);
+			path = SixOnboardingViewController;
+			sourceTree = "<group>";
+		};
+		B61D0CCE2493C84F00BADBFF /* EighthOnboardingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B61D0CCA2493C75300BADBFF /* EighthOnboardingViewController.swift */,
+				B61D0CCC2493C84A00BADBFF /* OptionCell.swift */,
+			);
+			path = EighthOnboardingViewController;
+			sourceTree = "<group>";
+		};
 		B64B163324918A4B000D9656 /* FiveOnboardingViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,8 +427,9 @@
 				B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */,
 				B64B162D24904303000D9656 /* FourthOnboardingViewController.swift */,
 				B64B163324918A4B000D9656 /* FiveOnboardingViewController */,
-				B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */,
+				B61D0CC92493C73100BADBFF /* SixOnboardingViewController */,
 				B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */,
+				B61D0CCE2493C84F00BADBFF /* EighthOnboardingViewController */,
 			);
 			path = OnboardingScreens;
 			sourceTree = "<group>";
@@ -605,7 +630,9 @@
 				B653B5F824885F5F0005446C /* NativeOnboardingViewController.swift in Sources */,
 				B61D0CC02492CCEC00BADBFF /* UserController.swift in Sources */,
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
+				B61D0CC82492E4EA00BADBFF /* EmbeddedViewController.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
+				B61D0CCB2493C75300BADBFF /* EighthOnboardingViewController.swift in Sources */,
 				B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */,
 				B653B5ED2485612A0005446C /* Client.swift in Sources */,
 				B61D0CBA2491912B00BADBFF /* SixOnboardingViewController.swift in Sources */,
@@ -639,6 +666,7 @@
 				B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */,
+				B61D0CCD2493C84A00BADBFF /* OptionCell.swift in Sources */,
 				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
 				B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */,
 				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
