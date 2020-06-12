@@ -11,9 +11,7 @@ import UIKit
 class EmbeddedViewController: UIViewController {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
     @IBOutlet weak var containerView: UIView!
-    
     @IBOutlet weak var incomeAmounLabel: UILabel! {
         didSet {
             incomeAmounLabel.text = String(NetworkingController.shared.census!.income.rounded()) + "$"
@@ -48,10 +46,7 @@ class EmbeddedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.normal)
         
     }
-    
-
-   
 }

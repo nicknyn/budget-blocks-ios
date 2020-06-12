@@ -17,7 +17,6 @@ class ProfileTableViewController : UITableViewController {
         didSet {
              nameLabel.text = DashboardTableViewController.user.name
         }
-       
     }
     @IBOutlet weak var emailLabel: UILabel! {
         didSet {

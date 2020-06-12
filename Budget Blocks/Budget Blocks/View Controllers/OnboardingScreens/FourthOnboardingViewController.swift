@@ -18,6 +18,7 @@ class FourthOnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+       
     }
 
     //MARK:- Actions
@@ -45,5 +46,4 @@ extension FourthOnboardingViewController: PLKPlaidLinkViewDelegate {
     func linkViewController(_ linkViewController: PLKPlaidLinkViewController, didExitWithError error: Error?, metadata: [String : Any]?) {
         
     }
-    
 }

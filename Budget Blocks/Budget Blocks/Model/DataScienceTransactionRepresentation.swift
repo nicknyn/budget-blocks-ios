@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 struct DataScienceTransactionRepresentations : Codable {
     let transactions : [DataScienceTransactionRepresentation]
 }

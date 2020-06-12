@@ -21,6 +21,5 @@ struct Client: Codable {
         case accessToken = "access_token"
         case startDate   = "start_date"
         case endDate     = "end_date"
-    }
-    // Ready for PLAID 
+    } // Ready for PLAID 
 }

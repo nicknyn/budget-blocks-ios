@@ -21,7 +21,7 @@ class SevenOnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.hidesBackButton = true 
         actualAmountLabel.text = String(amount!) + "$"
     }
     

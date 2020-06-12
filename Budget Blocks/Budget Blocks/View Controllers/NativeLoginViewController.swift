@@ -86,9 +86,6 @@ private enum CheckmarkState {
     }
     
     //MARK:- Actions
-    
-  
-    
     @IBAction func checkMarkTapped(_ sender: UIButton) {
         
         switch state {
@@ -107,8 +104,6 @@ private enum CheckmarkState {
         print("Forgot password")
         
     }
-    
-    
     
     @IBAction func signInTapped(_ sender: UIButton) {
         print("Sign in")

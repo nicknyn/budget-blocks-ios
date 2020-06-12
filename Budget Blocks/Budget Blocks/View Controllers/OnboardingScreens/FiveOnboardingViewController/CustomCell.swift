@@ -28,9 +28,4 @@ class CustomCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
     }
-    
-    
-    
-    
-
 }

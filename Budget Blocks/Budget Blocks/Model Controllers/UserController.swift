@@ -23,5 +23,4 @@ class UserController {
         try? CoreDataStack.shared.mainContext.save()
         return user
     }
-    
 }

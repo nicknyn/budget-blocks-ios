@@ -9,8 +9,6 @@
 import Foundation
 import CoreData
 
-
-
 extension CensusData {
     var censusDataRepresentation: CensusDataRepresentation {
         guard let city = city else { fatalError() }

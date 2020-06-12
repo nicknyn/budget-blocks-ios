@@ -10,7 +10,6 @@ import UIKit
 
 class SecondOnboardingViewController: UIViewController {
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Static \(UserController.userID)")

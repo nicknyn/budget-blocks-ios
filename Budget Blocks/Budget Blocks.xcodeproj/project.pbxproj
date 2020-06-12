@@ -61,6 +61,7 @@
 		B62288502482DAF2009FF6E5 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B622884F2482DAF2009FF6E5 /* Charts */; };
 		B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */; };
 		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
+		B6458E422493DBA800791EA0 /* NinethOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6458E412493DBA800791EA0 /* NinethOnboardingViewController.swift */; };
 		B64B162E24904303000D9656 /* FourthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B162D24904303000D9656 /* FourthOnboardingViewController.swift */; };
 		B64B16302491878B000D9656 /* FiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B162F2491878B000D9656 /* FiveOnboardingViewController.swift */; };
 		B64B163224918A46000D9656 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B163124918A46000D9656 /* CustomCell.swift */; };
@@ -72,7 +73,6 @@
 		B653B5F1248590020005446C /* OnlineTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F0248590020005446C /* OnlineTransaction.swift */; };
 		B653B5F32486FBD70005446C /* DataScienceTransactionRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */; };
 		B653B5F5248849130005446C /* NativeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F4248849120005446C /* NativeLoginViewController.swift */; };
-		B653B5F824885F5F0005446C /* NativeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F724885F5F0005446C /* NativeOnboardingViewController.swift */; };
 		B653B603248875AE0005446C /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B653B602248875AE0005446C /* SVProgressHUD */; };
 		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
 		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -175,6 +175,7 @@
 		B622884E2482DADB009FF6E5 /* Charts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Charts; path = ../Carthage/Checkouts/Charts; sourceTree = "<group>"; };
 		B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		B6458E412493DBA800791EA0 /* NinethOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NinethOnboardingViewController.swift; sourceTree = "<group>"; };
 		B64B162D24904303000D9656 /* FourthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthOnboardingViewController.swift; sourceTree = "<group>"; };
 		B64B162F2491878B000D9656 /* FiveOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveOnboardingViewController.swift; sourceTree = "<group>"; };
 		B64B163124918A46000D9656 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -186,7 +187,6 @@
 		B653B5F0248590020005446C /* OnlineTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTransaction.swift; sourceTree = "<group>"; };
 		B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScienceTransactionRepresentation.swift; sourceTree = "<group>"; };
 		B653B5F4248849120005446C /* NativeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLoginViewController.swift; sourceTree = "<group>"; };
-		B653B5F724885F5F0005446C /* NativeOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeOnboardingViewController.swift; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
 		B678948524762D0B00A47332 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
@@ -322,7 +322,6 @@
 				B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */,
 				B622884C2482D7D9009FF6E5 /* ChartViewController.swift */,
 				B653B5F4248849120005446C /* NativeLoginViewController.swift */,
-				B653B5F724885F5F0005446C /* NativeOnboardingViewController.swift */,
 				B650C3DA248FF45000DED736 /* SignUpViewController.swift */,
 				B650C3E024901B7900DED736 /* OnboardingScreens */,
 			);
@@ -430,6 +429,7 @@
 				B61D0CC92493C73100BADBFF /* SixOnboardingViewController */,
 				B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */,
 				B61D0CCE2493C84F00BADBFF /* EighthOnboardingViewController */,
+				B6458E412493DBA800791EA0 /* NinethOnboardingViewController.swift */,
 			);
 			path = OnboardingScreens;
 			sourceTree = "<group>";
@@ -627,7 +627,6 @@
 				590B3A5123FC554F0058D236 /* TransactionTableViewCell.swift in Sources */,
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
 				E3509F082448F92C0091592C /* Notifications.swift in Sources */,
-				B653B5F824885F5F0005446C /* NativeOnboardingViewController.swift in Sources */,
 				B61D0CC02492CCEC00BADBFF /* UserController.swift in Sources */,
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
 				B61D0CC82492E4EA00BADBFF /* EmbeddedViewController.swift in Sources */,
@@ -678,6 +677,7 @@
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 				B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */,
 				B653B5EF2485785D0005446C /* BankInfo.swift in Sources */,
+				B6458E422493DBA800791EA0 /* NinethOnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

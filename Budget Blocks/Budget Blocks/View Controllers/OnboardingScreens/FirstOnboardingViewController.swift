@@ -34,9 +34,6 @@ class FirstOnboardingViewController: UIViewController {
             }
         }
         
-        
-        
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "skip", style: .plain, target: self, action: #selector(skipTapped))
         let leftRecognizer = UISwipeGestureRecognizer(target: self, action:
             #selector(swipeMade(_:)))

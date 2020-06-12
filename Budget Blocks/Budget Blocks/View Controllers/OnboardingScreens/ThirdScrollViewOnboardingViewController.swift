@@ -16,7 +16,7 @@ enum EditState {
 class ThirdScrollViewOnboardingViewController: UIViewController {
 
     private var editState = EditState.edit
-    
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         
@@ -186,14 +186,14 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         return tf
     }()
     
-    
     //MARK:- Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "skip", style: .plain, target: self, action: #selector(skipTapped))
         view.addSubview(scrollView)
-        
+        navigationItem.hidesBackButton = true 
         scrollView.addSubview(scrollViewContainer)
         
         containerView.addSubview(profileLabel)
@@ -314,5 +314,4 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         // this is important for scrolling
         scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
-
 }

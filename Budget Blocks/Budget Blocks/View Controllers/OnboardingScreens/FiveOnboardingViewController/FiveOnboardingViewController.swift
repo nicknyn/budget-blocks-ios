@@ -37,13 +37,9 @@ class FiveOnboardingViewController: UIViewController {
     }()
     
     
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.tableFooterView = UIView()
-        }
-    }
+    @IBOutlet weak var tableView: UITableView!
+      
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +66,7 @@ extension FiveOnboardingViewController: UITableViewDelegate, UITableViewDataSour
         cell.dateLabel.text = transaction.date
         cell.nameLabel.text = transaction.name
         cell.dollarLabel.text = String(transaction.amount) + "$"
-        cell.dollarLabel.textColor = transaction.amount > 0 ? .link : .red
+        cell.dollarLabel.textColor = transaction.amount > 0 ? #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1) : .red
         cell.transactionImageView.image = transaction.amount > 0 ? UIImage(systemName: "shift") : UIImage(systemName: "chevron.down")
         
         
@@ -79,7 +75,6 @@ extension FiveOnboardingViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
 extension FiveOnboardingViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

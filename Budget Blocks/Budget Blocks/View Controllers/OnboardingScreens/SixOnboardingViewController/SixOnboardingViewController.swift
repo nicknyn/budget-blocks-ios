@@ -16,17 +16,13 @@ class SixOnboardingViewController: UIViewController {
     var embedd :EmbeddedViewController {
         return self.children.last as! EmbeddedViewController
     }
-        
-      
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationItem.hidesBackButton = true 
        
     }
-    
-    
-    
+  
     @IBAction func backTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }

@@ -13,31 +13,21 @@ class EighthOnboardingViewController: UIViewController {
     private var minimumSpacing: CGFloat = 5
     @IBOutlet weak var mainCollectionView: UICollectionView!
 
-    
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
         mainCollectionView.register(OptionCell.self, forCellWithReuseIdentifier: "OptionCell")
-          mainCollectionView.delegate = self
+        mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
     }
-    
 
-    
     @IBAction func backTapped(_ sender: UIButton) {
-        
+        navigationController?.popViewController(animated: true)
     }
-    
-    
-    
     
     @IBAction func nextTapped(_ sender: UIButton) {
         
     }
-    
-
 }
 extension EighthOnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -51,7 +41,6 @@ extension EighthOnboardingViewController: UICollectionViewDelegate, UICollection
         cell.categoryLabel.text = "DUMMY"
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
         var totalUsableWidth = collectionView.frame.width
@@ -67,7 +56,6 @@ extension EighthOnboardingViewController: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5
