@@ -49,7 +49,6 @@ class LoginViewController: UIViewController {
     // MARK:- Properties-
     
     var networkingController: NetworkingController!
-    var userController : UserController!
     var delegate: LoginViewControllerDelegate?
     var loadingGroup = DispatchGroup()
     var signIn: Bool = true

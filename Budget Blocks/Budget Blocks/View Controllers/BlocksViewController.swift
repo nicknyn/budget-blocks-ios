@@ -300,5 +300,4 @@ extension BlocksViewController: NSFetchedResultsControllerDelegate {
             fatalError()
         }
     }
-    
 }

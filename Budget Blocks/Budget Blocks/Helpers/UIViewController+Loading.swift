@@ -67,3 +67,27 @@ extension UINavigationController {
     }
     
 }
+extension UIViewController {
+    func createLabel(text: String) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }
+    func createButton(title: String) -> UIButton {
+        let button = UIButton(type: .system)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        return button
+    }
+    func createtextField(placeholder: String) -> UITextField {
+        let textField = UITextField()
+        textField.placeholder = placeholder
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }
+}

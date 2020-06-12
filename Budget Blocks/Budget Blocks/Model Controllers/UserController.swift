@@ -2,18 +2,25 @@
 //  UserController.swift
 //  Budget Blocks
 //
-//  Created by Nick Nguyen on 5/18/20.
+//  Created by Nick Nguyen on 6/11/20.
 //  Copyright © 2020 Isaac Lyons. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
+
 class UserController {
-    func createUser(into context: NSManagedObjectContext,name: String, email: String) {
-        let user = User(context: context)
+    
+    static let shared = UserController()
+    
+    let user = User(context: CoreDataStack.shared.mainContext)
+    static var userID: Int?
+    
+    func createUser(with name: String, email: String) -> User {
         user.name = name
         user.email = email
-        CoreDataStack.shared.save(context: context)
+        try? CoreDataStack.shared.mainContext.save()
+        return user
     }
 }

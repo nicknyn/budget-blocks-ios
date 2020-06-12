@@ -186,5 +186,4 @@ class CategoriesTableViewController: UITableViewController {
             
             present(alert, animated: true)
     }
-    
 }

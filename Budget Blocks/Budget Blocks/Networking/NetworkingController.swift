@@ -9,7 +9,13 @@
 import Foundation
 import SwiftyJSON
 import KeychainSwift
+import CoreData
 
+enum NetworkError:String, Error {
+    case badURL = "Bad URL"
+    case badResponse = "Bad Response"
+    case invalidData = "Invalid Data"
+}
 
 struct BodyForPlaidPost: Encodable {
     let publicToken: String
@@ -33,13 +39,24 @@ class NetworkingController {
     static var userID : Int = 0
     private let baseURL = URL(string: "https://lambda-budget-blocks.herokuapp.com/")!
     private let newBaseURL = URL(string: "https://budget-blocks-production-new.herokuapp.com")!
+//    https://sandbox.plaid.com/transactions/get
+    private let plaidBaseURL = URL(string: "https://sandbox.plaid.com/")!
     private let emailKey = "email"
     private let passwordKey = "password"
     private let keychain = KeychainSwift()
     private let jsonEncoder = JSONEncoder()
     private let jsonDecoder = JSONDecoder()
-    
+     var census: CensusData?
     var bearer: Bearer?
+    
+    static let dateFormatter: DateFormatter = {
+       let fm = DateFormatter()
+        fm.calendar = .current
+        fm.locale = Locale(identifier: "en_US_POSIX")
+        fm.dateFormat = "yyyy-MM-dd"
+        return fm
+    }()
+    
     
     var linkedAccount: Bool {
         return bearer?.linkedAccount ?? false
@@ -101,14 +118,14 @@ class NetworkingController {
         }.resume()
     }
     
-    func registerUserToDatabase(user:UserRepresentation,bearer: String, completion: @escaping (UserRep?,Error?) -> Void) {
+    func registerUserToDatabase(user:UserRepresentation,accessToken: String, completion: @escaping (UserRep?,Error?) -> Void) {
         let registerURL = newBaseURL.appendingPathComponent("api")
-            .appendingPathComponent("users")
+                                    .appendingPathComponent("users")
         
         var request = URLRequest(url: registerURL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         do {
             let jsonData = try self.jsonEncoder.encode(user)
             request.httpBody = jsonData
@@ -165,7 +182,6 @@ class NetworkingController {
           return myToken
     }
 
-    
     func register(email: String, password: String, firstName: String, lastName: String, completion: @escaping (String?, Error?) -> Void) {
         let registerJSON: JSON = ["email": email,
                                   "password": password,
@@ -197,9 +213,172 @@ class NetworkingController {
         bearer = nil
         keychain.clear()
     }
-  
+    static var transactions : DataScienceTransactionRepresentations?
     
-    func sendPlaidTokenToServer(publicToken: String,userID: Int, completion: @escaping (Error?) -> Void) {
+    func sendTransactionsToDataScience(_ transaction: OnlineTransactions, completion: @escaping (DataScienceTransactionRepresentations, Error?) -> Void) {
+        let endpoint = URL(string: "https://api.budgetblocks.org/transaction")!
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        jsonEncoder.dateEncodingStrategy = .formatted(NetworkingController.dateFormatter)
+        jsonEncoder.dataEncodingStrategy = .base64
+        
+          
+        guard let dataToSend = try? jsonEncoder.encode(transaction) else { return }
+
+        URLSession.shared.uploadTask(with: request, from: dataToSend) { (data, response, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+        
+            print(response!)
+            print("DATA COMING BACK FROM DATA SCIENCE \(String(data: data!,encoding: .utf8))")
+            guard let data = data else { return }
+            do {
+                let dataScienceDataArray = try self.jsonDecoder.decode(DataScienceTransactionRepresentations.self, from: data)
+
+                print(dataScienceDataArray.transactions)
+                completion(dataScienceDataArray,nil)
+                // CoreData
+                for transaction in dataScienceDataArray.transactions {
+                    guard let _ = self.fetchTransaction(transaction.transactionID) else {
+                          let _ = DataScienceTransaction(dataScienceTransactionRepresentation: transaction, context: CoreDataStack.shared.mainContext)
+                        continue
+                        
+                        
+                    }
+                  
+                    
+                }
+//                do {
+//                       try CoreDataStack.shared.save()
+//                } catch {
+//                    print(error.localizedDescription)
+//                }
+             
+            } catch {
+                print(error.localizedDescription)
+            }
+        }.resume()
+    }
+    
+    func fetchTransaction(_ transactionID: String) -> DataScienceTransaction? {
+        let moc = CoreDataStack.shared.mainContext
+        let dataScienceTransactionFetch = NSFetchRequest<DataScienceTransaction>(entityName: String(describing: DataScienceTransaction.self))
+        dataScienceTransactionFetch.predicate = NSPredicate(format: "transactionID == %@",transactionID)
+        do {
+            let fetchedTransactions = try moc.fetch(dataScienceTransactionFetch)
+            return fetchedTransactions.first
+        } catch {
+            fatalError("Failed to fetch employees: \(error)")
+        }
+//
+    }
+    
+    func sendCensusToDataScience(location:[String],userId: Int,completion: @escaping (Error?) -> Void) {
+        let endpoint = URL(string: "https://api.budgetblocks.org/census")!
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            let census = CensusToPost(location: location, userId: userId)
+            let jsonCensusData = try jsonEncoder.encode(census)
+            request.httpBody = jsonCensusData
+        } catch let err as NSError {
+            print(err.localizedDescription)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            guard let data = data else { return }
+            print(response!)
+            do {
+                let jsonCensus = try self.jsonDecoder.decode(CensusDataRepresentation.self, from: data)
+                self.census = CensusData(censusRepresentation: jsonCensus, context: CoreDataStack.shared.mainContext)
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+        }.resume()
+    }
+    
+    
+    func getTransactionsFromPlaid(of client: Client,completion: @escaping (Result<OnlineTransactions,NetworkError>) -> Void) {
+        let endpoint = plaidBaseURL
+            .appendingPathComponent("transactions")
+            .appendingPathComponent("get")
+        print(endpoint)
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        do {
+            jsonEncoder.dateEncodingStrategy = .formatted(NetworkingController.dateFormatter)
+            jsonEncoder.dataEncodingStrategy = .base64
+            let jsonClientData = try jsonEncoder.encode(client)
+            request.httpBody = jsonClientData
+        } catch let err as NSError {
+            print(err.localizedDescription)
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let err = error {
+                print(err.localizedDescription)
+            }
+            guard let response = response else { return }
+            print("RESPONSE \(response)")
+            guard let data = data else { return }
+            
+            do {
+                self.jsonDecoder.dataDecodingStrategy = .deferredToData
+                self.jsonDecoder.dateDecodingStrategy = .formatted(NetworkingController.dateFormatter)
+            
+                let transactions = try self.jsonDecoder.decode(OnlineTransactions.self, from: data)
+
+                completion(.success(transactions))
+        
+            } catch {
+                print("Error DECODING \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+    
+    
+    func getAccessTokenFromUserId(userID: Int,completion: @escaping (Result<BankInfos,NetworkError>) -> Void ) {
+        let endpoint = newBaseURL
+            .appendingPathComponent("plaid")
+            .appendingPathComponent("accessToken")
+            .appendingPathComponent(String(userID))
+        print(endpoint)
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = HTTPMethod.get.rawValue
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let err = error {
+                completion(.failure(.badURL))
+                print(err.localizedDescription)
+            }
+            print(response!)
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.badResponse))
+                return
+            }
+           
+            guard let data = data else {
+                completion(.failure(.invalidData))
+                return
+            }
+            
+            do {
+                let jsonBankInfo = try self.jsonDecoder.decode(BankInfos.self, from: data)
+                completion(.success(jsonBankInfo))
+            } catch let err {
+                print(err.localizedDescription)
+            }
+        }.resume()
+    }
+    
+    
+    func sendPlaidPublicTokenToServerToGetAccessToken(publicToken: String,userID: Int, completion: @escaping (Error?) -> Void) {
         let endpoint = newBaseURL
             .appendingPathComponent("plaid")
             .appendingPathComponent("token_exchange")
@@ -219,11 +398,13 @@ class NetworkingController {
                 print ("error: \(error)")
                 return
             }
-           
+          
             if let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode)  {
                 print(response.statusCode)
             }
+            let json = try? JSON(data: data!)
+            print(json)
             if let mimeType = response?.mimeType,
                 mimeType == "application/json",
                 let data = data,

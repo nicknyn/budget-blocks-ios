@@ -28,7 +28,6 @@
 		5955B8A423DB59BA00A24A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A323DB59BA00A24A8F /* Assets.xcassets */; };
 		5955B8A723DB59BA00A24A8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5955B8A523DB59BA00A24A8F /* LaunchScreen.storyboard */; };
 		5955B8BD23DB59BB00A24A8F /* Budget_BlocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */; };
-		5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964123DFC1FD0062F794 /* WelcomeViewController.swift */; };
 		5967964423DFC8520062F794 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967964323DFC8520062F794 /* LoginViewController.swift */; };
 		5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1ED23E239C000BAA183 /* Bearer.swift */; };
 		5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5969C1F023E38D3200BAA183 /* CoreDataStack.swift */; };
@@ -46,16 +45,41 @@
 		59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */; };
 		59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D1550923EB91DE003233C1 /* Int64+Currency.swift */; };
 		B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */; };
+		B61D0CBA2491912B00BADBFF /* SixOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */; };
+		B61D0CBC249197E800BADBFF /* SevenOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */; };
+		B61D0CBE249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */; };
+		B61D0CC02492CCEC00BADBFF /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CBF2492CCEC00BADBFF /* UserController.swift */; };
+		B61D0CC22492CEC000BADBFF /* CensusToPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC12492CEC000BADBFF /* CensusToPost.swift */; };
+		B61D0CC42492E03D00BADBFF /* CensusDataRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */; };
+		B61D0CC62492E0DE00BADBFF /* CensusData+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */; };
+		B61D0CC82492E4EA00BADBFF /* EmbeddedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CC72492E4EA00BADBFF /* EmbeddedViewController.swift */; };
+		B61D0CCB2493C75300BADBFF /* EighthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CCA2493C75300BADBFF /* EighthOnboardingViewController.swift */; };
+		B61D0CCD2493C84A00BADBFF /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D0CCC2493C84A00BADBFF /* OptionCell.swift */; };
 		B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6228847248022EA009FF6E5 /* UserRepresentation.swift */; };
 		B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884924802334009FF6E5 /* User+Convenience.swift */; };
+		B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B622884C2482D7D9009FF6E5 /* ChartViewController.swift */; };
+		B62288502482DAF2009FF6E5 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = B622884F2482DAF2009FF6E5 /* Charts */; };
+		B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */; };
 		B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */; };
+		B6458E422493DBA800791EA0 /* NinethOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6458E412493DBA800791EA0 /* NinethOnboardingViewController.swift */; };
+		B64B162E24904303000D9656 /* FourthOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B162D24904303000D9656 /* FourthOnboardingViewController.swift */; };
+		B64B16302491878B000D9656 /* FiveOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B162F2491878B000D9656 /* FiveOnboardingViewController.swift */; };
+		B64B163224918A46000D9656 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B163124918A46000D9656 /* CustomCell.swift */; };
+		B650C3DB248FF45000DED736 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DA248FF45000DED736 /* SignUpViewController.swift */; };
+		B650C3DD249013C400DED736 /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */; };
+		B650C3DF24901B7200DED736 /* SecondOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */; };
+		B653B5ED2485612A0005446C /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EC2485612A0005446C /* Client.swift */; };
+		B653B5EF2485785D0005446C /* BankInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5EE2485785D0005446C /* BankInfo.swift */; };
+		B653B5F1248590020005446C /* OnlineTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F0248590020005446C /* OnlineTransaction.swift */; };
+		B653B5F32486FBD70005446C /* DataScienceTransactionRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */; };
+		B653B5F5248849130005446C /* NativeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653B5F4248849120005446C /* NativeLoginViewController.swift */; };
+		B653B603248875AE0005446C /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = B653B602248875AE0005446C /* SVProgressHUD */; };
 		B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; };
 		B6789481247626EB00A47332 /* OktaAuthNative.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B678947F247626EA00A47332 /* OktaAuthNative.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; };
 		B6789484247626EE00A47332 /* OktaOidc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B6789482247626ED00A47332 /* OktaOidc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B678948624762D0B00A47332 /* Okta.plist in Resources */ = {isa = PBXBuildFile; fileRef = B678948524762D0B00A47332 /* Okta.plist */; };
 		B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */; };
-		B6F023122473399B004FE006 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F023112473399B004FE006 /* UserController.swift */; };
 		E3509F082448F92C0091592C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F072448F92C0091592C /* Notifications.swift */; };
 		E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -120,7 +144,6 @@
 		5955B8B823DB59BB00A24A8F /* Budget BlocksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Budget BlocksUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5955B8BC23DB59BB00A24A8F /* Budget_BlocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BlocksUITests.swift; sourceTree = "<group>"; };
 		5955B8BE23DB59BB00A24A8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5967964123DFC1FD0062F794 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		5967964323DFC8520062F794 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5969C1ED23E239C000BAA183 /* Bearer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bearer.swift; sourceTree = "<group>"; };
 		5969C1F023E38D3200BAA183 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -136,15 +159,39 @@
 		59D1550623EB8D57003233C1 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
 		59D1550923EB91DE003233C1 /* Int64+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int64+Currency.swift"; sourceTree = "<group>"; };
 		B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixOnboardingViewController.swift; sourceTree = "<group>"; };
+		B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SevenOnboardingViewController.swift; sourceTree = "<group>"; };
+		B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdScrollViewOnboardingViewController.swift; sourceTree = "<group>"; };
+		B61D0CBF2492CCEC00BADBFF /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		B61D0CC12492CEC000BADBFF /* CensusToPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CensusToPost.swift; sourceTree = "<group>"; };
+		B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CensusDataRepresentation.swift; sourceTree = "<group>"; };
+		B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CensusData+Convenience.swift"; sourceTree = "<group>"; };
+		B61D0CC72492E4EA00BADBFF /* EmbeddedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedViewController.swift; sourceTree = "<group>"; };
+		B61D0CCA2493C75300BADBFF /* EighthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EighthOnboardingViewController.swift; sourceTree = "<group>"; };
+		B61D0CCC2493C84A00BADBFF /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		B6228847248022EA009FF6E5 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
 		B622884924802334009FF6E5 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
+		B622884C2482D7D9009FF6E5 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		B622884E2482DADB009FF6E5 /* Charts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Charts; path = ../Carthage/Checkouts/Charts; sourceTree = "<group>"; };
+		B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		B6458E412493DBA800791EA0 /* NinethOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NinethOnboardingViewController.swift; sourceTree = "<group>"; };
+		B64B162D24904303000D9656 /* FourthOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourthOnboardingViewController.swift; sourceTree = "<group>"; };
+		B64B162F2491878B000D9656 /* FiveOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveOnboardingViewController.swift; sourceTree = "<group>"; };
+		B64B163124918A46000D9656 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		B650C3DA248FF45000DED736 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
+		B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewController.swift; sourceTree = "<group>"; };
+		B653B5EC2485612A0005446C /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		B653B5EE2485785D0005446C /* BankInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankInfo.swift; sourceTree = "<group>"; };
+		B653B5F0248590020005446C /* OnlineTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTransaction.swift; sourceTree = "<group>"; };
+		B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScienceTransactionRepresentation.swift; sourceTree = "<group>"; };
+		B653B5F4248849120005446C /* NativeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeLoginViewController.swift; sourceTree = "<group>"; };
 		B678947F247626EA00A47332 /* OktaAuthNative.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaAuthNative.framework; path = ../Carthage/Build/iOS/OktaAuthNative.framework; sourceTree = "<group>"; };
 		B6789482247626ED00A47332 /* OktaOidc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OktaOidc.framework; path = ../Carthage/Build/iOS/OktaOidc.framework; sourceTree = "<group>"; };
 		B678948524762D0B00A47332 /* Okta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Okta.plist; sourceTree = "<group>"; };
 		B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		B6F0230C24733836004FE006 /* Budget_Blocks 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Budget_Blocks 2.xcdatamodel"; sourceTree = "<group>"; };
-		B6F023112473399B004FE006 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		E3509F072448F92C0091592C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		E3509F0B244F626A0091592C /* CustomCategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoriesTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,7 +202,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6789480247626EB00A47332 /* OktaAuthNative.framework in Frameworks */,
+				B62288502482DAF2009FF6E5 /* Charts in Frameworks */,
 				598B29F923FD994D0038B698 /* KeychainSwift in Frameworks */,
+				B653B603248875AE0005446C /* SVProgressHUD in Frameworks */,
 				5939B1F523DF55F3003FB0E0 /* SwiftyJSON in Frameworks */,
 				B6789483247626EE00A47332 /* OktaOidc.framework in Frameworks */,
 				596C10FD23E0E09F003DF1D8 /* LinkKit.framework in Frameworks */,
@@ -225,6 +274,7 @@
 				5955B89723DB59B800A24A8F /* AppDelegate.swift */,
 				5955B89923DB59B800A24A8F /* SceneDelegate.swift */,
 				E3509F072448F92C0091592C /* Notifications.swift */,
+				B62288512482F7A3009FF6E5 /* CustomTabBarController.swift */,
 				5969C1EF23E38CC800BAA183 /* Model */,
 				5969C1F423E3903400BAA183 /* Model Controllers */,
 				5967964023DFC1C70062F794 /* View Controllers */,
@@ -259,7 +309,6 @@
 		5967964023DFC1C70062F794 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5967964123DFC1FD0062F794 /* WelcomeViewController.swift */,
 				5967964323DFC8520062F794 /* LoginViewController.swift */,
 				5969C1F723E39BDE00BAA183 /* TransactionsViewController.swift */,
 				593D45ED23E8E196007E8404 /* DashboardTableViewController.swift */,
@@ -271,6 +320,10 @@
 				B60176D6246CD0C400718B0A /* ForgotPasswordViewController.swift */,
 				B6F0230A247322D3004FE006 /* ProfileTableViewController.swift */,
 				B644C6A42473541E002CC36A /* ChangePasswordViewController.swift */,
+				B622884C2482D7D9009FF6E5 /* ChartViewController.swift */,
+				B653B5F4248849120005446C /* NativeLoginViewController.swift */,
+				B650C3DA248FF45000DED736 /* SignUpViewController.swift */,
+				B650C3E024901B7900DED736 /* OnboardingScreens */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -283,6 +336,13 @@
 				5969C1F223E38EBF00BAA183 /* Budget_Blocks+Convenience.swift */,
 				B6228847248022EA009FF6E5 /* UserRepresentation.swift */,
 				B622884924802334009FF6E5 /* User+Convenience.swift */,
+				B653B5EC2485612A0005446C /* Client.swift */,
+				B653B5EE2485785D0005446C /* BankInfo.swift */,
+				B653B5F0248590020005446C /* OnlineTransaction.swift */,
+				B653B5F22486FBD70005446C /* DataScienceTransactionRepresentation.swift */,
+				B61D0CC32492E03D00BADBFF /* CensusDataRepresentation.swift */,
+				B61D0CC52492E0DE00BADBFF /* CensusData+Convenience.swift */,
+				B61D0CC12492CEC000BADBFF /* CensusToPost.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,7 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				5969C1F523E3904400BAA183 /* TransactionController.swift */,
-				B6F023112473399B004FE006 /* UserController.swift */,
+				B61D0CBF2492CCEC00BADBFF /* UserController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -299,6 +359,7 @@
 		596C10FB23E0E09F003DF1D8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B622884E2482DADB009FF6E5 /* Charts */,
 				B6789482247626ED00A47332 /* OktaOidc.framework */,
 				B678947F247626EA00A47332 /* OktaAuthNative.framework */,
 				596C10FC23E0E09F003DF1D8 /* LinkKit.framework */,
@@ -328,6 +389,49 @@
 				598B29FE23FF6D290038B698 /* UIViewController+Loading.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B61D0CC92493C73100BADBFF /* SixOnboardingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B61D0CB92491912B00BADBFF /* SixOnboardingViewController.swift */,
+				B61D0CC72492E4EA00BADBFF /* EmbeddedViewController.swift */,
+			);
+			path = SixOnboardingViewController;
+			sourceTree = "<group>";
+		};
+		B61D0CCE2493C84F00BADBFF /* EighthOnboardingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B61D0CCA2493C75300BADBFF /* EighthOnboardingViewController.swift */,
+				B61D0CCC2493C84A00BADBFF /* OptionCell.swift */,
+			);
+			path = EighthOnboardingViewController;
+			sourceTree = "<group>";
+		};
+		B64B163324918A4B000D9656 /* FiveOnboardingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B64B162F2491878B000D9656 /* FiveOnboardingViewController.swift */,
+				B64B163124918A46000D9656 /* CustomCell.swift */,
+			);
+			path = FiveOnboardingViewController;
+			sourceTree = "<group>";
+		};
+		B650C3E024901B7900DED736 /* OnboardingScreens */ = {
+			isa = PBXGroup;
+			children = (
+				B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */,
+				B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */,
+				B61D0CBD249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift */,
+				B64B162D24904303000D9656 /* FourthOnboardingViewController.swift */,
+				B64B163324918A4B000D9656 /* FiveOnboardingViewController */,
+				B61D0CC92493C73100BADBFF /* SixOnboardingViewController */,
+				B61D0CBB249197E800BADBFF /* SevenOnboardingViewController.swift */,
+				B61D0CCE2493C84F00BADBFF /* EighthOnboardingViewController */,
+				B6458E412493DBA800791EA0 /* NinethOnboardingViewController.swift */,
+			);
+			path = OnboardingScreens;
 			sourceTree = "<group>";
 		};
 		B6F022452470B841004FE006 /* Storyboards */ = {
@@ -370,6 +474,8 @@
 			packageProductDependencies = (
 				5939B1F423DF55F3003FB0E0 /* SwiftyJSON */,
 				598B29F823FD994D0038B698 /* KeychainSwift */,
+				B622884F2482DAF2009FF6E5 /* Charts */,
+				B653B602248875AE0005446C /* SVProgressHUD */,
 			);
 			productName = "Budget Blocks";
 			productReference = 5955B89423DB59B800A24A8F /* Budget Blocks.app */;
@@ -446,6 +552,7 @@
 			packageReferences = (
 				5939B1F323DF55F3003FB0E0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				B653B601248875AE0005446C /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
 			);
 			productRefGroup = 5955B89523DB59B800A24A8F /* Products */;
 			projectDirPath = "";
@@ -516,39 +623,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				592B3CB623F2539E0035FF3A /* UIKit+Font.swift in Sources */,
+				B650C3DF24901B7200DED736 /* SecondOnboardingViewController.swift in Sources */,
 				590B3A5123FC554F0058D236 /* TransactionTableViewCell.swift in Sources */,
 				5969C1EE23E239C000BAA183 /* Bearer.swift in Sources */,
 				E3509F082448F92C0091592C /* Notifications.swift in Sources */,
+				B61D0CC02492CCEC00BADBFF /* UserController.swift in Sources */,
 				598B29FB23FDB9FA0038B698 /* Bool+Int.swift in Sources */,
+				B61D0CC82492E4EA00BADBFF /* EmbeddedViewController.swift in Sources */,
 				593D45EE23E8E196007E8404 /* DashboardTableViewController.swift in Sources */,
+				B61D0CCB2493C75300BADBFF /* EighthOnboardingViewController.swift in Sources */,
 				B6F0230B247322D3004FE006 /* ProfileTableViewController.swift in Sources */,
+				B653B5ED2485612A0005446C /* Client.swift in Sources */,
+				B61D0CBA2491912B00BADBFF /* SixOnboardingViewController.swift in Sources */,
 				592B3CB423F2441E0035FF3A /* BudgetTableViewCell.swift in Sources */,
 				592B3CB223F2132F0035FF3A /* BlocksViewController.swift in Sources */,
+				B653B5F32486FBD70005446C /* DataScienceTransactionRepresentation.swift in Sources */,
 				B644C6A52473541E002CC36A /* ChangePasswordViewController.swift in Sources */,
 				598B29FF23FF6D2A0038B698 /* UIViewController+Loading.swift in Sources */,
+				B61D0CC62492E0DE00BADBFF /* CensusData+Convenience.swift in Sources */,
 				59BAB9D423F361F900BF91F7 /* Error+Log.swift in Sources */,
 				5967964423DFC8520062F794 /* LoginViewController.swift in Sources */,
 				5969C1F823E39BDE00BAA183 /* TransactionsViewController.swift in Sources */,
-				B6F023122473399B004FE006 /* UserController.swift in Sources */,
+				B653B5F1248590020005446C /* OnlineTransaction.swift in Sources */,
 				5969C1F123E38D3200BAA183 /* CoreDataStack.swift in Sources */,
 				592B3CAE23F1CBC90035FF3A /* CategoryTableViewCell.swift in Sources */,
 				598B29FD23FDDC7A0038B698 /* OnboardingViewController.swift in Sources */,
+				B64B163224918A46000D9656 /* CustomCell.swift in Sources */,
+				B650C3DD249013C400DED736 /* FirstOnboardingViewController.swift in Sources */,
+				B64B162E24904303000D9656 /* FourthOnboardingViewController.swift in Sources */,
+				B61D0CC42492E03D00BADBFF /* CensusDataRepresentation.swift in Sources */,
 				5955B89823DB59B800A24A8F /* AppDelegate.swift in Sources */,
-				5967964223DFC1FD0062F794 /* WelcomeViewController.swift in Sources */,
+				B61D0CC22492CEC000BADBFF /* CensusToPost.swift in Sources */,
 				B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */,
+				B64B16302491878B000D9656 /* FiveOnboardingViewController.swift in Sources */,
 				5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */,
+				B61D0CBC249197E800BADBFF /* SevenOnboardingViewController.swift in Sources */,
 				59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */,
 				5969C1F623E3904400BAA183 /* TransactionController.swift in Sources */,
 				597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */,
 				590B3A5523FC846C0058D236 /* CategoriesTableViewController.swift in Sources */,
+				B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */,
+				B61D0CCD2493C84A00BADBFF /* OptionCell.swift in Sources */,
 				59D1550723EB8D57003233C1 /* DashboardTableViewCell.swift in Sources */,
+				B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */,
 				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
+				B61D0CBE249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
+				B650C3DB248FF45000DED736 /* SignUpViewController.swift in Sources */,
 				B60176D7246CD0C400718B0A /* ForgotPasswordViewController.swift in Sources */,
+				B653B5F5248849130005446C /* NativeLoginViewController.swift in Sources */,
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 				B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */,
+				B653B5EF2485785D0005446C /* BankInfo.swift in Sources */,
+				B6458E422493DBA800791EA0 /* NinethOnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,7 +782,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -707,7 +836,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -899,6 +1028,14 @@
 				minimumVersion = 19.0.0;
 			};
 		};
+		B653B601248875AE0005446C /* XCRemoteSwiftPackageReference "SVProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/epitonium/SVProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -911,6 +1048,15 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 598B29F723FD994D0038B698 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		B622884F2482DAF2009FF6E5 /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Charts;
+		};
+		B653B602248875AE0005446C /* SVProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B653B601248875AE0005446C /* XCRemoteSwiftPackageReference "SVProgressHUD" */;
+			productName = SVProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -41,25 +41,25 @@ class ChangePasswordViewController: UIViewController {
     private lazy var newPasswordField : UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Enter new password"
-        textField.borderStyle = .line
+        textField.placeholder        = "Enter new password"
+        textField.borderStyle        = .line
         textField.isSecureTextEntry  = true
         return textField
     }()
     
     private lazy var currentPasswordStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.currentPasswordLabel,self.oldPasswordField])
+        let stackView       = UIStackView(arrangedSubviews: [self.currentPasswordLabel,self.oldPasswordField])
         stackView.alignment = .fill
-        stackView.axis = .vertical
-        stackView.spacing = 5
+        stackView.axis      = .vertical
+        stackView.spacing   = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private lazy var newPasswordStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [self.newPasswordLabel,self.newPasswordField])
+        let stackView       = UIStackView(arrangedSubviews: [self.newPasswordLabel,self.newPasswordField])
         stackView.alignment = .fill
-        stackView.axis = .vertical
+        stackView.axis      = .vertical
         
         stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +99,7 @@ class ChangePasswordViewController: UIViewController {
         print("Change password")
         
         guard let oldPassword = oldPasswordField.text, !oldPassword.isEmpty,
-            let newPassword = newPasswordField.text, !newPassword.isEmpty else { return }
+            let newPassword   = newPasswordField.text, !newPassword.isEmpty else { return }
         
     }
 }

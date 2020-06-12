@@ -13,9 +13,9 @@ extension Transaction {
         self.init(context: context)
         
         self.transactionID = transactionID
-        self.name = name
-        self.amount = amount
-        self.date = date
+        self.name          = name
+        self.amount        = amount
+        self.date          = date
     }
 }
 
@@ -24,6 +24,6 @@ extension TransactionCategory {
         self.init(context: context)
         
         self.categoryID = categoryID
-        self.name = name
+        self.name       = name
     }
 }

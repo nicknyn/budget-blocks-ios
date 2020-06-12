@@ -19,21 +19,15 @@ class TransactionsViewController: UIViewController {
     private let dateFormatter = DateFormatter()
     private let loadingGroup = DispatchGroup()
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Transaction> = {
-        let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+    private lazy var fetchedResultsController: NSFetchedResultsController<DataScienceTransaction> = {
+        let fetchRequest: NSFetchRequest<DataScienceTransaction> = DataScienceTransaction.fetchRequest()
         
         fetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "date", ascending: false),
-            NSSortDescriptor(key: "transactionID", ascending: true)
-        ]
+          ]
         
-        if let category = category {
-            let predicate = NSPredicate(format: "category == %@", category)
-            fetchRequest.predicate = predicate
-        }
         
         let context = CoreDataStack.shared.mainContext
-        
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest,
                                              managedObjectContext: context,
                                              sectionNameKeyPath: nil,
@@ -41,7 +35,8 @@ class TransactionsViewController: UIViewController {
         frc.delegate = self
         
         do {
-            try frc.performFetch()
+                 try frc.performFetch()
+            
         } catch {
             fatalError("Error fetching transactions: \(error)")
         }
@@ -58,36 +53,6 @@ class TransactionsViewController: UIViewController {
        
         if let categoryName = category?.name {
             title = categoryName
-        }
-        
-        transactionController.updateTransactionsFromServer(context: CoreDataStack.shared.mainContext) { message, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    self.alertAndReturn(title: "An error has occurred.", message: "There was an error fetching your transactions.")
-                }
-                return error.log()
-            }
-            
-            guard let message = message else { return }
-            let alertTitle: String
-            let alertMessage: String
-            
-            switch message {
-            case "No access_Token found for that user id provided":
-                alertTitle = "No linked accounts"
-                alertMessage = "Please link a bank account first"
-            case "insertion process hasn't started", "we are inserting your data":
-                alertTitle = "Try again in a moment"
-                alertMessage = "We're working on fetching your transactions. Please try again in a moment."
-            default:
-                alertTitle = "An error has occurred."
-                alertMessage = "There was an error fetching your transactions."
-                NSLog("Message: \(message)")
-            }
-            
-            DispatchQueue.main.async {
-                self.alertAndReturn(title: alertTitle, message: alertMessage)
-            }
         }
     }
     
@@ -132,7 +97,10 @@ class TransactionsViewController: UIViewController {
 
 extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return fetchedResultsController.fetchedObjects?.count ?? 0
+
+      
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,50 +108,21 @@ extension TransactionsViewController: UITableViewDataSource, UITableViewDelegate
         guard let cell = uiCell as? TransactionTableViewCell else { return uiCell }
         
         let transaction = fetchedResultsController.object(at: indexPath)
+
+        cell.amountLabel.text      = String(transaction.amount) + "$"
         cell.descriptionLabel.text = transaction.name
-        
-        let amount = transaction.amount * -1
-        cell.amountLabel.text = "$\(amount.currency)"
-        if amount < 0 {
-            cell.amountLabel.textColor = UIColor(red:0.96, green:0.13, blue:0.18, alpha:1.0)
-        } else {
-            cell.amountLabel.textColor = UIColor(red:0.32, green:0.77, blue:0.10, alpha:1.0)
-        }
-        
-        if let category = transaction.category?.name {
-            cell.categoryLabel.text = category
-        }
-        
-        if let date = transaction.date {
-            cell.dateLabel.text = dateFormatter.string(from: date)
-        }
+//
+        let ac = transaction.category as! [String]
+        cell.categoryLabel.text    = ac.joined()
+        cell.dateLabel.text        = transaction.date?.description
+        cell.amountLabel.textColor = transaction.amount < 0 ?  UIColor.red : UIColor.link
         
         cell.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return networkingController.manualAccount
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            //TODO: Ask the user for confirmation
-            let transaction = fetchedResultsController.object(at: indexPath)
-            
-            loadingGroup.enter()
-            loading(message: "Deleting transaction...", dispatchGroup: loadingGroup)
-            transactionController.delete(transaction: transaction, context: CoreDataStack.shared.mainContext) { _, error in
-                self.loadingGroup.notify(queue: .main) {
-                    self.loadingGroup.enter()
-                    self.dismissAlert(dispatchGroup: self.loadingGroup)
-                }
-                
-                error?.log()
-            }
-        }
-    }
+
 }
 
 // MARK: Fetched results controller delegate
@@ -220,8 +159,8 @@ extension TransactionsViewController: NSFetchedResultsControllerDelegate {
             guard let indexPath = indexPath else { return }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         case .move:
-            guard let indexPath = indexPath,
-                let newIndexPath = newIndexPath else { return }
+            guard let indexPath    = indexPath,
+                  let newIndexPath = newIndexPath else { return }
             tableView.moveRow(at: indexPath, to: newIndexPath)
         case .update:
             guard let indexPath = indexPath else { return }
@@ -230,5 +169,4 @@ extension TransactionsViewController: NSFetchedResultsControllerDelegate {
             fatalError()
         }
     }
-    
 }
