@@ -39,6 +39,7 @@ class CategoryCell: UITableViewCell {
        let view = UIProgressView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.3882825077, green: 0.6711806059, blue: 0.5451156497, alpha: 1)
+        view.progressTintColor = .red
         return view
     }()
     

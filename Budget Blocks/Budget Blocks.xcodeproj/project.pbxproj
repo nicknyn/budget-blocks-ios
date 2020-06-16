@@ -59,13 +59,16 @@
 		B64B163224918A46000D9656 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64B163124918A46000D9656 /* CustomCell.swift */; };
 		B65025D824981C8200ACF541 /* WelcomeOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025D724981C8200ACF541 /* WelcomeOnboardingViewController.swift */; };
 		B65025DA2499071F00ACF541 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025D92499071F00ACF541 /* DashboardViewController.swift */; };
-		B65025DE24990E3900ACF541 /* PageHorizontalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025DD24990E3900ACF541 /* PageHorizontalCell.swift */; };
+		B65025DE24990E3900ACF541 /* BudgetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025DD24990E3900ACF541 /* BudgetScreen.swift */; };
 		B65025E02499359100ACF541 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025DF2499359100ACF541 /* CalendarCell.swift */; };
 		B65025E424993C0400ACF541 /* BlocksDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025E324993C0400ACF541 /* BlocksDataSource.swift */; };
 		B65025E624993CAC00ACF541 /* CalenderDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025E524993CAC00ACF541 /* CalenderDatasource.swift */; };
 		B65025EA24993E6E00ACF541 /* BlockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025E924993E6E00ACF541 /* BlockCell.swift */; };
 		B65025EF249951E200ACF541 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025EE249951E200ACF541 /* CategoryCell.swift */; };
 		B65025F12499520300ACF541 /* CategoryTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025F02499520300ACF541 /* CategoryTableViewDataSource.swift */; };
+		B65025F32499751300ACF541 /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025F22499751300ACF541 /* ChartCell.swift */; };
+		B65025F7249979DC00ACF541 /* ActivityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025F6249979DC00ACF541 /* ActivityDataSource.swift */; };
+		B65025F924997A3500ACF541 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65025F824997A3500ACF541 /* ActivityCell.swift */; };
 		B650C3DB248FF45000DED736 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DA248FF45000DED736 /* SignUpViewController.swift */; };
 		B650C3DD249013C400DED736 /* FirstOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */; };
 		B650C3DF24901B7200DED736 /* SecondOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */; };
@@ -173,13 +176,16 @@
 		B64B163124918A46000D9656 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		B65025D724981C8200ACF541 /* WelcomeOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeOnboardingViewController.swift; sourceTree = "<group>"; };
 		B65025D92499071F00ACF541 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		B65025DD24990E3900ACF541 /* PageHorizontalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageHorizontalCell.swift; sourceTree = "<group>"; };
+		B65025DD24990E3900ACF541 /* BudgetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetScreen.swift; sourceTree = "<group>"; };
 		B65025DF2499359100ACF541 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		B65025E324993C0400ACF541 /* BlocksDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlocksDataSource.swift; sourceTree = "<group>"; };
 		B65025E524993CAC00ACF541 /* CalenderDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderDatasource.swift; sourceTree = "<group>"; };
 		B65025E924993E6E00ACF541 /* BlockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockCell.swift; sourceTree = "<group>"; };
 		B65025EE249951E200ACF541 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		B65025F02499520300ACF541 /* CategoryTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewDataSource.swift; sourceTree = "<group>"; };
+		B65025F22499751300ACF541 /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
+		B65025F6249979DC00ACF541 /* ActivityDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDataSource.swift; sourceTree = "<group>"; };
+		B65025F824997A3500ACF541 /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		B650C3DA248FF45000DED736 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B650C3DC249013C400DED736 /* FirstOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboardingViewController.swift; sourceTree = "<group>"; };
 		B650C3DE24901B7200DED736 /* SecondOnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboardingViewController.swift; sourceTree = "<group>"; };
@@ -414,10 +420,8 @@
 			isa = PBXGroup;
 			children = (
 				B65025D92499071F00ACF541 /* DashboardViewController.swift */,
-				B65025DD24990E3900ACF541 /* PageHorizontalCell.swift */,
-				B65025ED249951D300ACF541 /* CategoryTableViewController */,
-				B65025E724993E1100ACF541 /* CalenderCollectionViewController */,
-				B65025E824993E4800ACF541 /* BlocksCollectionViewController */,
+				B65025F52499799800ACF541 /* ChartScreen */,
+				B65025F42499798A00ACF541 /* BudgetScreen */,
 			);
 			path = DashboardViewController;
 			sourceTree = "<group>";
@@ -447,6 +451,27 @@
 				B65025F02499520300ACF541 /* CategoryTableViewDataSource.swift */,
 			);
 			path = CategoryTableViewController;
+			sourceTree = "<group>";
+		};
+		B65025F42499798A00ACF541 /* BudgetScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B65025DD24990E3900ACF541 /* BudgetScreen.swift */,
+				B65025E824993E4800ACF541 /* BlocksCollectionViewController */,
+				B65025E724993E1100ACF541 /* CalenderCollectionViewController */,
+				B65025ED249951D300ACF541 /* CategoryTableViewController */,
+			);
+			path = BudgetScreen;
+			sourceTree = "<group>";
+		};
+		B65025F52499799800ACF541 /* ChartScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B65025F22499751300ACF541 /* ChartCell.swift */,
+				B65025F6249979DC00ACF541 /* ActivityDataSource.swift */,
+				B65025F824997A3500ACF541 /* ActivityCell.swift */,
+			);
+			path = ChartScreen;
 			sourceTree = "<group>";
 		};
 		B650C3E024901B7900DED736 /* OnboardingScreens */ = {
@@ -687,6 +712,7 @@
 				B622884A24802334009FF6E5 /* User+Convenience.swift in Sources */,
 				B65025E424993C0400ACF541 /* BlocksDataSource.swift in Sources */,
 				B64B16302491878B000D9656 /* FiveOnboardingViewController.swift in Sources */,
+				B65025F32499751300ACF541 /* ChartCell.swift in Sources */,
 				5969C1F323E38EBF00BAA183 /* Budget_Blocks+Convenience.swift in Sources */,
 				B61D0CBC249197E800BADBFF /* SevenOnboardingViewController.swift in Sources */,
 				59D1550A23EB91DE003233C1 /* Int64+Currency.swift in Sources */,
@@ -694,11 +720,13 @@
 				597E119723F310EF00E505C6 /* UIAlertController+Fix.swift in Sources */,
 				590B3A5523FC846C0058D236 /* CategoriesTableViewController.swift in Sources */,
 				B62288522482F7A3009FF6E5 /* CustomTabBarController.swift in Sources */,
+				B65025F7249979DC00ACF541 /* ActivityDataSource.swift in Sources */,
 				5955B8A223DB59B800A24A8F /* Budget_Blocks.xcdatamodeld in Sources */,
 				E3509F0C244F626A0091592C /* CustomCategoriesTableViewController.swift in Sources */,
 				B61D0CCD2493C84A00BADBFF /* OptionCell.swift in Sources */,
 				B622884D2482D7D9009FF6E5 /* ChartViewController.swift in Sources */,
 				590B3A5323FC63B50058D236 /* CreateTransactionViewController.swift in Sources */,
+				B65025F924997A3500ACF541 /* ActivityCell.swift in Sources */,
 				B61D0CBE249286EB00BADBFF /* ThirdScrollViewOnboardingViewController.swift in Sources */,
 				B65025DA2499071F00ACF541 /* DashboardViewController.swift in Sources */,
 				5955B89A23DB59B800A24A8F /* SceneDelegate.swift in Sources */,
@@ -708,7 +736,7 @@
 				5939B1F223DF5517003FB0E0 /* NetworkingController.swift in Sources */,
 				B6228848248022EA009FF6E5 /* UserRepresentation.swift in Sources */,
 				B653B5EF2485785D0005446C /* BankInfo.swift in Sources */,
-				B65025DE24990E3900ACF541 /* PageHorizontalCell.swift in Sources */,
+				B65025DE24990E3900ACF541 /* BudgetScreen.swift in Sources */,
 				B6458E422493DBA800791EA0 /* NinethOnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

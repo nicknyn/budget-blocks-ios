@@ -30,11 +30,7 @@ class BlocksDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDe
         } else {
               cell.blockButton.setImage(image, for: .normal)
         }
-            
-       
-            
-           
-        
+
         return cell
     }
     

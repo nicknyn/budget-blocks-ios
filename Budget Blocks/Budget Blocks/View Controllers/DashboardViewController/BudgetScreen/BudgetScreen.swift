@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PageHorizontalCell: UICollectionViewCell  {
+class BudgetScreen: UICollectionViewCell  {
 
     let blocksDataSource = BlocksDataSource()
     let calenderDataSource = CalenderDatasource()

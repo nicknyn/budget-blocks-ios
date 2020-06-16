@@ -61,7 +61,6 @@ extension UISegmentedControl {
 
 class DashboardViewController: UIViewController {
 
-    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -127,11 +126,12 @@ class DashboardViewController: UIViewController {
        let sm = UISegmentedControl(items: ["Spending","Budget"])
         sm.translatesAutoresizingMaskIntoConstraints = false
         sm.selectedSegmentIndex = 0
-        sm.selectedSegmentTintColor = .red
-        sm.backgroundColor = .clear
-        sm.tintColor = .red
-        sm.apportionsSegmentWidthsByContent = true
-        sm.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.normal)
+        sm.selectedSegmentTintColor = .clear
+
+        
+        sm.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white,
+                                   NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)],
+                                  for: UIControl.State.normal)
         sm.addTarget(self, action: #selector(switchToSpending), for: .valueChanged)
         sm.heightAnchor.constraint(equalToConstant: 30).isActive = true
         return sm
@@ -139,14 +139,13 @@ class DashboardViewController: UIViewController {
     
     
     @objc func switchToSpending() {
-//        mySegmentedControl.changeUnderlinePosition()
         switch mySegmentedControl.selectedSegmentIndex {
             case 0:
                 let indexPath = IndexPath(item: 0, section: 0)
-                nickCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+                segmentSwitchCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
             case 1:
                 let indexPath = IndexPath(item: 1, section: 0)
-                nickCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+                segmentSwitchCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
             default:
             break
         }
@@ -154,7 +153,7 @@ class DashboardViewController: UIViewController {
     }
     
     
-    lazy var nickCollectionView: UICollectionView = {
+    lazy var segmentSwitchCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
@@ -169,17 +168,14 @@ class DashboardViewController: UIViewController {
         
     }()
     
-    
-    
-    
  //MARK:- Life Cycle
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        nickCollectionView.register(PageHorizontalCell.self, forCellWithReuseIdentifier: "CollectionViewCell")
-        
+     
+        segmentSwitchCollectionView.register(BudgetScreen.self, forCellWithReuseIdentifier: "CollectionViewCell")
+        segmentSwitchCollectionView.register(ChartCell.self, forCellWithReuseIdentifier: "ChartCell")
         hideKeyboardWhenTappedAround()
         navigationItem.hidesBackButton = true
         view.addSubview(scrollView)
@@ -193,19 +189,19 @@ class DashboardViewController: UIViewController {
         greenView.addSubview(balanceLabel)
         greenView.addSubview(hiUserLabel)
         
-        containerView.addSubview(nickCollectionView)
+        containerView.addSubview(segmentSwitchCollectionView)
         
         NSLayoutConstraint.activate([
             greenView.topAnchor.constraint(equalTo: containerView.topAnchor),
             greenView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             greenView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
             
-            nickCollectionView.topAnchor.constraint(equalTo: greenView.bottomAnchor),
-            nickCollectionView.leadingAnchor.constraint(equalTo: greenView.leadingAnchor),
-            nickCollectionView.trailingAnchor.constraint(equalTo: greenView.trailingAnchor),
-            nickCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            segmentSwitchCollectionView.topAnchor.constraint(equalTo: greenView.bottomAnchor),
+            segmentSwitchCollectionView.leadingAnchor.constraint(equalTo: greenView.leadingAnchor),
+            segmentSwitchCollectionView.trailingAnchor.constraint(equalTo: greenView.trailingAnchor),
+            segmentSwitchCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             
-            mySegmentedControl.bottomAnchor.constraint(equalTo: greenView.bottomAnchor),
+            mySegmentedControl.bottomAnchor.constraint(equalTo: greenView.bottomAnchor,constant: -16),
             mySegmentedControl.leadingAnchor.constraint(equalTo: greenView.leadingAnchor,constant: 100),
             mySegmentedControl.trailingAnchor.constraint(equalTo: greenView.trailingAnchor,constant: -100),
             
@@ -243,14 +239,21 @@ extension DashboardViewController: UICollectionViewDelegate,UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! PageHorizontalCell
-        return cell
+        let categoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! BudgetScreen
+        let chartCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChartCell", for: indexPath) as! ChartCell
+        
+        switch indexPath.item {
+            case 0:
+            return chartCell
+            default:
+            return categoryCell
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height )
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        nickCollectionView.collectionViewLayout.invalidateLayout()
+        segmentSwitchCollectionView.collectionViewLayout.invalidateLayout()
     }
 }
