@@ -49,7 +49,7 @@ class FirstOnboardingViewController: UIViewController {
 
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layoutIfNeeded()
+        self.navigationController?.navigationBar.layoutIfNeeded() // hide the border line navigation bar
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
@@ -70,7 +70,6 @@ class FirstOnboardingViewController: UIViewController {
             
         }
     }
-        
     func createOidcClient() -> OktaOidc? {
         var oidcClient: OktaOidc?
         if let config = self.readTestConfig() {
@@ -78,7 +77,6 @@ class FirstOnboardingViewController: UIViewController {
         } else {
             oidcClient = try? OktaOidc()
         }
-        
         return oidcClient
     }
 }

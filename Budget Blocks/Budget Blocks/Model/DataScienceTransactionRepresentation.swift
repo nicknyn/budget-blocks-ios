@@ -21,11 +21,11 @@ struct DataScienceTransactionRepresentation : Codable {
     let transactionID: String
     
     enum CodingKeys: String,CodingKey {
-        case amount   = "amount"
-        case location = "location"
-        case date     = "date"
-        case name     = "name"
-        case category = "budget_blocks_category"
+        case amount        = "amount"
+        case location      = "location"
+        case date          = "date"
+        case name          = "name"
+        case category      = "budget_blocks_category"
         case transactionID = "transaction_id"
     }
 }
@@ -33,11 +33,11 @@ struct DataScienceTransactionRepresentation : Codable {
 extension DataScienceTransaction {
     
     var dataScienceTransactionRepresentation : DataScienceTransactionRepresentation {
-        guard let location = location as? Location else { preconditionFailure("No data")}
-        guard let date     = date,
-            let name     = name,
-            let category = category as? [String],
-            let transactionID = transactionID
+        guard let location      = location as? Location else { preconditionFailure("No data") }
+        guard let date          = date,
+              let name          = name,
+              let category      = category as? [String],
+              let transactionID = transactionID
             else { preconditionFailure("No data") }
         return DataScienceTransactionRepresentation(amount: amount,
                                                     location: location,

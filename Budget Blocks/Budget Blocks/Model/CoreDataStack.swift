@@ -30,7 +30,6 @@ class CoreDataStack {
         return container
     }()
     
-    // Create easy access to the moc (managed object context)
     var mainContext: NSManagedObjectContext {
         return container.viewContext
     }
@@ -41,7 +40,7 @@ class CoreDataStack {
                 try context.save()
             } catch {
                 NSLog("Error saving context: \(error)")
-//                context.reset()
+                context.reset()
             }
         }
     }

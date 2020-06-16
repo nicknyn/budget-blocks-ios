@@ -25,10 +25,7 @@ class SevenOnboardingViewController: UIViewController {
         actualAmountLabel.text = String(amount!) + "$"
     }
     
-
-  
     @IBAction func backTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
-    
 }

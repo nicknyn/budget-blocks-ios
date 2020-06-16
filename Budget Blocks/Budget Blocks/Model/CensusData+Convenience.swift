@@ -49,9 +49,6 @@ extension CensusData {
         
     }
     
-    
-    
-    
     @discardableResult convenience init?(censusRepresentation: CensusDataRepresentation,
                                          context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         
@@ -66,6 +63,5 @@ extension CensusData {
                   transfer : censusRepresentation.transfer,
                   savings :censusRepresentation.savings,
                   context : context)
-        
     }
 }

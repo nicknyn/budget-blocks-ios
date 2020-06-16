@@ -46,9 +46,6 @@ class FiveOnboardingViewController: UIViewController {
 
     }
     
-
-    
-    
     @IBAction func backTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }

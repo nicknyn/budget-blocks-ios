@@ -13,8 +13,8 @@ struct CensusToPost: Codable {
     let userId: Int
     
     enum CodingKeys: String, CodingKey {
-        case location
-        case userId = "user_id"
+        case location = "location"
+        case userId   = "user_id"
     }
 }
 

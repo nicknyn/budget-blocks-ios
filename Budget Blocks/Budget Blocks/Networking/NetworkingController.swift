@@ -302,8 +302,6 @@ class NetworkingController {
             }
         }.resume()
     }
-    
-    
     func getTransactionsFromPlaid(of client: Client,completion: @escaping (Result<OnlineTransactions,NetworkError>) -> Void) {
         let endpoint = plaidBaseURL
             .appendingPathComponent("transactions")
@@ -343,7 +341,6 @@ class NetworkingController {
         }.resume()
     }
     
-    
     func getAccessTokenFromUserId(userID: Int,completion: @escaping (Result<BankInfos,NetworkError>) -> Void ) {
         let endpoint = newBaseURL
             .appendingPathComponent("plaid")
@@ -376,7 +373,6 @@ class NetworkingController {
             }
         }.resume()
     }
-    
     
     func sendPlaidPublicTokenToServerToGetAccessToken(publicToken: String,userID: Int, completion: @escaping (Error?) -> Void) {
         let endpoint = newBaseURL

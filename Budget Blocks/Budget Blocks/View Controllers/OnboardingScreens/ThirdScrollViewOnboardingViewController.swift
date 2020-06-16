@@ -12,28 +12,27 @@ enum EditState {
     case edit
     case save
 }
-
 class ThirdScrollViewOnboardingViewController: UIViewController {
-
+   
     private var editState = EditState.edit
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        
+        scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-    
+
     private let scrollViewContainer: UIStackView = {
         let view = UIStackView()
-        
+
         view.axis = .vertical
         view.spacing = 10
-        
+
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     private let containerView: UIView = {
         let view = UIView()
         view.heightAnchor.constraint(equalToConstant: 920).isActive = true
@@ -69,12 +68,12 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
                 passwordTextField.isUserInteractionEnabled = true
                 nameTextField.becomeFirstResponder()
             case .save:
-            print("POST TO save password")
-            editState = .edit
-            editButton.setTitle("Edit", for: .normal)
-            nameTextField.isUserInteractionEnabled = false
-            emailTextField.isUserInteractionEnabled = false
-            passwordTextField.isUserInteractionEnabled = false
+                print("POST TO save password")
+                editState = .edit
+                editButton.setTitle("Edit", for: .normal)
+                nameTextField.isUserInteractionEnabled = false
+                emailTextField.isUserInteractionEnabled = false
+                passwordTextField.isUserInteractionEnabled = false
         }
     }
     
@@ -215,10 +214,6 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         containerView.addSubview(zipcodeLabel)
         containerView.addSubview(zipcodeTextField)
         
-        
-        
-        
-        
         unitedStateLabel.font = UIFont.systemFont(ofSize: 16)
         
         NSLayoutConstraint.activate([
@@ -298,8 +293,6 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
             
         ])
        
-        
-        
         scrollViewContainer.addArrangedSubview(containerView)
 
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true

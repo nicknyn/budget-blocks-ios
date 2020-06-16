@@ -13,12 +13,10 @@ class CustomCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var transactionImageView: UIImageView!
-    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dollarLabel: UILabel!
     
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
       

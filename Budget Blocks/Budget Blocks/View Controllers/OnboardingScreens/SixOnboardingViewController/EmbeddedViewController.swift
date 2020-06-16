@@ -31,7 +31,6 @@ class EmbeddedViewController: UIViewController {
         
     }
     
-    
     @IBAction func segmentSwitched(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
             case 0:
@@ -42,7 +41,6 @@ class EmbeddedViewController: UIViewController {
             break
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

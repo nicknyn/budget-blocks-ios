@@ -18,7 +18,7 @@ class UserController {
     static var userID: Int?
     
     func createUser(with name: String, email: String) -> User {
-        user.name = name
+        user.name  = name
         user.email = email
         try? CoreDataStack.shared.mainContext.save()
         return user

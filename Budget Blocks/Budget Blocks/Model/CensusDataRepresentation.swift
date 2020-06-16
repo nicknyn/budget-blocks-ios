@@ -21,15 +21,15 @@ struct CensusDataRepresentation : Codable {
     let savings: Double
     
     enum CodingKeys: String,CodingKey {
-        case city = "City"
-        case personal = "Personal"
-        case food = "Food"
-        case debt = "Debt"
-        case income = "Income"
-        case giving = "Giving"
-        case housing = "Housing"
-        case transportation = "Transportation"
-        case transfer = "transfer"
-        case savings = "savings"
+        case city            = "City"
+        case personal        = "Personal"
+        case food            = "Food"
+        case debt            = "Debt"
+        case income          = "Income"
+        case giving          = "Giving"
+        case housing         = "Housing"
+        case transportation  = "Transportation"
+        case transfer        = "transfer"
+        case savings         = "savings"
     }
 }
