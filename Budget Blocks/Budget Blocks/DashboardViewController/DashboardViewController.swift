@@ -60,7 +60,10 @@ extension UISegmentedControl {
 }
 
 class DashboardViewController: UIViewController {
-
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+ 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
@@ -122,23 +125,42 @@ class DashboardViewController: UIViewController {
         return view
     }()
     
+    lazy var barView:UIView = {
+       let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.3165915608, green: 0.7718194127, blue: 0.7388673425, alpha: 1)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var mySegmentedControl: UISegmentedControl = {
        let sm = UISegmentedControl(items: ["Spending","Budget"])
         sm.translatesAutoresizingMaskIntoConstraints = false
         sm.selectedSegmentIndex = 0
         sm.selectedSegmentTintColor = .clear
-
+        sm.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 18),
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray
+        ], for: .normal)
+        sm.backgroundColor = .clear
+        sm.tintColor = .clear
+        sm.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 18),
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ], for: .selected)
         
-        sm.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white,
-                                   NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)],
-                                  for: UIControl.State.normal)
+//        sm.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white,
+//                                   NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)],
+//                                  for: UIControl.State.normal)
         sm.addTarget(self, action: #selector(switchToSpending), for: .valueChanged)
         sm.heightAnchor.constraint(equalToConstant: 30).isActive = true
         return sm
     }()
     
     
-    @objc func switchToSpending() {
+    @objc func switchToSpending(sender: UISegmentedControl) {
+        UIView.animate(withDuration: 0.3) {
+            self.barView.frame.origin.x = (self.mySegmentedControl.frame.width / CGFloat(self.mySegmentedControl.numberOfSegments)) * CGFloat(self.mySegmentedControl.selectedSegmentIndex)
+        }
         switch mySegmentedControl.selectedSegmentIndex {
             case 0:
                 let indexPath = IndexPath(item: 0, section: 0)
@@ -169,14 +191,18 @@ class DashboardViewController: UIViewController {
     }()
     
  //MARK:- Life Cycle
-    
-    
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        view.backgroundColor = #colorLiteral(red: 0.3165915608, green: 0.7718194127, blue: 0.7388673425, alpha: 1)
         segmentSwitchCollectionView.register(BudgetScreen.self, forCellWithReuseIdentifier: "CollectionViewCell")
         segmentSwitchCollectionView.register(ChartCell.self, forCellWithReuseIdentifier: "ChartCell")
         hideKeyboardWhenTappedAround()
+        navigationController?.navigationBar.isHidden = true
         navigationItem.hidesBackButton = true
         view.addSubview(scrollView)
         scrollView.addSubview(scrollViewContainer)
@@ -185,6 +211,15 @@ class DashboardViewController: UIViewController {
         containerView.addSubview(greenView)
         
         greenView.addSubview(mySegmentedControl)
+        greenView.addSubview(barView)
+        
+        barView.topAnchor.constraint(equalTo: mySegmentedControl.bottomAnchor).isActive = true
+        barView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        // Constrain the button bar to the left side of the segmented control
+        barView.leftAnchor.constraint(equalTo: mySegmentedControl.leftAnchor).isActive = true
+        // Constrain the button bar to the width of the segmented control divided by the number of segments
+        barView.widthAnchor.constraint(equalTo: mySegmentedControl.widthAnchor, multiplier: 1 / CGFloat(mySegmentedControl.numberOfSegments)).isActive = true
+        
         greenView.addSubview(amountLabel)
         greenView.addSubview(balanceLabel)
         greenView.addSubview(hiUserLabel)

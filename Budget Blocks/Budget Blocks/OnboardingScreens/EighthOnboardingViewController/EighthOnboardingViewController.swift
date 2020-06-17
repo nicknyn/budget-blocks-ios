@@ -11,8 +11,11 @@ import UIKit
 class EighthOnboardingViewController: UIViewController {
 
     private var minimumSpacing: CGFloat = 5
+    
+    
     @IBOutlet weak var mainCollectionView: UICollectionView!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true

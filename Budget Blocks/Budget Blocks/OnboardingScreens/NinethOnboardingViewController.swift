@@ -10,6 +10,10 @@ import UIKit
 
 class NinethOnboardingViewController: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBOutlet weak var amountLabel: UILabel!
     
     //MARK:- Life Cycle

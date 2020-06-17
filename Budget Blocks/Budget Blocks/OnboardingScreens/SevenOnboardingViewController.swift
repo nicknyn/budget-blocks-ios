@@ -16,6 +16,7 @@ class SevenOnboardingViewController: UIViewController {
         didSet {
             goalTextField.layer.borderWidth = 1.0
             goalTextField.layer.borderColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
+            goalTextField.keyboardType = .numberPad
         }
     }
     

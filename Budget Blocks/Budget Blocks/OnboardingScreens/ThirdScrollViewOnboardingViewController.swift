@@ -13,7 +13,59 @@ enum EditState {
     case save
 }
 class ThirdScrollViewOnboardingViewController: UIViewController {
-   
+    
+   private let states = [
+        "Alabama",
+        "Alaska",
+        "Arizona",
+        "Arkansas",
+        "California",
+        "Colorado",
+        "Connecticut",
+        "Delaware",
+        "Florida",
+        "Georgia",
+        "Hawaii",
+        "Idaho",
+        "Illinois",
+        "Indiana",
+        "Iowa",
+        "Kansas",
+        "Kentucky",
+        "Louisiana",
+        "Maine",
+        "Maryland",
+        "Massachusetts",
+        "Michigan",
+        "Minnesota",
+        "Mississippi",
+        "Missouri",
+        "Montana",
+        "Nebraska",
+        "Nevada",
+        "New Hampshire",
+        "New Jersey",
+        "New Mexico",
+        "New York",
+        "North Carolina",
+        "North Dakota",
+        "Ohio",
+        "Oklahoma",
+        "Oregon",
+        "Pennsylvania",
+        "Rhode Island",
+        "South Carolina",
+        "South Dakota",
+        "Tennessee",
+        "Texas",
+        "Utah",
+        "Vermont",
+        "Virginia",
+        "Washington",
+        "West Virginia",
+        "Wisconsin",
+        "Wyoming",
+    ]
     private var editState = EditState.edit
 
     private let scrollView: UIScrollView = {
@@ -128,6 +180,13 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         }
         performSegue(withIdentifier: "3To4", sender: self)
     }
+    lazy var statePickerView: UIPickerView = {
+       let view = UIPickerView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.dataSource = self
+        view.delegate = self
+        return view
+    }()
     
     @objc func skipTapped() {
         print("skipping")
@@ -138,20 +197,23 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
        let tf = createtextField(placeholder: "")
         tf.text = UserController.shared.user.name
         tf.isUserInteractionEnabled = false
+        tf.delegate = self
         return tf
     }()
     lazy var emailLabel = createLabel(text: "Email")
     lazy var emailTextField : UITextField = {
         let tf = createtextField(placeholder: "")
         tf.text = UserController.shared.user.email
-         tf.isUserInteractionEnabled = false
+        tf.isUserInteractionEnabled = false
+        tf.delegate = self
         return tf
     }()
     lazy var passwordLabel = createLabel(text: "Password")
     lazy var passwordTextField : UITextField = {
         let tf = createtextField(placeholder: "")
         tf.text = "**********"
-         tf.isUserInteractionEnabled = false
+        tf.isUserInteractionEnabled = false
+        tf.delegate = self
         return tf
     }()
     lazy var countryLabel = createLabel(text: "Country")
@@ -164,14 +226,16 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         tf.layer.borderWidth = 1.0
         tf.layer.borderColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
         tf.layer.cornerRadius = 4
+        tf.delegate = self
         return tf
     }()
     lazy var stateLabel = createLabel(text: "State")
     lazy var stateTextField : UITextField = {
        let tf = createtextField(placeholder: "TX")
-       
+        tf.inputView = self.statePickerView
         tf.layer.cornerRadius = 4
         tf.layer.borderWidth = 1.0
+        tf.delegate = self
         tf.layer.borderColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
         return tf
     }()
@@ -180,6 +244,7 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
        let tf = createtextField(placeholder: "75041")
         tf.keyboardType = .numberPad
         tf.layer.cornerRadius = 4
+        tf.delegate = self
         tf.layer.borderWidth = 1.0
         tf.layer.borderColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
         return tf
@@ -306,5 +371,36 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         scrollViewContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         // this is important for scrolling
         scrollViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+    }
+}
+extension ThirdScrollViewOnboardingViewController: UIPickerViewDelegate,UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return states.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return states[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        stateTextField.text = states[row]
+        stateTextField.resignFirstResponder()
+    }
+}
+extension ThirdScrollViewOnboardingViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        switch textField {
+            case zipcodeTextField:
+            return count <= 5
+            default:
+            return count <= 20
+        }
     }
 }

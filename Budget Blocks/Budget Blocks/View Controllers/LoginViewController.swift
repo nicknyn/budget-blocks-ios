@@ -268,7 +268,6 @@ class LoginViewController: UIViewController {
             loginVC.lastName = passwordTextField.text
         }
     }
-
 }
 
 // MARK:- Text field delegate-
