@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileVC: UITableViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +33,4 @@ class ProfileVC: UITableViewController {
     @IBAction func logOutTapped(_ sender: UIButton) {
         print("Logging out")
     }
-    
-    
 }

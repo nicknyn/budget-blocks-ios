@@ -98,7 +98,6 @@ class ForgotPasswordViewController: UIViewController {
     private func sendEmailToUser() {
         //
     }
-
 }
 extension ForgotPasswordViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

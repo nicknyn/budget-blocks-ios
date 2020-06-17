@@ -19,7 +19,7 @@ class FirstOnboardingViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("This is \(successStatus)")
+        print("This is \(String(describing: successStatus))")
         _ = UserController.shared.createUser(with: [(successStatus?.model.embedded?.user?.profile?.firstName)!,  (successStatus?.model.embedded?.user?.profile?.lastName)!].joined(separator: " "), email: (successStatus?.model.embedded?.user?.profile?.login)!)
         
         guard let oidcClient = self.createOidcClient() else { return }

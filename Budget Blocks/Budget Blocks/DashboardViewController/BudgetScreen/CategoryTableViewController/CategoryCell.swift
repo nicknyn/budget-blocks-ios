@@ -38,7 +38,7 @@ class CategoryCell: UITableViewCell {
     lazy var categoryProgressView: UIProgressView = {
        let view = UIProgressView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.3882825077, green: 0.6711806059, blue: 0.5451156497, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.7001445293, green: 0.9239938855, blue: 0.916201055, alpha: 1)
         view.progressTintColor = .red
         return view
     }()
@@ -55,7 +55,7 @@ class CategoryCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             categoryImageView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
-//            categoryImageView.topAnchor.constraint(equalTo: topAnchor,constant: 16),
+            categoryImageView.topAnchor.constraint(equalTo: topAnchor,constant: 16),
             categoryImageView.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16),
             
             categoryName.leadingAnchor.constraint(equalTo: categoryImageView.trailingAnchor,constant: 8),
@@ -72,8 +72,6 @@ class CategoryCell: UITableViewCell {
             categoryProgressView.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16)
             
         ])
-        
-        
     }
     
     required init?(coder: NSCoder) {

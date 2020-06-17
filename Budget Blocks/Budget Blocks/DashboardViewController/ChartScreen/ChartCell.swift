@@ -11,7 +11,7 @@ import Charts
 
 class ChartCell: UICollectionViewCell {
     
-    let activityDataSource = ActivityDataSource()
+    private let activityDataSource = ActivityDataSource()
     
     lazy var containerCellView: UIView = {
         let view = UIView()
@@ -68,14 +68,13 @@ class ChartCell: UICollectionViewCell {
         tv.tableFooterView = UIView()
         tv.backgroundColor = .white // red
         tv.dataSource = activityDataSource
+        tv.delegate = activityDataSource
         tv.separatorStyle = .singleLine
         
-        tv.delegate = activityDataSource
+        
         tv.register(ActivityCell.self, forCellReuseIdentifier: "ActivityCell")
         return tv
     }()
-    
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

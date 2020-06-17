@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import OktaAuthNative
+import OktaOidc
+import SVProgressHUD
 
 class SignUpViewController: UIViewController {
 
@@ -17,6 +20,9 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var checkmarkButton: UIButton!
     
+    var isChecked = false
+    
+    
     //MARK:- Life Cycle
     
     override func viewDidLoad() {
@@ -26,10 +32,15 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func checkmarkButtonTapped(_ sender: UIButton) {
+        isChecked.toggle()
+        checkmarkButton.setImage(isChecked ?
+            UIImage(systemName: "checkmark.square") : UIImage(systemName:"square"), for: .normal)
+        print("Remember me")
         
     }
     
     @IBAction func createAccountTapped(_ sender: UIButton) {
+        print("Creating account...")
         
     }
     

@@ -109,7 +109,8 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         
         return lb
     }()
-    @objc func editTapped() {
+    @objc
+    func editTapped() {
         print("edit")
         switch editState {
             case .edit:
@@ -171,14 +172,24 @@ class ThirdScrollViewOnboardingViewController: UIViewController {
         return stackView
     }()
     
-    @objc func backButtonTapped() {
+    @objc
+    func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    @objc func nextButtonTapped() {
-        NetworkingController.shared.sendCensusToDataScience(location: [cityTextField.text!,stateTextField.text!], userId: UserController.userID!) { (error) in
-            print(error!)
+    @objc
+    func nextButtonTapped() {
+        guard let city = cityTextField.text,cityTextField.hasText,
+            let state = stateTextField.text,stateTextField.hasText,
+            let userID = UserController.userID else {
+                showAlert(title: "Information missing", message: "Please fill out all the information.")
+            return
         }
-        performSegue(withIdentifier: "3To4", sender: self)
+        NetworkingController.shared.sendCensusToDataScience(location: [city,state], userId: userID) { (error) in
+            if let error = error {
+                print("Error sending census data \(error.localizedDescription)")
+            }
+        }
+       self.performSegue(withIdentifier: "3To4", sender: self)
     }
     lazy var statePickerView: UIPickerView = {
        let view = UIPickerView()
@@ -382,7 +393,7 @@ extension ThirdScrollViewOnboardingViewController: UIPickerViewDelegate,UIPicker
         return states.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return states[row]
+        return states[row] // states picker view
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         stateTextField.text = states[row]
@@ -398,9 +409,9 @@ extension ThirdScrollViewOnboardingViewController: UITextFieldDelegate {
         let count = textFieldText.count - substringToReplace.count + string.count
         switch textField {
             case zipcodeTextField:
-            return count <= 5
+            return count <= 5 // limit zipcode 5 letters
             default:
-            return count <= 20
+            return count <= 20 // The rest is 20
         }
     }
 }

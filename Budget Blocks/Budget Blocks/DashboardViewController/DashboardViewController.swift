@@ -7,10 +7,9 @@
 //
 
 import UIKit
-
 extension UISegmentedControl {
     
-    func removeBorder(){
+    func removeBorder() {
         
         self.tintColor = UIColor.clear
         self.backgroundColor = UIColor.clear
@@ -58,7 +57,6 @@ extension UISegmentedControl {
         
     }
 }
-
 class DashboardViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -138,13 +136,13 @@ class DashboardViewController: UIViewController {
         sm.selectedSegmentIndex = 0
         sm.selectedSegmentTintColor = .clear
         sm.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 18),
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 18)!,
             NSAttributedString.Key.foregroundColor: UIColor.lightGray
         ], for: .normal)
         sm.backgroundColor = .clear
         sm.tintColor = .clear
         sm.setTitleTextAttributes([
-            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 18),
+            NSAttributedString.Key.font : UIFont(name: "DINCondensed-Bold", size: 18)!,
             NSAttributedString.Key.foregroundColor: UIColor.white
         ], for: .selected)
         
@@ -192,10 +190,9 @@ class DashboardViewController: UIViewController {
     
  //MARK:- Life Cycle
   
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNeedsStatusBarAppearanceUpdate()
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        navigationController?.navigationBar.isHidden = false
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.3165915608, green: 0.7718194127, blue: 0.7388673425, alpha: 1)

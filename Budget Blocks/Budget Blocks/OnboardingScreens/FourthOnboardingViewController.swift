@@ -37,7 +37,10 @@ extension FourthOnboardingViewController: PLKPlaidLinkViewDelegate {
         print("Hello")
         dismiss(animated: true, completion: nil)
         NetworkingController.shared.sendPlaidPublicTokenToServerToGetAccessToken(publicToken: publicToken, userID: UserController.userID!) { (error) in
-            print(error?.localizedDescription)
+            if let error = error {
+                print("Error send plaid token to server to get access token: \(error.localizedDescription)")
+            }
+        
             // POST the database
         }
         performSegue(withIdentifier: "LinkToDashboard", sender: self)

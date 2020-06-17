@@ -51,8 +51,6 @@ class ChartViewController: UIViewController {
         numberOfDownloadsDataEntries        = [iosDataEntry,macDataEntry,tvOSDataEntry]
         updateChartData()
         setupUI()
-    
-       
     }
     
     private func updateChartData() {

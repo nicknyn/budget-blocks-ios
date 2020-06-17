@@ -44,6 +44,43 @@ class FiveOnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        guard let clientID = ProcessInfo.processInfo.environment["CLIENT_ID"], let secret = ProcessInfo.processInfo.environment["SECRET"] else { return }
+      
+        navigationItem.hidesBackButton = true 
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        NetworkingController.shared.getAccessTokenFromUserId(userID: UserController.userID!) { (result) in
+            switch result {
+                case .success(let bankInfos):
+                    let accessToken = bankInfos.data.first!.accessToken
+                    print("PLAID ACCESSTOKEN: \(accessToken)")
+                    let today = Date()
+                    let thirtyDaysBeforeToday = Calendar.current.date(byAdding: .day, value: -30, to: today)
+                    
+                    let newClient = Client(clientID: clientID,
+                                           secret: secret,
+                                           accessToken: accessToken,
+                                           startDate: NetworkingController.dateFormatter.string(from: thirtyDaysBeforeToday!),
+                                           endDate: NetworkingController.dateFormatter.string(from: today)) // get 30 days transaction
+                    NetworkingController.shared.getTransactionsFromPlaid(of: newClient) { (result) in
+                        switch result {
+                            case .success(var transactions) :
+                                print("TRANSACTION FROM SEVER \(transactions.transactions)")
+                                transactions.userId = UserController.userID!
+                                NetworkingController.shared.sendTransactionsToDataScience(transactions) { (array,err) in
+                                    print("ERROD SENDING TO DATA SCIENCE \(err?.localizedDescription)")
+                                    
+                            }
+                            case .failure(let error):
+                                print(error)
+                        }
+                }
+                case .failure(let error):
+                    print(error)
+            }
+        }
+        tableView.reloadData()
     }
     
     @IBAction func backTapped(_ sender: UIButton) {

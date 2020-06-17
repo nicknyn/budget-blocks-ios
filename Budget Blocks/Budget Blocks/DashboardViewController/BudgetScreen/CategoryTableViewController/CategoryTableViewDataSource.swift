@@ -31,5 +31,4 @@ class CategoryTableViewDataSource: NSObject, UITableViewDelegate,UITableViewData
         header.textLabel?.textColor = .black
         header.textLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
     }
-    
 }

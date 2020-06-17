@@ -36,5 +36,4 @@ class BlockCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
 }
