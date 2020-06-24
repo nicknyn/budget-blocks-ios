@@ -9,28 +9,29 @@
 import UIKit
 
 class ProfileVC: UITableViewController {
-
+  
+  @IBOutlet weak var nameTextField: UITextField!
+  @IBOutlet weak var editButton: UIButton!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-     
-    }
-
-    // MARK: - Actions
-
-    
-    @IBAction func accountInfoTapped(_ sender: UIButton) {
-        print("edit info...")
-    }
-    
-    
-   
-    @IBAction func editBankAccountTapped(_ sender: UIButton) {
-        print("Editting")
-    }
-    
-    @IBAction func logOutTapped(_ sender: UIButton) {
-        print("Logging out")
-    }
+    view.backgroundColor = .secondarySystemBackground
+  }
+  
+  // MARK: - Actions
+  
+  @IBAction func accountInfoTapped(_ sender: UIButton) {
+    editButton.setTitle("Save", for: .normal)
+    print("edit info...")
+    nameTextField.becomeFirstResponder()
+  }
+  
+  @IBAction func editBankAccountTapped(_ sender: UIButton) {
+    print("Editting")
+  }
+  
+  @IBAction func logOutTapped(_ sender: UIButton) {
+    print("Logging out")
+  }
 }

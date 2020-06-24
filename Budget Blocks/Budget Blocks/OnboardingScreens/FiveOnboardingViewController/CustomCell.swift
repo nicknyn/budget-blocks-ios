@@ -8,22 +8,13 @@
 
 import UIKit
 
-class CustomCell: UITableViewCell {
-
-    
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var transactionImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var dollarLabel: UILabel!
-    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-      
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
+final class CustomCell: UITableViewCell {
+  
+  //MARK:-Outlets-
+  
+  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var dollarLabel: UILabel!
+  
+  
 }

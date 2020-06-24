@@ -8,13 +8,16 @@
 
 import UIKit
 
-class WelcomeOnboardingViewController: UIViewController {
+final class WelcomeOnboardingViewController: UIViewController {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    hideBorderLineOfNavigationBar()
+  }
+  
+ 
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  @IBAction func signInTapped(_ sender: UIButton) {
 
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for:.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.layoutIfNeeded()
-    }
+  }
 }

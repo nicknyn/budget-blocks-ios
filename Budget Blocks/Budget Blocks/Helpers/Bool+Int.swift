@@ -9,9 +9,9 @@
 import Foundation
 
 extension Bool {
-    var int: Int { self ? 1 : 0 }
+  var int: Int { self ? 1 : 0 }
 }
 
 extension Int {
-    var bool: Bool { self == 0 ? false : true }
+  var bool: Bool { self == 0 ? false : true }
 }

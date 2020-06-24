@@ -9,10 +9,10 @@
 import UIKit
 
 extension UILabel {
-    func setApplicationTypeface() {
-        let applicationTypefaceName = "Exo-Regular"
-        
-        let textSize = self.font.pointSize
-        self.font = UIFont(name: applicationTypefaceName, size: textSize)
-    }
+  func setApplicationTypeface() {
+    let applicationTypefaceName = "Exo-Regular"
+    
+    let textSize = self.font.pointSize
+    self.font = UIFont(name: applicationTypefaceName, size: textSize)
+  }
 }

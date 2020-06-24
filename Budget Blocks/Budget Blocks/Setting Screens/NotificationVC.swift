@@ -9,10 +9,10 @@
 import UIKit
 
 class NotificationVC: UITableViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-     
-    }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = .secondarySystemBackground
+    
+  }
 }
