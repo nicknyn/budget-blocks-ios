@@ -20,7 +20,7 @@ final class ThirdScrollViewOnboardingViewController: UIViewController {
   
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
-    scrollView.showsVerticalScrollIndicator = false
+    scrollView.showsVerticalScrollIndicator = true
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     return scrollView
   }()
@@ -131,10 +131,10 @@ final class ThirdScrollViewOnboardingViewController: UIViewController {
   }
   @objc
   private func nextButtonTapped() {
-    guard let city = cityTextField.text,cityTextField.hasText,
-      let state = stateTextField.text,stateTextField.hasText,
+    guard let city = cityTextField.text,
+      let state = stateTextField.text,
       let userID = UserController.userID else {
-        showAlert(title: "Information missing", message: "Please fill out all the information.")
+//        showAlert(title: "Information missing", message: "Please fill out all the information.")
         return
     }
     NetworkingController.shared.sendCensusToDataScience(location: [city,state], userId: userID) { (error) in

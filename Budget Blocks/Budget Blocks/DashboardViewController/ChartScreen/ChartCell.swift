@@ -67,6 +67,23 @@ class ChartCell: UICollectionViewCell {
     tv.register(ActivityCell.self, forCellReuseIdentifier: "ActivityCell")
     return tv
   }()
+  var months = NetworkingController.dataArrayTransactions?.transactions.map {$0.name }
+  var values = NetworkingController.dataArrayTransactions?.transactions.map {$0.amount }
+  func setLineChart(name: [String],values:[Double]) {
+    var lineArray: [ChartDataEntry] = []
+    for i in 0 ..< name.count {
+      let data: ChartDataEntry = ChartDataEntry(x: Double(i), y: values[i])
+      lineArray.append(data)
+    }
+    let lineDataSet = LineChartDataSet(entries: lineArray, label: "Spending in the last 30 days.")
+    lineDataSet.setColor(#colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1))
+    
+    let lineData = LineChartData(dataSet: lineDataSet)
+    lineChartView.data = lineData
+    lineChartView.animate(xAxisDuration: 2, easingOption: .easeInBounce)
+    lineChartView.animate(xAxisDuration: 2, easingOption: .easeInBounce)
+    
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -74,18 +91,9 @@ class ChartCell: UICollectionViewCell {
     addSubview(containerCellView)
     containerCellView.addSubview(lineChartView)
     containerCellView.addSubview(activityTableView)
-    lineChartView.chartDescription?.text = "TRANSACTION"
     
-    var entries = [ChartDataEntry]()
     
-    entries.append(ChartDataEntry(x: 200, y: 300))
-    entries.append(ChartDataEntry(x: 200, y: 200, data: "Jan"))
-    
-    let set = LineChartDataSet(entries: entries)
-    set.colors = ChartColorTemplates.material()
-    let data = LineChartData(dataSet: set)
-    lineChartView.data = data
-    
+    setLineChart(name: months!, values: values!)
     
     
     NSLayoutConstraint.activate([
@@ -140,7 +148,7 @@ extension ChartCell :  UITableViewDataSource, UITableViewDelegate {
     
     cell.activityName.text = transaction.name
     cell.amountLabel.text = String(transaction.amount) + "$"
-    cell.amountLabel.textColor = transaction.amount > 0 ? #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1) : .red
+    cell.amountLabel.textColor =  #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1) 
    
     
     

@@ -9,14 +9,14 @@
 import UIKit
 
 final class OptionCell: UICollectionViewCell {
-  
-  override var isSelected: Bool {
-    didSet {
-      categoryLabel.textColor = isSelected ? .white : .black
-      amountLabel.textColor = isSelected ? .white : .black
-      backgroundColor = isSelected ? #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1) : .secondarySystemBackground
-    }
-  }
+//  
+//  override var isSelected: Bool {
+//    didSet {
+//      categoryLabel.textColor = isSelected ? .white : .black
+//      actualAmountLabel.textColor = isSelected ? .white : .black
+//      backgroundColor = isSelected ? #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1) : .secondarySystemBackground
+//    }
+//  }
   
   let containerView: UIView = {
     let view = UIView()
@@ -31,13 +31,21 @@ final class OptionCell: UICollectionViewCell {
     lb.translatesAutoresizingMaskIntoConstraints = false
     return lb
   }()
-  lazy var amountLabel: UILabel = {
+  lazy var actualAmountLabel: UILabel = {
     let lb = UILabel()
     lb.text = "Dummy 600"
     lb.textAlignment = .center
     lb.translatesAutoresizingMaskIntoConstraints = false
     return lb
   }()
+//  lazy var goalAmountLabel: UILabel = {
+//    let lb = UILabel()
+//    lb.text = "Set goal"
+//    lb.textColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
+//    lb.textAlignment = .center
+//    lb.translatesAutoresizingMaskIntoConstraints = false
+//    return lb
+//  }()
   
   lazy var categoryImageView: UIImageView = {
     let im = UIImageView()
@@ -60,18 +68,23 @@ final class OptionCell: UICollectionViewCell {
       
     ])
     containerView.addSubview(categoryLabel)
-    containerView.addSubview(amountLabel)
+    containerView.addSubview(actualAmountLabel)
     containerView.addSubview(categoryImageView)
+//    containerView.addSubview(goalAmountLabel)
     
     NSLayoutConstraint.activate([
       categoryLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
       categoryLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
       categoryLabel.widthAnchor.constraint(equalToConstant: 200),
       
-      amountLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor,constant: 4),
-      amountLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
-      amountLabel.trailingAnchor.constraint(equalTo: categoryLabel.trailingAnchor),
+      actualAmountLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor,constant: 4),
+      actualAmountLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
+      actualAmountLabel.trailingAnchor.constraint(equalTo: categoryLabel.trailingAnchor),
       
+    
+//      goalAmountLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
+//      goalAmountLabel.trailingAnchor.constraint(equalTo: categoryLabel.trailingAnchor),
+//      goalAmountLabel.topAnchor.constraint(equalTo: actualAmountLabel.bottomAnchor,constant: 8),
       
       categoryImageView.bottomAnchor.constraint(equalTo: categoryLabel.topAnchor,constant: -4),
       categoryImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

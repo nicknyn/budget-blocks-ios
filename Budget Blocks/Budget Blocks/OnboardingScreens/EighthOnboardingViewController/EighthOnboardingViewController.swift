@@ -13,14 +13,9 @@ final class EighthOnboardingViewController: UIViewController {
   private var minimumSpacing: CGFloat = 5
   let defaultCategories: [String: Double] = ["Personal":NetworkingController.shared.census!.personal.rounded(),
                                              "Food":NetworkingController.shared.census!.food.rounded(),
-                                             "Debt":NetworkingController.shared.census!.debt.rounded(),
-                                    
-                                             "Giving":NetworkingController.shared.census!.giving.rounded(),
-                                             "Housing":NetworkingController.shared.census!.housing.rounded(),
-                                             "Transportation":NetworkingController.shared.census!.transportation.rounded(),
-                                             "Transfer":NetworkingController.shared.census!.transfer.rounded(),
-                                             "Savings":NetworkingController.shared.census!.savings.rounded()]
-  
+                                             "House":NetworkingController.shared.census!.housing.rounded(),
+                                             "Transportation":NetworkingController.shared.census!.transportation.rounded()]
+
   @IBOutlet weak var mainCollectionView: UICollectionView!
   
   
@@ -47,15 +42,16 @@ extension EighthOnboardingViewController: UICollectionViewDelegate, UICollection
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OptionCell", for: indexPath) as! OptionCell
-    let amountsArray = Array(defaultCategories.values)
-    let amount = "$" + String(amountsArray[indexPath.item].rounded())
-    let categoryName = Array(defaultCategories.keys)[indexPath.item]
-    cell.layer.cornerRadius = 4
-    cell.categoryLabel.text = categoryName
+    let amountsArray             = Array(defaultCategories.values)
+    let amount                   = "$" + String(amountsArray[indexPath.item].rounded())
+    let categoryName             = Array(defaultCategories.keys)[indexPath.item]
+    cell.layer.cornerRadius      = 4
+    cell.categoryLabel.text      = categoryName
     cell.categoryImageView.image = UIImage(named: categoryName)
-    cell.amountLabel.text = amount
+    cell.actualAmountLabel.text        = "\(amount)"
     return cell
   }
+ 
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
@@ -67,8 +63,9 @@ extension EighthOnboardingViewController: UICollectionViewDelegate, UICollection
     let numberOfItemsInOneRow = Int(totalUsableWidth / minWidth)
     totalUsableWidth -= CGFloat(numberOfItemsInOneRow - 1) * flowLayout.minimumInteritemSpacing
     let width = totalUsableWidth / CGFloat(numberOfItemsInOneRow)
-    return CGSize(width: width, height: width / 2)
+    return CGSize(width: width, height: width )
   }
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
   }
@@ -85,7 +82,7 @@ extension EighthOnboardingViewController: UICollectionViewDelegate, UICollection
     let cell = collectionView.cellForItem(at: indexPath) as! OptionCell
     cell.backgroundColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
     cell.categoryLabel.textColor = .white
-    cell.amountLabel.textColor = .white
+    cell.actualAmountLabel.textColor = .white
     
     
     print(indexPath.item)
@@ -94,7 +91,7 @@ extension EighthOnboardingViewController: UICollectionViewDelegate, UICollection
     guard let indexPath = sender as? IndexPath else { return }
     let collectionCell = mainCollectionView.cellForItem(at: indexPath) as! OptionCell
     let textToPass = collectionCell.categoryLabel.text
-    let amountToPass = collectionCell.amountLabel.text
+    let amountToPass = collectionCell.actualAmountLabel.text
     let detailVC = segue.destination as! NinethOnboardingViewController
     detailVC.categoryTitle = textToPass
     detailVC.defaultAmount = amountToPass

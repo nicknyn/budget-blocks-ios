@@ -47,8 +47,7 @@ final class NativeLoginViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    SVProgressHUD.setBackgroundColor(.black)
-    SVProgressHUD.setForegroundColor(.white)
+    SVProgressHUD.setDefaultStyle(.dark)
     emailTextField.delegate = self
     passwordTextField.delegate = self
     if userDefault.bool(forKey: "check") == true {
