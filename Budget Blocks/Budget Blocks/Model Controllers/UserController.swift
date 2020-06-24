@@ -11,16 +11,18 @@ import CoreData
 
 
 class UserController {
-    
-    static let shared = UserController()
-    
-    let user = User(context: CoreDataStack.shared.mainContext)
-    static var userID: Int?
-    
-    func createUser(with name: String, email: String) -> User {
-        user.name = name
-        user.email = email
-        try? CoreDataStack.shared.mainContext.save()
-        return user
-    }
+  
+  static let shared = UserController()
+
+  var user = User(context: CoreDataStack.shared.mainContext)
+  var currentUserGoal = Goal(context: CoreDataStack.shared.mainContext)
+  
+  static var userID: Int?
+  
+  func createUser(with name: String, email: String) -> User {
+    user.name  = name
+    user.email = email
+    try? CoreDataStack.shared.mainContext.save()
+    return user
+  }
 }

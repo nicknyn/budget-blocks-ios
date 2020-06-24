@@ -9,7 +9,7 @@
 import Foundation
 
 extension Error {
-    func log() {
-        NSLog("\(self)")
-    }
+  func log() {
+    NSLog("\(self)")
+  }
 }

@@ -11,6 +11,7 @@
         <attribute name="savings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="transfer" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="transportation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="censusData" inverseEntity="User"/>
     </entity>
     <entity name="DataScienceTransaction" representedClassName="DataScienceTransaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -19,6 +20,18 @@
         <attribute name="location" optional="YES" attributeType="Transformable"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="transactionID" optional="YES" attributeType="String"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="dataScienceTransaction" inverseEntity="User"/>
+    </entity>
+    <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
+        <attribute name="debt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="food" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="giving" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="housing" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="income" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="personal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="savings" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="transfer" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="transportation" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -36,12 +49,15 @@
     <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="censusData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CensusData" inverseName="user" inverseEntity="CensusData"/>
+        <relationship name="dataScienceTransaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataScienceTransaction" inverseName="user" inverseEntity="DataScienceTransaction"/>
     </entity>
     <elements>
-        <element name="DataScienceTransaction" positionX="-325.9765625" positionY="104.34375" width="128" height="133"/>
+        <element name="CensusData" positionX="-352.7265625" positionY="267.5078125" width="128" height="208"/>
+        <element name="DataScienceTransaction" positionX="-377.15625" positionY="-24.54296875" width="128" height="148"/>
         <element name="Transaction" positionX="174.5625" positionY="-139.46484375" width="128" height="118"/>
         <element name="TransactionCategory" positionX="-104.4609375" positionY="-182.73046875" width="128" height="103"/>
-        <element name="User" positionX="-526.93359375" positionY="117.46875" width="128" height="73"/>
-        <element name="CensusData" positionX="-229.296875" positionY="352.02734375" width="128" height="193"/>
+        <element name="User" positionX="-555.171875" positionY="175.24609375" width="128" height="103"/>
+        <element name="Goal" positionX="-189" positionY="135" width="128" height="178"/>
     </elements>
 </model>
