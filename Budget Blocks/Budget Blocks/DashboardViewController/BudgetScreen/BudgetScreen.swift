@@ -197,7 +197,7 @@ class BudgetScreen: UICollectionViewCell  {
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
-  let dict = ["Housing": UserController.shared.currentUserGoal.housing,
+  let dict = ["House": UserController.shared.currentUserGoal.housing,
               "Food": UserController.shared.currentUserGoal.food,
               "Transportation": UserController.shared.currentUserGoal.transportation,
               "Personal": UserController.shared.currentUserGoal.personal,
@@ -208,7 +208,7 @@ class BudgetScreen: UICollectionViewCell  {
 extension BudgetScreen: UITableViewDataSource,UITableViewDelegate {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     
-    return "Category                     Goal"
+    return "Category                        Goal"
   }
   
   

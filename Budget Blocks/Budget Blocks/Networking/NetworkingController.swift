@@ -216,7 +216,7 @@ class NetworkingController {
     keychain.clear()
   }
   static var transactions : DataScienceTransactionRepresentations?
-  
+  static var dataArrayTransactions : DataScienceTransactionRepresentations?
   func sendTransactionsToDataScience(_ transaction: OnlineTransactions, completion: @escaping (DataScienceTransactionRepresentations, Error?) -> Void) {
     let endpoint = URL(string: "https://api.budgetblocks.org/transaction")!
     var request = URLRequest(url: endpoint)
@@ -238,7 +238,7 @@ class NetworkingController {
       guard let data = data else { return }
       do {
         let dataScienceDataArray = try self.jsonDecoder.decode(DataScienceTransactionRepresentations.self, from: data)
-        
+        NetworkingController.dataArrayTransactions = dataScienceDataArray
         print(dataScienceDataArray.transactions)
         completion(dataScienceDataArray,nil)
         // CoreData

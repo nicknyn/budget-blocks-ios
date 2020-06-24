@@ -346,7 +346,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWi-CT-DgT">
                                         <rect key="frame" x="40" y="0.0" width="310" height="40"/>
-                                        <fontDescription key="fontDescription" name="Poppins-ExtraBold" family="Poppins" pointSize="40"/>
+                                        <fontDescription key="fontDescription" name="Poppins-ExtraBold" family="Poppins" pointSize="30"/>
                                         <color key="textColor" red="0.40302401780000002" green="0.79367810490000001" blue="0.76756912470000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1066,10 +1066,10 @@
                                         <color key="selectedSegmentTintColor" red="0.40302401780000002" green="0.79367810490000001" blue="0.76756912470000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0U-6V-6i8">
-                                        <rect key="frame" x="50" y="100.33333333333337" width="250" height="150"/>
+                                        <rect key="frame" x="32" y="71.999999999999986" width="286" height="246.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NBj-kv-34C">
-                                                <rect key="frame" x="72.666666666666657" y="52.999999999999943" width="105" height="44"/>
+                                                <rect key="frame" x="90.666666666666657" y="101.33333333333331" width="105" height="44"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="MiB-9o-oU9">
                                                         <rect key="frame" x="0.0" y="0.0" width="105" height="20"/>
@@ -1111,18 +1111,18 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="NBj-kv-34C" firstAttribute="centerX" secondItem="B0U-6V-6i8" secondAttribute="centerX" id="BQF-3Y-ehT"/>
-                                            <constraint firstItem="NBj-kv-34C" firstAttribute="centerY" secondItem="B0U-6V-6i8" secondAttribute="centerY" id="NUm-7P-8mf"/>
-                                            <constraint firstAttribute="height" constant="150" id="iNh-1w-2AH"/>
-                                            <constraint firstAttribute="width" constant="250" id="xTD-ZT-Lal"/>
+                                            <constraint firstItem="NBj-kv-34C" firstAttribute="centerY" secondItem="B0U-6V-6i8" secondAttribute="centerY" id="CyL-4W-c9k"/>
+                                            <constraint firstItem="NBj-kv-34C" firstAttribute="centerX" secondItem="B0U-6V-6i8" secondAttribute="centerX" id="Ibq-Ui-Zas"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="B0U-6V-6i8" firstAttribute="centerX" secondItem="stj-S4-8wz" secondAttribute="centerX" id="FGh-wH-qkh"/>
-                                    <constraint firstItem="B0U-6V-6i8" firstAttribute="centerY" secondItem="stj-S4-8wz" secondAttribute="centerY" id="J5U-Wn-6sb"/>
+                                    <constraint firstAttribute="bottom" secondItem="B0U-6V-6i8" secondAttribute="bottom" constant="32" id="F0I-QR-POI"/>
+                                    <constraint firstItem="B0U-6V-6i8" firstAttribute="leading" secondItem="stj-S4-8wz" secondAttribute="leading" constant="32" id="Fwa-kn-L9o"/>
                                     <constraint firstItem="d5s-Jt-i9p" firstAttribute="top" secondItem="stj-S4-8wz" secondAttribute="top" id="Xzu-SB-DGQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="B0U-6V-6i8" secondAttribute="trailing" constant="32" id="aUV-c2-d72"/>
                                     <constraint firstAttribute="trailing" secondItem="d5s-Jt-i9p" secondAttribute="trailing" id="asA-uP-opg"/>
+                                    <constraint firstItem="B0U-6V-6i8" firstAttribute="top" secondItem="d5s-Jt-i9p" secondAttribute="bottom" constant="32" id="eeE-11-dL8"/>
                                     <constraint firstItem="d5s-Jt-i9p" firstAttribute="leading" secondItem="stj-S4-8wz" secondAttribute="leading" id="qKf-b9-tSY"/>
                                 </constraints>
                             </view>
@@ -1600,7 +1600,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Urg-YG-1WT"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="creditcard" catalog="system" id="wga-ax-jyL"/>
+                    <tabBarItem key="tabBarItem" title="" image="sidebar.left" catalog="system" id="wga-ax-jyL"/>
                     <navigationItem key="navigationItem" id="enK-3V-klF"/>
                     <size key="freeformSize" width="414" height="1000"/>
                 </viewController>
@@ -1700,12 +1700,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="3Mk-cC-i87">
                         <barButtonItem key="leftBarButtonItem" id="20L-YI-mB2">
-                            <view key="customView" contentMode="scaleToFill" id="gPb-NQ-W77">
+                            <view key="customView" contentMode="scaleToFill" ambiguous="YES" id="gPb-NQ-W77">
                                 <rect key="frame" x="20" y="5.6666666666666679" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T9A-ta-ym1">
-                                        <rect key="frame" x="0.0" y="0.0" width="92" height="33"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenicon" translatesAutoresizingMaskIntoConstraints="NO" id="T9A-ta-ym1">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="05C-Mw-L2x"/>
+                                            <constraint firstAttribute="height" constant="20" id="J2S-gK-Vk4"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -2620,15 +2624,19 @@
                                 <rect key="frame" x="20" y="5.6666666666666679" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTh-vF-TO4">
-                                        <rect key="frame" x="25" y="5.9999999999998472" width="75" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sTh-vF-TO4">
+                                        <rect key="frame" x="0.0" y="6" width="92" height="24"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="sTh-vF-TO4" firstAttribute="top" secondItem="gSk-2F-fv7" secondAttribute="top" constant="6" id="4YS-Ln-bgP"/>
+                                    <constraint firstItem="sTh-vF-TO4" firstAttribute="leading" secondItem="gSk-2F-fv7" secondAttribute="leading" id="liS-0H-WmS"/>
+                                    <constraint firstAttribute="trailing" secondItem="sTh-vF-TO4" secondAttribute="trailing" id="tEI-TB-ws8"/>
+                                </constraints>
                             </view>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="xsB-Gx-cHH">
@@ -2783,8 +2791,8 @@
                                 <rect key="frame" x="20" y="5.6666666666666679" width="92" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6op-h0-OmZ">
-                                        <rect key="frame" x="25" y="5.3333333333333321" width="118" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Blocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6op-h0-OmZ">
+                                        <rect key="frame" x="32.333333333333336" y="5.3333333333333339" width="110.66666666666666" height="22.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Poppins-ExtraBold" family="Poppins" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -2952,7 +2960,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="2KL-Jc-wsq"/>
-        <segue reference="Nsp-IW-lXX"/>
+        <segue reference="hg9-cY-NMT"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
@@ -2965,12 +2973,12 @@
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
-        <image name="creditcard" catalog="system" width="128" height="91"/>
         <image name="envelope" catalog="system" width="128" height="93"/>
         <image name="greenicon" width="133" height="133"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
         <image name="plablo" width="293" height="137"/>
         <image name="shift" catalog="system" width="128" height="106"/>
+        <image name="sidebar.left" catalog="system" width="128" height="93"/>
         <image name="square" catalog="system" width="128" height="114"/>
     </resources>
 </document>

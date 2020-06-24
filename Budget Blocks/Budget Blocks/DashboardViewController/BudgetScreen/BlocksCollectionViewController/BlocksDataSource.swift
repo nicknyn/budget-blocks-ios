@@ -11,10 +11,10 @@ import UIKit
 class BlocksDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
   
   private let sfSymbols = [ UIImage(systemName: "heart"),
-                            UIImage(systemName: "trash"),
+                            UIImage(systemName: "house"),
                             UIImage(systemName: "tray"),
-                            UIImage(systemName: "sun.min"),
-                            UIImage(systemName: "moon")
+                            UIImage(systemName: "car"),
+                            UIImage(systemName: "smiley")
   ]
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -26,7 +26,8 @@ class BlocksDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HEHE", for: indexPath) as! BlockCell
     if indexPath == IndexPath(item: 0, section: 0) {
       cell.blockButton.setTitle("Income", for: .normal)
-      cell.blockButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+      cell.backgroundColor = #colorLiteral(red: 0.3165915608, green: 0.7718194127, blue: 0.7388673425, alpha: 1)
+      cell.blockButton.titleLabel?.font = UIFont(name: "Poppins", size: 12)
     } else {
       cell.blockButton.setImage(image, for: .normal)
     }

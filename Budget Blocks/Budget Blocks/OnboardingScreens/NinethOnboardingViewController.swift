@@ -66,7 +66,7 @@ class NinethOnboardingViewController: UIViewController {
     switch categoryTitle {
       case "Debt":
         UserController.shared.currentUserGoal.debt = number.doubleValue
-      case "Housing":
+      case "House":
         UserController.shared.currentUserGoal.housing = number.doubleValue
       case "Giving":
         UserController.shared.currentUserGoal.giving = number.doubleValue
