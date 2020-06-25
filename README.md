@@ -58,9 +58,8 @@ When i sign in and create a budget I can select the category "Food and drink" an
 ### Features
 
 -    Connect your bank account with Plaid
--    Manually enter income and expenses
--    Automatically sort transactions into categories
--    Create Budget Blocks (virtual envolopes) to limit spending in categories
+-    Create goal to budget per blocks 
+
 
 ## Requirements
 
