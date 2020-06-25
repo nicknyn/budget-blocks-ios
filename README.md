@@ -45,7 +45,7 @@ Users can create a block that and select a category for it to be put under and t
 for example:
 When i sign in and create a budget I can select the category "Food and drink" and give that an amount of how ever much I think would be good and everytime i make a perchues I can go into the app and put the date i made the purches how much it cost and an optinal discription of what i bought then when I save that transaction it will put it into the right category and a progress bar will be visiable showing a visual of how much money I have to spend in that category till I have spent to much.
 
-![Simulator Screen Shot - iPhone 11 Pro Max - 2020-06-25 at 12 20 40](https://user-images.githubusercontent.com/50033125/85760824-336e0800-b6e0-11ea-956b-850bb9c6672b.png height ="200")
+![Simulator Screen Shot - iPhone 11 Pro Max - 2020-06-25 at 12 20 40](https://user-images.githubusercontent.com/50033125/85760824-336e0800-b6e0-11ea-956b-850bb9c6672b.png)
 
 
 
