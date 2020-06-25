@@ -47,8 +47,8 @@ When i sign in and create a budget I can select the category "Food and drink" an
 
 ### Screenshots
 
-<img src="https://user-images.githubusercontent.com/50033125/85760824-336e0800-b6e0-11ea-956b-850bb9c6672b.png " width="250">
 
+<img src="https://user-images.githubusercontent.com/50033125/85760824-336e0800-b6e0-11ea-956b-850bb9c6672b.png " width="250"> <img src="https://openclipart.org/download/71101/two.svg" width="300"/>
 ### Features
 
 -    Connect your bank account with Plaid
