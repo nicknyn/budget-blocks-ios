@@ -56,21 +56,16 @@ class CategoryCell: UITableViewCell {
     contentView.addSubview(amountLabel)
     contentView.addSubview(categoryProgressView)
     
-    
-    
     NSLayoutConstraint.activate([
       categoryImageView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
       categoryImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-      //      categoryImageView.topAnchor.constraint(equalTo: topAnchor,constant: 16),
-      //      categoryImageView.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16),
-      
+     
       categoryName.leadingAnchor.constraint(equalTo: categoryImageView.trailingAnchor,constant: 8),
       categoryName.centerYAnchor.constraint(equalTo: centerYAnchor),
       
       amountLabel.trailingAnchor.constraint(equalTo: categoryProgressView.leadingAnchor,constant: -8),
       amountLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       
-      //      categoryProgressView.leadingAnchor.constraint(equalTo: amountLabel.trailingAnchor,constant: 16),
       categoryProgressView.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16),
       categoryProgressView.widthAnchor.constraint(equalToConstant: 180),
       categoryProgressView.centerYAnchor.constraint(equalTo: centerYAnchor),

@@ -23,7 +23,7 @@ final class SevenOnboardingViewController: UIViewController {
     }
   }
   
-  
+//MARK:- Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.hidesBackButton = true
@@ -48,9 +48,6 @@ final class SevenOnboardingViewController: UIViewController {
     UserController.shared.currentUserGoal.income = number.doubleValue
     print(UserController.shared.currentUserGoal.income)
   }
-  
-  
-  
 }
 extension SevenOnboardingViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool { // return FALSE to not change text
@@ -82,7 +79,7 @@ extension SevenOnboardingViewController: UITextFieldDelegate {
     formatter.locale = Locale(identifier: "en_US")
     let numberFromField = (NSString(string: userGoalInput).doubleValue) / 100
     goalTextField.text = formatter.string(from: NSNumber(value: numberFromField))
-    print(goalTextField.text)
-    print(Double(goalTextField.text!.dropFirst()))
+    print(goalTextField.text as Any)
+    print(Double(goalTextField.text!.dropFirst()) as Any)
   }
 }

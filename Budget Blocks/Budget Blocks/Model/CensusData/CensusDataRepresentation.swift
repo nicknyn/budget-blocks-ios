@@ -9,16 +9,16 @@
 import Foundation
 
 struct CensusDataRepresentation : Codable {
-  let city: String
-  let personal: Double
-  let food: Double
-  let debt: Double
-  let income: Double
-  let giving: Double
-  let housing: Double
-  let transportation: Double
-  let transfer: Double
-  let savings: Double
+  let city            : String
+  let personal        : Double
+  let food            : Double
+  let debt            : Double
+  let income          : Double
+  let giving          : Double
+  let housing         : Double
+  let transportation  : Double
+  let transfer        : Double
+  let savings         : Double
   
   enum CodingKeys: String,CodingKey {
     case city            = "City"

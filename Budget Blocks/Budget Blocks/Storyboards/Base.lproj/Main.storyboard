@@ -1715,7 +1715,6 @@
                                 <constraints>
                                     <constraint firstItem="T9A-ta-ym1" firstAttribute="leading" secondItem="gPb-NQ-W77" secondAttribute="leading" id="9HN-Co-H5A"/>
                                     <constraint firstAttribute="bottom" secondItem="T9A-ta-ym1" secondAttribute="bottom" id="HJa-Ck-oef"/>
-                                    <constraint firstAttribute="trailing" secondItem="T9A-ta-ym1" secondAttribute="trailing" id="HzG-kU-yz2"/>
                                     <constraint firstItem="T9A-ta-ym1" firstAttribute="top" secondItem="gPb-NQ-W77" secondAttribute="top" id="T9G-fr-9Sq"/>
                                 </constraints>
                             </view>

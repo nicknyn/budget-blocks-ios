@@ -9,15 +9,7 @@
 import UIKit
 
 final class OptionCell: UICollectionViewCell {
-//  
-//  override var isSelected: Bool {
-//    didSet {
-//      categoryLabel.textColor = isSelected ? .white : .black
-//      actualAmountLabel.textColor = isSelected ? .white : .black
-//      backgroundColor = isSelected ? #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1) : .secondarySystemBackground
-//    }
-//  }
-  
+
   let containerView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -38,15 +30,7 @@ final class OptionCell: UICollectionViewCell {
     lb.translatesAutoresizingMaskIntoConstraints = false
     return lb
   }()
-//  lazy var goalAmountLabel: UILabel = {
-//    let lb = UILabel()
-//    lb.text = "Set goal"
-//    lb.textColor = #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1)
-//    lb.textAlignment = .center
-//    lb.translatesAutoresizingMaskIntoConstraints = false
-//    return lb
-//  }()
-  
+
   lazy var categoryImageView: UIImageView = {
     let im = UIImageView()
     
@@ -70,7 +54,7 @@ final class OptionCell: UICollectionViewCell {
     containerView.addSubview(categoryLabel)
     containerView.addSubview(actualAmountLabel)
     containerView.addSubview(categoryImageView)
-//    containerView.addSubview(goalAmountLabel)
+
     
     NSLayoutConstraint.activate([
       categoryLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -80,11 +64,6 @@ final class OptionCell: UICollectionViewCell {
       actualAmountLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor,constant: 4),
       actualAmountLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
       actualAmountLabel.trailingAnchor.constraint(equalTo: categoryLabel.trailingAnchor),
-      
-    
-//      goalAmountLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
-//      goalAmountLabel.trailingAnchor.constraint(equalTo: categoryLabel.trailingAnchor),
-//      goalAmountLabel.topAnchor.constraint(equalTo: actualAmountLabel.bottomAnchor,constant: 8),
       
       categoryImageView.bottomAnchor.constraint(equalTo: categoryLabel.topAnchor,constant: -4),
       categoryImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),

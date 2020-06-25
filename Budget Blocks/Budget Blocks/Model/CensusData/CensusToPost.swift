@@ -10,7 +10,7 @@ import Foundation
 
 struct CensusToPost: Codable {
   let location: [String]
-  let userId: Int
+  let userId  : Int
   
   enum CodingKeys: String, CodingKey {
     case location = "location"

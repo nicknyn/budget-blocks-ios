@@ -51,8 +51,6 @@ class ChartCell: UICollectionViewCell {
     return chart
   }()
 
- 
-  
   lazy var activityTableView: UITableView = {
     
     let tv = UITableView(frame: .zero, style: .plain)
@@ -62,14 +60,15 @@ class ChartCell: UICollectionViewCell {
     tv.dataSource = self
     tv.delegate = self
     tv.separatorStyle = .singleLine
-    
-    
+  
     tv.register(ActivityCell.self, forCellReuseIdentifier: "ActivityCell")
     return tv
   }()
+  
   var months = NetworkingController.dataArrayTransactions?.transactions.map {$0.name }
   var values = NetworkingController.dataArrayTransactions?.transactions.map {$0.amount }
-  func setLineChart(name: [String],values:[Double]) {
+  
+  private func setLineChart(name: [String],values:[Double]) {
     var lineArray: [ChartDataEntry] = []
     for i in 0 ..< name.count {
       let data: ChartDataEntry = ChartDataEntry(x: Double(i), y: values[i])
@@ -82,7 +81,6 @@ class ChartCell: UICollectionViewCell {
     lineChartView.data = lineData
     lineChartView.animate(xAxisDuration: 2, easingOption: .easeInBounce)
     lineChartView.animate(xAxisDuration: 2, easingOption: .easeInBounce)
-    
   }
   
   override init(frame: CGRect) {
@@ -94,7 +92,6 @@ class ChartCell: UICollectionViewCell {
     
     
     setLineChart(name: months!, values: values!)
-    
     
     NSLayoutConstraint.activate([
       containerCellView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -113,12 +110,11 @@ class ChartCell: UICollectionViewCell {
       activityTableView.trailingAnchor.constraint(equalTo: containerCellView.trailingAnchor),
       activityTableView.bottomAnchor.constraint(equalTo: containerCellView.bottomAnchor)
     ])
-    
   }
-  
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
+  
 }
 extension ChartCell: ChartViewDelegate {
   
@@ -150,8 +146,6 @@ extension ChartCell :  UITableViewDataSource, UITableViewDelegate {
     cell.amountLabel.text = String(transaction.amount) + "$"
     cell.amountLabel.textColor =  #colorLiteral(red: 0.4030240178, green: 0.7936781049, blue: 0.7675691247, alpha: 1) 
    
-    
-    
     return cell
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

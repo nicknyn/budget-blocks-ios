@@ -71,14 +71,12 @@ class BudgetScreen: UICollectionViewCell  {
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.heightAnchor.constraint(equalToConstant: 70).isActive = true
     
-    //        collectionView.isScrollEnabled = false
-    
     return collectionView
   }()
   
   lazy var blocksView: UIView = {
     let view = UIView()
-    view.backgroundColor = .white // orange before
+    view.backgroundColor = .white
     view.translatesAutoresizingMaskIntoConstraints = false
     view.heightAnchor.constraint(equalToConstant: 140).isActive = true
     return view
@@ -88,7 +86,7 @@ class BudgetScreen: UICollectionViewCell  {
     let lb = UILabel()
     lb.text = "Blocks"
     lb.textAlignment = .left
-    lb.backgroundColor = .white //brown
+    lb.backgroundColor = .white
     lb.font = UIFont.boldSystemFont(ofSize: 16)
     lb.translatesAutoresizingMaskIntoConstraints = false
     return lb
@@ -115,7 +113,7 @@ class BudgetScreen: UICollectionViewCell  {
     lb.text = "Income: \(incomeString!)"
     lb.textColor = .black
     lb.font = UIFont(name: "Poppins-Bold", size: 20)
-    lb.backgroundColor = .white // orange
+    lb.backgroundColor = .white 
     lb.widthAnchor.constraint(equalToConstant: 200).isActive = true
     lb.translatesAutoresizingMaskIntoConstraints = false
     return lb

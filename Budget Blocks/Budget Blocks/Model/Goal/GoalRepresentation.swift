@@ -9,17 +9,17 @@
 import Foundation
 
 struct GoalRepresentation: Codable {
-  let id : Int?
-  let food: Double?
-  let housing: Double?
-  let personal: Double?
-  let income: Double?
-  let giving: Double?
-  let savings: Double?
-  let debt: Double?
-  let transfer: Double?
-  let transportation: Double?
-  let userId : Int?
+  let id             : Int?
+  let food           : Double?
+  let housing        : Double?
+  let personal       : Double?
+  let income         : Double?
+  let giving         : Double?
+  let savings        : Double?
+  let debt           : Double?
+  let transfer       : Double?
+  let transportation : Double?
+  let userId         : Int?
   
   enum CodingKeys: String,CodingKey {
     case id

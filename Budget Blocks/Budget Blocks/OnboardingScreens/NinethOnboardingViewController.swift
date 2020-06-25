@@ -10,10 +10,9 @@ import UIKit
 
 class NinethOnboardingViewController: UIViewController {
   
-  var categoryTitle: String? // HACK, need CoreData model
+  var categoryTitle: String? 
   var defaultAmount: String?
   private var userGoalInput = ""
-  
   
   @IBOutlet weak var introductionLabel: UILabel! {
     didSet {
@@ -119,8 +118,8 @@ extension NinethOnboardingViewController: UITextFieldDelegate {
     formatter.locale = Locale(identifier: "en_US")
     let numberFromField = (NSString(string: userGoalInput).doubleValue) / 100
     amoutGoalTextField.text = formatter.string(from: NSNumber(value: numberFromField))
-    print(amoutGoalTextField.text)
-    print(Double(amoutGoalTextField.text!.dropFirst()))
+    print(amoutGoalTextField.text as Any)
+    print(Double(amoutGoalTextField.text!.dropFirst()) as Any)
   }
 }
 

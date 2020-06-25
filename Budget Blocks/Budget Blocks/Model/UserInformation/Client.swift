@@ -9,11 +9,11 @@
 import Foundation
 
 struct Client: Codable {
-  let clientID : String
-  let secret: String
-  let accessToken: String
-  let startDate: String
-  let endDate : String
+  let clientID     : String
+  let secret       : String
+  let accessToken  : String
+  let startDate    : String
+  let endDate      : String
   
   enum CodingKeys: String,CodingKey {
     case clientID    = "client_id"

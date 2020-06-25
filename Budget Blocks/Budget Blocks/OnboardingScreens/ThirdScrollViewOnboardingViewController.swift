@@ -133,10 +133,7 @@ final class ThirdScrollViewOnboardingViewController: UIViewController {
   private func nextButtonTapped() {
     guard let city = cityTextField.text,
       let state = stateTextField.text,
-      let userID = UserController.userID else {
-//        showAlert(title: "Information missing", message: "Please fill out all the information.")
-        return
-    }
+      let userID = UserController.userID else { return }
     NetworkingController.shared.sendCensusToDataScience(location: [city,state], userId: userID) { (error) in
       if let error = error {
         print("Error sending census data \(error.localizedDescription)")
