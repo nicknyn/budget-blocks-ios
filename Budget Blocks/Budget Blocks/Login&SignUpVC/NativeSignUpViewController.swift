@@ -21,8 +21,8 @@ final class NativeSignUpViewController: UIViewController {
   @IBOutlet weak var passwordTextField: UITextField! { didSet { passwordTextField.isSecureTextEntry = true } }
   @IBOutlet weak var checkmarkButton: UIButton!
   
- private var isChecked = false
- private var successStatus: OktaAuthStatus?
+  private var isChecked = false
+  private var successStatus: OktaAuthStatus?
  
   //MARK:- Life Cycle
   

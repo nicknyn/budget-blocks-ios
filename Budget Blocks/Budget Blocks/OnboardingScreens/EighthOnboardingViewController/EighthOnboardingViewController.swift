@@ -52,7 +52,6 @@ extension EighthOnboardingViewController: UICollectionViewDelegate, UICollection
     return cell
   }
  
-  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
     var totalUsableWidth = collectionView.frame.width

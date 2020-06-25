@@ -13,11 +13,11 @@ struct DataScienceTransactionRepresentations : Codable {
   let transactions : [DataScienceTransactionRepresentation]
 }
 struct DataScienceTransactionRepresentation : Codable {
-  let amount: Double
-  let location: Location
-  let date: String
-  let name: String
-  let category: [String]
+  let amount       : Double
+  let location     : Location
+  let date         : String
+  let name         : String
+  let category     : [String]
   let transactionID: String
   
   enum CodingKeys: String,CodingKey {

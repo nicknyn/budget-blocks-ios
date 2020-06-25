@@ -101,7 +101,6 @@ final class FiveOnboardingViewController: UIViewController {
           print(error)
       }
     }
-   
   }
   
   @IBAction func backTapped(_ sender: UIButton) {

@@ -13,6 +13,8 @@ class ProfileVC: UITableViewController {
   @IBOutlet weak var nameTextField: UITextField!
   @IBOutlet weak var editButton: UIButton!
   
+  //MARK:- Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     

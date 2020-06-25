@@ -18,15 +18,6 @@ class ActivityCell: UITableViewCell {
     return lb
   }()
   
-//  lazy var activityImage: UIImageView = {
-//    let im = UIImageView()
-//    im.image = UIImage(systemName: "wifi")
-//    im.translatesAutoresizingMaskIntoConstraints = false
-//    im.widthAnchor.constraint(equalToConstant: 30).isActive = true
-//    im.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//    return im
-//  }()
-  
   lazy var activityName: UILabel = {
     let lb = UILabel()
     lb.text = "Whole Food"
@@ -47,7 +38,6 @@ class ActivityCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     contentView.addSubview(dateLabel)
-//    contentView.addSubview(activityImage)
     contentView.addSubview(activityName)
     contentView.addSubview(amountLabel)
     
@@ -56,13 +46,9 @@ class ActivityCell: UITableViewCell {
       dateLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 16),
       dateLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
       
-//      activityImage.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor,constant: 16),
-//      activityImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-//
       activityName.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor,constant: 8),
       activityName.centerYAnchor.constraint(equalTo: centerYAnchor),
       activityName.widthAnchor.constraint(equalToConstant: 180),
-      
       
       amountLabel.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -16),
       amountLabel.centerYAnchor.constraint(equalTo: centerYAnchor)

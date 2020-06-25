@@ -36,17 +36,17 @@ extension Goal {
                                       userId: Int16,
                                       context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
     self.init(context:context)
-    self.id = id
-    self.food = food ?? 0.0
-    self.housing = housing ?? 0.0
-    self.personal = personal ?? 0.0
-    self.income = income ?? 0.0
-    self.giving = giving ?? 0.0
-    self.savings = savings ?? 0.0
-    self.debt = debt ?? 0.0
-    self.transfer = transfer ?? 0.0
+    self.id             = id
+    self.food           = food ?? 0.0
+    self.housing        = housing ?? 0.0
+    self.personal       = personal ?? 0.0
+    self.income         = income ?? 0.0
+    self.giving         = giving ?? 0.0
+    self.savings        = savings ?? 0.0
+    self.debt           = debt ?? 0.0
+    self.transfer       = transfer ?? 0.0
     self.transportation = transportation ?? 0.0
-    self.userId = userId
+    self.userId         = userId
   }
   
   @discardableResult convenience init?(goalRepresentation: GoalRepresentation,
@@ -62,7 +62,7 @@ extension Goal {
               debt:goalRepresentation.debt,
               transfer:goalRepresentation.transfer,
               transportation:goalRepresentation.transportation,
-              userId:Int16(goalRepresentation.userId ?? 0)
+              userId:Int16(goalRepresentation.userId ?? 0 )
     )
   }
 }

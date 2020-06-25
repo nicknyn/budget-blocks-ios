@@ -10,7 +10,7 @@ import Foundation
 
 struct OnlineTransactions: Codable {
   let transactions : [OnlineTransaction]
-  var userId : Int?
+  var userId       : Int?
   
   enum CodingKeys: String, CodingKey {
     case transactions
@@ -20,23 +20,23 @@ struct OnlineTransactions: Codable {
 }
 
 struct OnlineTransaction: Codable {
-  let accountId : String
-  let accountOwner: String?
-  let amount : Double
-  let authorizedDate: String?
-  let category : [String]
-  let categoryId : String
-  let date : String
-  let isoCurrencyCode : String
-  let location : Location
-  let name: String
-  let paymentChannel: String?
-  let paymentMeta : PaymentMeta
-  let pending: Bool?
-  let pendingTransactionId: String?
-  let transactionCode: String?
-  let transactionId: String?
-  let transactionType: String?
+  let accountId             : String
+  let accountOwner          : String?
+  let amount                : Double
+  let authorizedDate        : String?
+  let category              : [String]
+  let categoryId            : String
+  let date                  : String
+  let isoCurrencyCode       : String
+  let location              : Location
+  let name                  : String
+  let paymentChannel        : String?
+  let paymentMeta           : PaymentMeta
+  let pending               : Bool?
+  let pendingTransactionId  : String?
+  let transactionCode       : String?
+  let transactionId         : String?
+  let transactionType       : String?
   let unofficialCurrencyCode: String?
   
   enum CodingKeys: String, CodingKey {
@@ -62,14 +62,14 @@ struct OnlineTransaction: Codable {
 }
 
 class Location:NSObject, Codable {
-  let address: String?
-  let city: String?
-  let country: String?
-  let latitude: String?
-  let longitude: String?
-  let postalCode: String?
-  let region: String?
-  let storeNumber: String?
+  let address     : String?
+  let city        : String?
+  let country     : String?
+  let latitude    : String?
+  let longitude   : String?
+  let postalCode  : String?
+  let region      : String?
+  let storeNumber : String?
   
   enum CodingKeys: String,CodingKey {
     case address       = "address"
@@ -84,14 +84,14 @@ class Location:NSObject, Codable {
 }
 
 struct PaymentMeta: Codable {
-  let byOrderOf: String?
-  let payee: String?
-  let payer: String?
-  let paymentMethod: String?
-  let paymentProcessor: String?
-  let ppdID: Int?
-  let reason: String?
-  let referenceNumber: Int?
+  let byOrderOf         : String?
+  let payee             : String?
+  let payer             : String?
+  let paymentMethod     : String?
+  let paymentProcessor  : String?
+  let ppdID             : Int?
+  let reason            : String?
+  let referenceNumber   : Int?
   
   enum CodingKeys: String,CodingKey {
     case byOrderOf            = "by_order_of"
