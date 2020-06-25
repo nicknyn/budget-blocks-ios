@@ -4,16 +4,22 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 ## Contributors
 
+### Labs 20
+
 | [Isaac Lyons](https://github.com/Isvvc) |
 | :-----------------------------------------------------------------------------------------------------------: | 
 | [<img src="https://ca.slack-edge.com/T4JUEB3ME-ULRD89HA7-e4096b799aec-512" width = "200" />](https://github.com/Isvvc) | 
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Isvvc) |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
+### Labs 22
+
 | [Tyler Christian](https://github.com/TylerChristian711) |
 | :-----------------------------------------------------------------------------------------------------------: |
 | [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6NGDNZ-3b670f940ff2-512" width = "200" />](https://github.com/Isvvc)|
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/TylerChristian711)|
+
+## Labs 24 (Lastest)
 
 | [Nick Nguyen](https://github.com/tonic2000) |
 | :-----------------------------------------------------------------------------------------------------------: |
