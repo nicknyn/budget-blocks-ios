@@ -67,6 +67,8 @@ When i sign in and create a budget I can select the category "Food and drink" an
 ### Plaid Link
 
 [Plaid Link iOS SKD](https://plaid.com/docs/link/ios/) allows the user to connect a bank account to their Budget Blocks account. Requires the `PLAID_PUBLIC_KEY` environment variable to be set.
+### Okta
+[Okta](https://github.com/okta/okta-auth-swift) is used for authentication(sign in/ sign up) and any other custom features to be added later on.
 
 ### SwiftyJSON
 
