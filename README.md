@@ -17,7 +17,7 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 | [Nick Nguyen](https://github.com/tonic2000) |
 | :-----------------------------------------------------------------------------------------------------------: |
-| [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6RKYKX-d23f30e2610d-512" width = "200" />](https://github.com/Isvvc) |
+| [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6RKYKX-d23f30e2610d-512" width = "200" />](https://github.com/tonic2000) |
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tonic2000) |
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
