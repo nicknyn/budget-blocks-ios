@@ -46,7 +46,7 @@ for example:
 When i sign in and create a budget I can select the category "Food and drink" and give that an amount of how ever much I think would be good and everytime i make a perchues I can go into the app and put the date i made the purches how much it cost and an optinal discription of what i bought then when I save that transaction it will put it into the right category and a progress bar will be visiable showing a visual of how much money I have to spend in that category till I have spent to much.
 
 
-<img src="header.png" height=600 />
+
 
 ### Features
 
