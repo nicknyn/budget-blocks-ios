@@ -12,7 +12,7 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 | [Tyler Christian](https://github.com/TylerChristian711) |
 | :-----------------------------------------------------------------------------------------------------------: |
-| [<img scr="https://ca.slack-edge.com/T4JUEB3ME-ULZSEQXAR-3b670f940ff2-512" width = "200" />](https://github.com/TylerChristian711)|
+| [<img scr=https://ca.slack-edge.com/ESZCHB482-W012H6NGDNZ-3b670f940ff2-512 width = "200" />](https://github.com/TylerChristian711)|
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/TylerChristian711)|
 
 | [Nick Nguyen](https://github.com/tonic2000) |
