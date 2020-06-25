@@ -75,6 +75,9 @@ When i sign in and create a budget I can select the category "Food and drink" an
 
 [KeychainSwift](https://github.com/evgenyneu/keychain-swift) is used for easily storing login credentials using Apple's Keychain.
 
+### SVProgressHUD
+[SVProgressHUD](https://github.com/SVProgressHUD/SVProgressHUD) is for displaying elegant HUD when loading data.
+
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
