@@ -21,7 +21,7 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 
 ## Labs 24 (Lastest)
 
-| [Nick Nguyen](https://github.com/tonic2000) |
+| [Nick Nguyen](https://github.com/NickNguyeniOS14) |
 | :-----------------------------------------------------------------------------------------------------------: |
 | [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6RKYKX-0306055fbb0f-512" width = "200" />](https://github.com/tonic2000) |
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/tonic2000) |
