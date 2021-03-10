@@ -25,7 +25,7 @@ You can find the deployed project on [Apple TestFlight](https://testflight.apple
 | :-----------------------------------------------------------------------------------------------------------: |
 | [<img src="https://ca.slack-edge.com/ESZCHB482-W012H6RKYKX-8255e1eabb98-512" width = "200" />](https://github.com/NickNguyeniOS14) |
 | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/NickNguyeniOS14) |
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/n19/) |
 
 
 [![Swift Version][swift-image]][swift-url]
